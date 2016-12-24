@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace BLBackEnd
 {
-    class LostItem
+    class LostItem : CompanyItem
     {
-        bool wasFound;
+        private bool wasFound;
     }
 }

@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace BLBackEnd
 {
-    abstract class CompanyItem
+    abstract class CompanyItem : Item
     {
-        int _serialNumber;
-        String _companyName;
-        String _contactName;
-        String _contactPhone;
-        String _photoLocation;
+        private int _serialNumber;
+        private String _companyName;
+        private String _contactName;
+        private String _contactPhone;
+        private String _photoLocation;
     }
 }

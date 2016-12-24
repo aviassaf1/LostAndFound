@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace BLBackEnd
 {
-    abstract class FBItem
+    abstract class FBItem : Item
     {
-        String _postUrl;
-        String _publisherName;
-        FBType _type;
+        private String _postUrl;
+        private String _publisherName;
+        private FBType _type;
     }
 }

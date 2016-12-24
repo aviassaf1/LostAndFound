@@ -8,11 +8,11 @@ namespace BLBackEnd
 {
     abstract class Item
     {
-        int _itemID;
-        List<Color> _colors;
-        ItemType _itemType;
-        DateTime _date;
-        String _location;
-        String _description;
+        private int _itemID;
+        private List<Color> _colors;
+        private ItemType _itemType;
+        private DateTime _date;
+        private String _location;
+        private String _description;
     }
 }

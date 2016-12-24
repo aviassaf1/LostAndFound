@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace BLBackEnd
 {
-    class FoundItem
+    class FoundItem : CompanyItem
     {
-        bool _delivered;
+        private bool _delivered;
 
     }
 }

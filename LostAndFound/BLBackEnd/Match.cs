@@ -8,9 +8,9 @@ namespace BLBackEnd
 {
     class Match
     {
-        int _matchID;
-        CompanyItem _item1;
-        Item _item2;
-        MatchStatus _matchStatus;
+        private int _matchID;
+        private CompanyItem _item1;
+        private Item _item2;
+        private MatchStatus _matchStatus;
     }
 }

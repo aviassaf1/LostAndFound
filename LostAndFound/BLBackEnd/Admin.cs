@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BLBackEnd
 {
-    class Admin
+    class Admin : User
     {
     }
 }

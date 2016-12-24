@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace BLBackEnd
 {
-    class Company
+    class Company : User
     {
-        String _companyName;
-        String _phone;
-        HashSet<int> _lostItems;
-        HashSet<int> _foundItems;
-        HashSet<int> _matches;
+        private String _companyName;
+        private String _phone;
+        private HashSet<int> _lostItems;
+        private HashSet<int> _foundItems;
+        private HashSet<int> _matches;
     }
 }
