@@ -10,7 +10,6 @@ namespace LostAndFound
     class Database
     {
         private static Database singleton;
-        Cache cache;
         OleDbConnection connection;
 
 
@@ -50,7 +49,6 @@ namespace LostAndFound
         {
             try
             {
-                cache = Cache.getInstance;
                 connection = new OleDbConnection();
                 string s = System.IO.Directory.GetCurrentDirectory();
                 s = s.Substring(0, s.IndexOf("LostAndFound")) + "database.mdb; Persist Security Info = False;";
