@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LostAndFound
+namespace BLBackEnd
 {
     class Cache
     {
@@ -33,6 +33,26 @@ namespace LostAndFound
 //            if (this._forums != null)
 //                this._forums.Clear();            
 
+        }
+
+        internal void addFacebookGroup(string _companyName, string url)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void removeFacebookGroup(string _companyName, string url)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void addNewCompany(string _userName, string _password, string _companyName, string _phone)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void addNewFBItemToDB(FBItem fBItem)
+        {
+            throw new NotImplementedException();
         }
     }
 }

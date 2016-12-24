@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Admin.cs" />
+    <Compile Include="Cache.cs" />
     <Compile Include="Color.cs" />
     <Compile Include="Company.cs" />
     <Compile Include="CompanyItem.cs" />

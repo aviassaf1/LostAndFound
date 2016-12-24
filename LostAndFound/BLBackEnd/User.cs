@@ -8,7 +8,23 @@ namespace BLBackEnd
 {
     abstract class User
     {
-        private String _userName;
-        private String _password;
+        protected String _userName;
+        protected String _password;
+
+        protected string UserName
+        {
+            get
+            {
+                return _userName;
+            }
+        }
+
+        protected string Password
+        {
+            get
+            {
+                return _password;
+            }
+        }
     }
 }
