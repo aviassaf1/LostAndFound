@@ -5,13 +5,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LostAndFound
+namespace DB
 {
-    class Database
+    public class Database
     {
         private static Database singleton;
         OleDbConnection connection;
 
+        private Database()
+        {
+
+        }
 
         public void closeConnectionDB()
         {
@@ -86,7 +90,5 @@ namespace LostAndFound
                 closeConnectionDB();
             }
         }
-
-        
     }
 }
