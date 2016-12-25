@@ -8,10 +8,74 @@ namespace BLBackEnd
 {
     abstract class CompanyItem : Item
     {
-        private int _serialNumber;
-        private String _companyName;
-        private String _contactName;
-        private String _contactPhone;
-        private String _photoLocation;
+        protected int _serialNumber;
+        protected String _companyName;
+        protected String _contactName;
+        protected String _contactPhone;
+        protected String _photoLocation;
+
+        public int SerialNumber
+        {
+            get
+            {
+                return _serialNumber;
+            }
+
+            set
+            {
+                _serialNumber = value;
+                cache.updateCompanyItem(this);
+            }
+        }
+
+        public string ContactName
+        {
+            get
+            {
+                return _contactName;
+            }
+
+            set
+            {
+                _contactName = value;
+                cache.updateCompanyItem(this);
+            }
+        }
+
+        public string ContactPhone
+        {
+            get
+            {
+                return _contactPhone;
+            }
+
+            set
+            {
+                _contactPhone = value;
+                cache.updateCompanyItem(this);
+            }
+        }
+
+        public string PhotoLocation
+        {
+            get
+            {
+                return _photoLocation;
+            }
+
+            set
+            {
+                _photoLocation = value;
+                cache.updateCompanyItem(this);
+            }
+        }
+
+        protected string CompanyName
+        {
+            get
+            {
+                return _companyName;
+            }
+        }
     }
 }

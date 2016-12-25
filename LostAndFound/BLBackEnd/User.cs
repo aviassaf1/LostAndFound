@@ -8,7 +8,31 @@ namespace BLBackEnd
 {
     abstract class User
     {
-        private String _userName;
-        private String _password;
+        protected static Cache cache = Cache.getInstance;
+        protected String _userName;
+        protected String _password;
+
+        protected string Password
+        {
+            get
+            {
+                return _password;
+            }
+
+            set
+            {
+                _password = value;
+                cache.updateUser(_userName, _password);
+            }
+        }
+
+        protected string UserName
+        {
+            get
+            {
+                return _userName;
+            }
+        }
+
     }
 }
