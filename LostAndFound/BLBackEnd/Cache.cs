@@ -33,6 +33,11 @@ namespace BLBackEnd
             throw new NotImplementedException();
         }
 
+        internal void addMatch(Match match)
+        {
+            throw new NotImplementedException();
+        }
+
         internal void updateLostItem(LostItem lostItem)
         {
             throw new NotImplementedException();
@@ -54,6 +59,11 @@ namespace BLBackEnd
         }
 
         internal void updateCompanyItem(CompanyItem companyItem)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void updateMatch(int _matchID, int _companyItemID, int _item2ID, MatchStatus _matchStatus)
         {
             throw new NotImplementedException();
         }

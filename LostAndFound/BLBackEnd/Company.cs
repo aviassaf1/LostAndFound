@@ -8,7 +8,6 @@ namespace BLBackEnd
 {
     class Company : User
     {
-        private static Cache cache =Cache.getInstance;
         private String _companyName;
         private String _phone;
         private HashSet<int> _lostItems;
