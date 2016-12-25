@@ -9,7 +9,7 @@ namespace Domain
 {
     class class1
     {
-        public static void main()
+        public static void Main()
         {
 
         }
