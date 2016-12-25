@@ -19,7 +19,7 @@ namespace BLBackEnd
         public Company(String userName,String password, String companyName, String phone, HashSet<string> facebookGroups)
         {
             _userName = userName;
-            _password = password;
+            Password = password;
             _companyName = companyName;
             _phone = phone;
             _facebookGroups = facebookGroups;
@@ -32,7 +32,7 @@ namespace BLBackEnd
             HashSet<int> lostItems,HashSet<int> foundItems, HashSet<int> matches)
         {
             _userName = userName;
-            _password = password;
+            Password = password;
             _companyName = companyName;
             _phone = phone;
             _facebookGroups = facebookGroups;

@@ -28,6 +28,36 @@ namespace BLBackEnd
             }
         }
 
+        internal void updateFoundItem(FoundItem foundItem)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void updateLostItem(LostItem lostItem)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void updateUser(string _userName, string _password)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void addLostItem(LostItem lostItem)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void addFoundItem(FoundItem foundItem)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void updateCompanyItem(CompanyItem companyItem)
+        {
+            throw new NotImplementedException();
+        }
+
         public void clear()
         {
 //            if (this._forums != null)

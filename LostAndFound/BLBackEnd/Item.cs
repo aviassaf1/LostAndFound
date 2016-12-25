@@ -15,6 +15,7 @@ namespace BLBackEnd
         protected DateTime _date;
         protected String _location;
         protected String _description;
+
         protected abstract void updateItem();
 
         public int ItemID
