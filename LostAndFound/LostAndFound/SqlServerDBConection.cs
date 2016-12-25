@@ -11,9 +11,14 @@ namespace LostAndFound
     {
         public static void Main()
         {
-            SqlConnection conn = new SqlConnection();
-            conn.ConnectionString = "data source = LAPTOP-2CIHG2T7\\SQLEXPRESSWORK; database = LostAndFoundDataBase; integrated security = SSPI";
-            conn.Open();
+            LostAndFoundDataBaseEntities db = new LostAndFoundDataBaseEntities();
+            db.Configuration.ProxyCreationEnabled = false;
+            db.Configuration.LazyLoadingEnabled = false;
+            foreach(var company in db.Companies)
+            {
+                Console.WriteLine(company.userName);
+            }
+            while (true) ;
         }
     }
 }
