@@ -3,17 +3,34 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DB;
 
 namespace BLBackEnd
 {
     class Cache
     {
-        //private Dictionary<string, User> _users;
+        private static Database _db;
+
+        private Dictionary<string, Admin> _admins;
+        private Dictionary<string, Company> _companies;
+        private Dictionary<int, LostItem> _lostItems;
+        private Dictionary<int, FoundItem> _foundItems;
+        private Dictionary<int, FBItem> _FBItems;
+        private Dictionary<int, Match> _matches;
+
+
         private static Cache singleton;
 
         private Cache()
         {
-            //_users = new Dictionary<string, User>();
+            _admins = new Dictionary<string, Admin>();
+            _companies = new Dictionary<string, Company>();
+            _lostItems = new Dictionary<int, LostItem>();
+            _foundItems = new Dictionary<int, FoundItem>();
+            _FBItems = new Dictionary<int, FBItem>();
+            _matches = new Dictionary<int, Match>();
+            _db = Database.getInstance;
+            ////////////////////////////////////////////////add db to cache
         }
 
         public static Cache getInstance
@@ -26,6 +43,22 @@ namespace BLBackEnd
                 }
                 return singleton;
             }
+        }
+
+        public void clear()
+        {
+            if (this._admins != null)
+                this._admins.Clear();
+            if (this._companies != null)
+                this._companies.Clear();
+            if (this._foundItems != null)
+                this._foundItems.Clear();
+            if (this._lostItems != null)
+                this._lostItems.Clear();
+            if (this._FBItems != null)
+                this._FBItems.Clear();
+            if (this._matches != null)
+                this._matches.Clear();
         }
 
         internal void updateFoundItem(FoundItem foundItem)
@@ -68,13 +101,6 @@ namespace BLBackEnd
             throw new NotImplementedException();
         }
 
-        public void clear()
-        {
-//            if (this._forums != null)
-//                this._forums.Clear();            
-
-        }
-
         internal void addFacebookGroup(string _companyName, string url)
         {
             throw new NotImplementedException();
@@ -92,7 +118,12 @@ namespace BLBackEnd
 
         internal void addNewFBItemToDB(FBItem fBItem)
         {
-            throw new NotImplementedException();
+            _FBItems.Add(fBItem.ItemID, fBItem);
+//            List<String> colors = new List<string>();
+
+            //_db.addFBItem(fBItem.ItemID,fBItem.Colors, fBItem.ItemType, fBItem.Date, fBItem.Location, fBItem.Description,
+              //  fBItem.PostUrl, fBItem.PublisherName, fBItem.Type);
+            
         }
     }
 }
