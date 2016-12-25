@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{02F88DDB-DFDE-4C71-A512-35B1C0A7DD9F}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>LostAndFound</RootNamespace>
     <AssemblyName>LostAndFound</AssemblyName>
@@ -95,6 +95,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SqlServerDB.edmx</DependentUpon>
     </Compile>
+    <Compile Include="SqlServerDBConection.cs" />
     <Compile Include="Users.cs">
       <DependentUpon>SqlServerDB.tt</DependentUpon>
     </Compile>
