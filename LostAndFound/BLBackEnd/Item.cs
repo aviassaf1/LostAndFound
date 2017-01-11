@@ -24,6 +24,10 @@ namespace BLBackEnd
             {
                 return _itemID;
             }
+            set
+            {
+                this._itemID = value;
+            }
         }
 
         public List<Color> Colors
