@@ -11,14 +11,29 @@ namespace LostAndFound
     {
         public static void Main()
         {
-            LostAndFoundDataBaseEntities db = new LostAndFoundDataBaseEntities();
+            dbEntities db = new dbEntities();
             db.Configuration.ProxyCreationEnabled = false;
             db.Configuration.LazyLoadingEnabled = false;
-            foreach(var company in db.Companies)
+            foreach(var company in db.@try)
             {
-                Console.WriteLine(company.userName);
+                Console.WriteLine(company.a);
             }
             while (true) ;
+    
+   /*         SqlConnection conn = new SqlConnection("user id=LAPTOP-2CIHG2T7\\Tomer;" + "password=password;" + "server=LAPTOP-2CIHG2T7\\SQLEXPRESSWORK;"
+                                                   + "Trusted_Connection=yes;" + "database=LostAndFoundDataBase;"
+                                                   + "connection timeout=30");
+            try
+            {
+                conn.Open();
+                Console.WriteLine("worked");
+                while (true) ;
+            }
+            catch
+            {
+                Console.WriteLine("didnt work");
+                while (true) ;
+            }*/
         }
     }
 }
