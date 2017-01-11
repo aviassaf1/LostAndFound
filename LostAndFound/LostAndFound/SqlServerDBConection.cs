@@ -11,17 +11,17 @@ namespace LostAndFound
     {
         public static void Main()
         {
-            dbEntities db = new dbEntities();
-            db.Configuration.ProxyCreationEnabled = false;
-            db.Configuration.LazyLoadingEnabled = false;
-            foreach(var company in db.@try)
-            {
-                Console.WriteLine(company.a);
-            }
-            while (true) ;
+        //    dbEntities db = new dbEntities();
+         //   db.Configuration.ProxyCreationEnabled = false;
+        //    db.Configuration.LazyLoadingEnabled = false;
+        //    foreach(var company in db.@try)
+       //     {
+      ///          Console.WriteLine(company.a);
+     ///       }
+      ///      while (true) ;
     
-   /*         SqlConnection conn = new SqlConnection("user id=LAPTOP-2CIHG2T7\\Tomer;" + "password=password;" + "server=LAPTOP-2CIHG2T7\\SQLEXPRESSWORK;"
-                                                   + "Trusted_Connection=yes;" + "database=LostAndFoundDataBase;"
+            SqlConnection conn = new SqlConnection("user id=sa;" + "password=geraistheman;" + "server=LAPTOP-2CIHG2T7\\TOMERSERVER;"
+                                                   + "Trusted_Connection=yes;" + "database=LostAndFound;"
                                                    + "connection timeout=30");
             try
             {
@@ -33,7 +33,7 @@ namespace LostAndFound
             {
                 Console.WriteLine("didnt work");
                 while (true) ;
-            }*/
+            }
         }
     }
 }

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e5f1428623fd4e178ef4373f90db8bb6" Name="Diagram1">
+        <EntityTypeShape EntityType="LostAndFoundDBModel.User" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LostAndFoundDBModel.Companies" Width="1.5" PointX="3.75" PointY="0.75" />
+        <EntityTypeShape EntityType="LostAndFoundDBModel.CompanyItems" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="LostAndFoundDBModel.FacebookGroups" Width="1.5" PointX="2.75" PointY="3.75" />
+        <EntityTypeShape EntityType="LostAndFoundDBModel.FBItem" Width="1.5" PointX="4.75" PointY="3.75" />
+        <EntityTypeShape EntityType="LostAndFoundDBModel.FoundItems" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="LostAndFoundDBModel.Items" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="LostAndFoundDBModel.LostItems" Width="1.5" PointX="6.75" PointY="4.75" />
+        <EntityTypeShape EntityType="LostAndFoundDBModel.Table" Width="1.5" PointX="2.75" PointY="7.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
