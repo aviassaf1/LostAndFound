@@ -25,7 +25,7 @@ namespace BLBackEnd
             _lostItems = new HashSet<int>();
             _foundItems = new HashSet<int>();
             _matches = new HashSet<int>();
-            cache.addNewCompany(UserName, Password, _companyName, _phone);
+            cache.addNewCompany(UserName, Password, _companyName, _phone,facebookGroups);
         }
         public Company(String userName, String password, String companyName, String phone, HashSet<string> facebookGroups,
             HashSet<int> lostItems,HashSet<int> foundItems, HashSet<int> matches)
@@ -47,6 +47,29 @@ namespace BLBackEnd
                 return _lostItems;
             }
         }
+        public Boolean addLostItem(int lostItemID)
+        {
+            if (_lostItems.Contains(lostItemID))
+                return false;
+            _lostItems.Add(lostItemID);
+            return true;
+        }
+        public Boolean removeLostItem(int lostItemID)
+        {
+            if (!_lostItems.Contains(lostItemID))
+                return false;
+            _lostItems.Remove(lostItemID);
+            cache.removeLostItem(lostItemID);
+            return true;
+        }
+        public Boolean addLostItem(LostItem lostItem)
+        {
+            int id=cache.getAvialbleItemID();
+            lostItem.ItemID = id;
+            _lostItems.Add(id);
+            cache.addLostItem(lostItem);
+            return true;
+        }
 
         public HashSet<int> FoundItems
         {
@@ -54,6 +77,29 @@ namespace BLBackEnd
             {
                 return _foundItems;
             }
+        }
+        public Boolean addFoundItem(int foundItemID)
+        {
+            if (_foundItems.Contains(foundItemID))
+                return false;
+            _foundItems.Add(foundItemID);
+            return true;
+        }
+        public Boolean removeFoundItem(int foundItemID)
+        {
+            if (!_foundItems.Contains(foundItemID))
+                return false;
+            _foundItems.Remove(foundItemID);
+            cache.removefoundItem(foundItemID);
+            return true;
+        }
+        public Boolean addFoundItem(FoundItem foundItem)
+        {
+            int id = cache.getAvialbleItemID();
+            foundItem.ItemID = id;
+            _foundItems.Add(id);
+            cache.addFoundItem(foundItem);
+            return true;
         }
 
         public HashSet<int> Matches
@@ -63,6 +109,29 @@ namespace BLBackEnd
                 return _matches;
             }
         }
+        public Boolean addMatch(int matchID)
+        {
+            if (Matches.Contains(matchID))
+                return false;
+            Match match = cache.getMatch(matchID);
+            if (match != null &&(_lostItems.Contains(match.CompanyItemID) || _foundItems.Contains(match.CompanyItemID))) 
+            {
+                Matches.Add(matchID);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public Boolean removeMatch(int matchID)
+        {
+            if (!Matches.Contains(matchID))
+                return false;
+            Matches.Remove(matchID);
+            return true;
+        }
+
 
         public string Phone
         {

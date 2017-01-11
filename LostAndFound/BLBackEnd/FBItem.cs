@@ -53,7 +53,7 @@ namespace BLBackEnd
 
         protected override void updateItem()
         {
-            throw new NotImplementedException();
+            cache.updateFacebbokItem(this);
         }
 
         public void addToDB()

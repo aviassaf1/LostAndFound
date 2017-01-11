@@ -45,6 +45,11 @@ namespace BLBackEnd
             }
         }
 
+        internal void updateFacebbokItem(FBItem fBItem)
+        {
+            throw new NotImplementedException();
+        }
+
         public void clear()
         {
             if (this._admins != null)
@@ -62,6 +67,21 @@ namespace BLBackEnd
         }
 
         internal void updateFoundItem(FoundItem foundItem)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal Match getMatch(int matchID)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void removeLostItem(int lostItemID)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal int getAvialbleItemID()
         {
             throw new NotImplementedException();
         }
@@ -96,6 +116,11 @@ namespace BLBackEnd
             throw new NotImplementedException();
         }
 
+        internal void removefoundItem(int foundItemID)
+        {
+            throw new NotImplementedException();
+        }
+
         internal void updateMatch(int _matchID, int _companyItemID, int _item2ID, MatchStatus _matchStatus)
         {
             throw new NotImplementedException();
@@ -111,7 +136,7 @@ namespace BLBackEnd
             throw new NotImplementedException();
         }
 
-        internal void addNewCompany(string _userName, string _password, string _companyName, string _phone)
+        internal void addNewCompany(string _userName, string _password, string _companyName, string _phone, HashSet<String> facebookGroups)
         {
             throw new NotImplementedException();
         }

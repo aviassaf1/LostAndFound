@@ -27,6 +27,22 @@ namespace BLBackEnd
             _photoLocation = photoLocation;
             _delivered = false;
         }
+        public FoundItem( List<Color> colors, ItemType itemType, DateTime date, String location, String description,
+        int serialNumber, String companyName, String contactName, String contactPhone, String photoLocation)
+        {
+            _itemID = -1;
+            _colors = colors;
+            _itemType = itemType;
+            _date = date;
+            _location = location;
+            _description = description;
+            _serialNumber = serialNumber;
+            _companyName = companyName;
+            _contactName = contactName;
+            _contactPhone = ContactPhone;
+            _photoLocation = photoLocation;
+            _delivered = false;
+        }
 
         public void addToDB()
         {
