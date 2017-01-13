@@ -70,7 +70,7 @@ namespace BLBackEnd
             }
         }
 
-        protected string CompanyName
+        public string CompanyName
         {
             get
             {

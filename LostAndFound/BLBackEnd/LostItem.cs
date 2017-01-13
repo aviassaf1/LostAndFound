@@ -49,7 +49,7 @@ namespace BLBackEnd
          }*/
 
 
-        protected bool WasFound
+        public bool WasFound
         {
             get
             {

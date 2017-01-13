@@ -66,7 +66,7 @@ namespace BLBackEnd
             set
             {
                 _matchStatus = value;
-                cache.updateMatch(_matchID, _companyItemID, _item2ID, _matchStatus);
+                cache.updateMatch(_matchID, _matchStatus);
             }
         }
     }

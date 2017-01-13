@@ -17,7 +17,7 @@ namespace BLBackEnd
         private Dictionary<int, FoundItem> _foundItems;
         private Dictionary<int, FBItem> _FBItems;
         private Dictionary<int, Match> _matches;
-
+        private int maxAvilableComapanyItemID;
 
         private static Cache singleton;
 
@@ -31,6 +31,16 @@ namespace BLBackEnd
             _matches = new Dictionary<int, Match>();
             _db = Database.getInstance;
             ////////////////////////////////////////////////add db to cache
+            maxAvilableComapanyItemID = 0;
+            foreach (int id in _lostItems.Keys)
+            {
+                maxAvilableComapanyItemID = Math.Max(id, maxAvilableComapanyItemID);
+            }
+            foreach (int id in _foundItems.Keys)
+            {
+                maxAvilableComapanyItemID = Math.Max(id, maxAvilableComapanyItemID);
+            }
+            maxAvilableComapanyItemID = maxAvilableComapanyItemID + 1;
         }
 
         public static Cache getInstance
@@ -43,11 +53,6 @@ namespace BLBackEnd
                 }
                 return singleton;
             }
-        }
-
-        internal void updateFacebbokItem(FBItem fBItem)
-        {
-            throw new NotImplementedException();
         }
 
         public void clear()
@@ -68,82 +73,108 @@ namespace BLBackEnd
 
         internal void updateFoundItem(FoundItem foundItem)
         {
-            throw new NotImplementedException();
+            _db.updateFoundItem(foundItem.ItemID, foundItem.Colors, foundItem.ItemType, foundItem.Date, foundItem.Location,
+                foundItem.Description, foundItem.PhotoLocation,foundItem.Delivered);
         }
 
         internal Match getMatch(int matchID)
         {
-            throw new NotImplementedException();
+            return _matches[matchID];
         }
 
         internal void removeLostItem(int lostItemID)
         {
-            throw new NotImplementedException();
+            if (_lostItems[lostItemID] != null)
+            {
+                _lostItems.Remove(lostItemID);
+                _db.removeLostItem(lostItemID);
+            }
         }
 
-        internal int getAvialbleItemID()
+        internal int getAvialbleCompanyItemID()//add syncronize
         {
-            throw new NotImplementedException();
+            maxAvilableComapanyItemID++;
+            return maxAvilableComapanyItemID - 1;
         }
 
         internal void addMatch(Match match)
         {
-            throw new NotImplementedException();
+            _matches.Add(match.MatchID, match);
+            _db.addMatch(match.MatchID, match.CompanyItemID, match.Item2ID, match.MatchStatus.ToString);
         }
 
         internal void updateLostItem(LostItem lostItem)
         {
-            throw new NotImplementedException();
+            _db.updateLostItem(lostItem.ItemID, lostItem.Colors, lostItem.ItemType, lostItem.Date, lostItem.Location,
+                lostItem.Description, lostItem.PhotoLocation,lostItem.WasFound);
         }
 
         internal void updateUser(string _userName, string _password)
         {
-            throw new NotImplementedException();
+            _db.updateUser(_userName, _password);
         }
 
         internal void addLostItem(LostItem lostItem)
         {
-            throw new NotImplementedException();
+            _lostItems.Add(lostItem.ItemID, lostItem);
+            _db.addLostItem(lostItem.ItemID, lostItem.Colors, lostItem.ItemType, lostItem.Date, lostItem.Location,
+                lostItem.Description, lostItem.SerialNumber, lostItem.CompanyName, lostItem.ContactName,
+                lostItem.ContactPhone, lostItem.PhotoLocation, lostItem.WasFound);
         }
 
         internal void addFoundItem(FoundItem foundItem)
         {
-            throw new NotImplementedException();
+            _foundItems.Add(foundItem.ItemID, foundItem);
+            _db.addFoundItem(foundItem.ItemID, foundItem.Colors, foundItem.ItemType, foundItem.Date, foundItem.Location,
+                foundItem.Description, foundItem.SerialNumber, foundItem.CompanyName, foundItem.ContactName,
+                foundItem.ContactPhone, foundItem.PhotoLocation, foundItem.Delivered);
         }
 
         internal void updateCompanyItem(CompanyItem companyItem)
         {
-            throw new NotImplementedException();
+            _db.updateCompanyItem(companyItem.ItemID, companyItem.SerialNumber, companyItem.ContactName, companyItem.ContactPhone, companyItem.CompanyName);
         }
 
         internal void removefoundItem(int foundItemID)
         {
-            throw new NotImplementedException();
+            if (_lostItems[foundItemID] != null)
+            {
+                _lostItems.Remove(foundItemID);
+                _db.removeLostItem(foundItemID);
+            }
         }
 
-        internal void updateMatch(int _matchID, int _companyItemID, int _item2ID, MatchStatus _matchStatus)
+        internal void updateMatch(int matchID, MatchStatus matchStatus)
         {
-            throw new NotImplementedException();
+            _db.updateMatch(matchID, matchStatus.ToString);
         }
 
-        internal void addFacebookGroup(string _companyName, string url)
+        internal void addFacebookGroup(string companyName, string url)
         {
-            throw new NotImplementedException();
+            _db.addFacebookGroup(companyName, url);
         }
 
-        internal void removeFacebookGroup(string _companyName, string url)
+        internal void removeFacebookGroup(string companyName, string url)
         {
-            throw new NotImplementedException();
+            _db.removeFacebookGroup(companyName, url);
         }
 
         internal void addNewCompany(string _userName, string _password, string _companyName, string _phone, HashSet<String> facebookGroups)
         {
-            throw new NotImplementedException();
+            _db.addNewCompany(_userName, _password, _companyName, _phone, facebookGroups);
+        }
+
+        internal void updateFacebbokItem(FBItem fBItem)
+        {
+            _db.updateFBItem(fBItem.ItemID, fBItem.Colors, fBItem.ItemType, fBItem.Date, fBItem.Location, fBItem.Description,
+            fBItem.PostUrl, fBItem.PublisherName, fBItem.Type.ToString);
         }
 
         internal void addNewFBItemToDB(FBItem fBItem)
         {
             _FBItems.Add(fBItem.ItemID, fBItem);
+            _db.addFBItem(fBItem.ItemID, fBItem.Colors, fBItem.ItemType.ToString, fBItem.Date, fBItem.Location, fBItem.Description,
+                fBItem.PostUrl, fBItem.PublisherName, fBItem.Type.ToString);
 //            List<String> colors = new List<string>();
 
             //_db.addFBItem(fBItem.ItemID,fBItem.Colors, fBItem.ItemType, fBItem.Date, fBItem.Location, fBItem.Description,
