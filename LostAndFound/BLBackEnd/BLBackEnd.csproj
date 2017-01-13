@@ -66,9 +66,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LostAndFound\DB.csproj">
-      <Project>{02f88ddb-dfde-4c71-a512-35b1c0a7dd9f}</Project>
-      <Name>DB</Name>
+    <ProjectReference Include="..\DataLayer\DataLayer.csproj">
+      <Project>{57a9311f-aef0-411f-a5e0-4b0fe160bda7}</Project>
+      <Name>DataLayer</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
