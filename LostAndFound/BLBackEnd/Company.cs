@@ -64,7 +64,7 @@ namespace BLBackEnd
         }
         public Boolean addLostItem(LostItem lostItem)
         {
-            int id=cache.getAvialbleItemID();
+            int id=cache.getAvialbleCompanyItemID();
             lostItem.ItemID = id;
             _lostItems.Add(id);
             cache.addLostItem(lostItem);
@@ -95,7 +95,7 @@ namespace BLBackEnd
         }
         public Boolean addFoundItem(FoundItem foundItem)
         {
-            int id = cache.getAvialbleItemID();
+            int id = cache.getAvialbleCompanyItemID();
             foundItem.ItemID = id;
             _foundItems.Add(id);
             cache.addFoundItem(foundItem);
