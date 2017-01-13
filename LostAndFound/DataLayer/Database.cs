@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataLayer
 {
-    class Database
+    public class Database
     {
         private static Database singleton;
         LostAndFoundDBEntities db;

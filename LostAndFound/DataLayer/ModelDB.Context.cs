@@ -26,5 +26,13 @@ namespace DataLayer
         }
     
         public DbSet<User> User { get; set; }
+        public DbSet<Companies> Companies { get; set; }
+        public DbSet<CompanyItems> CompanyItems { get; set; }
+        public DbSet<FacebookGroups> FacebookGroups { get; set; }
+        public DbSet<FBItem> FBItem { get; set; }
+        public DbSet<FoundItems> FoundItems { get; set; }
+        public DbSet<Items> Items { get; set; }
+        public DbSet<LostItems> LostItems { get; set; }
+        public DbSet<Table> Table { get; set; }
     }
 }
