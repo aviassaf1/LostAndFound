@@ -9,7 +9,7 @@ namespace BLBackEnd
 {
     public class Cache
     {
-        private static Database _db;
+        private static IDB _db;
 
         private Dictionary<string, Admin> _admins;
         private Dictionary<string, Company> _companies;
@@ -73,8 +73,8 @@ namespace BLBackEnd
 
         internal void updateFoundItem(FoundItem foundItem)
         {
-            _db.updateFoundItem(foundItem.ItemID, foundItem.Colors, foundItem.ItemType, foundItem.Date, foundItem.Location,
-                foundItem.Description, foundItem.PhotoLocation,foundItem.Delivered);
+            _db.updateFoundItem(foundItem.ItemID, /*should be a company name here*/ foundItem.Colors, foundItem.ItemType, foundItem.Date, foundItem.Location,
+                foundItem.Description, foundItem.PhotoLocation, foundItem.Delivered);
         }
 
         internal Match getMatch(int matchID)
@@ -100,34 +100,34 @@ namespace BLBackEnd
         internal void addMatch(Match match)
         {
             _matches.Add(match.MatchID, match);
-            _db.addMatch(match.MatchID, match.CompanyItemID, match.Item2ID, match.MatchStatus.ToString);
+            _db.addMatch(match.CompanyItemID, match.Item2ID, match.MatchStatus.ToString());
         }
 
         internal void updateLostItem(LostItem lostItem)
         {
-            _db.updateLostItem(lostItem.ItemID, lostItem.Colors, lostItem.ItemType, lostItem.Date, lostItem.Location,
+            _db.updateLostItem(lostItem.ItemID,/*should be a company name here*/ lostItem.Colors, lostItem.ItemType, lostItem.Date, lostItem.Location,
                 lostItem.Description, lostItem.PhotoLocation,lostItem.WasFound);
         }
 
         internal void updateUser(string _userName, string _password)
         {
-            _db.updateUser(_userName, _password);
+            _db.updateUser(_userName, _password /*add if the user is admin as a bool or create a new method of update where the state of is admin does not change*/);
         }
 
         internal void addLostItem(LostItem lostItem)
         {
             _lostItems.Add(lostItem.ItemID, lostItem);
-            _db.addLostItem(lostItem.ItemID, lostItem.Colors, lostItem.ItemType, lostItem.Date, lostItem.Location,
+            _db.addLostItem(lostItem.ItemID/*should remove this field because the item id is auto generated*/, lostItem.Colors, lostItem.ItemType, lostItem.Date, lostItem.Location,
                 lostItem.Description, lostItem.SerialNumber, lostItem.CompanyName, lostItem.ContactName,
-                lostItem.ContactPhone, lostItem.PhotoLocation, lostItem.WasFound);
+                lostItem.ContactPhone, lostItem.PhotoLocation, lostItem.WasFound);////all of this is defferent from database
         }
 
         internal void addFoundItem(FoundItem foundItem)
         {
             _foundItems.Add(foundItem.ItemID, foundItem);
-            _db.addFoundItem(foundItem.ItemID, foundItem.Colors, foundItem.ItemType, foundItem.Date, foundItem.Location,
+            _db.addFoundItem(foundItem.ItemID/*should remove this field because the item id is auto generated*/, foundItem.Colors, foundItem.ItemType, foundItem.Date, foundItem.Location,
                 foundItem.Description, foundItem.SerialNumber, foundItem.CompanyName, foundItem.ContactName,
-                foundItem.ContactPhone, foundItem.PhotoLocation, foundItem.Delivered);
+                foundItem.ContactPhone, foundItem.PhotoLocation, foundItem.Delivered);//all of this is defferent from database
         }
 
         internal void updateCompanyItem(CompanyItem companyItem)
@@ -146,7 +146,7 @@ namespace BLBackEnd
 
         internal void updateMatch(int matchID, MatchStatus matchStatus)
         {
-            _db.updateMatch(matchID, matchStatus.ToString);
+            _db.updateMatch(matchID, matchStatus.ToString);//either add all nesseray fields or crate a new method where the company name and the item's id shouldnt be changed
         }
 
         internal void addFacebookGroup(string companyName, string url)
@@ -161,20 +161,20 @@ namespace BLBackEnd
 
         internal void addNewCompany(string _userName, string _password, string _companyName, string _phone, HashSet<String> facebookGroups)
         {
-            _db.addNewCompany(_userName, _password, _companyName, _phone, facebookGroups);
+            _db.addCompany(_userName, _password, _companyName, _phone, facebookGroups);
         }
 
         internal void updateFacebbokItem(FBItem fBItem)
         {
-            _db.updateFBItem(fBItem.ItemID, fBItem.Colors, fBItem.ItemType, fBItem.Date, fBItem.Location, fBItem.Description,
-            fBItem.PostUrl, fBItem.PublisherName, fBItem.Type.ToString);
+            _db.updateFBItem(fBItem.ItemID, fBItem.Colors/*colors isnt a list of string, that should be changed*/, fBItem.ItemType.ToString(), fBItem.Date, fBItem.Location, fBItem.Description,
+            fBItem.PostUrl, fBItem.PublisherName, fBItem.Type.ToString());
         }
 
         internal void addNewFBItemToDB(FBItem fBItem)
         {
             _FBItems.Add(fBItem.ItemID, fBItem);
-            _db.addFBItem(fBItem.ItemID, fBItem.Colors, fBItem.ItemType.ToString, fBItem.Date, fBItem.Location, fBItem.Description,
-                fBItem.PostUrl, fBItem.PublisherName, fBItem.Type.ToString);            
+            _db.addFBItem(fBItem.ItemID, fBItem.Colors/*colors isnt a list of string, that should be changed*/, fBItem.ItemType.ToString(), fBItem.Date, fBItem.Location, fBItem.Description,
+                fBItem.PostUrl, fBItem.PublisherName, fBItem.Type.ToString());            
         }
     }
 }
