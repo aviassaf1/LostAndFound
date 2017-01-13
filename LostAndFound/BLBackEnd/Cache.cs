@@ -7,7 +7,7 @@ using DataLayer;
 
 namespace BLBackEnd
 {
-    class Cache
+    public class Cache
     {
         private static Database _db;
 
@@ -174,12 +174,7 @@ namespace BLBackEnd
         {
             _FBItems.Add(fBItem.ItemID, fBItem);
             _db.addFBItem(fBItem.ItemID, fBItem.Colors, fBItem.ItemType.ToString, fBItem.Date, fBItem.Location, fBItem.Description,
-                fBItem.PostUrl, fBItem.PublisherName, fBItem.Type.ToString);
-//            List<String> colors = new List<string>();
-
-            //_db.addFBItem(fBItem.ItemID,fBItem.Colors, fBItem.ItemType, fBItem.Date, fBItem.Location, fBItem.Description,
-              //  fBItem.PostUrl, fBItem.PublisherName, fBItem.Type);
-            
+                fBItem.PostUrl, fBItem.PublisherName, fBItem.Type.ToString);            
         }
     }
 }
