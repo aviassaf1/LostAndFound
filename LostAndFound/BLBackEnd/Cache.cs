@@ -23,14 +23,33 @@ namespace BLBackEnd
 
         private Cache()
         {
+            _db = Database.getInstance;
+            ////////////////////////////////////////////////add db to cache
+            initCache();
+        }
+
+        private void initCache()
+        {
             _admins = new Dictionary<string, Admin>();
             _companies = new Dictionary<string, Company>();
             _lostItems = new Dictionary<int, LostItem>();
             _foundItems = new Dictionary<int, FoundItem>();
             _FBItems = new Dictionary<int, FBItem>();
             _matches = new Dictionary<int, Match>();
-            _db = Database.getInstance;
-            ////////////////////////////////////////////////add db to cache
+
+
+            List<List<String>> admins= _db.getAdminsList();//String userName,String password
+            List<List<String>> companies = _db.getCompaniesList();//String userName,String password, String companyName, String phone, 
+            List<List<String>> facebookGroups= _db.getFBGroupsList();//String companyName, String url, //maybe add group name
+            List<List<object>> lostItems = _db.getLostItemsList();//int itemID, List<Color> colors, ItemType itemType, DateTime date, String location, String description, int serialNumber, String companyName, String contactName, String contactPhone, String photoLocation
+            List<List<object>> foundItems = _db.getFoundItemsList();//int itemID, List<Color> colors, ItemType itemType, DateTime date, String location, String description, int serialNumber, String companyName, String contactName, String contactPhone, String photoLocation
+            List<List<object>> FBItems = _db.geFBItemsList();//int itemID, List<Color> colors, ItemType itemType, DateTime date, String location, String description, String postUrl, String publisherName, FBType fbType
+            List<List<String>> matches = _db.getMatchesList();//int matchID, int companyItemID, int item2ID, MatchStatus matchStatus
+            setMaxAvialbleItemID();
+        }
+
+        private void setMaxAvialbleItemID()
+        {
             maxAvilableComapanyItemID = 0;
             foreach (int id in _lostItems.Keys)
             {
