@@ -31,8 +31,9 @@ namespace Domain.Managers
                 }
                 else
                     return "not good matchNumber";
-                return "statusChanged";
+                return "status Changed";
             }
+            return "no match with that id";
         }
 
         public List<Match> findMatches(CompanyItem cItem, String token)
