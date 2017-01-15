@@ -10,7 +10,7 @@ namespace Domain.Managers
     public interface IMatchManager
     {
         List<Match> findMatches(CompanyItem item, String token);
-        String changeMatchStatus();
+        String changeMatchStatus(int matchID, int statusNum);
 
     }
 }

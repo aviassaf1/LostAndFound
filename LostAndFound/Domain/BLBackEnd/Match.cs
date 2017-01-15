@@ -22,6 +22,13 @@ namespace Domain.BLBackEnd
             _item2ID = item2ID;
             _matchStatus = matchStatus;
         }
+        public Match(int companyItemID, int item2ID, MatchStatus matchStatus)
+        {
+            _matchID = -1;
+            _companyItemID = companyItemID;
+            _item2ID = item2ID;
+            _matchStatus = matchStatus;
+        }
 
         public void addToDB()
         {
