@@ -21,20 +21,30 @@ namespace DataLayer
         String addFBItem(List<string> colors, string itemType, DateTime lostDate, string location, string decription, string postURL, string publisherName, string type);
         String removeFBItem(int itemId);
         String updateFBItem(int itemId, List<string> colorsNew, string itemTypeNew, DateTime lostDateNew, string locationNew, string decriptionNew, string postURLNew, string publisherNameNew, string typeNew);
-        String addFoundItem(string companyName, string photoLocation, List<string> colors, string itemType, DateTime findingDate, string location, string description, bool delivered);
+        String addFoundItem(List<string> colors, string itemType, DateTime findingDate, string location,
+                string description, int serialNumber, string companyName, string contactName,
+                string contactPhone, string photoLocation, bool wasFound);
         String removeFoundItem(string itemId);
-        String updateFoundItem(string itemId, string companyNameNew, List<string> colorsNew, string itemTypeNew, DateTime findingDateNew, string locationNew, string descriptionNew, string photoLocationNew, bool deliveredNew);
-        String addItem(int itemId);
+        String updateFoundItem(int itemId, string companyNameNew, List<string> colorsNew, string itemTypeNew, DateTime findingDateNew, string locationNew, string descriptionNew, string photoLocationNew, bool deliveredNew);
         String removeItem(int itemId);
-        String addLostItem(string companyName,  List<string> colors, string itemType, DateTime lostDate, string location, string description, string photoLocation, bool delivered);
+        String addLostItem(List<string> colors, string itemType, DateTime lostDate, string location,
+                string description, int serialNumber, string companyName, string contactName,
+                string contactPhone, string photoLocation, bool wasFound);
         String removeLostItem(int itemId);
-        String updateLostItem(int itemId, string companyNameNew, string photoLocationNew, List<string> colorsNew, string itemTypeNew, DateTime lostDateNew, string locationNew, string descriptionNew, bool deliveredNew);
+        String updateLostItem(int itemId, string companyNameNew, List<string> colorsNew, string itemTypeNew, DateTime lostDateNew, string locationNew, string descriptionNew, string photoLocationNew, bool deliveredNew);
         String addMatch(int companyItemId, int itemID, string matchStatus);
-        String removeMatch(string matchId);
-        String updateMatch(string matchId, string companyItemIdNew, string itemIDNew, string matchStatusNew);
+        String removeMatch(int matchId);
+        String updateMatch(int matchId, string matchStatusNew);
         String addUser(string userName, string password, bool isAdmin);
         String removeUser(string userName);
-        String updateUser(string userName, string newPassword, bool isAdminNew);
+        String updateUser(string userName, string newPassword);
+        List<List<String>> getAdminsList();
+        List<List<String>> getCompaniesList();
+        List<List<String>> getFBGroupsList();
+        List<List<object>> getLostItemsList();
+        List<List<object>> getFoundItemsList();
+        List<List<object>> geFBItemsList();
+        List<List<String>> getMatchesList();
 
 
 

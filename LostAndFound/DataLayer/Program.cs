@@ -8,7 +8,7 @@ namespace DataLayer
 {
     class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             Database db = Database.getInstance;
             // ent.

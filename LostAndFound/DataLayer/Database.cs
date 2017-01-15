@@ -125,5 +125,165 @@ namespace DataLayer
         {
             throw new NotImplementedException();
         }
+
+        public string addCompany(string userName, string password, string companyName, string phone, HashSet<string> facebookGroups)
+        {
+            throw new NotImplementedException();
+        }
+
+        string IDB.removeCompany(string companyName)
+        {
+            throw new NotImplementedException();
+        }
+
+        string IDB.updateCompany(string UserNameNew, string CompanyNameNew, string PhoneNew)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string AddCompanyItem(int serialNumber, string contactName, string contactPhone, string companyName)
+        {
+            throw new NotImplementedException();
+        }
+
+        string IDB.removeCompanyItem(int itemId)
+        {
+            throw new NotImplementedException();
+        }
+
+        string IDB.updateCompanyItem(int itemId, int serialNumberNew, string contactNameNew, string contactPhoneNew, string companyNameNew)
+        {
+            throw new NotImplementedException();
+        }
+
+        string IDB.addFacebookGroup(string companyName, string groupURL)
+        {
+            throw new NotImplementedException();
+        }
+
+        string IDB.removeFacebookGroup(string companyName, string groupURL)
+        {
+            throw new NotImplementedException();
+        }
+
+        string IDB.updateFacebookGroup(string companyName, string groupURL)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string addFBItem(List<string> colors, string itemType, DateTime lostDate, string location, string decription, string postURL, string publisherName, string type)
+        {
+            throw new NotImplementedException();
+        }
+
+        string IDB.removeFBItem(int itemId)
+        {
+            throw new NotImplementedException();
+        }
+
+        string IDB.updateFBItem(int itemId, List<string> colorsNew, string itemTypeNew, DateTime lostDateNew, string locationNew, string decriptionNew, string postURLNew, string publisherNameNew, string typeNew)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string addFoundItem(List<string> colors, string itemType, DateTime findingDate, string location, string description, int serialNumber, string companyName, string contactName, string contactPhone, string photoLocation, bool wasFound)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string removeFoundItem(string itemId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string updateFoundItem(int itemId, string companyNameNew, List<string> colorsNew, string itemTypeNew, DateTime findingDateNew, string locationNew, string descriptionNew, string photoLocationNew, bool deliveredNew)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string removeItem(int itemId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string addLostItem(List<string> colors, string itemType, DateTime lostDate, string location, string description, int serialNumber, string companyName, string contactName, string contactPhone, string photoLocation, bool wasFound)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string removeLostItem(int itemId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string updateLostItem(int itemId, string companyNameNew, List<string> colorsNew, string itemTypeNew, DateTime lostDateNew, string locationNew, string descriptionNew, string photoLocationNew, bool deliveredNew)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string addMatch(int companyItemId, int itemID, string matchStatus)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string removeMatch(int matchId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string updateMatch(int matchId, string matchStatusNew)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string addUser(string userName, string password, bool isAdmin)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string removeUser(string userName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string updateUser(string userName, string newPassword)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<List<string>> getAdminsList()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<List<string>> getCompaniesList()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<List<string>> getFBGroupsList()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<List<object>> getLostItemsList()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<List<object>> getFoundItemsList()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<List<object>> geFBItemsList()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<List<string>> getMatchesList()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
