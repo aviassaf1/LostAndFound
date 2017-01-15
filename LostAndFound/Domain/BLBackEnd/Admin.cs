@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Domain.BLBackEnd
 {
-    class Admin : User
+    public class Admin : User
     {
         public Admin(String adminName, String password)
         {

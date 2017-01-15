@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Domain.BLBackEnd
 {
-    class Match
+    public class Match
     {
         private static Cache cache = Cache.getInstance;
 

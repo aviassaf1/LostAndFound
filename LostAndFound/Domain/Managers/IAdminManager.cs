@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.BLBackEnd
+namespace Domain.Managers
 {
-    public enum FBType
+    public interface IAdminManager
     {
-        LOST, FOUND
+        String login();
     }
 }

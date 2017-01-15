@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Domain.BLBackEnd
 {
-    abstract class User
+    public abstract class User
     {
         protected static Cache cache = Cache.getInstance;
         protected String _userName;

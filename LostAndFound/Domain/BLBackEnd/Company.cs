@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Domain.BLBackEnd
 {
-    class Company : User
+    public class Company : User
     {
         private String _companyName;
         private String _phone;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Domain.BLBackEnd
 {
-    class FoundItem : CompanyItem
+    public class FoundItem : CompanyItem
     {
         private bool _delivered;
 

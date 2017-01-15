@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Domain.BLBackEnd
 {
-    enum MatchStatus
+    public enum MatchStatus
     {
         POSSIBLE, CORRECT, COMPLETE, INCORRECT
     }

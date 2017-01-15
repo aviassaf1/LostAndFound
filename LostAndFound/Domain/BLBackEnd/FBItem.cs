@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Domain.BLBackEnd
 {
-    class FBItem : Item
+    public class FBItem : Item
     {
 
         private String _postUrl;

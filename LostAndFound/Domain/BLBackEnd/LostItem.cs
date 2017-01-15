@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Domain.BLBackEnd
 {
-    class LostItem : CompanyItem
+    public class LostItem : CompanyItem
     {
         private bool _wasFound;
 

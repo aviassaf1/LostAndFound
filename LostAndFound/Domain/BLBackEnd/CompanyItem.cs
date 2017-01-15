@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Domain.BLBackEnd
 {
-    abstract class CompanyItem : Item
+    public abstract class CompanyItem : Item
     {
         protected int _serialNumber;
         protected String _companyName;

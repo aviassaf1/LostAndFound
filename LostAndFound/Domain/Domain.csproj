@@ -62,7 +62,14 @@
     <Compile Include="BLBackEnd\MatchStatus.cs" />
     <Compile Include="BLBackEnd\User.cs" />
     <Compile Include="Logger.cs" />
-    <Compile Include="Managers\Class1.cs" />
+    <Compile Include="Managers\AdminManager.cs" />
+    <Compile Include="Managers\ComapanyManager.cs" />
+    <Compile Include="Managers\IAdminManager.cs" />
+    <Compile Include="Managers\ICompanyManager.cs" />
+    <Compile Include="Managers\IItemManager.cs" />
+    <Compile Include="Managers\IMatchManager.cs" />
+    <Compile Include="Managers\ItemManager.cs" />
+    <Compile Include="Managers\MatchManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Domain.Managers
 {
-    class Class1
+    public class ComapanyManager //:ICompanyManager
     {
+        private Dictionary<String ,int > _FBTokens;//company name, token
+        
     }
 }

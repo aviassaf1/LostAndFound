@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Domain.BLBackEnd
 {
-    enum ItemType
+    public enum ItemType
     {
         ID, WALLET, PCMOUSE, PC, PHONE, KEYS, BAG, UMBRELLA, SWEATSHIRT,
         GLASSES, SHOES, FLIPFLOPS, FOLDER, CHARGER
