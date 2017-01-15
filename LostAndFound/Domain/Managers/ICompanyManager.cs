@@ -11,6 +11,8 @@ namespace Domain.Managers
         String login();
         String addLostItem();
         String addFoundItem();
-        
+        String getCompanyByName();
+        String publishInventory(String token, String GroupID, int days);//max days=8
+
     }
 }

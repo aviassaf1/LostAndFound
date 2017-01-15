@@ -9,7 +9,7 @@ namespace Domain.Managers
 {
     public interface IMatchManager
     {
-        List<Match> findMatches(CompanyItem item);
+        List<Match> findMatches(CompanyItem item, String token);
         String changeMatchStatus();
 
     }
