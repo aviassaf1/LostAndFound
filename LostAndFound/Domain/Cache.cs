@@ -109,7 +109,7 @@ namespace Domain.BLBackEnd
 
         internal void updateFoundItem(FoundItem foundItem)
         {
-            _db.updateFoundItem(foundItem.ItemID, /*should be a company name here*/ foundItem.getColorsList(), foundItem.ItemType, foundItem.Date, foundItem.Location,
+            _db.updateFoundItem(foundItem.ItemID, foundItem.CompanyName, foundItem.getColorsList(), foundItem.ItemType.ToString(), foundItem.Date, foundItem.Location,
                 foundItem.Description, foundItem.PhotoLocation, foundItem.Delivered);
         }
 
@@ -141,19 +141,19 @@ namespace Domain.BLBackEnd
 
         internal void updateLostItem(LostItem lostItem)
         {
-            _db.updateLostItem(lostItem.ItemID,/*should be a company name here*/ lostItem.getColorsList(), lostItem.ItemType, lostItem.Date, lostItem.Location,
+            _db.updateLostItem(lostItem.ItemID,lostItem.CompanyName , lostItem.getColorsList(), lostItem.ItemType.ToString(), lostItem.Date, lostItem.Location,
                 lostItem.Description, lostItem.PhotoLocation,lostItem.WasFound);
         }
 
         internal void updateUser(string _userName, string _password)
         {
-            _db.updateUser(_userName, _password /*add if the user is admin as a bool or create a new method of update where the state of is admin does not change*/);
+            _db.updateUser(_userName, _password);
         }
 
         internal void addLostItem(LostItem lostItem)
         {
             _lostItems.Add(lostItem.ItemID, lostItem);
-            _db.addLostItem(lostItem.ItemID/*should remove this field because the item id is auto generated*/, lostItem.getColorsList(), lostItem.ItemType, lostItem.Date, lostItem.Location,
+            _db.addLostItem(lostItem.getColorsList(), lostItem.ItemType.ToString(), lostItem.Date, lostItem.Location,
                 lostItem.Description, lostItem.SerialNumber, lostItem.CompanyName, lostItem.ContactName,
                 lostItem.ContactPhone, lostItem.PhotoLocation, lostItem.WasFound);////all of this is defferent from database
         }
@@ -161,7 +161,7 @@ namespace Domain.BLBackEnd
         internal void addFoundItem(FoundItem foundItem)
         {
             _foundItems.Add(foundItem.ItemID, foundItem);
-            _db.addFoundItem(foundItem.ItemID/*should remove this field because the item id is auto generated*/, foundItem.getColorsList(), foundItem.ItemType, foundItem.Date, foundItem.Location,
+            _db.addFoundItem(foundItem.getColorsList(), foundItem.ItemType.ToString(), foundItem.Date, foundItem.Location,
                 foundItem.Description, foundItem.SerialNumber, foundItem.CompanyName, foundItem.ContactName,
                 foundItem.ContactPhone, foundItem.PhotoLocation, foundItem.Delivered);//all of this is defferent from database
         }
@@ -182,7 +182,7 @@ namespace Domain.BLBackEnd
 
         internal void updateMatch(int matchID, MatchStatus matchStatus)
         {
-            _db.updateMatch(matchID, matchStatus.ToString);//either add all nesseray fields or crate a new method where the company name and the item's id shouldnt be changed
+            _db.updateMatch(matchID, matchStatus.ToString());//either add all nesseray fields or crate a new method where the company name and the item's id shouldnt be changed
         }
 
         internal void addFacebookGroup(string companyName, string url)
@@ -209,7 +209,7 @@ namespace Domain.BLBackEnd
         internal void addNewFBItemToDB(FBItem fBItem)
         {
             _FBItems.Add(fBItem.ItemID, fBItem);
-            _db.addFBItem(fBItem.ItemID, fBItem.getColorsList()/*colors isnt a list of string, that should be changed*/, fBItem.ItemType.ToString(), fBItem.Date, fBItem.Location, fBItem.Description,
+            _db.addFBItem(fBItem.getColorsList()/*colors isnt a list of string, that should be changed*/, fBItem.ItemType.ToString(), fBItem.Date, fBItem.Location, fBItem.Description,
                 fBItem.PostUrl, fBItem.PublisherName, fBItem.Type.ToString());            
         }
     }
