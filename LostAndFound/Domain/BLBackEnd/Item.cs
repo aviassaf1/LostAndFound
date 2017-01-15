@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BLBackEnd
+namespace Domain.BLBackEnd
 {
     abstract class Item
     {
@@ -108,6 +108,15 @@ namespace BLBackEnd
                 _description = value;
                 this.updateItem();
             }
+        }
+        public List<string> getColorsList()
+        {
+            List<string> colors = new List<string>();
+            foreach(Color color in _colors)
+            {
+                colors.Add(color.ToString());
+            }
+            return colors;
         }
     }
 }

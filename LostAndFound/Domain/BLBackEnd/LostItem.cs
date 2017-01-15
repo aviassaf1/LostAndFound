@@ -4,14 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BLBackEnd
+namespace Domain.BLBackEnd
 {
-    class FoundItem : CompanyItem
+    class LostItem : CompanyItem
     {
-        private bool _delivered;
+        private bool _wasFound;
 
-
-        public FoundItem(int itemID, List<Color> colors, ItemType itemType, DateTime date, String location, String description,
+        public LostItem(int itemID, List<Color> colors, ItemType itemType, DateTime date, String location, String description,
         int serialNumber, String companyName, String contactName, String contactPhone, String photoLocation)
         {
             _itemID = itemID;
@@ -25,9 +24,9 @@ namespace BLBackEnd
             _contactName = contactName;
             _contactPhone = ContactPhone;
             _photoLocation = photoLocation;
-            _delivered = false;
+            _wasFound = false;
         }
-        public FoundItem( List<Color> colors, ItemType itemType, DateTime date, String location, String description,
+        public LostItem(List<Color> colors, ItemType itemType, DateTime date, String location, String description,
         int serialNumber, String companyName, String contactName, String contactPhone, String photoLocation)
         {
             _itemID = -1;
@@ -41,31 +40,31 @@ namespace BLBackEnd
             _contactName = contactName;
             _contactPhone = ContactPhone;
             _photoLocation = photoLocation;
-            _delivered = false;
+            _wasFound = false;
         }
 
-        public void addToDB()
-        {
-            cache.addFoundItem(this);
-        }
+        /* public void addToDB()
+         {
+             cache.addLostItem(this);
+         }*/
 
-        public bool Delivered
+
+        public bool WasFound
         {
             get
             {
-                return _delivered;
+                return _wasFound;
             }
-
             set
             {
-                _delivered = value;
+                _wasFound = value;
                 updateItem();
             }
         }
 
         protected override void updateItem()
         {
-            cache.updateFoundItem(this);
+            cache.updateLostItem(this);
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BLBackEnd
+namespace Domain.BLBackEnd
 {
     abstract class CompanyItem : Item
     {

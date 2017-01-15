@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BLBackEnd
+namespace Domain.BLBackEnd
 {
-    enum MatchStatus
+    enum FBType
     {
-        POSSIBLE, CORRECT, COMPLETE, INCORRECT
+        LOST, FOUND
     }
 }

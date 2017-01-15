@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BLBackEnd
+namespace Domain.BLBackEnd
 {
-    enum Color
+    enum MatchStatus
     {
-        PINK, BLACK, BLUE, RED, GREEN, YELLOW, WHITE, PURPEL, ORANGE, GRAY, BROWN
+        POSSIBLE, CORRECT, COMPLETE, INCORRECT
     }
 }

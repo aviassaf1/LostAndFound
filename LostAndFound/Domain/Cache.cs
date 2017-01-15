@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DataLayer;
 
-namespace BLBackEnd
+namespace Domain.BLBackEnd
 {
     public class Cache
     {
@@ -20,6 +20,18 @@ namespace BLBackEnd
         private int maxAvilableComapanyItemID;
 
         private static Cache singleton;
+        public static Cache getInstance
+        {
+            get
+            {
+                if (singleton == null)
+                {
+                    singleton = new Cache();
+                }
+                return singleton;
+            }
+        }
+
 
         private Cache()
         {
@@ -45,6 +57,23 @@ namespace BLBackEnd
             List<List<object>> foundItems = _db.getFoundItemsList();//int itemID, List<Color> colors, ItemType itemType, DateTime date, String location, String description, int serialNumber, String companyName, String contactName, String contactPhone, String photoLocation
             List<List<object>> FBItems = _db.geFBItemsList();//int itemID, List<Color> colors, ItemType itemType, DateTime date, String location, String description, String postUrl, String publisherName, FBType fbType
             List<List<String>> matches = _db.getMatchesList();//int matchID, int companyItemID, int item2ID, MatchStatus matchStatus
+
+            foreach (List<String> list in admins)
+            {
+                _admins.Add(list.ElementAt(0), new Admin(list.ElementAt(0), list.ElementAt(1)));//add encryption to pass
+            }
+            foreach (List<String> list in companies)
+            {
+                _companies.Add(list.ElementAt(0), new Company(list.ElementAt(0), list.ElementAt(1), list.ElementAt(2), list.ElementAt(3),new HashSet<string>()));//add encryption to pass
+            }
+            foreach (List<String> list in facebookGroups)
+            {
+                _companies[list.ElementAt(0)].addFacebookGroup(list.ElementAt(1));
+            }
+            //lost items
+            //found items
+            //fbitems
+            //matches
             setMaxAvialbleItemID();
         }
 
@@ -60,18 +89,6 @@ namespace BLBackEnd
                 maxAvilableComapanyItemID = Math.Max(id, maxAvilableComapanyItemID);
             }
             maxAvilableComapanyItemID = maxAvilableComapanyItemID + 1;
-        }
-
-        public static Cache getInstance
-        {
-            get
-            {
-                if (singleton == null)
-                {
-                    singleton = new Cache();
-                }
-                return singleton;
-            }
         }
 
         public void clear()
@@ -92,7 +109,7 @@ namespace BLBackEnd
 
         internal void updateFoundItem(FoundItem foundItem)
         {
-            _db.updateFoundItem(foundItem.ItemID, /*should be a company name here*/ foundItem.Colors, foundItem.ItemType, foundItem.Date, foundItem.Location,
+            _db.updateFoundItem(foundItem.ItemID, /*should be a company name here*/ foundItem.getColorsList(), foundItem.ItemType, foundItem.Date, foundItem.Location,
                 foundItem.Description, foundItem.PhotoLocation, foundItem.Delivered);
         }
 
@@ -124,7 +141,7 @@ namespace BLBackEnd
 
         internal void updateLostItem(LostItem lostItem)
         {
-            _db.updateLostItem(lostItem.ItemID,/*should be a company name here*/ lostItem.Colors, lostItem.ItemType, lostItem.Date, lostItem.Location,
+            _db.updateLostItem(lostItem.ItemID,/*should be a company name here*/ lostItem.getColorsList(), lostItem.ItemType, lostItem.Date, lostItem.Location,
                 lostItem.Description, lostItem.PhotoLocation,lostItem.WasFound);
         }
 
@@ -136,7 +153,7 @@ namespace BLBackEnd
         internal void addLostItem(LostItem lostItem)
         {
             _lostItems.Add(lostItem.ItemID, lostItem);
-            _db.addLostItem(lostItem.ItemID/*should remove this field because the item id is auto generated*/, lostItem.Colors, lostItem.ItemType, lostItem.Date, lostItem.Location,
+            _db.addLostItem(lostItem.ItemID/*should remove this field because the item id is auto generated*/, lostItem.getColorsList(), lostItem.ItemType, lostItem.Date, lostItem.Location,
                 lostItem.Description, lostItem.SerialNumber, lostItem.CompanyName, lostItem.ContactName,
                 lostItem.ContactPhone, lostItem.PhotoLocation, lostItem.WasFound);////all of this is defferent from database
         }
@@ -144,7 +161,7 @@ namespace BLBackEnd
         internal void addFoundItem(FoundItem foundItem)
         {
             _foundItems.Add(foundItem.ItemID, foundItem);
-            _db.addFoundItem(foundItem.ItemID/*should remove this field because the item id is auto generated*/, foundItem.Colors, foundItem.ItemType, foundItem.Date, foundItem.Location,
+            _db.addFoundItem(foundItem.ItemID/*should remove this field because the item id is auto generated*/, foundItem.getColorsList(), foundItem.ItemType, foundItem.Date, foundItem.Location,
                 foundItem.Description, foundItem.SerialNumber, foundItem.CompanyName, foundItem.ContactName,
                 foundItem.ContactPhone, foundItem.PhotoLocation, foundItem.Delivered);//all of this is defferent from database
         }
@@ -185,14 +202,14 @@ namespace BLBackEnd
 
         internal void updateFacebbokItem(FBItem fBItem)
         {
-            _db.updateFBItem(fBItem.ItemID, fBItem.Colors/*colors isnt a list of string, that should be changed*/, fBItem.ItemType.ToString(), fBItem.Date, fBItem.Location, fBItem.Description,
+            _db.updateFBItem(fBItem.ItemID, fBItem.getColorsList()/*colors isnt a list of string, that should be changed*/, fBItem.ItemType.ToString(), fBItem.Date, fBItem.Location, fBItem.Description,
             fBItem.PostUrl, fBItem.PublisherName, fBItem.Type.ToString());
         }
 
         internal void addNewFBItemToDB(FBItem fBItem)
         {
             _FBItems.Add(fBItem.ItemID, fBItem);
-            _db.addFBItem(fBItem.ItemID, fBItem.Colors/*colors isnt a list of string, that should be changed*/, fBItem.ItemType.ToString(), fBItem.Date, fBItem.Location, fBItem.Description,
+            _db.addFBItem(fBItem.ItemID, fBItem.getColorsList()/*colors isnt a list of string, that should be changed*/, fBItem.ItemType.ToString(), fBItem.Date, fBItem.Location, fBItem.Description,
                 fBItem.PostUrl, fBItem.PublisherName, fBItem.Type.ToString());            
         }
     }

@@ -47,7 +47,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="BLBackEnd\Admin.cs" />
+    <Compile Include="Cache.cs" />
+    <Compile Include="BLBackEnd\Color.cs" />
+    <Compile Include="BLBackEnd\Company.cs" />
+    <Compile Include="BLBackEnd\CompanyItem.cs" />
+    <Compile Include="BLBackEnd\FBItem.cs" />
+    <Compile Include="BLBackEnd\FBType.cs" />
+    <Compile Include="BLBackEnd\FoundItem.cs" />
+    <Compile Include="BLBackEnd\Item.cs" />
+    <Compile Include="BLBackEnd\ItemType.cs" />
+    <Compile Include="BLBackEnd\LostItem.cs" />
+    <Compile Include="BLBackEnd\Match.cs" />
+    <Compile Include="BLBackEnd\MatchStatus.cs" />
+    <Compile Include="BLBackEnd\User.cs" />
+    <Compile Include="Logger.cs" />
+    <Compile Include="Managers\Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -55,9 +70,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BLBackEnd\BLBackEnd.csproj">
-      <Project>{9b535c42-497e-49ea-9936-e480e36bd873}</Project>
-      <Name>BLBackEnd</Name>
+    <ProjectReference Include="..\DataLayer\DataLayer.csproj">
+      <Project>{57a9311f-aef0-411f-a5e0-4b0fe160bda7}</Project>
+      <Name>DataLayer</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

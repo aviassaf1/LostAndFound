@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BLBackEnd
+namespace Domain.Managers
 {
-    class Admin : User
+    class Class1
     {
     }
 }
