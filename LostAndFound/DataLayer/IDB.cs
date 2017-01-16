@@ -13,40 +13,44 @@ namespace DataLayer
         String removeCompany(string companyName);
         String updateCompany(string companyName, string userNameNew, string phoneNew);
         Companies findCompanyByCompanyName(string companyName);
-        String AddCompanyItem(int serialNumber, string contactName, string contactPhone, string companyName);
+        int AddCompanyItem(int serialNumber, string contactName, string contactPhone, string companyName);
         String removeCompanyItem(int itemId);
         String updateCompanyItem(int itemId, int serialNumberNew, string contactNameNew, string contactPhoneNew, string companyNameNew);
         CompanyItems findCompanyItemByItemId(int itemId);
         String addFacebookGroup(string companyName, string groupURL);
         String removeFacebookGroup(string companyName, string groupURL);
-        String updateFacebookGroup(string companyName, string groupURL);
-        String addFBItem(List<string> colors, string itemType, DateTime lostDate, string location, string decription, string postURL, string publisherName, string type);
+        String updateFacebookGroup(string companyName, string groupURL);//not clear waht should be change url, companyName or 2?...
+        FacebookGroups findFacebookGroup(string companyName, string groupUrl);
+        Items findItemByItemId(int itemId);
+        int addFBItem(List<string> colors, string itemType, DateTime lostDate, string location, string decription, string postId, string publisherName, string type);
         String removeFBItem(int itemId);
-        String updateFBItem(int itemId, List<string> colorsNew, string itemTypeNew, DateTime lostDateNew, string locationNew, string decriptionNew, string postURLNew, string publisherNameNew, string typeNew);
-        String addFoundItem(List<string> colors, string itemType, DateTime findingDate, string location,
+        String updateFBItem(int itemId, List<string> colorsNew, string itemTypeNew, DateTime lostDateNew, string locationNew, string decriptionNew, string postIdNew, string publisherNameNew, string typeNew);
+        int addFoundItem(List<string> colors, string itemType, DateTime findingDate, string location,
                 string description, int serialNumber, string companyName, string contactName,
                 string contactPhone, string photoLocation, bool wasFound);
-        String removeFoundItem(string itemId);
+        String removeFoundItem(int itemId);
         String updateFoundItem(int itemId, string companyNameNew, List<string> colorsNew, string itemTypeNew, DateTime findingDateNew, string locationNew, string descriptionNew, string photoLocationNew, bool deliveredNew);
         String removeItem(int itemId);
-        String addLostItem(List<string> colors, string itemType, DateTime lostDate, string location,
+        int addLostItem(List<string> colors, string itemType, DateTime lostDate, string location,
                 string description, int serialNumber, string companyName, string contactName,
                 string contactPhone, string photoLocation, bool wasFound);
         String removeLostItem(int itemId);
         String updateLostItem(int itemId, string companyNameNew, List<string> colorsNew, string itemTypeNew, DateTime lostDateNew, string locationNew, string descriptionNew, string photoLocationNew, bool deliveredNew);
-        String addMatch(int companyItemId, int itemID, string matchStatus);
+        int addMatch(int companyItemId, int itemID, string matchStatus);
         String removeMatch(int matchId);
         String updateMatch(int matchId, string matchStatusNew);
+        Matches findMathByMatchId(int matchId);
         String addUser(string userName, string password, bool isAdmin);
         String removeUser(string userName);
         String updateUser(string userName, string newPassword);
-        List<List<String>> getAdminsList();
-        List<List<String>> getCompaniesList();
-        List<List<String>> getFBGroupsList();
-        List<List<object>> getLostItemsList();
-        List<List<object>> getFoundItemsList();
-        List<List<object>> geFBItemsList();
-        List<List<String>> getMatchesList();
+        User findUserByUserName(string userName);
+        List<User> getAdminsList();
+        List<Companies> getCompaniesList();
+        List<FacebookGroups> getFBGroupsList();
+        List<LostItems> getLostItemsList();
+        List<FoundItems> getFoundItemsList();
+        List<FBItem> getFBItemsList();
+        List<Matches> getMatchesList();
 
 
 

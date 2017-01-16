@@ -11,23 +11,21 @@ namespace DataLayer
         private static Database singleton;
         Entities db;
 
+
         private Database()
         {
 
         }
 
 
-        public static Database getInstance
+        public static Database getInstance()
         {
-            get
-            {
                 if (singleton == null)
                 {
                     singleton = new Database();
                     singleton.initializeDB();
                 }
                 return singleton;
-            }
         }
         private Boolean initializeDB()
         {
@@ -47,17 +45,76 @@ namespace DataLayer
         }
         public void testop()
         {
-            foreach (var item in db.User)
-            {
-                Console.WriteLine(item.UserName);
-            }
-            while (true) ;
+            /*
+            User user = new User();
+            user.UserName = "testUser";
+            user.password = "testpass";
+            user.isAdmin = true;
+            Companies company = new Companies();
+            company.User = user;
+            company.userName = user.UserName;
+            company.phone = "testphone";
+            company.companyName = "testCompany";
+            List <CompanyItems>  companyItems = new List<CompanyItems>();
+            company.CompanyItems = companyItems;
+            CompanyItems cItem = new CompanyItems();
+            cItem.Companies = company;
+            cItem.companyName = company.companyName;
+            cItem.contactName = "";
+            cItem.contactPhone = "";
+            cItem.FoundItems = null;
+            cItem.itemId = 15;
+            Items item = new Items();
+            item.itemID = 15;
+            item.CompanyItems = cItem;
+            cItem.Items = item;
+            company.CompanyItems.Add(cItem);
+            company.FacebookGroups = new LinkedList<FacebookGroups>();
+            FacebookGroups fbg = new FacebookGroups();
+            fbg.Companies = company;
+            fbg.CompanyName = company.companyName;
+            fbg.groupURL = "urlTest";
+            company.FacebookGroups.Add(fbg);
+            user.Companies = new LinkedList<Companies>();
+            user.Companies.Add(company);
+
+    */
+            //  db.User.Add(new User());
+            User user = new User();
+            user.UserName = "user2";
+            user.password = "123";
+            Companies company = new Companies();
+            company.companyName = "comp1";
+            company.User = user;
+            // db.User = new LinkedList<User>();
+            //db.User = new System.Data.Entity.DbSet<User>();
+            db.User.Add(user);
+            user.Companies.Add(company);
+            //Console.WriteLine(db.User);
+           // while (true) ;
+            //company.User = user;
+            db.SaveChanges();
+            //Companies comp = findCompanyByCompanyName(company.companyName);
+            //Console.WriteLine(comp.User.UserName);
+            //user.Companies.Remove(comp);
+            //db.Companies.Remove(comp);
+            Items item = new Items();
+            db.Items.Add(item);
+            user.password = "456";
+            db.SaveChanges();
+            int x = item.itemID;
+            int y = x;
+            //while (true) ;
+            
+            //db.User.Remove(user);
+            //db.User.re;
+            //db.SaveChanges();
+            //db.di
         }
         public void clear()
         {
             try
             {
-                
                 //cache.clear();
             }
             catch
@@ -65,21 +122,50 @@ namespace DataLayer
                 
             }
         }
+        private void clearFbGroups()
+        {
+            foreach(FacebookGroups fbg in db.FacebookGroups)
+            {
+
+            }
+        
+        }
 
         public string addCompany(string userName, string password, string companyName, string phone, HashSet<string> facebookGroups)
         {
             try
             {
-                Companies company = new Companies(userName,companyName, phone);
-                addUser(userName, password, true);//not sure what the last one should be
+                if (findCompanyByCompanyName(companyName) != null)
+                {
+                    return "company already exists";
+                }
+                Companies company = new Companies();
+                company.userName = userName;
+                company.companyName = companyName;
+                company.phone = phone;
+                User user = findUserByUserName(userName);
+                if (user == null)
+                {
+                    return "user was not found in the system";
+                }
+                user.Companies.Add(company);
+                company.User = user;
+                foreach (string url in facebookGroups)
+                {
+                    FacebookGroups fbg = new FacebookGroups();
+                    fbg.CompanyName = companyName;
+                    fbg.groupURL = url;
+                    company.FacebookGroups.Add(fbg);
+                    fbg.Companies = company;
+                }
                 db.Companies.Add(company);
+                db.SaveChanges();
                 return "true";
             }
             catch(Exception e)
             {
                 return e.ToString();
             }
-            //needs to add also in facebook groups table
         }
 
         public string removeCompany(string companyName)
@@ -87,14 +173,20 @@ namespace DataLayer
             try
             {
                 Companies company = findCompanyByCompanyName(companyName);
+                foreach(FacebookGroups fbg in company.FacebookGroups)
+                {
+                    db.FacebookGroups.Remove(fbg);
+                }
+                User user = findUserByUserName(company.userName);
+                user.Companies.Remove(company);
                 db.Companies.Remove(company);
+                db.SaveChanges();
                 return "true";
             }
             catch(Exception e)
             {
                 return e.ToString();
             }
-            //needs also to remove in facebookgroups table
         }
 
         public string updateCompany(string companyName, string userNameNew, string phoneNew)
@@ -102,8 +194,18 @@ namespace DataLayer
             try
             {
                 Companies company = findCompanyByCompanyName(companyName);
+                User userNew = findUserByUserName(userNameNew);
+                if(userNew==null)
+                {
+                    return "the new user does not exist in the system";
+                }
                 company.userName = userNameNew;
                 company.phone = phoneNew;
+                User oldUser = company.User;
+                oldUser.Companies.Remove(company);
+                userNew.Companies.Add(company);
+                company.User = userNew;
+                db.SaveChanges();
                 return "true";
             }
             catch(Exception e)
@@ -131,17 +233,28 @@ namespace DataLayer
             }
         }
 
-        public string AddCompanyItem(int serialNumber, string contactName, string contactPhone, string companyName)
+        public int AddCompanyItem(int serialNumber, string contactName, string contactPhone, string companyName)
         {
             try
             {
-                CompanyItems cItem = new CompanyItems(serialNumber, contactName, contactPhone, companyName);
-                db.CompanyItems.Add(cItem);
-                return "true";
+                CompanyItems cItem = new CompanyItems();
+                Companies company = findCompanyByCompanyName(companyName);
+                if (company == null)
+                {
+                    return -2;
+                }
+                company.CompanyItems.Add(cItem);
+                cItem.Companies = company;
+                cItem.companyName = companyName;
+                cItem.contactName = contactName;
+                cItem.contactPhone = contactPhone;
+                cItem.serialNumber = serialNumber;
+                db.SaveChanges();
+                return cItem.itemId;
             }
-            catch(Exception e)
+            catch
             {
-                return e.ToString();
+                return -1;
             }
         }
 
@@ -150,7 +263,15 @@ namespace DataLayer
             try
             {
                 CompanyItems cItem = findCompanyItemByItemId(itemId);
+                removeFoundItem(cItem.FoundItems.itemID);
+                removeLostItem(cItem.LostItems.itemID);
+                if(cItem==null)
+                {
+                    return "the item does not exist in the system";
+                }
+                cItem.Companies.CompanyItems.Remove(cItem);
                 db.CompanyItems.Remove(cItem);
+                db.SaveChanges();
                 return "true";
             }
             catch(Exception e)
@@ -164,10 +285,24 @@ namespace DataLayer
             try
             {
                 CompanyItems cItem = findCompanyItemByItemId(itemId);
+                if(cItem==null)
+                {
+                    return "item does not exist in the system";
+                }
                 cItem.serialNumber = serialNumberNew;
                 cItem.contactName = contactNameNew;
                 cItem.contactPhone = contactPhoneNew;
+                Companies oldCompany = findCompanyByCompanyName(cItem.Companies.companyName);
+                oldCompany.CompanyItems.Remove(cItem);
+                Companies newCompany = findCompanyByCompanyName(companyNameNew);
+                if (companyNameNew == null)
+                {
+                    return "new company does not exist";
+                }
+                newCompany.CompanyItems.Add(cItem);
                 cItem.companyName = companyNameNew;
+                cItem.Companies = newCompany;
+                db.SaveChanges();
                 return "true";
             }
             catch(Exception e)
@@ -198,8 +333,16 @@ namespace DataLayer
         {
             try
             {
-                FacebookGroups fbg = new FacebookGroups(companyName, groupURL);
-                db.FacebookGroups.Add(fbg);
+                FacebookGroups fbg = new FacebookGroups();
+                Companies company = findCompanyByCompanyName(companyName);
+                if (company == null)
+                {
+                    return "company does not exist";
+                }
+                company.FacebookGroups.Add(fbg);
+                fbg.Companies = company;
+                fbg.CompanyName = companyName;
+                db.SaveChanges();
                 return "true";
             }
             catch(Exception e)
@@ -210,127 +353,583 @@ namespace DataLayer
 
         public string removeFacebookGroup(string companyName, string groupURL)
         {
-            throw new NotImplementedException();
+            try
+            {
+                FacebookGroups fbg = findFacebookGroup(companyName, groupURL);
+                if (fbg == null)
+                {
+                    return "couldnt find the facebook group matching the company name and group url";
+                }
+                Companies company = findCompanyByCompanyName(companyName);
+                company.FacebookGroups.Remove(fbg);
+                db.FacebookGroups.Remove(fbg);
+                db.SaveChanges();
+                return "true";
+            }
+            catch(Exception e)
+            {
+                return e.ToString();
+            }
         }
 
         public string updateFacebookGroup(string companyName, string groupURL)
         {
             throw new NotImplementedException();
         }
-
-        public string addFBItem(List<string> colors, string itemType, DateTime lostDate, string location, string decription, string postURL, string publisherName, string type)
+        public FacebookGroups findFacebookGroup(string companyName, string groupUrl)
         {
-            throw new NotImplementedException();
+            try
+            {
+                foreach(FacebookGroups fbg in db.FacebookGroups)
+                {
+                    if(fbg.CompanyName.Equals(companyName) && fbg.groupURL.Equals(groupUrl))
+                    {
+                        return fbg;
+                    }
+                }
+                return null;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+        private string listOfColorsToString(List<string> colors)
+        {
+            string str = "";
+            foreach(string color in colors)
+            {
+                str = str + "," + color;
+            }
+            if (!str.Equals(""))
+            {
+                str = str.Substring(1);
+            }
+            return str;
+        }
+        private List<string> stringToListOfColors(string colors)
+        {
+            string color = "";
+            List<string> colorList = new List<string>();
+            for(int i=0; i<colors.Length; i++)
+            {
+                if ((i == colors.Length - 1) || colors.ElementAt(i).Equals(","))
+                {
+                    colorList.Add(color);
+                    color = "";
+                }
+                else
+                {
+                    color += colors.ElementAt(i);
+                }
+            }
+            return colorList;
+        }
+        public Items findItemByItemId(int itemId)
+        {
+            try
+            {
+                foreach (Items item in db.Items)
+                {
+                    if (item.itemID == itemId)
+                    {
+                        return item;
+                    }
+                }
+                return null;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+        public int addFBItem(List<string> colors, string itemType, DateTime lostDate, string location, string decription, string postId, string publisherName, string type)
+        {
+            FBItem fbItem = new FBItem();
+            try
+            {
+                fbItem.colors = listOfColorsToString(colors);
+                fbItem.description = decription;
+                fbItem.location = location;
+                fbItem.lostDate = lostDate;
+                fbItem.postId = postId;
+                fbItem.publisherName = publisherName;
+                fbItem.type = type;
+                Items item = new Items();
+                db.Items.Add(item);
+                db.SaveChanges();
+                fbItem.itemID = item.itemID;
+                item.FBItem = fbItem;
+            }
+            catch
+            {
+                return -1;
+            }
+            db.SaveChanges();
+            return fbItem.itemID;
         }
 
         public string removeFBItem(int itemId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Items item = findItemByItemId(itemId);
+                if (item == null)
+                {
+                    return "item does not exist in the system";
+                }
+                if (item.FBItem == null)
+                {
+                    return "item was found in the system but it is not an FBItem";
+                }
+                db.FBItem.Remove(item.FBItem);
+                db.Items.Remove(item);
+            }
+            catch(Exception e)
+            {
+                return e.ToString();
+            }
+            db.SaveChanges();
+            return "true";
         }
 
         public string updateFBItem(int itemId, List<string> colorsNew, string itemTypeNew, DateTime lostDateNew, string locationNew, string decriptionNew, string postURLNew, string publisherNameNew, string typeNew)
         {
-            throw new NotImplementedException();
+            try
+            {
+                FBItem fbItem = findItemByItemId(itemId).FBItem;
+                if (fbItem == null)
+                {
+                    return "the item was found but it is not a fbItem";
+                }
+                fbItem.colors = listOfColorsToString(colorsNew);
+                fbItem.lostDate = lostDateNew;
+                fbItem.itemType = typeNew;
+                fbItem.postId = postURLNew;
+                fbItem.publisherName = publisherNameNew;
+                fbItem.type = typeNew;
+            }
+            catch(Exception e)
+            {
+                return e.ToString();
+            }
+            db.SaveChanges();
+            return "true";
         }
 
-        public string addFoundItem(List<string> colors, string itemType, DateTime findingDate, string location, string description, int serialNumber, string companyName, string contactName, string contactPhone, string photoLocation, bool wasFound)
+        public int addFoundItem(List<string> colors, string itemType, DateTime findingDate, string location, string description, int serialNumber, string companyName, string contactName, string contactPhone, string photoLocation, bool wasFound)
         {
-            throw new NotImplementedException();
+            FoundItems fItem = new FoundItems();
+            try
+            {
+                int citemId = AddCompanyItem(serialNumber, contactName, contactPhone, companyName);
+                CompanyItems cItem = findCompanyItemByItemId(citemId);
+                if (cItem == null)
+                {
+                    return -2;
+                }
+                fItem.findingDate = findingDate;
+                fItem.colors = listOfColorsToString(colors);
+                fItem.companyName = companyName;
+                fItem.delivered = wasFound;
+                fItem.description = description;
+                fItem.itemID = cItem.itemId;
+                fItem.itemType = itemType;
+                fItem.location = location;
+                fItem.photoLocation = photoLocation;
+                cItem.FoundItems = fItem;
+                fItem.CompanyItems = cItem;
+            }
+            catch
+            {
+                return -1;
+            }
+            db.SaveChanges();
+            return fItem.itemID;
         }
 
-        public string removeFoundItem(string itemId)
+        public string removeFoundItem(int itemId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Items item = findItemByItemId(itemId);
+                FoundItems fItem = item.CompanyItems.FoundItems;
+                if (fItem == null)
+                {
+                    return "item was found but it is ot a found item of a company";
+                }
+                item.CompanyItems.FoundItems = null;
+                db.FoundItems.Remove(fItem);
+                removeCompanyItem(itemId);
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+            db.SaveChanges();
+            return "true";
         }
 
         public string updateFoundItem(int itemId, string companyNameNew, List<string> colorsNew, string itemTypeNew, DateTime findingDateNew, string locationNew, string descriptionNew, string photoLocationNew, bool deliveredNew)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Items item = findItemByItemId(itemId);
+                FoundItems fItem = item.CompanyItems.FoundItems;
+                if (fItem == null)
+                {
+                    return "item was found but it is ot a found item of a company";
+                }
+                fItem.findingDate = findingDateNew;
+                fItem.colors = listOfColorsToString(colorsNew);
+                fItem.companyName = companyNameNew;
+                fItem.delivered = deliveredNew;
+                fItem.description = descriptionNew;
+                fItem.itemType = itemTypeNew;
+                fItem.location = locationNew;
+                fItem.photoLocation = photoLocationNew;
+                updateCompanyItem(itemId, item.CompanyItems.serialNumber.Value, item.CompanyItems.contactName, item.CompanyItems.contactPhone, companyNameNew);
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+            db.SaveChanges();
+            return "true";
         }
 
         public string removeItem(int itemId)
         {
-            throw new NotImplementedException();
+            try
+            {
+
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+            db.SaveChanges();
+            return "true";
         }
 
-        public string addLostItem(List<string> colors, string itemType, DateTime lostDate, string location, string description, int serialNumber, string companyName, string contactName, string contactPhone, string photoLocation, bool wasFound)
+        public int addLostItem(List<string> colors, string itemType, DateTime lostDate, string location, string description, int serialNumber, string companyName, string contactName, string contactPhone, string photoLocation, bool wasFound)
         {
-            throw new NotImplementedException();
+            LostItems lItem = new LostItems();
+            try
+            {
+                int citemId = AddCompanyItem(serialNumber, contactName, contactPhone, companyName);
+                CompanyItems cItem = findCompanyItemByItemId(citemId);
+                if (cItem == null)
+                {
+                    return -2;
+                }
+                lItem.lostDate = lostDate;
+                lItem.colors = listOfColorsToString(colors);
+                lItem.companyName = companyName;
+                lItem.delivered = wasFound;
+                lItem.description = description;
+                lItem.itemID = cItem.itemId;
+                lItem.itemType = itemType;
+                lItem.location = location;
+                lItem.photoLocation = photoLocation;
+                cItem.LostItems = lItem;
+                lItem.CompanyItems = cItem;
+            }
+            catch
+            {
+                return -1;
+            }
+            db.SaveChanges();
+            return lItem.itemID;
         }
 
         public string removeLostItem(int itemId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Items item = findItemByItemId(itemId);
+                LostItems lItem = item.CompanyItems.LostItems;
+                if (lItem == null)
+                {
+                    return "item was found but it is ot a found item of a company";
+                }
+                item.CompanyItems.LostItems = null;
+                db.LostItems.Remove(lItem);
+                removeCompanyItem(itemId);
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+            db.SaveChanges();
+            return "true";
         }
 
         public string updateLostItem(int itemId, string companyNameNew, List<string> colorsNew, string itemTypeNew, DateTime lostDateNew, string locationNew, string descriptionNew, string photoLocationNew, bool deliveredNew)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Items item = findItemByItemId(itemId);
+                LostItems lItem = item.CompanyItems.LostItems;
+                if (lItem == null)
+                {
+                    return "item was found but it is ot a found item of a company";
+                }
+                lItem.lostDate = lostDateNew;
+                lItem.colors = listOfColorsToString(colorsNew);
+                lItem.companyName = companyNameNew;
+                lItem.delivered = deliveredNew;
+                lItem.description = descriptionNew;
+                lItem.itemType = itemTypeNew;
+                lItem.location = locationNew;
+                lItem.photoLocation = photoLocationNew;
+                updateCompanyItem(itemId, item.CompanyItems.serialNumber.Value, item.CompanyItems.contactName, item.CompanyItems.contactPhone, companyNameNew);
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+            db.SaveChanges();
+            return "true";
         }
 
-        public string addMatch(int companyItemId, int itemID, string matchStatus)
+        public int addMatch(int companyItemId, int itemID, string matchStatus)
         {
-            throw new NotImplementedException();
+            Matches match = new Matches();
+            try
+            {
+                CompanyItems cItem = findCompanyItemByItemId(itemID);
+                if (cItem == null)
+                {
+                    return -2;
+                }
+                Items item = findItemByItemId(itemID);
+                if(cItem == null)
+                {
+                    return -3;
+                }
+                match.companyItemId = companyItemId;
+                match.itemID = itemID;
+                match.matchStatus = matchStatus;
+                cItem.Matches.Add(match);
+                item.Matches.Add(match);
+                match.CompanyItems = cItem;
+                match.Items = item;
+            }
+            catch
+            {
+                return -1;
+            }
+            db.SaveChanges();
+            return match.matchID;
         }
 
         public string removeMatch(int matchId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Matches match = findMathByMatchId(matchId);
+                match.CompanyItems.Matches.Remove(match);
+                match.Items.Matches.Remove(match);
+                db.Matches.Remove(match);
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+            db.SaveChanges();
+            return "true";
         }
 
         public string updateMatch(int matchId, string matchStatusNew)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Matches match = findMathByMatchId(matchId);
+                match.matchStatus = matchStatusNew;
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+            db.SaveChanges();
+            return "true";
+        }
+        public Matches findMathByMatchId(int matchId)
+        {
+            try
+            {
+                foreach(Matches match in db.Matches)
+                {
+                    if (match.matchID == matchId)
+                    {
+                        return match;
+                    }
+                }
+                return null;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         public string addUser(string userName, string password, bool isAdmin)
         {
-            throw new NotImplementedException();
+            try
+            {
+                User user = new User();
+                user.UserName = userName;
+                user.password = password;
+                user.isAdmin = isAdmin;
+                db.User.Add(user);
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+            db.SaveChanges();
+            return "true";
         }
 
         public string removeUser(string userName)
         {
-            throw new NotImplementedException();
+            try
+            {
+                User user = findUserByUserName(userName);
+                if(user==null)
+                {
+                    return "user does not exist in the system";
+                }
+                db.User.Remove(user);
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+            db.SaveChanges();
+            return "true";
         }
 
         public string updateUser(string userName, string newPassword)
         {
-            throw new NotImplementedException();
+            try
+            {
+                User user = findUserByUserName(userName);
+                if (user == null)
+                {
+                    return "user does not exist in the system";
+                }
+                user.password = newPassword;
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+            db.SaveChanges();
+            return "true";
+        }
+        public User findUserByUserName(string userName)
+        {
+            try
+            {
+                foreach (User user in db.User)
+                {
+                    if (user.UserName.Equals(userName))
+                    {
+                        return user;
+                    }
+                }
+                return null;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
-        public List<List<string>> getAdminsList()
+        public List<User> getAdminsList()
         {
-            throw new NotImplementedException();
+            try
+            {
+                return db.User.ToList();
+            }
+            catch
+            {
+                return null;
+            }
         }
 
-        public List<List<string>> getCompaniesList()
+        public List<Companies> getCompaniesList()
         {
-            throw new NotImplementedException();
+            try
+            {
+                return db.Companies.ToList();
+            }
+            catch
+            {
+                return null;
+            }
         }
 
-        public List<List<string>> getFBGroupsList()
+        public List<FacebookGroups> getFBGroupsList()
         {
-            throw new NotImplementedException();
+            try
+            {
+                return db.FacebookGroups.ToList();
+            }
+            catch
+            {
+                return null;
+            }
         }
 
-        public List<List<object>> getLostItemsList()
+        public List<LostItems> getLostItemsList()
         {
-            throw new NotImplementedException();
+            try
+            {
+                return db.LostItems.ToList();
+            }
+            catch
+            {
+                return null;
+            }
         }
 
-        public List<List<object>> getFoundItemsList()
+        public List<FoundItems> getFoundItemsList()
         {
-            throw new NotImplementedException();
+            try
+            {
+                return db.FoundItems.ToList();
+            }
+            catch
+            {
+                return null;
+            }
         }
 
-        public List<List<object>> geFBItemsList()
+        public List<FBItem> getFBItemsList()
         {
-            throw new NotImplementedException();
+            try
+            {
+                return db.FBItem.ToList();
+            }
+            catch
+            {
+                return null;
+            }
         }
 
-        public List<List<string>> getMatchesList()
+        public List<Matches> getMatchesList()
         {
-            throw new NotImplementedException();
+            try
+            {
+                return db.Matches.ToList();
+            }
+            catch
+            {
+                return null;
+            }
         }
     }
 }

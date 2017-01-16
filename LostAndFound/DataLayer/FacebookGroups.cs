@@ -14,12 +14,6 @@ namespace DataLayer
     
     public partial class FacebookGroups
     {
-        public FacebookGroups(string companyName, string groupURL)
-        {
-            CompanyName = companyName;
-            this.groupURL = groupURL;
-        }
-
         public string CompanyName { get; set; }
         public string groupURL { get; set; }
     
