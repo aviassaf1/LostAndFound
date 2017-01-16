@@ -27,6 +27,20 @@ namespace Domain.BLBackEnd
             _type = fbType;
         }
 
+        public FBItem(List<Color> colors, ItemType itemType, DateTime date, String location, String description,
+                    String postUrl, String publisherName, FBType fbType)
+        {
+            _itemID = -1;
+            _colors = colors;
+            _itemType = itemType;
+            _date = date;
+            _location = location;
+            _description = description;
+            _postUrl = postUrl;
+            _publisherName = publisherName;
+            _type = fbType;
+        }
+
         public string PostUrl
         {
             get

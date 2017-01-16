@@ -82,6 +82,25 @@ namespace Domain.Managers
         }
         private List<FBItem> getPostsFromGroup(String token, String GroupID, Boolean isLost)
         {
+            List<FBItem> answer = new List<FBItem>();
+            var fb = new FacebookClient(token);
+            fb.Version = "v2.3";
+            var parameters = new Dictionary<string, object>();
+            int daysAgo = 3;
+            DateTime nDaysAgo = DateTime.Now;
+            nDaysAgo = nDaysAgo.AddDays(-daysAgo);
+            Int32 unixTimestamp = (Int32)(nDaysAgo.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+            parameters["since"] = unixTimestamp;
+            dynamic result = fb.Get(GroupID+"/feed", new { since = unixTimestamp });
+            var posts = result["data"];
+            foreach (var post in posts)
+            {
+                DateTime date = 
+                FBItem item = new FBItem(List < Color > colors, ItemType itemType, DateTime date, String location, String description,
+            String postUrl, String publisherName, FBType fbType);
+                Console.WriteLine("post name " + post["from"]["name"]);
+                Console.WriteLine("post message " + post["message"]);
+            }
             return null;
         }
     }
