@@ -128,9 +128,87 @@ namespace Domain.Managers
             dynamic result = fb.Post(postID + "/comments", new { message = info });
             return true;
         }
-        private List<FBItem> getPostsFromGroup(String token, String GroupID)
+        public List<FBItem> getPostsFromGroup(String token, String GroupID)
+        {// check that its lost or found in descr
+            List<FBItem> answer = new List<FBItem>();
+            var fb = new FacebookClient(token);
+            fb.Version = "v2.3";
+            var parameters = new Dictionary<string, object>();
+            int daysAgo = 3;
+            DateTime nDaysAgo = DateTime.Now;
+            nDaysAgo = nDaysAgo.AddDays(-daysAgo);
+            Int32 unixTimestamp = (Int32)(nDaysAgo.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+            parameters["since"] = unixTimestamp;
+            dynamic result = fb.Get(GroupID+"/feed"/*, new { since = unixTimestamp }*/);
+            var posts = result["data"];
+            foreach (var post in posts)
+            {
+                JsonObject npost = (JsonObject)post;
+                if (npost.ContainsKey("message")) { 
+                    string description = post["message"];
+                    FBType fbType = getFBType(description);
+                    if (fbType != FBType.NO)
+                    {
+                        DateTime date = DateTime.Parse(post["created_time"]);
+                        string postID = post["id"];
+                        string publisher = post["from"]["name"];
+                        List<Color> colors = getColors(description);
+                        ItemType itemType = getItemType(description);
+                        string location = "NeverLand";//"getLocation(description);
+                        FBItem item = new FBItem(colors, itemType, date, location, description, postID, publisher, fbType);
+                        answer.Add(item);
+                    }
+                }
+            }
+            return answer;
+        }
+
+        private FBType getFBType(string description)
         {
-            return null;
+            Dictionary<string, FBType> HebTypes = new Dictionary<string, FBType>(){{ "אבד" , FBType.LOST },{ "איבד" , FBType.LOST },{ "איבוד" , FBType.LOST }, { "נעלם", FBType.LOST },
+                { "מישהו מצא", FBType.LOST }, { "מישהו במקרה מצא", FBType.LOST }, { "מצאת", FBType.FOUND }, { "מצאנ", FBType.FOUND }, { "נמצא", FBType.FOUND }, { "נימצא", FBType.FOUND }};
+            foreach (string hebType in HebTypes.Keys)
+            {
+                if (description.Contains(hebType))
+                {
+                    return HebTypes[hebType];
+                }
+            }
+            return FBType.NO;
+        }
+
+        private ItemType getItemType(string description)
+        {
+            Dictionary<string,ItemType> HebTypes = new Dictionary<string, ItemType>(){{ "תעוד" , ItemType.ID },{ "תז" , ItemType.ID },{ "ת\"ז" , ItemType.ID }, { "ארנק", ItemType.WALLET },
+                { "עכבר", ItemType.PCMOUSE }, { "מחשב", ItemType.PC }, { "פון", ItemType.PHONE }, { "מפתח", ItemType.KEYS }, { "תיק", ItemType.BAG }, { "מטרי", ItemType.UMBRELLA },
+                { "סווטשרט", ItemType.SWEATSHIRT },{ "סווצרט", ItemType.SWEATSHIRT }, { "משקפ", ItemType.GLASSES }, { "נעל", ItemType.SHOES },{ "כפכ", ItemType.FLIPFLOPS },
+                { "תיקיה", ItemType.FOLDER },{ "מחברת", ItemType.FOLDER },{ "קלסר", ItemType.FOLDER }, { "מטען", ItemType.CHARGER }, { "עגיל", ItemType.EARING }, { "טבעת", ItemType.RING },
+                { "שרשרת", ItemType.NECKLACE },{ "תליון", ItemType.NECKLACE }, { "צמיד", ItemType.BRACELET }, { "אוזני", ItemType.HEADPHONES }};
+            foreach (string hebType in HebTypes.Keys)
+            {
+                if (description.Contains(hebType))
+                {
+                    return HebTypes[hebType];
+                }
+            }
+            return ItemType.UNDEFIEND;
+            
+        }
+
+        private List<Color> getColors(string description)
+        {
+            List<Color> colors = new List<Color>();
+            Dictionary<string,Color> HebColors = new Dictionary<string, Color>(){{ "ורוד" , Color.PINK }, { "שחור", Color.BLACK }, { "כחול", Color.BLUE }, { "אדום", Color.RED }, { "אדומ", Color.RED },
+                { "ירוק", Color.GREEN }, { "צהוב", Color.YELLOW }, { "לבן", Color.WHITE }, { "לבנ", Color.WHITE }, { "סגול", Color.PURPEL }, { "כתום", Color.ORANGE }, { "כתומ", Color.ORANGE },
+                { "אפור", Color.GRAY }, { "חום", Color.BROWN }, { "חומ", Color.BROWN } , { "זהב", Color.GOLD }, { "זהוב", Color.GOLD }, { "כסף", Color.SILVER }, { "כסוף", Color.SILVER } };
+            foreach(string hebCol in HebColors.Keys)
+            {
+                if (description.Contains(hebCol))
+                {
+                    colors.Add(HebColors[hebCol]);
+                }
+            }
+            return colors;
         }
     }
 }

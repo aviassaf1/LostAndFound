@@ -8,6 +8,6 @@ namespace Domain.BLBackEnd
 {
     public enum FBType
     {
-        LOST, FOUND
+        LOST, FOUND, NO
     }
 }

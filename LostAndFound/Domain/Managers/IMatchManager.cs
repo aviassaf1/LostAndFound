@@ -11,6 +11,6 @@ namespace Domain.Managers
     {
         List<Match> findMatches(CompanyItem item, String token);
         String changeMatchStatus(int matchID, int statusNum);
-
+        List<FBItem> getPostsFromGroup(String token, String GroupID);
     }
 }

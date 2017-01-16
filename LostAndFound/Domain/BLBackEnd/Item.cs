@@ -8,7 +8,7 @@ namespace Domain.BLBackEnd
 {
     public abstract class Item
     {
-        protected static Cache cache = Cache.getInstance;
+        protected static Cache cache = null;// Cache.getInstance;
         protected int _itemID;
         protected List<Color> _colors;
         protected ItemType _itemType;

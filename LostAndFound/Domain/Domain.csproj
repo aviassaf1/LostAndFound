@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{CB7D594B-465F-4B99-91FE-E4803306D950}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Domain</RootNamespace>
     <AssemblyName>Domain</AssemblyName>
@@ -64,6 +64,7 @@
     <Compile Include="BLBackEnd\Match.cs" />
     <Compile Include="BLBackEnd\MatchStatus.cs" />
     <Compile Include="BLBackEnd\User.cs" />
+    <Compile Include="Class1.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Managers\AdminManager.cs" />
     <Compile Include="Managers\ComapanyManager.cs" />
