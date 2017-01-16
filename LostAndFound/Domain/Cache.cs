@@ -77,6 +77,13 @@ namespace Domain.BLBackEnd
             setMaxAvialbleItemID();
         }
 
+        internal Company getCompany(string companyName)
+        {
+            if (_companies.Keys.Contains(companyName))
+                return _companies[companyName];
+            return null;
+        }
+
         private void setMaxAvialbleItemID()
         {
             maxAvilableComapanyItemID = 0;

@@ -9,6 +9,20 @@ namespace Domain.Managers
 {
     public class ItemManager : IItemManager
     {
+        private static IItemManager singleton;
+
+        public static IItemManager getInstance
+        {
+            get
+            {
+                if (singleton == null)
+                {
+                    singleton = new ItemManager();
+                }
+                return singleton;
+            }
+        }
+
         public List<CompanyItem> getAllCompanyItems(string companyName)
         {
             throw new NotImplementedException();
