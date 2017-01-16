@@ -20,7 +20,7 @@ namespace DataLayer
         public Nullable<System.DateTime> lostDate { get; set; }
         public string location { get; set; }
         public string description { get; set; }
-        public string postURL { get; set; }
+        public string postId { get; set; }
         public string publisherName { get; set; }
         public string type { get; set; }
     

@@ -4,25 +4,26 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="9ecd6455203343c48906e130386fa31d" Name="Diagram1" ZoomLevel="63">
-        <EntityTypeShape EntityType="LostAndFoundDBModel1.Companies" Width="1.5" PointX="10.75" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="LostAndFoundDBModel1.CompanyItems" Width="1.5" PointX="8.125" PointY="3.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="LostAndFoundDBModel1.FacebookGroups" Width="1.5" PointX="7" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="LostAndFoundDBModel1.FBItem" Width="1.5" PointX="6.375" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LostAndFoundDBModel1.FoundItems" Width="1.5" PointX="12.5" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="LostAndFoundDBModel1.Items" Width="1.5" PointX="3.125" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LostAndFoundDBModel1.LostItems" Width="1.5" PointX="10.125" PointY="6.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="LostAndFoundDBModel1.Matches" Width="1.5" PointX="5.125" PointY="3" IsExpanded="true" />
-        <AssociationConnector Association="LostAndFoundDBModel1.FK_CompanyItems_ToTable" ManuallyRouted="false" />
-        <AssociationConnector Association="LostAndFoundDBModel1.FK_FacebookGroups_ToTable" ManuallyRouted="false" />
-        <AssociationConnector Association="LostAndFoundDBModel1.FK_CompanyItems_ToTable_1" ManuallyRouted="false" />
-        <AssociationConnector Association="LostAndFoundDBModel1.FK_FoundItems_ToTable" ManuallyRouted="false" />
-        <AssociationConnector Association="LostAndFoundDBModel1.FK_LostItems_ToTable" ManuallyRouted="false" />
-        <AssociationConnector Association="LostAndFoundDBModel1.FK_Matches_ToTable_1" ManuallyRouted="false" />
-        <AssociationConnector Association="LostAndFoundDBModel1.FK_FBItem_ToTable" ManuallyRouted="false" />
-        <AssociationConnector Association="LostAndFoundDBModel1.FK_Matches_ToTable" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="LostAndFoundDBModel1.User" Width="1.5" PointX="14" PointY="1.625" />
-        <AssociationConnector Association="LostAndFoundDBModel1.FK_Companies_ToTable" />
+      <Diagram DiagramId="53ba4a3f326445c285b1e8360d6f1da1" Name="Diagram1" ZoomLevel="51">
+        <EntityTypeShape EntityType="LostAndFoundDBModel.Companies" Width="1.5" PointX="8.625" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="LostAndFoundDBModel.CompanyItems" Width="1.5" PointX="4" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LostAndFoundDBModel.FacebookGroups" Width="1.5" PointX="7.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LostAndFoundDBModel.FBItem" Width="1.5" PointX="1.25" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LostAndFoundDBModel.FoundItems" Width="1.5" PointX="6.125" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LostAndFoundDBModel.Items" Width="1.5" PointX="3.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LostAndFoundDBModel.LostItems" Width="1.5" PointX="1.875" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LostAndFoundDBModel.Matches" Width="1.5" PointX="5.625" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LostAndFoundDBModel.User" Width="1.5" PointX="9.375" PointY="0.5" IsExpanded="true" />
+        <AssociationConnector Association="LostAndFoundDBModel.FK_Companies_ToTable" ManuallyRouted="false" />
+        <AssociationConnector Association="LostAndFoundDBModel.FK_CompanyItems_ToTable" ManuallyRouted="false" />
+        <AssociationConnector Association="LostAndFoundDBModel.FK_FacebookGroups_ToTable" ManuallyRouted="false" />
+        <AssociationConnector Association="LostAndFoundDBModel.FK_CompanyItems_ToTable_1" ManuallyRouted="false" />
+        <AssociationConnector Association="LostAndFoundDBModel.FK_FoundItems_ToTable" ManuallyRouted="false" >
+        </AssociationConnector>
+        <AssociationConnector Association="LostAndFoundDBModel.FK_LostItems_ToTable" ManuallyRouted="false" />
+        <AssociationConnector Association="LostAndFoundDBModel.FK_Matches_ToTable_1" ManuallyRouted="false" ></AssociationConnector>
+        <AssociationConnector Association="LostAndFoundDBModel.FK_FBItem_ToTable" ManuallyRouted="false" />
+        <AssociationConnector Association="LostAndFoundDBModel.FK_Matches_ToTable" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -18,15 +18,7 @@ namespace DataLayer
         {
             this.Matches = new HashSet<Matches>();
         }
-
-        public CompanyItems(int serialNumber, string contactName, string contactPhone, string companyName)
-        {
-            this.serialNumber = serialNumber;
-            this.contactName = contactName;
-            this.contactPhone = contactPhone;
-            this.companyName = companyName;
-        }
-
+    
         public int itemId { get; set; }
         public Nullable<int> serialNumber { get; set; }
         public string contactName { get; set; }

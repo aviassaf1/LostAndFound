@@ -35,7 +35,7 @@ namespace Domain.BLBackEnd
 
         private Cache()
         {
-            _db = Database.getInstance;
+            _db = Database.getInstance();
             ////////////////////////////////////////////////add db to cache
             initCache();
         }
