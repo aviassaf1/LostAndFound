@@ -9,7 +9,7 @@ namespace DataLayer
     public class Database : IDB
     {
         private static Database singleton;
-        LostAndFoundDBEntities db;
+        Entities db;
 
         private Database()
         {
@@ -33,7 +33,7 @@ namespace DataLayer
         {
             try
             {
-                this.db = new LostAndFoundDBEntities();
+                this.db = new Entities();
                 string Path = Environment.CurrentDirectory;
                 string[] appPath = Path.Split(new string[] { "bin" }, StringSplitOptions.None);
                 AppDomain.CurrentDomain.SetData("DataDirectory", appPath[0]);
@@ -66,107 +66,154 @@ namespace DataLayer
             }
         }
 
-        public bool AddCompany(string userName, string companyName, string phone)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool removeCompany(string companyName)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool updateCompany(string UserNameNew, string CompanyNameNew, string PhoneNew)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool AddCompanyItem(int itemId, int serialNumber, string contactName, string contactPhone, string companyName)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool removeCompanyItem(int itemId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool updateCompanyItem(int itemId, int serialNumberNew, string contactNameNew, string contactPhoneNew, string companyNameNew)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool addFacebookGroup(string companyName, string groupURL)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool removeFacebookGroup(string companyName, string groupURL)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool updateFacebookGroup(string companyName, string groupURL)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool addFBItem(int itemId, List<string> colors, string itemType, DateTime lostDate, string location, string decription, string postURL, string publisherName, string type)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool removeFBItem(int itemId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool updateFBItem(int itemId, List<string> colorsNew, string itemTypeNew, DateTime lostDateNew, string locationNew, string decriptionNew, string postURLNew, string publisherNameNew, string typeNew)
-        {
-            throw new NotImplementedException();
-        }
-
         public string addCompany(string userName, string password, string companyName, string phone, HashSet<string> facebookGroups)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Companies company = new Companies(userName,companyName, phone);
+                addUser(userName, password, true);//not sure what the last one should be
+                db.Companies.Add(company);
+                return "true";
+            }
+            catch(Exception e)
+            {
+                return e.ToString();
+            }
+            //needs to add also in facebook groups table
         }
 
-        string IDB.removeCompany(string companyName)
+        public string removeCompany(string companyName)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Companies company = findCompanyByCompanyName(companyName);
+                db.Companies.Remove(company);
+                return "true";
+            }
+            catch(Exception e)
+            {
+                return e.ToString();
+            }
+            //needs also to remove in facebookgroups table
         }
 
-        string IDB.updateCompany(string UserNameNew, string CompanyNameNew, string PhoneNew)
+        public string updateCompany(string companyName, string userNameNew, string phoneNew)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Companies company = findCompanyByCompanyName(companyName);
+                company.userName = userNameNew;
+                company.phone = phoneNew;
+                return "true";
+            }
+            catch(Exception e)
+            {
+                return e.ToString();
+            }
+
+        }
+        public Companies findCompanyByCompanyName(string companyName)
+        {
+            try
+            {
+                foreach (Companies company in db.Companies)
+                {
+                    if (company.companyName.Equals(companyName))
+                    {
+                        return company;
+                    }
+                }
+                return null;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         public string AddCompanyItem(int serialNumber, string contactName, string contactPhone, string companyName)
         {
-            throw new NotImplementedException();
+            try
+            {
+                CompanyItems cItem = new CompanyItems(serialNumber, contactName, contactPhone, companyName);
+                db.CompanyItems.Add(cItem);
+                return "true";
+            }
+            catch(Exception e)
+            {
+                return e.ToString();
+            }
         }
 
-        string IDB.removeCompanyItem(int itemId)
+        public string removeCompanyItem(int itemId)
+        {
+            try
+            {
+                CompanyItems cItem = findCompanyItemByItemId(itemId);
+                db.CompanyItems.Remove(cItem);
+                return "true";
+            }
+            catch(Exception e)
+            {
+                return e.ToString();
+            }
+        }
+
+        public string updateCompanyItem(int itemId, int serialNumberNew, string contactNameNew, string contactPhoneNew, string companyNameNew)
+        {
+            try
+            {
+                CompanyItems cItem = findCompanyItemByItemId(itemId);
+                cItem.serialNumber = serialNumberNew;
+                cItem.contactName = contactNameNew;
+                cItem.contactPhone = contactPhoneNew;
+                cItem.companyName = companyNameNew;
+                return "true";
+            }
+            catch(Exception e)
+            {
+                return e.ToString();
+            }
+        }
+        public CompanyItems findCompanyItemByItemId(int itemId)
+        {
+            try
+            {
+                foreach(CompanyItems cItem in db.CompanyItems)
+                {
+                    if(cItem.itemId== itemId)
+                    {
+                        return cItem;
+                    }
+                }
+                return null;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public string addFacebookGroup(string companyName, string groupURL)
+        {
+            try
+            {
+                FacebookGroups fbg = new FacebookGroups(companyName, groupURL);
+                db.FacebookGroups.Add(fbg);
+                return "true";
+            }
+            catch(Exception e)
+            {
+                return e.ToString();
+            }
+        }
+
+        public string removeFacebookGroup(string companyName, string groupURL)
         {
             throw new NotImplementedException();
         }
 
-        string IDB.updateCompanyItem(int itemId, int serialNumberNew, string contactNameNew, string contactPhoneNew, string companyNameNew)
-        {
-            throw new NotImplementedException();
-        }
-
-        string IDB.addFacebookGroup(string companyName, string groupURL)
-        {
-            throw new NotImplementedException();
-        }
-
-        string IDB.removeFacebookGroup(string companyName, string groupURL)
-        {
-            throw new NotImplementedException();
-        }
-
-        string IDB.updateFacebookGroup(string companyName, string groupURL)
+        public string updateFacebookGroup(string companyName, string groupURL)
         {
             throw new NotImplementedException();
         }
@@ -176,12 +223,12 @@ namespace DataLayer
             throw new NotImplementedException();
         }
 
-        string IDB.removeFBItem(int itemId)
+        public string removeFBItem(int itemId)
         {
             throw new NotImplementedException();
         }
 
-        string IDB.updateFBItem(int itemId, List<string> colorsNew, string itemTypeNew, DateTime lostDateNew, string locationNew, string decriptionNew, string postURLNew, string publisherNameNew, string typeNew)
+        public string updateFBItem(int itemId, List<string> colorsNew, string itemTypeNew, DateTime lostDateNew, string locationNew, string decriptionNew, string postURLNew, string publisherNameNew, string typeNew)
         {
             throw new NotImplementedException();
         }

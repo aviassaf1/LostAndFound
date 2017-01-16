@@ -14,8 +14,25 @@ namespace DataLayer
     
     public partial class Companies
     {
+        public Companies()
+        {
+            this.CompanyItems = new HashSet<CompanyItems>();
+            this.FacebookGroups = new HashSet<FacebookGroups>();
+        }
+
+        public Companies(string userName, string companyName, string phone)
+        {
+            this.userName = userName;
+            this.companyName = companyName;
+            this.phone = phone;
+        }
+
         public string userName { get; set; }
         public string companyName { get; set; }
-        public byte[] phone { get; set; }
+        public string phone { get; set; }
+    
+        public virtual ICollection<CompanyItems> CompanyItems { get; set; }
+        public virtual ICollection<FacebookGroups> FacebookGroups { get; set; }
+        public virtual User User { get; set; }
     }
 }
