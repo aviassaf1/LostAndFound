@@ -14,10 +14,29 @@ namespace DataLayer
     
     public partial class CompanyItems
     {
+        public CompanyItems()
+        {
+            this.Matches = new HashSet<Matches>();
+        }
+
+        public CompanyItems(int serialNumber, string contactName, string contactPhone, string companyName)
+        {
+            this.serialNumber = serialNumber;
+            this.contactName = contactName;
+            this.contactPhone = contactPhone;
+            this.companyName = companyName;
+        }
+
         public int itemId { get; set; }
         public Nullable<int> serialNumber { get; set; }
         public string contactName { get; set; }
         public string contactPhone { get; set; }
         public string companyName { get; set; }
+    
+        public virtual Companies Companies { get; set; }
+        public virtual Items Items { get; set; }
+        public virtual FoundItems FoundItems { get; set; }
+        public virtual LostItems LostItems { get; set; }
+        public virtual ICollection<Matches> Matches { get; set; }
     }
 }

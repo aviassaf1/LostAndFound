@@ -12,18 +12,14 @@ namespace DataLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class FBItem
+    public partial class Matches
     {
+        public int matchID { get; set; }
+        public int companyItemId { get; set; }
         public int itemID { get; set; }
-        public string colors { get; set; }
-        public string itemType { get; set; }
-        public Nullable<System.DateTime> lostDate { get; set; }
-        public string location { get; set; }
-        public string description { get; set; }
-        public string postURL { get; set; }
-        public string publisherName { get; set; }
-        public string type { get; set; }
+        public string matchStatus { get; set; }
     
+        public virtual CompanyItems CompanyItems { get; set; }
         public virtual Items Items { get; set; }
     }
 }

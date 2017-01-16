@@ -23,5 +23,7 @@ namespace DataLayer
         public string location { get; set; }
         public string description { get; set; }
         public Nullable<bool> delivered { get; set; }
+    
+        public virtual CompanyItems CompanyItems { get; set; }
     }
 }

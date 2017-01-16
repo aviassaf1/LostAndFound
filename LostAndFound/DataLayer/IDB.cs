@@ -11,10 +11,12 @@ namespace DataLayer
         void clear();
         String addCompany(string userName, string password, string companyName, string phone, HashSet<String> facebookGroups);
         String removeCompany(string companyName);
-        String updateCompany(string UserNameNew, string CompanyNameNew, string PhoneNew);
+        String updateCompany(string companyName, string userNameNew, string phoneNew);
+        Companies findCompanyByCompanyName(string companyName);
         String AddCompanyItem(int serialNumber, string contactName, string contactPhone, string companyName);
         String removeCompanyItem(int itemId);
         String updateCompanyItem(int itemId, int serialNumberNew, string contactNameNew, string contactPhoneNew, string companyNameNew);
+        CompanyItems findCompanyItemByItemId(int itemId);
         String addFacebookGroup(string companyName, string groupURL);
         String removeFacebookGroup(string companyName, string groupURL);
         String updateFacebookGroup(string companyName, string groupURL);

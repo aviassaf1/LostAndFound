@@ -14,8 +14,15 @@ namespace DataLayer
     
     public partial class User
     {
+        public User()
+        {
+            this.Companies = new HashSet<Companies>();
+        }
+    
         public string UserName { get; set; }
         public string password { get; set; }
         public Nullable<bool> isAdmin { get; set; }
+    
+        public virtual ICollection<Companies> Companies { get; set; }
     }
 }

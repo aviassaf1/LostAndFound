@@ -14,6 +14,15 @@ namespace DataLayer
     
     public partial class Items
     {
+        public Items()
+        {
+            this.Matches = new HashSet<Matches>();
+        }
+    
         public int itemID { get; set; }
+    
+        public virtual CompanyItems CompanyItems { get; set; }
+        public virtual FBItem FBItem { get; set; }
+        public virtual ICollection<Matches> Matches { get; set; }
     }
 }
