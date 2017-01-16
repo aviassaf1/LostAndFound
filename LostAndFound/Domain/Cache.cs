@@ -50,25 +50,25 @@ namespace Domain.BLBackEnd
             _matches = new Dictionary<int, Match>();
 
 
-            List<List<String>> admins= _db.getAdminsList();//String userName,String password
-            List<List<String>> companies = _db.getCompaniesList();//String userName,String password, String companyName, String phone, 
-            List<List<String>> facebookGroups= _db.getFBGroupsList();//String companyName, String url, //maybe add group name
-            List<List<object>> lostItems = _db.getLostItemsList();//int itemID, List<Color> colors, ItemType itemType, DateTime date, String location, String description, int serialNumber, String companyName, String contactName, String contactPhone, String photoLocation
-            List<List<object>> foundItems = _db.getFoundItemsList();//int itemID, List<Color> colors, ItemType itemType, DateTime date, String location, String description, int serialNumber, String companyName, String contactName, String contactPhone, String photoLocation
-            List<List<object>> FBItems = _db.geFBItemsList();//int itemID, List<Color> colors, ItemType itemType, DateTime date, String location, String description, String postUrl, String publisherName, FBType fbType
-            List<List<String>> matches = _db.getMatchesList();//int matchID, int companyItemID, int item2ID, MatchStatus matchStatus
+            List<DataLayer.User> admins= _db.getAdminsList();//String userName,String password
+            List<Companies> companies = _db.getCompaniesList();//String userName,String password, String companyName, String phone, 
+            List<FacebookGroups> facebookGroups= _db.getFBGroupsList();//String companyName, String url, //maybe add group name
+            List<LostItems> lostItems = _db.getLostItemsList();//int itemID, List<Color> colors, ItemType itemType, DateTime date, String location, String description, int serialNumber, String companyName, String contactName, String contactPhone, String photoLocation
+            List<FoundItems> foundItems = _db.getFoundItemsList();//int itemID, List<Color> colors, ItemType itemType, DateTime date, String location, String description, int serialNumber, String companyName, String contactName, String contactPhone, String photoLocation
+            List<DataLayer.FBItem> FBItems = _db.getFBItemsList();//int itemID, List<Color> colors, ItemType itemType, DateTime date, String location, String description, String postUrl, String publisherName, FBType fbType
+            List<Matches> matches = _db.getMatchesList();//int matchID, int companyItemID, int item2ID, MatchStatus matchStatus
 
-            foreach (List<String> list in admins)
+            foreach (DataLayer.User user in admins)/////////////////////notice that sometimes u need to user datayer. somthig so it will use the one from datalayer and not domain
             {
-                _admins.Add(list.ElementAt(0), new Admin(list.ElementAt(0), list.ElementAt(1)));//add encryption to pass
+                _admins.Add(user.UserName, new Admin(user.UserName, user.password));//add encryption to pass
             }
-            foreach (List<String> list in companies)
+            foreach (Companies company in companies)
             {
-                _companies.Add(list.ElementAt(0), new Company(list.ElementAt(0), list.ElementAt(1), list.ElementAt(2), list.ElementAt(3),new HashSet<string>()));//add encryption to pass
+                _companies.Add(company.userName, new Company(company.userName, company.User.password, company.companyName, company.phone,new HashSet<string>()));//add encryption to pass
             }
-            foreach (List<String> list in facebookGroups)
+            foreach (FacebookGroups fbg in facebookGroups)
             {
-                _companies[list.ElementAt(0)].addFacebookGroup(list.ElementAt(1));
+                _companies[fbg.CompanyName].addFacebookGroup(fbg.groupURL);////not sure if i changed it correctly
             }
             //lost items
             //found items
