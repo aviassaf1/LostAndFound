@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Facebook;
 
 namespace Domain.Managers
 {
@@ -30,9 +31,15 @@ namespace Domain.Managers
             throw new NotImplementedException();
         }
 
-        public string publishInventory(string token, string GroupID, int days)
+        public string publishInventory(string token, string GroupID, int days, string companyUserName)
         {
-            throw new NotImplementedException();
+            var fb = new FacebookClient(token);
+            fb.Version = "v2.3";
+            var parameters = new Dictionary<string, object>();
+            //get inventory from db
+            string inventory = "inv";
+            dynamic result = fb.Post(GroupID + "/feed", new { message = inventory });
+            return "true";
         }
     }
 }
