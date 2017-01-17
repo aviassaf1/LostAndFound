@@ -62,6 +62,34 @@ namespace Domain.BLBackEnd
             {
                 _admins.Add(user.UserName, new Admin(user.UserName, user.password));//add encryption to pass
             }
+
+            Dictionary<string, ItemType> HebTypes = new Dictionary<string, ItemType>(){{ "ID" , ItemType.ID }, { "WALLET", ItemType.WALLET },
+                { "PCMOUSE", ItemType.PCMOUSE }, { "PC", ItemType.PC }, { "PHONE", ItemType.PHONE }, { "KEYS", ItemType.KEYS }, { "BAG", ItemType.BAG }, { "UMBRELLA", ItemType.UMBRELLA },
+                { "SWEATSHIRT", ItemType.SWEATSHIRT }, { "GLASSES", ItemType.GLASSES }, { "SHOES", ItemType.SHOES },{ "FLIPFLOPS", ItemType.FLIPFLOPS },
+                { "FOLDER", ItemType.FOLDER }, { "CHARGER", ItemType.CHARGER }, { "EARING", ItemType.EARING }, { "RING", ItemType.RING },
+                { "NECKLACE", ItemType.NECKLACE }, { "BRACELET", ItemType.BRACELET }, { "HEADPHONES", ItemType.HEADPHONES }};
+            Dictionary<string, FBType> FBTypes = new Dictionary<string, FBType>() { { "FOUND", FBType.FOUND }, { "LOST", FBType.LOST } };
+            Dictionary<string, MatchStatus> status = new Dictionary<string, MatchStatus>() { { "POSSIBLE", MatchStatus.POSSIBLE }, { "CORRECT", MatchStatus.CORRECT }, { "COMPLETE", MatchStatus.COMPLETE }, { "INCORRECT", MatchStatus.INCORRECT } };
+            foreach (LostItems li in lostItems)
+            {
+                //colors
+                _lostItems.Add(li.itemID, new LostItem(li.itemID, null/**/, HebTypes[li.itemType], li.lostDate.Value, li.location, li.description, -1 /*li.serial*/, li.companyName, ""/*li.contactName*/, ""/*li.contactphone*/, ""/*li.photolocation*/, li.delivered.Value));
+            }
+
+            foreach (FoundItems fi in foundItems)
+            {
+                //colors
+                _foundItems.Add(fi.itemID, new FoundItem(fi.itemID, null/**/, HebTypes[fi.itemType], fi.findingDate.Value, fi.location, fi.description, -1 /*li.serial*/, fi.companyName, ""/*li.contactName*/, ""/*li.contactphone*/, ""/*li.photolocation*/, fi.delivered.Value));
+            }
+            foreach (DataLayer.FBItem fbi in FBItems)
+            {
+                //colors
+                _FBItems.Add(fbi.itemID, new FBItem(fbi.itemID, null/**/, HebTypes[fbi.itemType], fbi.lostDate.Value/* change lost date name*/, fbi.location, fbi.description, fbi.postId, fbi.publisherName, FBTypes[fbi.type]));
+            }
+            foreach (Matches m in matches)
+            {
+                _matches.Add(m.matchID, new Match(m.matchID, m.companyItemId, m.itemID, status[m.matchStatus]));
+            }
             foreach (Companies company in companies)
             {
                 HashSet<String> FBGroups = new HashSet<string>();
@@ -69,16 +97,28 @@ namespace Domain.BLBackEnd
                 {
                     FBGroups.Add(fb.groupURL);
                 }
-                _companies.Add(company.userName, new Company(company.userName, company.User.password, company.companyName, company.phone, FBGroups));//add encryption to pass
+                HashSet<int> LostItems = new HashSet<int>();
+                foreach (LostItem li in _lostItems.Values)
+                {
+                    if(li.CompanyName.Equals(company.companyName))
+                        LostItems.Add(li.ItemID);
+                }
+                HashSet<int> FoundItems = new HashSet<int>();
+                foreach (FoundItem fi in _foundItems.Values)
+                {
+                    if (fi.CompanyName.Equals(company.companyName))
+                        FoundItems.Add(fi.ItemID);
+                }
+                HashSet<int> Matches = new HashSet<int>();
+                foreach (Match m in _matches.Values)
+                {
+                    if (LostItems.Contains(m.CompanyItemID) || FoundItems.Contains(m.CompanyItemID))
+                        Matches.Add(m.MatchID);
+                }
+                _companies.Add(company.userName, new Company(company.userName, company.User.password, company.companyName, company.phone, FBGroups, LostItems, FoundItems, Matches));//add encryption to pass
             }
-            foreach (FacebookGroups fbg in facebookGroups)
-            {
-                _companies[fbg.CompanyName].addFacebookGroup(fbg.groupURL);////not sure if i changed it correctly
-            }
-            //lost items
-            //found items
-            //fbitems
-            //matches
+            
+            
             setMaxAvialbleItemID();
         }
 
