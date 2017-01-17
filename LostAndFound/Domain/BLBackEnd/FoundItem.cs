@@ -12,7 +12,7 @@ namespace Domain.BLBackEnd
 
 
         public FoundItem(int itemID, List<Color> colors, ItemType itemType, DateTime date, String location, String description,
-        int serialNumber, String companyName, String contactName, String contactPhone, String photoLocation)
+        int serialNumber, String companyName, String contactName, String contactPhone, String photoLocation, bool delivered)
         {
             _itemID = itemID;
             _colors = colors;
@@ -25,7 +25,7 @@ namespace Domain.BLBackEnd
             _contactName = contactName;
             _contactPhone = ContactPhone;
             _photoLocation = photoLocation;
-            _delivered = false;
+            _delivered = delivered;
         }
         public FoundItem( List<Color> colors, ItemType itemType, DateTime date, String location, String description,
         int serialNumber, String companyName, String contactName, String contactPhone, String photoLocation)

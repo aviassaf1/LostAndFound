@@ -11,7 +11,7 @@ namespace Domain.BLBackEnd
         private bool _wasFound;
 
         public LostItem(int itemID, List<Color> colors, ItemType itemType, DateTime date, String location, String description,
-        int serialNumber, String companyName, String contactName, String contactPhone, String photoLocation)
+        int serialNumber, String companyName, String contactName, String contactPhone, String photoLocation, bool wasFound)
         {
             _itemID = itemID;
             _colors = colors;
@@ -24,7 +24,7 @@ namespace Domain.BLBackEnd
             _contactName = contactName;
             _contactPhone = ContactPhone;
             _photoLocation = photoLocation;
-            _wasFound = false;
+            _wasFound = wasFound;
         }
         public LostItem(List<Color> colors, ItemType itemType, DateTime date, String location, String description,
         int serialNumber, String companyName, String contactName, String contactPhone, String photoLocation)
