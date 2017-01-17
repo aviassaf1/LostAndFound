@@ -12,7 +12,7 @@ namespace Domain.Managers
     {
 
 
-        private Dictionary<String ,String > _FBTokens;//company name, token
+        private Dictionary<String ,String > _FBTokens=new Dictionary<string, string>();//company name, token
         private static ICompanyManager singleton;
 
         public static ICompanyManager getInstance
