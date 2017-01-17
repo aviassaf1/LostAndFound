@@ -124,11 +124,233 @@ namespace DataLayer
         }
         private void clearFbGroups()
         {
-            foreach(FacebookGroups fbg in db.FacebookGroups)
+            try
+            {
+                List<FacebookGroups> fbgList = new List<FacebookGroups>();
+                foreach (FacebookGroups fbg in db.FacebookGroups)
+                {
+                    fbgList.Add(fbg);
+                }
+                foreach (Companies company in db.Companies)
+                {
+                    company.FacebookGroups = new List<FacebookGroups>();
+                }
+                foreach (FacebookGroups fbg in fbgList)
+                {
+                    db.FacebookGroups.Remove(fbg);
+                }
+                db.SaveChanges();
+            }
+            catch
+            {
+
+            }            
+        }
+        private void clearFoundItems()
+        {
+            try
+            {
+                List<FoundItems> fItemList = new List<FoundItems>();
+                foreach (FoundItems fItem in db.FoundItems)
+                {
+                    fItemList.Add(fItem);
+                }
+                foreach (CompanyItems cItem in db.CompanyItems)
+                {
+                    cItem.FoundItems = null;
+                }
+                foreach (FoundItems fItem in fItemList)
+                {
+                    db.FoundItems.Remove(fItem);
+                }
+                db.SaveChanges();
+            }
+            catch
             {
 
             }
-        
+        }
+
+        private void clearLostItems()
+        {
+            try
+            {
+                List<LostItems> lItemList = new List<LostItems>();
+                
+                foreach (LostItems lItem in db.LostItems)
+                {
+                    lItemList.Add(lItem);
+                }
+                foreach (CompanyItems cItem in db.CompanyItems)
+                {
+                    cItem.LostItems = null;
+                }
+                foreach (LostItems lItem in lItemList)
+                {
+                    db.LostItems.Remove(lItem);
+                }
+                db.SaveChanges();
+            }
+            catch
+            {
+
+            }
+        }
+
+        private void clearFbItems()
+        {
+            try
+            {
+                List<FBItem> fbItemList = new List<FBItem>();
+                foreach (FBItem fbItem in db.FBItem)
+                {
+                    fbItemList.Add(fbItem);
+                }
+                foreach (Items item in db.Items)
+                {
+                    item.FBItem = null;
+                }
+                foreach (FBItem fbItem in fbItemList)
+                {
+                    db.FBItem.Remove(fbItem);
+                }
+                db.SaveChanges();
+            }
+            catch
+            {
+
+            }
+        }
+        private void clearMatches()
+        {
+            try
+            {
+                List<Matches> matchList = new List<Matches>();
+                foreach (Matches match in db.Matches)
+                {
+                    matchList.Add(match);
+                }
+                foreach (Items item in db.Items)
+                {
+                    item.Matches = new List<Matches>();
+                }
+                foreach (CompanyItems cItem in db.CompanyItems)
+                {
+                    cItem.Matches = new List<Matches>();
+                }
+                foreach (Matches match in matchList)
+                {
+                    db.Matches.Remove(match);
+                }
+                db.SaveChanges();
+            }
+            catch
+            {
+
+            }
+        }
+        private void clearCompanyItems()
+        {
+            try
+            {
+                clearFoundItems();
+                clearLostItems();
+                clearMatches();
+                List<CompanyItems> cItemList = new List<CompanyItems>();
+                foreach (CompanyItems cItem in db.CompanyItems)
+                {
+                    cItemList.Add(cItem);
+                }
+                foreach (Items item in db.Items)
+                {
+                    item.CompanyItems = null;
+                }
+                foreach (Companies company in db.Companies)
+                {
+                    company.CompanyItems = new List<CompanyItems>();
+                }
+                foreach (CompanyItems cItem in cItemList)
+                {
+                    db.CompanyItems.Remove(cItem);
+                }
+                db.SaveChanges();
+            }
+            catch
+            {
+
+            }
+        }
+        private void clearItems()
+        {
+            try
+            {
+                clearMatches();
+                clearFbItems();
+                clearCompanyItems();
+                List<Items> itemList = new List<Items>();
+                foreach (Items item in db.Items)
+                {
+                    itemList.Add(item);
+                }
+                foreach (Items item in itemList)
+                {
+                    db.Items.Remove(item);
+                }
+                db.SaveChanges();
+            }
+            catch
+            {
+
+            }
+        }
+
+        private void clearCompanies()
+        {
+            try
+            {
+                clearCompanyItems();
+                clearFbGroups();
+                List<Companies> companyList = new List<Companies>();
+                foreach (Companies company in db.Companies)
+                {
+                    companyList.Add(company);
+                }
+                foreach (User user in db.User)
+                {
+                    user.Companies = new List<Companies>();
+                }
+                foreach(Companies company in companyList)
+                {
+                    db.Companies.Remove(company);
+                }
+                db.SaveChanges();
+            }
+            catch
+            {
+
+            }
+        }
+
+        private void clearUsers()
+        {
+            try
+            {
+                clearCompanies();
+                List<User> userList = new List<User>();
+                foreach (User user in db.User)
+                {
+                    userList.Add(user);
+                }
+                foreach (User user in userList)
+                {
+                    db.User.Remove(user);
+                }
+                db.SaveChanges();
+            }
+            catch
+            {
+
+            }
         }
 
         public string addCompany(string userName, string password, string companyName, string phone, HashSet<string> facebookGroups)
@@ -460,12 +682,12 @@ namespace DataLayer
                 db.SaveChanges();
                 fbItem.itemID = item.itemID;
                 item.FBItem = fbItem;
+                db.SaveChanges();
             }
             catch
             {
                 return -1;
             }
-            db.SaveChanges();
             return fbItem.itemID;
         }
 
@@ -484,12 +706,12 @@ namespace DataLayer
                 }
                 db.FBItem.Remove(item.FBItem);
                 db.Items.Remove(item);
+                db.SaveChanges();
             }
             catch(Exception e)
             {
                 return e.ToString();
             }
-            db.SaveChanges();
             return "true";
         }
 
@@ -508,12 +730,12 @@ namespace DataLayer
                 fbItem.postId = postURLNew;
                 fbItem.publisherName = publisherNameNew;
                 fbItem.type = typeNew;
+                db.SaveChanges();
             }
             catch(Exception e)
             {
                 return e.ToString();
             }
-            db.SaveChanges();
             return "true";
         }
 
@@ -539,12 +761,12 @@ namespace DataLayer
                 fItem.photoLocation = photoLocation;
                 cItem.FoundItems = fItem;
                 fItem.CompanyItems = cItem;
+                db.SaveChanges();
             }
             catch
             {
                 return -1;
             }
-            db.SaveChanges();
             return fItem.itemID;
         }
 
@@ -561,12 +783,12 @@ namespace DataLayer
                 item.CompanyItems.FoundItems = null;
                 db.FoundItems.Remove(fItem);
                 removeCompanyItem(itemId);
+                db.SaveChanges();
             }
             catch (Exception e)
             {
                 return e.ToString();
             }
-            db.SaveChanges();
             return "true";
         }
 
@@ -589,12 +811,12 @@ namespace DataLayer
                 fItem.location = locationNew;
                 fItem.photoLocation = photoLocationNew;
                 updateCompanyItem(itemId, item.CompanyItems.serialNumber.Value, item.CompanyItems.contactName, item.CompanyItems.contactPhone, companyNameNew);
+                db.SaveChanges();
             }
             catch (Exception e)
             {
                 return e.ToString();
             }
-            db.SaveChanges();
             return "true";
         }
 
@@ -602,13 +824,26 @@ namespace DataLayer
         {
             try
             {
-
+                Items item = findItemByItemId(itemId);
+                if (item == null)
+                {
+                    return "item was not found in the system";
+                }
+                removeFBItem(itemId);
+                removeCompanyItem(itemId);
+                List<Matches> itemMatchesList = item.Matches.ToList();
+                foreach(Matches match in itemMatchesList)
+                {
+                    removeMatch(match.matchID);
+                }
+                db.Items.Remove(item);
+                db.SaveChanges();
             }
             catch (Exception e)
             {
                 return e.ToString();
             }
-            db.SaveChanges();
+            
             return "true";
         }
 
@@ -634,12 +869,12 @@ namespace DataLayer
                 lItem.photoLocation = photoLocation;
                 cItem.LostItems = lItem;
                 lItem.CompanyItems = cItem;
+                db.SaveChanges();
             }
             catch
             {
                 return -1;
             }
-            db.SaveChanges();
             return lItem.itemID;
         }
 
@@ -656,12 +891,12 @@ namespace DataLayer
                 item.CompanyItems.LostItems = null;
                 db.LostItems.Remove(lItem);
                 removeCompanyItem(itemId);
+                db.SaveChanges();
             }
             catch (Exception e)
             {
                 return e.ToString();
             }
-            db.SaveChanges();
             return "true";
         }
 
@@ -684,12 +919,12 @@ namespace DataLayer
                 lItem.location = locationNew;
                 lItem.photoLocation = photoLocationNew;
                 updateCompanyItem(itemId, item.CompanyItems.serialNumber.Value, item.CompanyItems.contactName, item.CompanyItems.contactPhone, companyNameNew);
+                db.SaveChanges();
             }
             catch (Exception e)
             {
                 return e.ToString();
             }
-            db.SaveChanges();
             return "true";
         }
 
@@ -715,12 +950,12 @@ namespace DataLayer
                 item.Matches.Add(match);
                 match.CompanyItems = cItem;
                 match.Items = item;
+                db.SaveChanges();
             }
             catch
             {
                 return -1;
             }
-            db.SaveChanges();
             return match.matchID;
         }
 
@@ -732,12 +967,12 @@ namespace DataLayer
                 match.CompanyItems.Matches.Remove(match);
                 match.Items.Matches.Remove(match);
                 db.Matches.Remove(match);
+                db.SaveChanges();
             }
             catch (Exception e)
             {
                 return e.ToString();
             }
-            db.SaveChanges();
             return "true";
         }
 
@@ -747,12 +982,12 @@ namespace DataLayer
             {
                 Matches match = findMathByMatchId(matchId);
                 match.matchStatus = matchStatusNew;
+                db.SaveChanges();
             }
             catch (Exception e)
             {
                 return e.ToString();
             }
-            db.SaveChanges();
             return "true";
         }
         public Matches findMathByMatchId(int matchId)
@@ -783,12 +1018,12 @@ namespace DataLayer
                 user.password = password;
                 user.isAdmin = isAdmin;
                 db.User.Add(user);
+                db.SaveChanges();
             }
             catch (Exception e)
             {
                 return e.ToString();
             }
-            db.SaveChanges();
             return "true";
         }
 
@@ -802,12 +1037,12 @@ namespace DataLayer
                     return "user does not exist in the system";
                 }
                 db.User.Remove(user);
+                db.SaveChanges();
             }
             catch (Exception e)
             {
                 return e.ToString();
             }
-            db.SaveChanges();
             return "true";
         }
 
@@ -821,12 +1056,12 @@ namespace DataLayer
                     return "user does not exist in the system";
                 }
                 user.password = newPassword;
+                db.SaveChanges();
             }
             catch (Exception e)
             {
                 return e.ToString();
             }
-            db.SaveChanges();
             return "true";
         }
         public User findUserByUserName(string userName)
