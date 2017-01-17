@@ -64,7 +64,12 @@ namespace Domain.BLBackEnd
             }
             foreach (Companies company in companies)
             {
-                _companies.Add(company.userName, new Company(company.userName, company.User.password, company.companyName, company.phone,new HashSet<string>()));//add encryption to pass
+                HashSet<String> FBGroups = new HashSet<string>();
+                foreach (FacebookGroups fb in company.FacebookGroups)
+                {
+                    FBGroups.Add(fb.groupURL);
+                }
+                _companies.Add(company.userName, new Company(company.userName, company.User.password, company.companyName, company.phone, FBGroups));//add encryption to pass
             }
             foreach (FacebookGroups fbg in facebookGroups)
             {
