@@ -36,7 +36,6 @@ namespace Domain.BLBackEnd
         private Cache()
         {
             _db = Database.getInstance();
-            ////////////////////////////////////////////////add db to cache
             initCache();
         }
 
@@ -58,7 +57,7 @@ namespace Domain.BLBackEnd
             List<DataLayer.FBItem> FBItems = _db.getFBItemsList();//int itemID, List<Color> colors, ItemType itemType, DateTime date, String location, String description, String postUrl, String publisherName, FBType fbType
             List<Matches> matches = _db.getMatchesList();//int matchID, int companyItemID, int item2ID, MatchStatus matchStatus
 
-            foreach (DataLayer.User user in admins)/////////////////////notice that sometimes u need to user datayer. somthig so it will use the one from datalayer and not domain
+            foreach (DataLayer.User user in admins)
             {
                 _admins.Add(user.UserName, new Admin(user.UserName, user.password));//add encryption to pass
             }
@@ -70,21 +69,36 @@ namespace Domain.BLBackEnd
                 { "NECKLACE", ItemType.NECKLACE }, { "BRACELET", ItemType.BRACELET }, { "HEADPHONES", ItemType.HEADPHONES }};
             Dictionary<string, FBType> FBTypes = new Dictionary<string, FBType>() { { "FOUND", FBType.FOUND }, { "LOST", FBType.LOST } };
             Dictionary<string, MatchStatus> status = new Dictionary<string, MatchStatus>() { { "POSSIBLE", MatchStatus.POSSIBLE }, { "CORRECT", MatchStatus.CORRECT }, { "COMPLETE", MatchStatus.COMPLETE }, { "INCORRECT", MatchStatus.INCORRECT } };
+            Dictionary<string, Color> HebColors = new Dictionary<string, Color>(){{ "PINK" , Color.PINK }, { "BLACK", Color.BLACK }, { "BLUE", Color.BLUE }, { "RED", Color.RED }, 
+                { "GREEN", Color.GREEN }, { "YELLOW", Color.YELLOW }, { "WHITE", Color.WHITE },{ "PURPEL", Color.PURPEL }, { "ORANGE", Color.ORANGE }, 
+                { "GRAY", Color.GRAY }, { "BROWN", Color.BROWN }, { "GOLD", Color.GOLD }, { "SILVER", Color.SILVER }};
             foreach (LostItems li in lostItems)
             {
-                //colors
-                _lostItems.Add(li.itemID, new LostItem(li.itemID, null/**/, HebTypes[li.itemType], li.lostDate.Value, li.location, li.description, -1 /*li.serial*/, li.companyName, ""/*li.contactName*/, ""/*li.contactphone*/, ""/*li.photolocation*/, li.delivered.Value));
+                List<Color> colors = new List<Color>();
+                foreach(string col in stringToListOfColors(li.colors))
+                {
+                    colors.Add(HebColors[col]);
+                }
+                _lostItems.Add(li.itemID, new LostItem(li.itemID, colors, HebTypes[li.itemType], li.lostDate.Value, li.location, li.description,  li.CompanyItems.serialNumber.Value, li.companyName, li.CompanyItems.contactName, li.CompanyItems.contactPhone, li.photoLocation, li.delivered.Value));
             }
 
             foreach (FoundItems fi in foundItems)
             {
-                //colors
-                _foundItems.Add(fi.itemID, new FoundItem(fi.itemID, null/**/, HebTypes[fi.itemType], fi.findingDate.Value, fi.location, fi.description, -1 /*li.serial*/, fi.companyName, ""/*li.contactName*/, ""/*li.contactphone*/, ""/*li.photolocation*/, fi.delivered.Value));
+                List<Color> colors = new List<Color>();
+                foreach (string col in stringToListOfColors(fi.colors))
+                {
+                    colors.Add(HebColors[col]);
+                }
+                _foundItems.Add(fi.itemID, new FoundItem(fi.itemID, colors, HebTypes[fi.itemType], fi.findingDate.Value, fi.location, fi.description, fi.CompanyItems.serialNumber.Value, fi.companyName, fi.CompanyItems.contactName, fi.CompanyItems.contactPhone, fi.photoLocation, fi.delivered.Value));
             }
             foreach (DataLayer.FBItem fbi in FBItems)
             {
-                //colors
-                _FBItems.Add(fbi.itemID, new FBItem(fbi.itemID, null/**/, HebTypes[fbi.itemType], fbi.lostDate.Value/* change lost date name*/, fbi.location, fbi.description, fbi.postId, fbi.publisherName, FBTypes[fbi.type]));
+                List<Color> colors = new List<Color>();
+                foreach (string col in stringToListOfColors(fbi.colors))
+                {
+                    colors.Add(HebColors[col]);
+                }
+                _FBItems.Add(fbi.itemID, new FBItem(fbi.itemID, colors, HebTypes[fbi.itemType], fbi.lostDate.Value/* change lost date name*/, fbi.location, fbi.description, fbi.postId, fbi.publisherName, FBTypes[fbi.type]));
             }
             foreach (Matches m in matches)
             {
@@ -120,6 +134,24 @@ namespace Domain.BLBackEnd
             
             
             setMaxAvialbleItemID();
+        }
+        private List<string> stringToListOfColors(string colors)
+        {
+            string color = "";
+            List<string> colorList = new List<string>();
+            for (int i = 0; i < colors.Length; i++)
+            {
+                if ((i == colors.Length - 1) || colors.ElementAt(i).Equals(","))
+                {
+                    colorList.Add(color);
+                    color = "";
+                }
+                else
+                {
+                    color += colors.ElementAt(i);
+                }
+            }
+            return colorList;
         }
 
         internal Company getCompany(string companyName)
@@ -207,7 +239,7 @@ namespace Domain.BLBackEnd
             _lostItems.Add(lostItem.ItemID, lostItem);
             _db.addLostItem(lostItem.getColorsList(), lostItem.ItemType.ToString(), lostItem.Date, lostItem.Location,
                 lostItem.Description, lostItem.SerialNumber, lostItem.CompanyName, lostItem.ContactName,
-                lostItem.ContactPhone, lostItem.PhotoLocation, lostItem.WasFound);////all of this is defferent from database
+                lostItem.ContactPhone, lostItem.PhotoLocation, lostItem.WasFound);
         }
 
         internal void addFoundItem(FoundItem foundItem)
@@ -215,7 +247,7 @@ namespace Domain.BLBackEnd
             _foundItems.Add(foundItem.ItemID, foundItem);
             _db.addFoundItem(foundItem.getColorsList(), foundItem.ItemType.ToString(), foundItem.Date, foundItem.Location,
                 foundItem.Description, foundItem.SerialNumber, foundItem.CompanyName, foundItem.ContactName,
-                foundItem.ContactPhone, foundItem.PhotoLocation, foundItem.Delivered);//all of this is defferent from database
+                foundItem.ContactPhone, foundItem.PhotoLocation, foundItem.Delivered);
         }
 
         internal void updateCompanyItem(CompanyItem companyItem)
@@ -234,7 +266,7 @@ namespace Domain.BLBackEnd
 
         internal void updateMatch(int matchID, MatchStatus matchStatus)
         {
-            _db.updateMatch(matchID, matchStatus.ToString());//either add all nesseray fields or crate a new method where the company name and the item's id shouldnt be changed
+            _db.updateMatch(matchID, matchStatus.ToString());
         }
 
         internal void addFacebookGroup(string companyName, string url)
@@ -254,14 +286,14 @@ namespace Domain.BLBackEnd
 
         internal void updateFacebbokItem(FBItem fBItem)
         {
-            _db.updateFBItem(fBItem.ItemID, fBItem.getColorsList()/*colors isnt a list of string, that should be changed*/, fBItem.ItemType.ToString(), fBItem.Date, fBItem.Location, fBItem.Description,
+            _db.updateFBItem(fBItem.ItemID, fBItem.getColorsList(), fBItem.ItemType.ToString(), fBItem.Date, fBItem.Location, fBItem.Description,
             fBItem.PostUrl, fBItem.PublisherName, fBItem.Type.ToString());
         }
 
         internal void addNewFBItemToDB(FBItem fBItem)
         {
             _FBItems.Add(fBItem.ItemID, fBItem);
-            _db.addFBItem(fBItem.getColorsList()/*colors isnt a list of string, that should be changed*/, fBItem.ItemType.ToString(), fBItem.Date, fBItem.Location, fBItem.Description,
+            _db.addFBItem(fBItem.getColorsList(), fBItem.ItemType.ToString(), fBItem.Date, fBItem.Location, fBItem.Description,
                 fBItem.PostUrl, fBItem.PublisherName, fBItem.Type.ToString());            
         }
     }
