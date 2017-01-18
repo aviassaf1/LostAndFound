@@ -10,8 +10,6 @@ namespace Domain.Managers
 {
     public class ComapanyManager :ICompanyManager
     {
-
-
         private Dictionary<String ,String > _FBTokens=new Dictionary<string, string>();//company name, token
         private static ICompanyManager singleton;
 
@@ -27,16 +25,15 @@ namespace Domain.Managers
             }
         }
 
-
-
-
          public string addFoundItem()
         {
+            //check Date is not bigger than today
             throw new NotImplementedException();
         }
 
         public string addLostItem()
         {
+            //check Date is not bigger than today
             throw new NotImplementedException();
         }
 

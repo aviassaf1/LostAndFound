@@ -75,6 +75,7 @@ namespace Domain.Managers
                 Match match = findMatch(cItem, item);
                 if (match != null)
                     newMatches.Add(match);
+                //if its FBItem that not in DB, add it
             }
             return newMatches;
         }
@@ -155,6 +156,7 @@ namespace Domain.Managers
                         List<Color> colors = getColors(description);
                         ItemType itemType = getItemType(description);
                         string location = "NeverLand";//"getLocation(description);
+                        //if FBItem is in db, take it from there!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                         FBItem item = new FBItem(colors, itemType, date, location, description, postID, publisher, fbType);
                         answer.Add(item);
                     }

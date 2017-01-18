@@ -32,7 +32,6 @@ namespace Domain.BLBackEnd
             }
         }
 
-
         private Cache()
         {
             _db = Database.getInstance();
@@ -47,7 +46,6 @@ namespace Domain.BLBackEnd
             _foundItems = new Dictionary<int, FoundItem>();
             _FBItems = new Dictionary<int, FBItem>();
             _matches = new Dictionary<int, Match>();
-
 
             List<DataLayer.User> admins= _db.getAdminsList();//String userName,String password
             List<Companies> companies = _db.getCompaniesList();//String userName,String password, String companyName, String phone, 
@@ -131,8 +129,6 @@ namespace Domain.BLBackEnd
                 }
                 _companies.Add(company.userName, new Company(company.userName, company.User.password, company.companyName, company.phone, FBGroups, LostItems, FoundItems, Matches));//add encryption to pass
             }
-            
-            
             setMaxAvialbleItemID();
         }
         private List<string> stringToListOfColors(string colors)
@@ -161,7 +157,7 @@ namespace Domain.BLBackEnd
             return null;
         }
 
-        private void setMaxAvialbleItemID()
+        private void setMaxAvialbleItemID()//sync
         {
             maxAvilableComapanyItemID = 0;
             foreach (int id in _lostItems.Keys)
@@ -189,6 +185,7 @@ namespace Domain.BLBackEnd
                 this._FBItems.Clear();
             if (this._matches != null)
                 this._matches.Clear();
+            _db.clear();
         }
 
         internal void updateFoundItem(FoundItem foundItem)
@@ -281,6 +278,7 @@ namespace Domain.BLBackEnd
 
         internal void addNewCompany(string _userName, string _password, string _companyName, string _phone, HashSet<String> facebookGroups)
         {
+            _companies.Add(_userName, new Company(_userName, _password, _companyName, _phone, facebookGroups));
             _db.addCompany(_userName, _password, _companyName, _phone, facebookGroups);
         }
 

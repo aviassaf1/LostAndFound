@@ -23,6 +23,9 @@ namespace Domain.Managers
         }
         public string addComapny(string userName, string password, string companyName, string phone, HashSet<string> facebookGroups)
         {
+            //check not exist
+            //check phone type
+            //check password
             throw new NotImplementedException();
         }
 
