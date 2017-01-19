@@ -12,7 +12,12 @@ namespace Domain.Managers
     {
         private Dictionary<String ,String > _FBTokens=new Dictionary<string, string>();//company name, token
         private static ICompanyManager singleton;
+        private Cache cache;
 
+        private ComapanyManager()
+        {
+            cache = Cache.getInstance;
+        }
         public static ICompanyManager getInstance
         {
             get
@@ -37,9 +42,9 @@ namespace Domain.Managers
             throw new NotImplementedException();
         }
 
-        public string getCompanyByName()
+        public Company getCompanyByName(string companyName)
         {
-            throw new NotImplementedException();
+            return cache.getCompany(companyName);           
         }
 
         public String login(String companyName, String token)
@@ -64,14 +69,44 @@ namespace Domain.Managers
             return "true";
         }
 
-        public List<Item> getLostItems3Days(string companyName, DateTime date)
+        public List<LostItem> getLostItems3Days(string companyName, DateTime date)
         {
-            throw new NotImplementedException();
+            Company company = cache.getCompany(companyName);
+            if (company == null)
+            {
+                return null;
+            }
+            List<LostItem> companyLostItemsList = company.getAllLostItems();
+            List<LostItem> itemsFromLastThreeDays = new List<LostItem>();
+            foreach (LostItem item in companyLostItemsList)
+            {
+                DateTime itemDate = item.Date;
+                if (date.Subtract(itemDate).Days <= 2)
+                {
+                    itemsFromLastThreeDays.Add(item);
+                }
+            }
+            return itemsFromLastThreeDays;
         }
 
-        public List<Item> getFoundItems3Days(string companyName, DateTime date)
+        public List<FoundItem> getFoundItems3Days(string companyName, DateTime date)
         {
-            throw new NotImplementedException();
+            Company company = cache.getCompany(companyName);
+            if (company == null)
+            {
+                return null;
+            }
+            List<FoundItem> companyFoundItemsList = company.getAllFoundItems();
+            List<FoundItem> itemsFromLastThreeDays = new List<FoundItem>();
+            foreach (FoundItem item in companyFoundItemsList)
+            {
+                DateTime itemDate = item.Date;
+                if (date.Subtract(itemDate).Days <= 2)
+                {
+                    itemsFromLastThreeDays.Add(item);
+                }
+            }
+            return itemsFromLastThreeDays;
         }
     }
 }

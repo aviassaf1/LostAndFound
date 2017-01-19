@@ -176,5 +176,13 @@ namespace Domain.BLBackEnd
             }
             return false;
         }
+        public List<LostItem> getAllLostItems()
+        {
+            throw new NotImplementedException();
+        }
+        public List<FoundItem> getAllFoundItems()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
