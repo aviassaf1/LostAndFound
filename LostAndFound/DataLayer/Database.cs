@@ -17,7 +17,6 @@ namespace DataLayer
 
         }
 
-
         public static Database getInstance()
         {
                 if (singleton == null)
@@ -26,6 +25,47 @@ namespace DataLayer
                     singleton.initializeDB();
                 }
                 return singleton;
+        }
+        public void setUp() 
+        {
+
+            User admin = new User();
+            admin.UserName = "testAdmin";
+            admin.password = "testpassAdmin";
+            admin.isAdmin = true;
+            db.User.Add(admin);
+            DataLayer.User user = new DataLayer.User();
+            user.UserName = "testUser";
+            user.password = "testpassUser";
+            user.isAdmin = false;
+            db.User.Add(user);
+            Companies company = new Companies();
+            company.User = user;
+            user.Companies.Add(company);
+            company.userName = user.UserName;
+            company.phone = "testphone";
+            company.companyName = "testCompany";
+            db.SaveChanges();
+            List<CompanyItems> companyItems = new List<CompanyItems>();
+            company.CompanyItems = companyItems;
+            CompanyItems cItem = new CompanyItems();
+            cItem.Companies = company;
+            cItem.companyName = company.companyName;
+            cItem.contactName = "";
+            cItem.contactPhone = "";
+            cItem.FoundItems = null;
+            companyItems.Add(cItem);
+            db.SaveChanges();
+            Items item = new Items();
+            item.itemID = cItem.itemId;
+            item.CompanyItems = cItem;
+            cItem.Items = item;
+            FacebookGroups fbg = new FacebookGroups();
+            fbg.Companies = company;
+            fbg.CompanyName = company.companyName;
+            fbg.groupURL = "urlTest";
+            company.FacebookGroups.Add(fbg);
+            
         }
         private Boolean initializeDB()
         {
