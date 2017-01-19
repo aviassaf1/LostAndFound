@@ -33,6 +33,7 @@ namespace DataLayer
             admin.UserName = "testAdmin";
             admin.password = "testpassAdmin";
             admin.isAdmin = true;
+            //db.User = new System.Data.Entity.DbSet<User>();
             db.User.Add(admin);
             DataLayer.User user = new DataLayer.User();
             user.UserName = "testUser";
@@ -123,12 +124,13 @@ namespace DataLayer
             User user = new User();
             user.UserName = "user2";
             user.password = "123";
+            db.User.Add(user);
             Companies company = new Companies();
             company.companyName = "comp1";
             company.User = user;
             // db.User = new LinkedList<User>();
             //db.User = new System.Data.Entity.DbSet<User>();
-            db.User.Add(user);
+            
             user.Companies.Add(company);
             //Console.WriteLine(db.User);
            // while (true) ;
