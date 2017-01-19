@@ -12,7 +12,7 @@ namespace Domain
     {
         public static void Main(string[] args)
         {
-            List<FBItem> list =  MatchManager.getInstance.getPostsFromGroup("EAACEdEose0cBAF4oCerYDZA1f7hPgkAkCZApnlwG6NGmUMSAt3WZCw3hkNUGxyp2PwKUDQO1K46GNUyP7REFx1sbJgPyw5DV9kyV2VOBZBIQ2c1EsRe4EZB1w5ZCqIMhkbPLqjVFkYlW4qiqcXvssZBR6FvDV9dhiso69CpGsfRAgZDZD",
+            List<FBItem> list =  MatchManager.getInstance.getPostsFromGroup("EAACEdEose0cBAK6rRVVd0ygPiF1id6G2HZBILpjTsldk5fVZAOJDkLzcdJ6qgvjq41E4AGrFQbL97P4So14vZCHTfTZA6HS2f10TABWvS9I5b1Uq9XgYwpfztcDewRUkr6NyVnvx0YDqnPbMjOc1yAZAMbvSB1cIKXlxDDdOS5QZDZD",
                 "1538105046204967");
 //            int i = 0;
         }

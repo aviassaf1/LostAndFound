@@ -60,16 +60,10 @@ namespace Domain
                 _admins.Add(user.UserName, new Admin(user.UserName, user.password));//add encryption to pass
             }
 
-            Dictionary<string, ItemType> HebTypes = new Dictionary<string, ItemType>(){{ "ID" , ItemType.ID }, { "WALLET", ItemType.WALLET },
-                { "PCMOUSE", ItemType.PCMOUSE }, { "PC", ItemType.PC }, { "PHONE", ItemType.PHONE }, { "KEYS", ItemType.KEYS }, { "BAG", ItemType.BAG }, { "UMBRELLA", ItemType.UMBRELLA },
-                { "SWEATSHIRT", ItemType.SWEATSHIRT }, { "GLASSES", ItemType.GLASSES }, { "SHOES", ItemType.SHOES },{ "FLIPFLOPS", ItemType.FLIPFLOPS },
-                { "FOLDER", ItemType.FOLDER }, { "CHARGER", ItemType.CHARGER }, { "EARING", ItemType.EARING }, { "RING", ItemType.RING },
-                { "NECKLACE", ItemType.NECKLACE }, { "BRACELET", ItemType.BRACELET }, { "HEADPHONES", ItemType.HEADPHONES }};
-            Dictionary<string, FBType> FBTypes = new Dictionary<string, FBType>() { { "FOUND", FBType.FOUND }, { "LOST", FBType.LOST } };
-            Dictionary<string, MatchStatus> status = new Dictionary<string, MatchStatus>() { { "POSSIBLE", MatchStatus.POSSIBLE }, { "CORRECT", MatchStatus.CORRECT }, { "COMPLETE", MatchStatus.COMPLETE }, { "INCORRECT", MatchStatus.INCORRECT } };
-            Dictionary<string, Color> Colors = new Dictionary<string, Color>(){{ "PINK" , Color.PINK }, { "BLACK", Color.BLACK }, { "BLUE", Color.BLUE }, { "RED", Color.RED }, 
-                { "GREEN", Color.GREEN }, { "YELLOW", Color.YELLOW }, { "WHITE", Color.WHITE },{ "PURPEL", Color.PURPEL }, { "ORANGE", Color.ORANGE }, 
-                { "GRAY", Color.GRAY }, { "BROWN", Color.BROWN }, { "GOLD", Color.GOLD }, { "SILVER", Color.SILVER }};
+            Dictionary<string, ItemType> HebTypes = DataType.English2EnglishTypes;
+            Dictionary<string, FBType> FBTypes = DataType.FBTypes;
+            Dictionary<string, MatchStatus> status = DataType.status;
+            Dictionary<string, Color> Colors = DataType.EnglishColors;
             foreach (LostItems li in lostItems)
             {
                 List<Color> colors = new List<Color>();
@@ -321,19 +315,7 @@ namespace Domain
             _db.addFBItem(fBItem.getColorsList(), fBItem.ItemType.ToString(), fBItem.Date, fBItem.Location, fBItem.Description,
                 fBItem.PostID, fBItem.PublisherName, fBItem.Type.ToString());            
         }
-        internal List<Item> getAllCompanyItems()
-        {
-            List<Item> itemList = new List<Item>();
-            foreach(LostItem lItem in _lostItems.Values)
-            {
-                itemList.Add(lItem);
-            }
-            foreach (FoundItem fItem in _foundItems.Values)
-            {
-                itemList.Add(fItem);
-            }
-            return itemList;
-        }
+        
         internal List<LostItem> getLostItems()
         {
             List<LostItem> itemList = new List<LostItem>();

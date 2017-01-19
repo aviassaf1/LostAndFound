@@ -213,8 +213,7 @@ namespace Domain.Managers
 
         private FBType getFBType(string description)
         {
-            Dictionary<string, FBType> HebTypes = new Dictionary<string, FBType>(){{ "אבד" , FBType.LOST },{ "איבד" , FBType.LOST },{ "איבוד" , FBType.LOST }, { "נעלם", FBType.LOST },
-                { "מישהו מצא", FBType.LOST }, { "מישהו במקרה מצא", FBType.LOST }, { "מצאת", FBType.FOUND }, { "מצאנ", FBType.FOUND }, { "נמצא", FBType.FOUND }, { "נימצא", FBType.FOUND }};
+            Dictionary<string, FBType> HebTypes = DataType.HebTypes;
             foreach (string hebType in HebTypes.Keys)
             {
                 if (description.Contains(hebType))
@@ -227,11 +226,7 @@ namespace Domain.Managers
 
         private ItemType getItemType(string description)
         {
-            Dictionary<string,ItemType> HebTypes = new Dictionary<string, ItemType>(){{ "תעוד" , ItemType.ID },{ "תז" , ItemType.ID },{ "ת\"ז" , ItemType.ID }, { "ארנק", ItemType.WALLET },
-                { "עכבר", ItemType.PCMOUSE }, { "מחשב", ItemType.PC }, { "פון", ItemType.PHONE }, { "מפתח", ItemType.KEYS }, { "תיק", ItemType.BAG }, { "מטרי", ItemType.UMBRELLA },
-                { "סווטשרט", ItemType.SWEATSHIRT },{ "סווצרט", ItemType.SWEATSHIRT }, { "משקפ", ItemType.GLASSES }, { "נעל", ItemType.SHOES },{ "כפכ", ItemType.FLIPFLOPS },
-                { "תיקיה", ItemType.FOLDER },{ "מחברת", ItemType.FOLDER },{ "קלסר", ItemType.FOLDER }, { "מטען", ItemType.CHARGER }, { "עגיל", ItemType.EARING }, { "טבעת", ItemType.RING },
-                { "שרשרת", ItemType.NECKLACE },{ "תליון", ItemType.NECKLACE }, { "צמיד", ItemType.BRACELET }, { "אוזני", ItemType.HEADPHONES }};
+            Dictionary<string, ItemType> HebTypes = DataType.Hebrew2EnglishTypes;
             foreach (string hebType in HebTypes.Keys)
             {
                 if (description.Contains(hebType))
@@ -246,9 +241,7 @@ namespace Domain.Managers
         private List<Color> getColors(string description)
         {
             List<Color> colors = new List<Color>();
-            Dictionary<string,Color> HebColors = new Dictionary<string, Color>(){{ "ורוד" , Color.PINK }, { "שחור", Color.BLACK }, { "כחול", Color.BLUE }, { "אדום", Color.RED }, { "אדומ", Color.RED },
-                { "ירוק", Color.GREEN }, { "צהוב", Color.YELLOW }, { "לבן", Color.WHITE }, { "לבנ", Color.WHITE }, { "סגול", Color.PURPEL }, { "כתום", Color.ORANGE }, { "כתומ", Color.ORANGE },
-                { "אפור", Color.GRAY }, { "חום", Color.BROWN }, { "חומ", Color.BROWN } , { "זהב", Color.GOLD }, { "זהוב", Color.GOLD }, { "כסף", Color.SILVER }, { "כסוף", Color.SILVER } };
+            Dictionary<string, Color> HebColors = DataType.HebColors;
             foreach(string hebCol in HebColors.Keys)
             {
                 if (description.Contains(hebCol))
