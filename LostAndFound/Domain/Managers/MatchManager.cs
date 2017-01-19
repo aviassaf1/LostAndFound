@@ -150,7 +150,7 @@ namespace Domain.Managers
                 Boolean colorMatch = false;
                 foreach (Color color in cItem.Colors)
                 {
-                    if (item.Colors.Contains(color))
+                    if (item.Colors.Contains(color) || item.Colors.Contains(Color.UNKNOWN))
                     {
                         colorMatch = true;
                     }
@@ -244,12 +244,18 @@ namespace Domain.Managers
         {
             List<Color> colors = new List<Color>();
             Dictionary<string, Color> HebColors = DataType.HebColors;
+            Boolean foundColor = false;
             foreach(string hebCol in HebColors.Keys)
             {
                 if (description.Contains(hebCol))
                 {
                     colors.Add(HebColors[hebCol]);
+                    foundColor = true;
                 }
+            }
+            if (foundColor == false)
+            {
+                colors.Add(Color.UNKNOWN);
             }
             return colors;
         }
