@@ -131,6 +131,16 @@ namespace Domain.BLBackEnd
             }
             setMaxAvialbleItemID();
         }
+
+        internal CompanyItem getCompanyItem(int itemID)
+        {
+            if (_lostItems.ContainsKey(itemID))
+                return (_lostItems[itemID]);
+            if (_foundItems.ContainsKey(itemID))
+                return (_foundItems[itemID]);
+            return null;
+        }
+
         private List<string> stringToListOfColors(string colors)
         {
             string color = "";

@@ -30,17 +30,6 @@ namespace Domain.Managers
             }
         }
 
-         public string addFoundItem()
-        {
-            //check Date is not bigger than today
-            throw new NotImplementedException();
-        }
-
-        public string addLostItem()
-        {
-            //check Date is not bigger than today
-            throw new NotImplementedException();
-        }
 
         public Company getCompanyByName(string companyName)
         {
