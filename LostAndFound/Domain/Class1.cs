@@ -12,14 +12,14 @@ namespace Domain
     {
         public static void Main(string[] args)
         {
-            string token = "EAACEdEose0cBACFTRe2WTi4LfgT8g0fFzxthi9y2lWGFpB4tim64BYZBksIvZC3FKPHgxVGyWfRItRGU484KxkXkhUZBqdIKXLxmCI6SKd2b9QSUg5whuYgZCdhM725ZARwZCs9CxG9NkaVlTv1bA6PaQZCz4nU9D0OPI0ZCcAnmrQZDZD";
+            string token = "EAACEdEose0cBANqSssjLRNrYig5RK9NGZBOS7cbcdowIlDUYCNXklrsci9IgSZBZB26BcVZAHtxfehRCfnBZBwXiCrrfdSSZCfGYLJMEWETUWfsZBC0ZC5FLm2MyAotVsP0OjCrPEZANi5lakXIbqU7ZA6ehdo2kU6heRaxjD6XzXn0gZDZD";
             List<FBItem> list =  MatchManager.getInstance.getPostsFromGroup(token,
                 "1538105046204967");
             List<string> colors = new List<string>() { "PINK" };
             HashSet<string> fbg = new HashSet<string>() { "1538105046204967" };
 
             AdminManager.getInstance.addComapny("GuyCompany", "gG1", "GuyComapany", "050000000", fbg);
-            ItemManager.getInstance.addLostItem(colors,"KEYS", DateTime.Today, "here", "desc",56658, "GuyCompany", "noam",
+            ItemManager.getInstance.addFoundItem(colors,"KEYS", DateTime.Today, "here", "desc",56658, "GuyCompany", "noam",
                 "0555555555", "location",token);
             Cache cache = Cache.getInstance;
             int i = 0;

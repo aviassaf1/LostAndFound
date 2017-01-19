@@ -251,7 +251,7 @@ namespace Domain
         internal void addMatch(Match match)
         {
             _matches.Add(match.MatchID, match);
-            int id = new Random().Next();//_db.addMatch(match.CompanyItemID, match.Item2ID, match.MatchStatus.ToString());
+            int id = _db.addMatch(match.CompanyItemID, match.Item2ID, match.MatchStatus.ToString());
             match.MatchID = id;
         }
 
