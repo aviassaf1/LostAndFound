@@ -47,7 +47,8 @@ namespace Domain.Managers
             }
             FoundItem newItem = new FoundItem(colors, type, date, location, description, serialNumber, companyName, contactName, 
                 contactPhone, photoLocation);
-            cache.getCompany(companyName).addFoundItem(newItem);
+            newItem.addToDB();
+            cache.getCompany(companyName).addFoundItem(newItem.ItemID);
             MatchManager.getInstance.findMatches(newItem, token);
             return "add found item: item was added successfully";
         }
@@ -68,7 +69,8 @@ namespace Domain.Managers
             }
             LostItem newItem = new LostItem(colors, type, date, location, description, serialNumber, companyName, contactName,
                 contactPhone, photoLocation);
-            Cache.getInstance.getCompany(companyName).addLostItem(newItem);
+            newItem.addToDB();
+            Cache.getInstance.getCompany(companyName).addLostItem(newItem.ItemID);
             MatchManager.getInstance.findMatches(newItem, token);
             return "add lost item: item was added successfully";
         }
