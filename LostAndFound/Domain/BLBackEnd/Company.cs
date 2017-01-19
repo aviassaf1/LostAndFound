@@ -25,7 +25,7 @@ namespace Domain.BLBackEnd
             _lostItems = new HashSet<int>();
             _foundItems = new HashSet<int>();
             _matches = new HashSet<int>();
-            cache.addNewCompany(UserName, Password, _companyName, _phone,facebookGroups);
+            cache.addNewCompany(this);
         }
         public Company(String userName, String password, String companyName, String phone, HashSet<string> facebookGroups,
             HashSet<int> lostItems,HashSet<int> foundItems, HashSet<int> matches)

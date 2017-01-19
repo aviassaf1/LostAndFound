@@ -311,10 +311,10 @@ namespace Domain
             _db.removeFacebookGroup(companyName, url);
         }
 
-        internal void addNewCompany(string _userName, string _password, string _companyName, string _phone, HashSet<String> facebookGroups)
+        internal void addNewCompany(Company company)
         {
-            _companies.Add(_userName, new Company(_userName, _password, _companyName, _phone, facebookGroups));
-            _db.addCompany(_userName, _password, _companyName, _phone, facebookGroups);
+            _companies.Add(company.UserName, company);
+            _db.addCompany(company.UserName, company.Password, company.CompanyName, company.Phone, company.FacebookGroups);
         }
 
         internal void updateFacebbokItem(Domain.BLBackEnd.FBItem fBItem)

@@ -12,7 +12,7 @@ namespace Domain.BLBackEnd
         protected String _userName;
         protected String _password;
 
-        protected string Password
+        public string Password
         {
             get
             {
@@ -26,7 +26,7 @@ namespace Domain.BLBackEnd
             }
         }
 
-        protected string UserName
+        public string UserName
         {
             get
             {
