@@ -73,9 +73,10 @@ namespace DataLayer
             try
             {
                 this.db = new Entities();
-                string Path = Environment.CurrentDirectory;
-                string[] appPath = Path.Split(new string[] { "bin" }, StringSplitOptions.None);
-                AppDomain.CurrentDomain.SetData("DataDirectory", appPath[0]);
+                string baseDir = AppDomain.CurrentDomain.BaseDirectory;
+                int index = baseDir.IndexOf("LostAndFound");
+                string dataDir = baseDir.Substring(0, index) + "LostAndFound\\LostAndFound\\";
+                AppDomain.CurrentDomain.SetData("DataDirectory", dataDir);
                 //initialAddToCache();
                 return true;
             }

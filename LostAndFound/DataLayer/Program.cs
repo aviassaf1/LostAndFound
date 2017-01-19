@@ -11,8 +11,6 @@ namespace DataLayer
         public static void Main(string[] args)
         {
             Database db = Database.getInstance();
-            // ent.
-            //ent.Database.Connection.Open();
             db.testop();
         }
     }
