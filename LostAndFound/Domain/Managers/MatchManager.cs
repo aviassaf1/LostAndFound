@@ -112,6 +112,7 @@ namespace Domain.Managers
                         if (item.GetType().Equals(typeof(FBItem)))
                         {
                             item.addToDB();
+                            match.Item2ID = item.ItemID;
                             match.addToDB();
                             commentToPost(token, ((FBItem)item).PostID, "שלום, נמצאה התאמה בין הפריט לבין פריט ב" + cItem.CompanyName + " מספר ההתאמה של הפריט הוא: " + match.MatchID);
                         }
