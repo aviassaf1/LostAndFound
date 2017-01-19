@@ -12,7 +12,7 @@ namespace Domain
     {
         public static void Main(string[] args)
         {
-            string token = "EAACEdEose0cBAM5rDkM1hRKGCImrxrA7QJ4gZAh2s2ZCv9PuQeuT8qfgNeJQKkvBYWruFfNZADesnp8PB35pU7ykzzG2HF9Wo0xCqbJFQkHLwFfsKQYfDZAZAZBvtDBmJXa45wQS3ZAavaWmmuc3TI9msR8lyAF5oGrSe8bTqhabgZDZD";
+            string token = "EAACEdEose0cBAJZAw64b2cIJReLnTCZCNZCuSRAM1RE10z4fgN1bakJ43UQbEeeqqU60ZAIZAgbuxH046bIt4gNjXFZBrqKHwjGR5cb7MDRDQWVH66KA6WAiOEqN3fZCva9DlCZBv00pVc8CAZCbweYdYspAw4Fc7knZAW27tlUJV6RAZDZD";
             List<FBItem> list =  MatchManager.getInstance.getPostsFromGroup(token,
                 "1538105046204967");
             List<string> colors = new List<string>() { "PINK" };
