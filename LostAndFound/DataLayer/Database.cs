@@ -426,10 +426,11 @@ namespace DataLayer
                 company.companyName = companyName;
                 company.phone = phone;
                 User user = findUserByUserName(userName);
-                if (user == null)
+                if (user != null)
                 {
-                    return "user was not found in the system";
+                    return "user already exists in the system";
                 }
+                addUser(userName, password, false);
                 user.Companies.Add(company);
                 company.User = user;
                 foreach (string url in facebookGroups)
