@@ -369,7 +369,7 @@ namespace DataLayer
         {
             try
             {
-                clearCompanyItems();
+                clearItems();
                 clearFbGroups();
                 List<Companies> companyList = new List<Companies>();
                 foreach (Companies company in db.Companies)
