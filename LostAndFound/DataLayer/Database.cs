@@ -11,7 +11,6 @@ namespace DataLayer
         private static Database singleton;
         private Entities db;
 
-
         private Database()
         {
 
@@ -544,13 +543,15 @@ namespace DataLayer
         {
             try
             {
+                Items item = new Items();
+                db.SaveChanges();
                 CompanyItems cItem = new CompanyItems();
                 Companies company = findCompanyByCompanyName(companyName);
                 if (company == null)
                 {
                     return -2;
                 }
-                Items item = new Items();
+                
                 db.SaveChanges();
                 company.CompanyItems.Add(cItem);
                 item.CompanyItems = cItem;
@@ -564,7 +565,7 @@ namespace DataLayer
                 db.SaveChanges();
                 return cItem.itemId;
             }
-            catch
+            catch(Exception e)
             {
                 return -1;
             }
@@ -757,6 +758,9 @@ namespace DataLayer
         }
         public int addFBItem(List<string> colors, string itemType, DateTime lostDate, string location, string decription, string postId, string publisherName, string type)
         {
+            Items item = new Items();
+            db.Items.Add(item);
+            db.SaveChanges();
             FBItem fbItem = new FBItem();
             try
             {
@@ -767,12 +771,8 @@ namespace DataLayer
                 fbItem.postId = postId;
                 fbItem.publisherName = publisherName;
                 fbItem.type = type;
-                Items item = new Items();
-                db.Items.Add(item);
-                db.SaveChanges();
                 fbItem.itemID = item.itemID;
                 fbItem.Items = item;
-                item.FBItem = fbItem;
                 db.SaveChanges();
             }
             catch
@@ -1031,7 +1031,7 @@ namespace DataLayer
             Matches match = new Matches();
             try
             {
-                CompanyItems cItem = findCompanyItemByItemId(itemID);
+                CompanyItems cItem = findCompanyItemByItemId(companyItemId);
                 if (cItem == null)
                 {
                     return -2;
