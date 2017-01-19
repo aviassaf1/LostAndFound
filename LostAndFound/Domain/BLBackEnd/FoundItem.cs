@@ -44,9 +44,13 @@ namespace Domain.BLBackEnd
             _delivered = false;
         }
 
-        public void addToDB()
+        public override void addToDB()
         {
-            cache.addFoundItem(this);
+            if (ItemID == -1)
+            {
+                ItemID = cache.getAvialbleItemID();
+                cache.addFoundItem(this);
+            }
         }
 
         public bool Delivered

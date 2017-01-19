@@ -41,6 +41,10 @@ namespace Domain.BLBackEnd
             {
                 return _matchID;
             }
+            set
+            {
+                _matchID = value;
+            }
         }
 
         public int CompanyItemID

@@ -17,7 +17,7 @@ namespace Domain.BLBackEnd
         protected String _description;
 
         protected abstract void updateItem();
-
+        public abstract void addToDB();
         public int ItemID
         {
             get
