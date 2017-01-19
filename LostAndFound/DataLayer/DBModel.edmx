@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="LostAndFoundDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="LostAndFoundDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Companies">
           <Key>
             <PropertyRef Name="companyName" />
@@ -17,7 +17,7 @@
           <Key>
             <PropertyRef Name="itemId" />
           </Key>
-          <Property Name="itemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="itemId" Type="int" Nullable="false" />
           <Property Name="serialNumber" Type="int" />
           <Property Name="contactName" Type="varchar" MaxLength="50" />
           <Property Name="contactPhone" Type="varchar" MaxLength="50" />
@@ -49,7 +49,7 @@
           <Key>
             <PropertyRef Name="itemID" />
           </Key>
-          <Property Name="itemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="itemID" Type="int" Nullable="false" />
           <Property Name="companyName" Type="varchar" MaxLength="50" />
           <Property Name="photoLocation" Type="varchar" MaxLength="50" />
           <Property Name="colors" Type="varchar" MaxLength="50" />
@@ -252,8 +252,7 @@
             <End Role="Matches" EntitySet="Matches" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="LostAndFoundDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -643,7 +642,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>
