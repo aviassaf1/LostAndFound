@@ -58,7 +58,7 @@ namespace Domain.Managers
             return "true";
         }
 
-        public List<LostItem> getLostItems3Days(string companyName, DateTime date)
+        public List<Item> getLostItems3Days(string companyName, DateTime date)
         {
             Company company = cache.getCompany(companyName);
             if (company == null)
@@ -66,7 +66,7 @@ namespace Domain.Managers
                 return null;
             }
             List<LostItem> companyLostItemsList = company.getAllLostItems();
-            List<LostItem> itemsFromLastThreeDays = new List<LostItem>();
+            List<Item> itemsFromLastThreeDays = new List<Item>();
             foreach (LostItem item in companyLostItemsList)
             {
                 DateTime itemDate = item.Date;
@@ -78,7 +78,7 @@ namespace Domain.Managers
             return itemsFromLastThreeDays;
         }
 
-        public List<FoundItem> getFoundItems3Days(string companyName, DateTime date)
+        public List<Item> getFoundItems3Days(string companyName, DateTime date)
         {
             Company company = cache.getCompany(companyName);
             if (company == null)
@@ -86,7 +86,7 @@ namespace Domain.Managers
                 return null;
             }
             List<FoundItem> companyFoundItemsList = company.getAllFoundItems();
-            List<FoundItem> itemsFromLastThreeDays = new List<FoundItem>();
+            List<Item> itemsFromLastThreeDays = new List<Item>();
             foreach (FoundItem item in companyFoundItemsList)
             {
                 DateTime itemDate = item.Date;
