@@ -18,7 +18,7 @@ namespace Domain.BLBackEnd
         public Company(String userName,String password, String companyName, String phone, HashSet<string> facebookGroups)
         {
             _userName = userName;
-            Password = password;
+            _password = password;
             _companyName = companyName;
             _phone = phone;
             _facebookGroups = facebookGroups;

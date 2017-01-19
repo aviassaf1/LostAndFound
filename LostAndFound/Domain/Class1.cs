@@ -18,7 +18,7 @@ namespace Domain
             List<string> colors = new List<string>() { "PINK" };
             HashSet<string> fbg = new HashSet<string>() { "1538105046204967" };
 
-            AdminManager.getInstance.addComapny("GuyCompany", "guy", "GuyComapany", "050000000", fbg);
+            AdminManager.getInstance.addComapny("GuyCompany", "gG1", "GuyComapany", "050000000", fbg);
             ItemManager.getInstance.addLostItem(colors,"KEYS", DateTime.Today, "here", "desc",56658, "GuyCompany", "noam",
                 "0555555555", "location",token);
             Cache cache = Cache.getInstance;
