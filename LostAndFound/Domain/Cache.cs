@@ -294,5 +294,36 @@ namespace Domain.BLBackEnd
             _db.addFBItem(fBItem.getColorsList(), fBItem.ItemType.ToString(), fBItem.Date, fBItem.Location, fBItem.Description,
                 fBItem.PostUrl, fBItem.PublisherName, fBItem.Type.ToString());            
         }
+        internal List<Item> getAllCompanyItems()
+        {
+            List<Item> itemList = new List<Item>();
+            foreach(LostItem lItem in _lostItems.Values)
+            {
+                itemList.Add(lItem);
+            }
+            foreach (FoundItem fItem in _foundItems.Values)
+            {
+                itemList.Add(fItem);
+            }
+            return itemList;
+        }
+        internal List<LostItem> getLostItems()
+        {
+            List<LostItem> itemList = new List<LostItem>();
+            foreach (LostItem lItem in _lostItems.Values)
+            {
+                itemList.Add(lItem);
+            }
+            return itemList;
+        }
+        internal List<FoundItem> getFoundItems()
+        {
+            List<FoundItem> itemList = new List<FoundItem>();
+            foreach (FoundItem fItem in _foundItems.Values)
+            {
+                itemList.Add(fItem);
+            }
+            return itemList;
+        }
     }
 }

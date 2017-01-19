@@ -9,7 +9,7 @@ namespace DataLayer
     public class Database : IDB
     {
         private static Database singleton;
-        Entities db;
+        private Entities db;
 
 
         private Database()
@@ -1087,7 +1087,16 @@ namespace DataLayer
         {
             try
             {
-                return db.User.ToList();
+                List<User> userList = db.User.ToList();
+                List<User> retList = new List<User>();
+                foreach(User user in userList)
+                {
+                    if (user.isAdmin.Value)
+                    {
+                        retList.Add(user);
+                    }
+                }
+                return retList;
             }
             catch
             {
@@ -1160,6 +1169,17 @@ namespace DataLayer
             try
             {
                 return db.Matches.ToList();
+            }
+            catch
+            {
+                return null;
+            }
+        }
+        public List<Items> getItemsList()
+        {
+            try
+            {
+                return db.Items.ToList();
             }
             catch
             {
