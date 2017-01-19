@@ -1130,7 +1130,11 @@ namespace DataLayer
         {
             try
             {
-                List<User> userList = db.User.ToList();
+                List<User> userList = new List<User>();
+                foreach (User user in db.User)
+                {
+                    userList.Add(user);
+                }
                 List<User> retList = new List<User>();
                 foreach(User user in userList)
                 {
@@ -1151,7 +1155,12 @@ namespace DataLayer
         {
             try
             {
-                return db.Companies.ToList();
+                List<Companies> companyList = new List<Companies>();
+                foreach(Companies company in db.Companies)
+                {
+                    companyList.Add(company);
+                }
+                return companyList;
             }
             catch
             {
@@ -1163,7 +1172,12 @@ namespace DataLayer
         {
             try
             {
-                return db.FacebookGroups.ToList();
+                List<FacebookGroups> facebookGroupsList = new List<FacebookGroups>();
+                foreach (FacebookGroups fbg in db.FacebookGroups)
+                {
+                    facebookGroupsList.Add(fbg);
+                }
+                return facebookGroupsList;
             }
             catch
             {
@@ -1175,7 +1189,12 @@ namespace DataLayer
         {
             try
             {
-                return db.LostItems.ToList();
+                List<LostItems> itemList = new List<LostItems>();
+                foreach (LostItems item in db.LostItems)
+                {
+                    itemList.Add(item);
+                }
+                return itemList;
             }
             catch
             {
@@ -1187,7 +1206,12 @@ namespace DataLayer
         {
             try
             {
-                return db.FoundItems.ToList();
+                List<FoundItems> itemList = new List<FoundItems>();
+                foreach (FoundItems item in db.FoundItems)
+                {
+                    itemList.Add(item);
+                }
+                return itemList;
             }
             catch
             {
@@ -1199,7 +1223,12 @@ namespace DataLayer
         {
             try
             {
-                return db.FBItem.ToList();
+                List<FBItem> itemList = new List<FBItem>();
+                foreach (FBItem item in db.FBItem)
+                {
+                    itemList.Add(item);
+                }
+                return itemList;
             }
             catch
             {
@@ -1211,7 +1240,12 @@ namespace DataLayer
         {
             try
             {
-                return db.Matches.ToList();
+                List<Matches> matchList = new List<Matches>();
+                foreach (Matches match in db.Matches)
+                {
+                    matchList.Add(match);
+                }
+                return matchList;
             }
             catch
             {
@@ -1222,7 +1256,12 @@ namespace DataLayer
         {
             try
             {
-                return db.Items.ToList();
+                List<Items> itemList = new List<Items>();
+                foreach (Items item in db.Items)
+                {
+                    itemList.Add(item);
+                }
+                return itemList;
             }
             catch
             {
