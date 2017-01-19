@@ -11,9 +11,9 @@ namespace Domain.Managers
     {
         List<CompanyItem> getAllCompanyItems(String companyName);
         String addLostItem(List<string> sColors, string sType, DateTime date, string location, string description,
-            int serialNumber, string companyName, string contactName, string contactPhone, string photoLocation);
+            int serialNumber, string companyName, string contactName, string contactPhone, string photoLocation, string token);
         String addFoundItem(List<string> sColors, string sType, DateTime date, string location, string description,
-            int serialNumber, string companyName, string contactName, string contactPhone, string photoLocation);
+            int serialNumber, string companyName, string contactName, string contactPhone, string photoLocation, string token);
         string transactionComplete(int itemID);
     }
 }

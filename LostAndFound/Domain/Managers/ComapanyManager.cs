@@ -47,16 +47,23 @@ namespace Domain.Managers
             return "login was succeeded";
         }
 
-        public string publishInventory(string token, string GroupID, int days, string companyUserName)
+        public string publishInventory(string token, string GroupID, int days, string companyName)
         {
             var fb = new FacebookClient(token);
             fb.Version = "v2.3";
             var parameters = new Dictionary<string, object>();
-            //get inventory from db
+            List<CompanyItem> items = ItemManager.getInstance.getAllCompanyItems(companyName);
+            foreach(CompanyItem item in items)
+            {
+                if ((item.GetType()).Equals(typeof(FoundItem)))
+                {
+
+                }
+            }
             string inventory = "inv";
             dynamic result = fb.Post(GroupID + "/feed", new { message = inventory });
             return "true";
-        }
+        } 
 
         public List<Item> getLostItems3Days(string companyName, DateTime date)
         {

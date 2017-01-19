@@ -38,7 +38,7 @@ namespace Domain.Managers
         }
 
         public string addFoundItem(List<string> sColors, string sType, DateTime date, string location, string description,
-            int serialNumber, string companyName, string contactName, string contactPhone, string photoLocation)
+            int serialNumber, string companyName, string contactName, string contactPhone, string photoLocation, string token)
         {
             List<Color> colors = new List<Color>();
             foreach (string color in sColors)
@@ -54,12 +54,12 @@ namespace Domain.Managers
             FoundItem newItem = new FoundItem(colors, type, date, location, description, serialNumber, companyName, contactName, 
                 contactPhone, photoLocation);
             newItem.addToDB();
-            ////////////////////////////////////////////////////////////////////////////find match
+            MatchManager.getInstance.findMatches(newItem, token);
             return "add found item: item was added successfully";
         }
 
         public string addLostItem(List<string> sColors, string sType, DateTime date, string location, string description,
-            int serialNumber, string companyName, string contactName, string contactPhone, string photoLocation)
+            int serialNumber, string companyName, string contactName, string contactPhone, string photoLocation, string token)
         {
             List<Color> colors = new List<Color>();
             foreach (string color in sColors)
@@ -75,7 +75,7 @@ namespace Domain.Managers
             LostItem newItem = new LostItem(colors, type, date, location, description, serialNumber, companyName, contactName,
                 contactPhone, photoLocation);
             newItem.addToDB();
-            ////////////////////////////////////////////////////////////////////////////find match
+            MatchManager.getInstance.findMatches(newItem, token);
             return "add lost item: item was added successfully";
         }
 
