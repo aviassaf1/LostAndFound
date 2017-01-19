@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Domain.Managers;
 using Domain.BLBackEnd;
-using DataLayer;
 
 namespace Domain
 {
