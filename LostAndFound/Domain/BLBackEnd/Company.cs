@@ -79,10 +79,15 @@ namespace Domain.BLBackEnd
 
         public Boolean addLostItem(LostItem lostItem)
         {
-            int id=cache.getAvialbleItemID();
-            lostItem.ItemID = id;
-            _lostItems.Add(id);
-            cache.addLostItem(lostItem);
+            if (lostItem.ItemID == -1)
+            {
+                lostItem.ItemID = cache.getAvialbleItemID();
+            }
+            if (!_lostItems.Contains(lostItem.ItemID))
+            {
+                _lostItems.Add(lostItem.ItemID);
+                cache.addLostItem(lostItem);
+            }
             return true;
         }
 
@@ -120,10 +125,15 @@ namespace Domain.BLBackEnd
         }
         public Boolean addFoundItem(FoundItem foundItem)
         {
-            int id = cache.getAvialbleItemID();
-            foundItem.ItemID = id;
-            _foundItems.Add(id);
-            cache.addFoundItem(foundItem);
+            if (foundItem.ItemID == -1)
+            {
+                foundItem.ItemID = cache.getAvialbleItemID();
+            }
+            if (!_lostItems.Contains(foundItem.ItemID))
+            {
+                _lostItems.Add(foundItem.ItemID);
+                cache.addFoundItem(foundItem);
+            }
             return true;
         }
 
@@ -204,11 +214,21 @@ namespace Domain.BLBackEnd
         }
         public List<LostItem> getAllLostItems()
         {
-            throw new NotImplementedException();
+            List<LostItem> items = new List<LostItem>();
+            foreach (int item in _foundItems)
+            {
+                items.Add((LostItem)(cache.getCompanyItem(item)));
+            }
+            return items;
         }
         public List<FoundItem> getAllFoundItems()
         {
-            throw new NotImplementedException();
+            List<FoundItem> items = new List<FoundItem>();
+            foreach(int item in _foundItems)
+            {
+                items.Add((FoundItem)(cache.getCompanyItem(item)));
+            }
+            return items;
         }
     }
 }
