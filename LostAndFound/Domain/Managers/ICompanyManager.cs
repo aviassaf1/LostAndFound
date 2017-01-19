@@ -10,8 +10,6 @@ namespace Domain.Managers
     public interface ICompanyManager
     {
         String login(String companyName, String token);
-        String addLostItem();
-        String addFoundItem();
         String getCompanyByName();
         String publishInventory(String token, String GroupID, int days, string compaynUserName);//max days=8
         List<Item> getLostItems3Days(string companyName, DateTime date);
