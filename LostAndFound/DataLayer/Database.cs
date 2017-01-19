@@ -46,7 +46,7 @@ namespace DataLayer
             company.userName = user.UserName;
             company.phone = "testphone";
             company.companyName = "testCompany";
-            db.SaveChanges();
+           // db.SaveChanges();
             List<CompanyItems> companyItems = new List<CompanyItems>();
             company.CompanyItems = companyItems;
             CompanyItems cItem = new CompanyItems();
