@@ -21,15 +21,27 @@ namespace Domain
             Console.WriteLine("Hello, welcom to FIND IT!");
             Console.WriteLine("Please enter the list of the item's colors.");
             string colorList = Console.ReadLine();
+            colorList = colorList.ToUpper();
             List<string> colors = stringToListOfColors(colorList);
             Console.WriteLine("Please enter the list of the item's type.");
             string itemType = Console.ReadLine();
+            itemType = itemType.ToUpper();
             Console.WriteLine("Please enter the contact's name");
             string cname = Console.ReadLine();
             Console.WriteLine("Please enter the contact's phone");
             string cphone = Console.ReadLine();
             ItemManager.getInstance.addFoundItem(colors, itemType, DateTime.Today, "here", "desc",56658, "GuyCompany", cname,
                 cphone, "location",token);
+
+            for(int j = 0; j<5; j++)
+            {
+                colors.Clear();
+                colors.Add(((Color)j).ToString());
+                itemType = ((ItemType)j).ToString();
+                ItemManager.getInstance.addFoundItem(colors, itemType, DateTime.Today, "here", "desc", 56658, "GuyCompany", cname,
+                cphone, "location", token);
+            }
+            ComapanyManager.getInstance.publishInventory(token, "1538105046204967", 2, "GuyCompany");
             Cache cache = Cache.getInstance;
             int i = 0;
             i++;
