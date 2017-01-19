@@ -175,6 +175,7 @@ namespace DataLayer
         {
             try
             {
+                clearUsers();
                 //cache.clear();
             }
             catch
@@ -431,17 +432,21 @@ namespace DataLayer
                     return "user already exists in the system";
                 }
                 addUser(userName, password, false);
+                user = findUserByUserName(userName);
                 user.Companies.Add(company);
                 company.User = user;
-                foreach (string url in facebookGroups)
+                if (facebookGroups != null)
                 {
-                    FacebookGroups fbg = new FacebookGroups();
-                    fbg.CompanyName = companyName;
-                    fbg.groupURL = url;
-                    company.FacebookGroups.Add(fbg);
-                    fbg.Companies = company;
+                    foreach (string url in facebookGroups)
+                    {
+                        FacebookGroups fbg = new FacebookGroups();
+                        fbg.CompanyName = companyName;
+                        fbg.groupURL = url;
+                        company.FacebookGroups.Add(fbg);
+                        fbg.Companies = company;
+                    }
                 }
-                db.Companies.Add(company);
+                //db.Companies.Add(company);
                 db.SaveChanges();
                 return "true";
             }
@@ -456,13 +461,31 @@ namespace DataLayer
             try
             {
                 Companies company = findCompanyByCompanyName(companyName);
-                foreach(FacebookGroups fbg in company.FacebookGroups)
+                if (company == null)
                 {
-                    db.FacebookGroups.Remove(fbg);
+                    return "company does not exist";
+                }
+                if (company.FacebookGroups != null)
+                {
+                    List<FacebookGroups> fbgList = company.FacebookGroups.ToList();
+                    foreach (FacebookGroups fbg in fbgList)
+                    {
+                        removeFacebookGroup(companyName, fbg.groupURL);
+                    }
+                }
+                if (company.CompanyItems != null)
+                {
+                    List<CompanyItems> cItemList = company.CompanyItems.ToList();
+                    foreach (CompanyItems cItem in cItemList)
+                    {
+                        removeItem(cItem.itemId);
+                    }
                 }
                 User user = findUserByUserName(company.userName);
+                company.User = null;
                 user.Companies.Remove(company);
                 db.Companies.Remove(company);
+                db.User.Remove(user);
                 db.SaveChanges();
                 return "true";
             }
@@ -890,13 +913,20 @@ namespace DataLayer
                 {
                     return "item was not found in the system";
                 }
-                removeFBItem(itemId);
-                removeCompanyItem(itemId);
+                
                 List<Matches> itemMatchesList = item.Matches.ToList();
                 foreach(Matches match in itemMatchesList)
                 {
                     removeMatch(match.matchID);
                 }
+                //item.FBItem.Items = null;
+                item.FBItem = null;
+                //item.CompanyItems.FoundItems.CompanyItems = null;
+                //item.CompanyItems.FoundItems = null;
+                //item.CompanyItems.LostItems.CompanyItems = null;
+                //item.CompanyItems.LostItems = null;
+                //item.CompanyItems.Items = null;
+                item.CompanyItems = null;
                 db.Items.Remove(item);
                 db.SaveChanges();
             }
@@ -1026,7 +1056,9 @@ namespace DataLayer
             {
                 Matches match = findMathByMatchId(matchId);
                 match.CompanyItems.Matches.Remove(match);
+                match.CompanyItems = null;
                 match.Items.Matches.Remove(match);
+                match.Items = null;
                 db.Matches.Remove(match);
                 db.SaveChanges();
             }
