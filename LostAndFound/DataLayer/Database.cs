@@ -23,6 +23,7 @@ namespace DataLayer
                 {
                     singleton = new Database();
                     singleton.initializeDB();
+                    singleton.clear();
                 }
                 return singleton;
         }
@@ -549,7 +550,12 @@ namespace DataLayer
                 {
                     return -2;
                 }
+                Items item = new Items();
+                db.SaveChanges();
                 company.CompanyItems.Add(cItem);
+                item.CompanyItems = cItem;
+                cItem.Items = item;
+                cItem.itemId = item.itemID;
                 cItem.Companies = company;
                 cItem.companyName = companyName;
                 cItem.contactName = contactName;
@@ -765,6 +771,7 @@ namespace DataLayer
                 db.Items.Add(item);
                 db.SaveChanges();
                 fbItem.itemID = item.itemID;
+                fbItem.Items = item;
                 item.FBItem = fbItem;
                 db.SaveChanges();
             }
