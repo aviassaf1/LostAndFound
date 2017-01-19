@@ -169,6 +169,10 @@ namespace Domain
             {
                 if ((i == colors.Length - 1) || colors.ElementAt(i).Equals(","))
                 {
+                    if (i == colors.Length - 1)
+                    {
+                        color += colors.ElementAt(i);
+                    }
                     colorList.Add(color);
                     color = "";
                 }
