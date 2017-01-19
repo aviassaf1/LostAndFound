@@ -188,7 +188,7 @@ namespace Domain.BLBackEnd
         public List<LostItem> getAllLostItems()
         {
             List<LostItem> items = new List<LostItem>();
-            foreach (int item in _foundItems)
+            foreach (int item in _lostItems)
             {
                 items.Add((LostItem)(cache.getCompanyItem(item)));
             }
