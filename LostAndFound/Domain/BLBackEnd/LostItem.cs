@@ -47,7 +47,6 @@ namespace Domain.BLBackEnd
          {
             if (ItemID == -1)
             {
-                ItemID = cache.getAvialbleItemID();
                 cache.addLostItem(this);
             }
         }

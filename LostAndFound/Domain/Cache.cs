@@ -17,7 +17,6 @@ namespace Domain
         private Dictionary<int, FoundItem> _foundItems;
         private Dictionary<string, Domain.BLBackEnd.FBItem> _FBItems;
         private Dictionary<int, Match> _matches;
-        private int maxAvilableComapanyItemID;
 
         private static Cache singleton;
         public static Cache getInstance
@@ -38,8 +37,7 @@ namespace Domain
                 _db = Database.getInstance();
                 initCache();
             }
-            catch(Exception e)
-            {
+            catch{
                 _admins = new Dictionary<string, Admin>();
                 _companies = new Dictionary<string, Company>();
                 _lostItems = new Dictionary<int, LostItem>();
@@ -47,7 +45,6 @@ namespace Domain
                 _FBItems = new Dictionary<string, Domain.BLBackEnd.FBItem>();
                 _matches = new Dictionary<int, Match>();
                 HashSet<string> fbg = new HashSet<string>() { "1538105046204967" };
-                maxAvilableComapanyItemID = 0;
                 //_companies.Add("GuyCompany", new Company("GuyCompany", "guy", "GuyComapany", "050000000",fbg, new HashSet<int>(), new HashSet<int>(), new HashSet<int>()));
             }
         }
@@ -137,7 +134,6 @@ namespace Domain
                 }
                 _companies.Add(company.userName, new Company(company.userName, company.User.password, company.companyName, company.phone, FBGroups, LostItems, FoundItems, Matches));//add encryption to pass
             }
-            setMaxAvialbleItemID();
         }
 
         internal CompanyItem getCompanyItem(int itemID)
@@ -191,19 +187,7 @@ namespace Domain
             return null;
         }
 
-        private void setMaxAvialbleItemID()//sync
-        {
-            maxAvilableComapanyItemID = 0;
-            foreach (int id in _lostItems.Keys)
-            {
-                maxAvilableComapanyItemID = Math.Max(id, maxAvilableComapanyItemID);
-            }
-            foreach (int id in _foundItems.Keys)
-            {
-                maxAvilableComapanyItemID = Math.Max(id, maxAvilableComapanyItemID);
-            }
-            maxAvilableComapanyItemID = maxAvilableComapanyItemID + 1;
-        }
+        
 
         public void clear()
         {
@@ -242,12 +226,6 @@ namespace Domain
             }
         }
 
-        internal int getAvialbleItemID()//add syncronize
-        {
-            maxAvilableComapanyItemID++;
-            return maxAvilableComapanyItemID - 1;
-        }
-
         internal void addMatch(Match match)
         {
             _matches.Add(match.MatchID, match);
@@ -269,17 +247,19 @@ namespace Domain
         internal void addLostItem(LostItem lostItem)
         {
             _lostItems.Add(lostItem.ItemID, lostItem);
-            _db.addLostItem(lostItem.getColorsList(), lostItem.ItemType.ToString(), lostItem.Date, lostItem.Location,
+            int id = _db.addLostItem(lostItem.getColorsList(), lostItem.ItemType.ToString(), lostItem.Date, lostItem.Location,
                 lostItem.Description, lostItem.SerialNumber, lostItem.CompanyName, lostItem.ContactName,
                 lostItem.ContactPhone, lostItem.PhotoLocation, lostItem.WasFound);
+            lostItem.ItemID = id;
         }
 
         internal void addFoundItem(FoundItem foundItem)
         {
             _foundItems.Add(foundItem.ItemID, foundItem);
-            _db.addFoundItem(foundItem.getColorsList(), foundItem.ItemType.ToString(), foundItem.Date, foundItem.Location,
+            int id = _db.addFoundItem(foundItem.getColorsList(), foundItem.ItemType.ToString(), foundItem.Date, foundItem.Location,
                 foundItem.Description, foundItem.SerialNumber, foundItem.CompanyName, foundItem.ContactName,
                 foundItem.ContactPhone, foundItem.PhotoLocation, foundItem.Delivered);
+            foundItem.ItemID = id;
         }
 
         internal void updateCompanyItem(CompanyItem companyItem)
@@ -326,8 +306,9 @@ namespace Domain
         internal void addNewFBItemToDB(Domain.BLBackEnd.FBItem fBItem)
         {
             _FBItems.Add(fBItem.PostID, fBItem);
-            _db.addFBItem(fBItem.getColorsList(), fBItem.ItemType.ToString(), fBItem.Date, fBItem.Location, fBItem.Description,
-                fBItem.PostID, fBItem.PublisherName, fBItem.Type.ToString());            
+            int id = _db.addFBItem(fBItem.getColorsList(), fBItem.ItemType.ToString(), fBItem.Date, fBItem.Location, fBItem.Description,
+                fBItem.PostID, fBItem.PublisherName, fBItem.Type.ToString());
+            fBItem.ItemID = id;          
         }
         
         internal List<LostItem> getLostItems()

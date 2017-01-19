@@ -77,20 +77,6 @@ namespace Domain.BLBackEnd
             return items;
         }
 
-        public Boolean addLostItem(LostItem lostItem)
-        {
-            if (lostItem.ItemID == -1)
-            {
-                lostItem.ItemID = cache.getAvialbleItemID();
-            }
-            if (!_lostItems.Contains(lostItem.ItemID))
-            {
-                _lostItems.Add(lostItem.ItemID);
-                cache.addLostItem(lostItem);
-            }
-            return true;
-        }
-
         public HashSet<int> FoundItems
         {
             get
@@ -121,19 +107,6 @@ namespace Domain.BLBackEnd
                 return false;
             _foundItems.Remove(foundItemID);
             cache.removefoundItem(foundItemID);
-            return true;
-        }
-        public Boolean addFoundItem(FoundItem foundItem)
-        {
-            if (foundItem.ItemID == -1)
-            {
-                foundItem.ItemID = cache.getAvialbleItemID();
-            }
-            if (!_lostItems.Contains(foundItem.ItemID))
-            {
-                _lostItems.Add(foundItem.ItemID);
-                cache.addFoundItem(foundItem);
-            }
             return true;
         }
 
