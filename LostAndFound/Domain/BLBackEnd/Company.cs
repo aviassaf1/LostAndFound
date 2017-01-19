@@ -62,6 +62,21 @@ namespace Domain.BLBackEnd
             cache.removeLostItem(lostItemID);
             return true;
         }
+
+        internal List<CompanyItem> getAllItems()
+        {
+            List<CompanyItem> items = new List<CompanyItem>();
+            foreach(int li in _lostItems)
+            {
+                items.Add(cache.getCompanyItem(li));
+            }
+            foreach (int fi in _foundItems)
+            {
+                items.Add(cache.getCompanyItem(fi));
+            }
+            return items;
+        }
+
         public Boolean addLostItem(LostItem lostItem)
         {
             int id=cache.getAvialbleItemID();
