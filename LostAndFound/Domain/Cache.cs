@@ -34,8 +34,22 @@ namespace Domain
 
         private Cache()
         {
-            _db = Database.getInstance();
-            initCache();
+            try {
+                _db = Database.getInstance();
+                initCache();
+            }
+            catch(Exception e)
+            {
+                _admins = new Dictionary<string, Admin>();
+                _companies = new Dictionary<string, Company>();
+                _lostItems = new Dictionary<int, LostItem>();
+                _foundItems = new Dictionary<int, FoundItem>();
+                _FBItems = new Dictionary<string, Domain.BLBackEnd.FBItem>();
+                _matches = new Dictionary<int, Match>();
+                HashSet<string> fbg = new HashSet<string>() { "1538105046204967" };
+                maxAvilableComapanyItemID = 0;
+                _companies.Add("GuyCompany", new Company("GuyCompany", "guy", "GuyComapany", "050000000",fbg, new HashSet<int>(), new HashSet<int>(), new HashSet<int>()));
+            }
         }
 
         private void initCache()
@@ -138,7 +152,7 @@ namespace Domain
         internal void deleteMatch(int matchID)
         {
             _matches.Remove(matchID);
-            _db.removeMatch(matchID);
+            //_db.removeMatch(matchID);
         }
 
         internal BLBackEnd.FBItem getFBItemByPostID(string postID)
@@ -205,13 +219,13 @@ namespace Domain
                 this._FBItems.Clear();
             if (this._matches != null)
                 this._matches.Clear();
-            _db.clear();
+            //_db.clear();
         }
 
         internal void updateFoundItem(FoundItem foundItem)
         {
-            _db.updateFoundItem(foundItem.ItemID, foundItem.CompanyName, foundItem.getColorsList(), foundItem.ItemType.ToString(), foundItem.Date, foundItem.Location,
-                foundItem.Description, foundItem.PhotoLocation, foundItem.Delivered);
+            //_db.updateFoundItem(foundItem.ItemID, foundItem.CompanyName, foundItem.getColorsList(), foundItem.ItemType.ToString(), foundItem.Date, foundItem.Location,
+            //    foundItem.Description, foundItem.PhotoLocation, foundItem.Delivered);
         }
 
         internal Match getMatch(int matchID)
@@ -224,7 +238,7 @@ namespace Domain
             if (_lostItems[lostItemID] != null)
             {
                 _lostItems.Remove(lostItemID);
-                _db.removeLostItem(lostItemID);
+                //_db.removeLostItem(lostItemID);
             }
         }
 
@@ -237,40 +251,40 @@ namespace Domain
         internal void addMatch(Match match)
         {
             _matches.Add(match.MatchID, match);
-            int id=_db.addMatch(match.CompanyItemID, match.Item2ID, match.MatchStatus.ToString());
+            int id = new Random().Next();//_db.addMatch(match.CompanyItemID, match.Item2ID, match.MatchStatus.ToString());
             match.MatchID = id;
         }
 
         internal void updateLostItem(LostItem lostItem)
         {
-            _db.updateLostItem(lostItem.ItemID,lostItem.CompanyName , lostItem.getColorsList(), lostItem.ItemType.ToString(), lostItem.Date, lostItem.Location,
-                lostItem.Description, lostItem.PhotoLocation,lostItem.WasFound);
+            //_db.updateLostItem(lostItem.ItemID,lostItem.CompanyName , lostItem.getColorsList(), lostItem.ItemType.ToString(), lostItem.Date, lostItem.Location,
+            //    lostItem.Description, lostItem.PhotoLocation,lostItem.WasFound);
         }
 
         internal void updateUser(string _userName, string _password)
         {
-            _db.updateUser(_userName, _password);
+            //_db.updateUser(_userName, _password);
         }
 
         internal void addLostItem(LostItem lostItem)
         {
             _lostItems.Add(lostItem.ItemID, lostItem);
-            _db.addLostItem(lostItem.getColorsList(), lostItem.ItemType.ToString(), lostItem.Date, lostItem.Location,
-                lostItem.Description, lostItem.SerialNumber, lostItem.CompanyName, lostItem.ContactName,
-                lostItem.ContactPhone, lostItem.PhotoLocation, lostItem.WasFound);
+            //_db.addLostItem(lostItem.getColorsList(), lostItem.ItemType.ToString(), lostItem.Date, lostItem.Location,
+            //    lostItem.Description, lostItem.SerialNumber, lostItem.CompanyName, lostItem.ContactName,
+            //    lostItem.ContactPhone, lostItem.PhotoLocation, lostItem.WasFound);
         }
 
         internal void addFoundItem(FoundItem foundItem)
         {
             _foundItems.Add(foundItem.ItemID, foundItem);
-            _db.addFoundItem(foundItem.getColorsList(), foundItem.ItemType.ToString(), foundItem.Date, foundItem.Location,
-                foundItem.Description, foundItem.SerialNumber, foundItem.CompanyName, foundItem.ContactName,
-                foundItem.ContactPhone, foundItem.PhotoLocation, foundItem.Delivered);
+            //_db.addFoundItem(foundItem.getColorsList(), foundItem.ItemType.ToString(), foundItem.Date, foundItem.Location,
+            //    foundItem.Description, foundItem.SerialNumber, foundItem.CompanyName, foundItem.ContactName,
+            //    foundItem.ContactPhone, foundItem.PhotoLocation, foundItem.Delivered);
         }
 
         internal void updateCompanyItem(CompanyItem companyItem)
         {
-            _db.updateCompanyItem(companyItem.ItemID, companyItem.SerialNumber, companyItem.ContactName, companyItem.ContactPhone, companyItem.CompanyName);
+            //_db.updateCompanyItem(companyItem.ItemID, companyItem.SerialNumber, companyItem.ContactName, companyItem.ContactPhone, companyItem.CompanyName);
         }
 
         internal void removefoundItem(int foundItemID)
@@ -278,42 +292,42 @@ namespace Domain
             if (_lostItems[foundItemID] != null)
             {
                 _lostItems.Remove(foundItemID);
-                _db.removeLostItem(foundItemID);
+                //_db.removeLostItem(foundItemID);
             }
         }
 
         internal void updateMatch(int matchID, MatchStatus matchStatus)
         {
-            _db.updateMatch(matchID, matchStatus.ToString());
+            //_db.updateMatch(matchID, matchStatus.ToString());
         }
 
         internal void addFacebookGroup(string companyName, string url)
         {
-            _db.addFacebookGroup(companyName, url);
+            //_db.addFacebookGroup(companyName, url);
         }
 
         internal void removeFacebookGroup(string companyName, string url)
         {
-            _db.removeFacebookGroup(companyName, url);
+            //_db.removeFacebookGroup(companyName, url);
         }
 
         internal void addNewCompany(string _userName, string _password, string _companyName, string _phone, HashSet<String> facebookGroups)
         {
             _companies.Add(_userName, new Company(_userName, _password, _companyName, _phone, facebookGroups));
-            _db.addCompany(_userName, _password, _companyName, _phone, facebookGroups);
+            //_db.addCompany(_userName, _password, _companyName, _phone, facebookGroups);
         }
 
         internal void updateFacebbokItem(Domain.BLBackEnd.FBItem fBItem)
         {
-            _db.updateFBItem(fBItem.ItemID, fBItem.getColorsList(), fBItem.ItemType.ToString(), fBItem.Date, fBItem.Location, fBItem.Description,
-            fBItem.PostID, fBItem.PublisherName, fBItem.Type.ToString());
+            //_db.updateFBItem(fBItem.ItemID, fBItem.getColorsList(), fBItem.ItemType.ToString(), fBItem.Date, fBItem.Location, fBItem.Description,
+            //fBItem.PostID, fBItem.PublisherName, fBItem.Type.ToString());
         }
 
         internal void addNewFBItemToDB(Domain.BLBackEnd.FBItem fBItem)
         {
             _FBItems.Add(fBItem.PostID, fBItem);
-            _db.addFBItem(fBItem.getColorsList(), fBItem.ItemType.ToString(), fBItem.Date, fBItem.Location, fBItem.Description,
-                fBItem.PostID, fBItem.PublisherName, fBItem.Type.ToString());            
+            //_db.addFBItem(fBItem.getColorsList(), fBItem.ItemType.ToString(), fBItem.Date, fBItem.Location, fBItem.Description,
+            //    fBItem.PostID, fBItem.PublisherName, fBItem.Type.ToString());            
         }
         
         internal List<LostItem> getLostItems()

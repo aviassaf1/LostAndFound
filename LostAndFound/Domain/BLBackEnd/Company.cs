@@ -31,7 +31,7 @@ namespace Domain.BLBackEnd
             HashSet<int> lostItems,HashSet<int> foundItems, HashSet<int> matches)
         {
             _userName = userName;
-            Password = password;
+            _password = password;
             _companyName = companyName;
             _phone = phone;
             _facebookGroups = facebookGroups;
