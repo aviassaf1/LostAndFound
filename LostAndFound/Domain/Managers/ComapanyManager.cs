@@ -53,14 +53,21 @@ namespace Domain.Managers
             fb.Version = "v2.3";
             var parameters = new Dictionary<string, object>();
             List<CompanyItem> items = ItemManager.getInstance.getAllCompanyItems(companyName);
-            foreach(CompanyItem item in items)
+            string inventory = "אלו הפריטים הנמצאים במחלקת אבדות ומציאות: \n";
+            string format = "item of type {0} and color(s) {1}\n";
+            DateTime nDaysAgo = DateTime.Now;
+            nDaysAgo = nDaysAgo.AddDays(-days);
+            foreach (CompanyItem item in items)
             {
                 if ((item.GetType()).Equals(typeof(FoundItem)))
                 {
-
+                    if(!((FoundItem)item).Delivered && item.Date.CompareTo(nDaysAgo) > 0)
+                    {
+                        inventory += String.Format(format, item.ItemType.ToString(), item.Colors.ToString());
+                    }
                 }
             }
-            string inventory = "inv";
+
             dynamic result = fb.Post(GroupID + "/feed", new { message = inventory });
             return "true";
         } 
