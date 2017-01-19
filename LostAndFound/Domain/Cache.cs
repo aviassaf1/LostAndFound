@@ -228,9 +228,8 @@ namespace Domain
 
         internal void addMatch(Match match)
         {
-            
+            _matches.Add(match.MatchID, match);
             int id = _db.addMatch(match.CompanyItemID, match.Item2ID, match.MatchStatus.ToString());
-            _matches.Add(id, match);
             match.MatchID = id;
         }
 
@@ -247,21 +246,19 @@ namespace Domain
 
         internal void addLostItem(LostItem lostItem)
         {
-            
+            _lostItems.Add(lostItem.ItemID, lostItem);
             int id = _db.addLostItem(lostItem.getColorsList(), lostItem.ItemType.ToString(), lostItem.Date, lostItem.Location,
                 lostItem.Description, lostItem.SerialNumber, lostItem.CompanyName, lostItem.ContactName,
                 lostItem.ContactPhone, lostItem.PhotoLocation, lostItem.WasFound);
-            _lostItems.Add(id, lostItem);
             lostItem.ItemID = id;
         }
 
         internal void addFoundItem(FoundItem foundItem)
         {
-            
+            _foundItems.Add(foundItem.ItemID, foundItem);
             int id = _db.addFoundItem(foundItem.getColorsList(), foundItem.ItemType.ToString(), foundItem.Date, foundItem.Location,
                 foundItem.Description, foundItem.SerialNumber, foundItem.CompanyName, foundItem.ContactName,
                 foundItem.ContactPhone, foundItem.PhotoLocation, foundItem.Delivered);
-            _foundItems.Add(id, foundItem);
             foundItem.ItemID = id;
         }
 
@@ -308,10 +305,9 @@ namespace Domain
 
         internal void addNewFBItemToDB(Domain.BLBackEnd.FBItem fBItem)
         {
-            
+            _FBItems.Add(fBItem.PostID, fBItem);
             int id = _db.addFBItem(fBItem.getColorsList(), fBItem.ItemType.ToString(), fBItem.Date, fBItem.Location, fBItem.Description,
                 fBItem.PostID, fBItem.PublisherName, fBItem.Type.ToString());
-            _FBItems.Add(fBItem.PostID, fBItem);
             fBItem.ItemID = id;          
         }
         
