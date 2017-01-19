@@ -28,7 +28,7 @@ namespace DataLayer
         }
         public void setUp() 
         {
-
+            db.SaveChanges();
             User admin = new User();
             admin.UserName = "testAdmin";
             admin.password = "testpassAdmin";
@@ -44,29 +44,46 @@ namespace DataLayer
             company.User = user;
             user.Companies.Add(company);
             company.userName = user.UserName;
-            company.phone = "testphone";
+            //company.phone = "testphone";
             company.companyName = "testCompany";
            // db.SaveChanges();
-            List<CompanyItems> companyItems = new List<CompanyItems>();
-            company.CompanyItems = companyItems;
-            CompanyItems cItem = new CompanyItems();
-            cItem.Companies = company;
-            cItem.companyName = company.companyName;
-            cItem.contactName = "";
-            cItem.contactPhone = "";
-            cItem.FoundItems = null;
-            companyItems.Add(cItem);
-            db.SaveChanges();
+            //db.SaveChanges();
             Items item = new Items();
-            item.itemID = cItem.itemId;
+            db.Items.Add(item);
+            db.SaveChanges();
+            item.CompanyItems = new CompanyItems();
+            item.CompanyItems.itemId = item.itemID;
+            item.CompanyItems.Companies = company;
+            company.CompanyItems.Add(item.CompanyItems);
+            item.CompanyItems.FoundItems = new FoundItems();
+            item.CompanyItems.FoundItems.itemID = item.itemID;
+            item.CompanyItems.FoundItems.CompanyItems = item.CompanyItems;
+            db.SaveChanges();
+            CompanyItems cItem = new CompanyItems();
             item.CompanyItems = cItem;
             cItem.Items = item;
+            //cItem.itemId = item.itemID;
+            cItem.Companies = company;
+            company.CompanyItems.Add(cItem);
+            cItem.companyName = company.companyName;
+            //db.CompanyItems.Add(cItem);
+            db.SaveChanges();
+            FoundItems fItem = new FoundItems();
+            //fItem.itemID = item.itemID;
+            fItem.companyName = company.companyName;
+            cItem.FoundItems = fItem;
+            fItem.CompanyItems = cItem;
+            //companyItems.Add(cItem);
+            //db.CompanyItems.Add(cItem);
+            //db.FoundItems.Add(fItem);
+            db.SaveChanges();
             FacebookGroups fbg = new FacebookGroups();
             fbg.Companies = company;
             fbg.CompanyName = company.companyName;
             fbg.groupURL = "urlTest";
             company.FacebookGroups.Add(fbg);
-            
+            db.SaveChanges();
+
         }
         private Boolean initializeDB()
         {
