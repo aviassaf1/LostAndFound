@@ -35,6 +35,9 @@ namespace Domain.Managers
                 {
                     match.MatchStatus = MatchStatus.CORRECT;
                     //remove other matches from that item
+                    removeMatchesOfItemExcept(match.MatchID, match.CompanyItemID);
+                    if (Cache.getInstance.getCompanyItem(match.Item2ID)!=null)
+                        removeMatchesOfItemExcept(match.MatchID, match.Item2ID);
                     //set item state
                 }
                 if (statusNum == 2)
@@ -51,31 +54,68 @@ namespace Domain.Managers
             return "no match with that id";
         }
 
+        private void removeMatchesOfItemExcept(int matchID, int companyItemID)
+        {
+            CompanyItem cItem = Cache.getInstance.getCompanyItem(companyItemID);
+            Company company = Cache.getInstance.getCompany(cItem.CompanyName);
+            List<Match> matchToRemove = new List<Match>();
+            foreach(Match m in company.getComapanyMatches())
+            {
+                if(matchID!=m.MatchID&&(m.Item2ID==companyItemID|| m.CompanyItemID == companyItemID))
+                {
+                    matchToRemove.Add(m);
+                }
+            }
+            foreach(Match match in matchToRemove)
+            {
+                company.removeMatch(match.MatchID);// maybe to remove the fbitem in matches also?
+            }
+        }
+
         public List<Match> findMatches(CompanyItem cItem, String token)
         {
             List<Match> newMatches = new List<Match>();
             List<Item> items = new List<Item>();
             List<Item> cItems;
             if (cItem.GetType()==typeof(FoundItem))
-                cItems = ComapanyManager.getInstance.getLostItems3Days(cItem.CompanyName, cItem.Date);//get lost or found items of company and add them to items
+                cItems = ComapanyManager.getInstance.getLostItems3Days(cItem.CompanyName, cItem.Date);
             else
-                cItems = ComapanyManager.getInstance.getFoundItems3Days(cItem.CompanyName, cItem.Date);//get lost or found items of company and add them to items
+                cItems = ComapanyManager.getInstance.getFoundItems3Days(cItem.CompanyName, cItem.Date);
             foreach (Item item in cItems)
             {
                 items.Add(item);
             }
-            List<Item> FBItems = getFBItemsOfCompany(cItem.CompanyName, token); //get lost or found item of facebook group and add them to items//make sure that therer are no dup FBItem
+            List<Item> FBItems = getFBItemsOfCompany(cItem.CompanyName, token); 
             foreach(Item item in FBItems)
             {
                 items.Add(item);
             }
+            List<Match> matches = Cache.getInstance.getCompany(cItem.CompanyName).getComapanyMatches();
             foreach (Item item in items)
             {
-                //if havent match in db already!!!
-                Match match = findMatch(cItem, item);
-                if (match != null)
-                    newMatches.Add(match);
-                //if its FBItem that not in DB, add it
+                Boolean addMatch = true;
+                foreach (Match m in matches)
+                {
+                    if ((m.CompanyItemID == cItem.ItemID && m.Item2ID == item.ItemID) || (m.CompanyItemID == item.ItemID && m.Item2ID == cItem.ItemID))
+                    {
+                        addMatch = false;
+                        break;
+                    }
+                        
+                }
+                if (addMatch)
+                {
+                    Match match = findMatch(cItem, item);
+                    if (match != null)
+                    {
+                        newMatches.Add(match);
+                        if (item.GetType().Equals(typeof(FBItem)))
+                        {
+                            item.addToDB();
+                            commentToPost(token, ((FBItem)item).PostID, "שלום, נמצאה התאמה בין הפריט לבין פריט ב" + cItem.CompanyName + " מספר ההתאמה של הפריט הוא: " + match.MatchID);
+                        }
+                    }
+                }
             }
             return newMatches;
         }
@@ -130,7 +170,7 @@ namespace Domain.Managers
             return true;
         }
         public List<FBItem> getPostsFromGroup(String token, String GroupID)
-        {// check that its lost or found in descr
+        {
             List<FBItem> answer = new List<FBItem>();
             var fb = new FacebookClient(token);
             fb.Version = "v2.3";
@@ -145,20 +185,26 @@ namespace Domain.Managers
             foreach (var post in posts)
             {
                 JsonObject npost = (JsonObject)post;
-                if (npost.ContainsKey("message")) { 
-                    string description = post["message"];
-                    FBType fbType = getFBType(description);
-                    if (fbType != FBType.NO)
+                string postID = post["id"];
+                FBItem fbi = Cache.getInstance.getFBItemByPostID(postID);
+                if (fbi != null)
+                    answer.Add(fbi);
+                else
+                {
+                    if (npost.ContainsKey("message"))
                     {
-                        DateTime date = DateTime.Parse(post["created_time"]);
-                        string postID = post["id"];
-                        string publisher = post["from"]["name"];
-                        List<Color> colors = getColors(description);
-                        ItemType itemType = getItemType(description);
-                        string location = "NeverLand";//"getLocation(description);
-                        //if FBItem is in db, take it from there!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                        FBItem item = new FBItem(colors, itemType, date, location, description, postID, publisher, fbType);
-                        answer.Add(item);
+                        string description = post["message"];
+                        FBType fbType = getFBType(description);
+                        if (fbType != FBType.NO)
+                        {
+                            DateTime date = DateTime.Parse(post["created_time"]);
+                            string publisher = post["from"]["name"];
+                            List<Color> colors = getColors(description);
+                            ItemType itemType = getItemType(description);
+                            string location = "NeverLand";//"getLocation(description);
+                            FBItem item = new FBItem(colors, itemType, date, location, description, postID, publisher, fbType);
+                            answer.Add(item);
+                        }
                     }
                 }
             }

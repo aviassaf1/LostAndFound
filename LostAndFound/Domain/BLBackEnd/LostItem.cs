@@ -43,10 +43,14 @@ namespace Domain.BLBackEnd
             _wasFound = false;
         }
 
-        /* public void addToDB()
+        public override void addToDB()
          {
-             cache.addLostItem(this);
-         }*/
+            if (ItemID == -1)
+            {
+                ItemID = cache.getAvialbleItemID();
+                cache.addLostItem(this);
+            }
+        }
 
 
         public bool WasFound

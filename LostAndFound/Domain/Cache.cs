@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DataLayer;
-
-namespace Domain.BLBackEnd
+using Domain.BLBackEnd;
+namespace Domain
 {
     public class Cache
     {
@@ -15,7 +15,7 @@ namespace Domain.BLBackEnd
         private Dictionary<string, Company> _companies;
         private Dictionary<int, LostItem> _lostItems;
         private Dictionary<int, FoundItem> _foundItems;
-        private Dictionary<int, FBItem> _FBItems;
+        private Dictionary<string, Domain.BLBackEnd.FBItem> _FBItems;
         private Dictionary<int, Match> _matches;
         private int maxAvilableComapanyItemID;
 
@@ -44,7 +44,7 @@ namespace Domain.BLBackEnd
             _companies = new Dictionary<string, Company>();
             _lostItems = new Dictionary<int, LostItem>();
             _foundItems = new Dictionary<int, FoundItem>();
-            _FBItems = new Dictionary<int, FBItem>();
+            _FBItems = new Dictionary<string, Domain.BLBackEnd.FBItem>();
             _matches = new Dictionary<int, Match>();
 
             List<DataLayer.User> admins= _db.getAdminsList();//String userName,String password
@@ -67,7 +67,7 @@ namespace Domain.BLBackEnd
                 { "NECKLACE", ItemType.NECKLACE }, { "BRACELET", ItemType.BRACELET }, { "HEADPHONES", ItemType.HEADPHONES }};
             Dictionary<string, FBType> FBTypes = new Dictionary<string, FBType>() { { "FOUND", FBType.FOUND }, { "LOST", FBType.LOST } };
             Dictionary<string, MatchStatus> status = new Dictionary<string, MatchStatus>() { { "POSSIBLE", MatchStatus.POSSIBLE }, { "CORRECT", MatchStatus.CORRECT }, { "COMPLETE", MatchStatus.COMPLETE }, { "INCORRECT", MatchStatus.INCORRECT } };
-            Dictionary<string, Color> HebColors = new Dictionary<string, Color>(){{ "PINK" , Color.PINK }, { "BLACK", Color.BLACK }, { "BLUE", Color.BLUE }, { "RED", Color.RED }, 
+            Dictionary<string, Color> Colors = new Dictionary<string, Color>(){{ "PINK" , Color.PINK }, { "BLACK", Color.BLACK }, { "BLUE", Color.BLUE }, { "RED", Color.RED }, 
                 { "GREEN", Color.GREEN }, { "YELLOW", Color.YELLOW }, { "WHITE", Color.WHITE },{ "PURPEL", Color.PURPEL }, { "ORANGE", Color.ORANGE }, 
                 { "GRAY", Color.GRAY }, { "BROWN", Color.BROWN }, { "GOLD", Color.GOLD }, { "SILVER", Color.SILVER }};
             foreach (LostItems li in lostItems)
@@ -75,7 +75,7 @@ namespace Domain.BLBackEnd
                 List<Color> colors = new List<Color>();
                 foreach(string col in stringToListOfColors(li.colors))
                 {
-                    colors.Add(HebColors[col]);
+                    colors.Add(Colors[col]);
                 }
                 _lostItems.Add(li.itemID, new LostItem(li.itemID, colors, HebTypes[li.itemType], li.lostDate.Value, li.location, li.description,  li.CompanyItems.serialNumber.Value, li.companyName, li.CompanyItems.contactName, li.CompanyItems.contactPhone, li.photoLocation, li.delivered.Value));
             }
@@ -85,7 +85,7 @@ namespace Domain.BLBackEnd
                 List<Color> colors = new List<Color>();
                 foreach (string col in stringToListOfColors(fi.colors))
                 {
-                    colors.Add(HebColors[col]);
+                    colors.Add(Colors[col]);
                 }
                 _foundItems.Add(fi.itemID, new FoundItem(fi.itemID, colors, HebTypes[fi.itemType], fi.findingDate.Value, fi.location, fi.description, fi.CompanyItems.serialNumber.Value, fi.companyName, fi.CompanyItems.contactName, fi.CompanyItems.contactPhone, fi.photoLocation, fi.delivered.Value));
             }
@@ -94,9 +94,9 @@ namespace Domain.BLBackEnd
                 List<Color> colors = new List<Color>();
                 foreach (string col in stringToListOfColors(fbi.colors))
                 {
-                    colors.Add(HebColors[col]);
+                    colors.Add(Colors[col]);
                 }
-                _FBItems.Add(fbi.itemID, new FBItem(fbi.itemID, colors, HebTypes[fbi.itemType], fbi.lostDate.Value/* change lost date name*/, fbi.location, fbi.description, fbi.postId, fbi.publisherName, FBTypes[fbi.type]));
+                _FBItems.Add(fbi.postId, new Domain.BLBackEnd.FBItem(fbi.itemID, colors, HebTypes[fbi.itemType], fbi.lostDate.Value/* change lost date name*/, fbi.location, fbi.description, fbi.postId, fbi.publisherName, FBTypes[fbi.type]));
             }
             foreach (Matches m in matches)
             {
@@ -131,6 +131,23 @@ namespace Domain.BLBackEnd
             }
             setMaxAvialbleItemID();
         }
+
+        internal void deleteMatch(int matchID)
+        {
+            _matches.Remove(matchID);
+            _db.removeMatch(matchID);
+        }
+
+        internal BLBackEnd.FBItem getFBItemByPostID(string postID)
+        {
+            if (_FBItems.ContainsKey(postID))
+            {
+                return _FBItems[postID];
+            }
+            return null;
+
+        }
+
         private List<string> stringToListOfColors(string colors)
         {
             string color = "";
@@ -208,7 +225,7 @@ namespace Domain.BLBackEnd
             }
         }
 
-        internal int getAvialbleCompanyItemID()//add syncronize
+        internal int getAvialbleItemID()//add syncronize
         {
             maxAvilableComapanyItemID++;
             return maxAvilableComapanyItemID - 1;
@@ -217,7 +234,8 @@ namespace Domain.BLBackEnd
         internal void addMatch(Match match)
         {
             _matches.Add(match.MatchID, match);
-            _db.addMatch(match.CompanyItemID, match.Item2ID, match.MatchStatus.ToString());
+            int id=_db.addMatch(match.CompanyItemID, match.Item2ID, match.MatchStatus.ToString());
+            match.MatchID = id;
         }
 
         internal void updateLostItem(LostItem lostItem)
@@ -282,17 +300,17 @@ namespace Domain.BLBackEnd
             _db.addCompany(_userName, _password, _companyName, _phone, facebookGroups);
         }
 
-        internal void updateFacebbokItem(FBItem fBItem)
+        internal void updateFacebbokItem(Domain.BLBackEnd.FBItem fBItem)
         {
             _db.updateFBItem(fBItem.ItemID, fBItem.getColorsList(), fBItem.ItemType.ToString(), fBItem.Date, fBItem.Location, fBItem.Description,
-            fBItem.PostUrl, fBItem.PublisherName, fBItem.Type.ToString());
+            fBItem.PostID, fBItem.PublisherName, fBItem.Type.ToString());
         }
 
-        internal void addNewFBItemToDB(FBItem fBItem)
+        internal void addNewFBItemToDB(Domain.BLBackEnd.FBItem fBItem)
         {
-            _FBItems.Add(fBItem.ItemID, fBItem);
+            _FBItems.Add(fBItem.PostID, fBItem);
             _db.addFBItem(fBItem.getColorsList(), fBItem.ItemType.ToString(), fBItem.Date, fBItem.Location, fBItem.Description,
-                fBItem.PostUrl, fBItem.PublisherName, fBItem.Type.ToString());            
+                fBItem.PostID, fBItem.PublisherName, fBItem.Type.ToString());            
         }
     }
 }

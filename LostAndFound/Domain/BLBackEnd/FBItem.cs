@@ -9,12 +9,12 @@ namespace Domain.BLBackEnd
     public class FBItem : Item
     {
 
-        private String _postUrl;
+        private String _postID;
         private String _publisherName;
         private FBType _type;
 
         public FBItem(int itemID, List<Color> colors, ItemType itemType, DateTime date, String location, String description,
-            String postUrl, String publisherName, FBType fbType)
+            String postID, String publisherName, FBType fbType)
         {
             _itemID = itemID;
             _colors = colors;
@@ -22,13 +22,13 @@ namespace Domain.BLBackEnd
             _date = date;
             _location = location;
             _description = description;
-            _postUrl = postUrl;
+            _postID = postID;
             _publisherName = publisherName;
             _type = fbType;
         }
 
         public FBItem(List<Color> colors, ItemType itemType, DateTime date, String location, String description,
-                    String postUrl, String publisherName, FBType fbType)
+                    String postID, String publisherName, FBType fbType)
         {
             _itemID = -1;
             _colors = colors;
@@ -36,16 +36,16 @@ namespace Domain.BLBackEnd
             _date = date;
             _location = location;
             _description = description;
-            _postUrl = postUrl;
+            _postID = postID;
             _publisherName = publisherName;
             _type = fbType;
         }
 
-        public string PostUrl
+        public string PostID
         {
             get
             {
-                return _postUrl;
+                return _postID;
             }
         }
 
@@ -70,9 +70,13 @@ namespace Domain.BLBackEnd
             cache.updateFacebbokItem(this);
         }
 
-        public void addToDB()
+        public override void addToDB()
         {
-            cache.addNewFBItemToDB(this);
+            if (ItemID == -1)
+            {
+                ItemID = cache.getAvialbleItemID();
+                cache.addNewFBItemToDB(this);
+            }
         }
     }
 }

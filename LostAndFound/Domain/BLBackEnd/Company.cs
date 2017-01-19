@@ -64,7 +64,7 @@ namespace Domain.BLBackEnd
         }
         public Boolean addLostItem(LostItem lostItem)
         {
-            int id=cache.getAvialbleCompanyItemID();
+            int id=cache.getAvialbleItemID();
             lostItem.ItemID = id;
             _lostItems.Add(id);
             cache.addLostItem(lostItem);
@@ -85,6 +85,16 @@ namespace Domain.BLBackEnd
             _foundItems.Add(foundItemID);
             return true;
         }
+
+        internal List<Match> getComapanyMatches()
+        {
+            List<Match> matches = new List<Match>();
+            foreach (int mID in _matches) {
+                matches.Add(cache.getMatch(mID));
+            }
+            return matches;
+        }
+
         public Boolean removeFoundItem(int foundItemID)
         {
             if (!_foundItems.Contains(foundItemID))
@@ -95,7 +105,7 @@ namespace Domain.BLBackEnd
         }
         public Boolean addFoundItem(FoundItem foundItem)
         {
-            int id = cache.getAvialbleCompanyItemID();
+            int id = cache.getAvialbleItemID();
             foundItem.ItemID = id;
             _foundItems.Add(id);
             cache.addFoundItem(foundItem);
@@ -129,6 +139,7 @@ namespace Domain.BLBackEnd
             if (!Matches.Contains(matchID))
                 return false;
             Matches.Remove(matchID);
+            cache.deleteMatch(matchID);
             return true;
         }
 
