@@ -34,7 +34,7 @@ namespace Domain.Managers
 
         public List<CompanyItem> getAllCompanyItems(string companyName)
         {
-            throw new NotImplementedException();
+            return cache.getCompany(companyName).getAllItems();
         }
 
         public string addFoundItem(List<string> sColors, string sType, DateTime date, string location, string description,
@@ -54,6 +54,7 @@ namespace Domain.Managers
             FoundItem newItem = new FoundItem(colors, type, date, location, description, serialNumber, companyName, contactName, 
                 contactPhone, photoLocation);
             newItem.addToDB();
+            ////////////////////////////////////////////////////////////////////////////find match
             return "add found item: item was added successfully";
         }
 
@@ -74,6 +75,7 @@ namespace Domain.Managers
             LostItem newItem = new LostItem(colors, type, date, location, description, serialNumber, companyName, contactName,
                 contactPhone, photoLocation);
             newItem.addToDB();
+            ////////////////////////////////////////////////////////////////////////////find match
             return "add lost item: item was added successfully";
         }
 
