@@ -63,14 +63,25 @@ namespace Domain.Managers
                 {
                     if(!((FoundItem)item).Delivered && item.Date.CompareTo(nDaysAgo) > 0)
                     {
-                        inventory += String.Format(format, item.ItemType.ToString(), item.Colors.ToString());
+                        string type = DataType.Hebrew2EnglishTypes.FirstOrDefault(x => x.Value == item.ItemType).Key;
+                        inventory += String.Format(format, type ,getColorsString(item.Colors));
                     }
                 }
             }
 
             dynamic result = fb.Post(GroupID + "/feed", new { message = inventory });
             return "true";
-        } 
+        }
+
+        private string getColorsString(List<Color> colors)
+        {
+            string resColors = "";
+            foreach(Color color in colors)
+            {
+                resColors += DataType.HebColors.FirstOrDefault(x => x.Value == color).Key;
+            }
+            return resColors;
+        }
 
         public List<Item> getLostItems3Days(string companyName, DateTime date)
         {
