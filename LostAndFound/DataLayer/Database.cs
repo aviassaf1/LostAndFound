@@ -592,7 +592,7 @@ namespace DataLayer
         }
 
 
-        public string updateCompanyItem(int itemId, int serialNumberNew, string contactNameNew, string contactPhoneNew, string companyNameNew)
+        public string updateCompanyItem(int itemId, int serialNumberNew, string contactNameNew, string contactPhoneNew)
         {
             try
             {
@@ -604,16 +604,6 @@ namespace DataLayer
                 cItem.serialNumber = serialNumberNew;
                 cItem.contactName = contactNameNew;
                 cItem.contactPhone = contactPhoneNew;
-                Companies oldCompany = findCompanyByCompanyName(cItem.Companies.companyName);
-                oldCompany.CompanyItems.Remove(cItem);
-                Companies newCompany = findCompanyByCompanyName(companyNameNew);
-                if (companyNameNew == null)
-                {
-                    return "new company does not exist";
-                }
-                newCompany.CompanyItems.Add(cItem);
-                cItem.companyName = companyNameNew;
-                cItem.Companies = newCompany;
                 db.SaveChanges();
                 return "true";
             }
@@ -759,11 +749,15 @@ namespace DataLayer
                 {
                     fbItem.colors = listOfColorsToString(colors);
                 }
-                fbItem.description = decription;
+                //fbItem.description = decription;
+                db.SaveChanges();
                 fbItem.location = location;
+                db.SaveChanges();
                 fbItem.lostDate = lostDate;
                 fbItem.postId = postId;
+                db.SaveChanges();
                 fbItem.publisherName = publisherName;
+                db.SaveChanges();
                 fbItem.type = type;
                 //item.FBItem = fbItem;
                 //db.FBItem.Add(fbItem);
@@ -815,7 +809,10 @@ namespace DataLayer
                     return -2;
                 }
                 fItem.findingDate = findingDate;
-                fItem.colors = listOfColorsToString(colors);
+                if (colors != null)
+                {
+                    fItem.colors = listOfColorsToString(colors);
+                }
                 fItem.companyName = companyName;
                 fItem.delivered = wasFound;
                 fItem.description = description;
@@ -834,7 +831,7 @@ namespace DataLayer
             return fItem.itemID;
         }
 
-        public string updateFoundItem(int itemId, string companyNameNew, List<string> colorsNew, string itemTypeNew, DateTime findingDateNew, string locationNew, string descriptionNew, string photoLocationNew, bool deliveredNew)
+        public string updateFoundItem(int itemId,  List<string> colorsNew, string itemTypeNew, DateTime findingDateNew, string locationNew, string descriptionNew, string photoLocationNew, bool deliveredNew)
         {
             try
             {
@@ -846,13 +843,12 @@ namespace DataLayer
                 }
                 fItem.findingDate = findingDateNew;
                 fItem.colors = listOfColorsToString(colorsNew);
-                fItem.companyName = companyNameNew;
                 fItem.delivered = deliveredNew;
                 fItem.description = descriptionNew;
                 fItem.itemType = itemTypeNew;
                 fItem.location = locationNew;
                 fItem.photoLocation = photoLocationNew;
-                updateCompanyItem(itemId, item.CompanyItems.serialNumber.Value, item.CompanyItems.contactName, item.CompanyItems.contactPhone, companyNameNew);
+                updateCompanyItem(itemId, item.CompanyItems.serialNumber.Value, item.CompanyItems.contactName, item.CompanyItems.contactPhone);
                 db.SaveChanges();
             }
             catch (Exception e)
@@ -908,7 +904,10 @@ namespace DataLayer
                     return -2;
                 }
                 lItem.lostDate = lostDate;
-                lItem.colors = listOfColorsToString(colors);
+                if (colors != null)
+                {
+                    lItem.colors = listOfColorsToString(colors);
+                }
                 lItem.companyName = companyName;
                 lItem.delivered = wasFound;
                 lItem.description = description;
@@ -927,7 +926,7 @@ namespace DataLayer
             return lItem.itemID;
         }
 
-        public string updateLostItem(int itemId, string companyNameNew, List<string> colorsNew, string itemTypeNew, DateTime lostDateNew, string locationNew, string descriptionNew, string photoLocationNew, bool deliveredNew)
+        public string updateLostItem(int itemId, List<string> colorsNew, string itemTypeNew, DateTime lostDateNew, string locationNew, string descriptionNew, string photoLocationNew, bool deliveredNew)
         {
             try
             {
@@ -938,14 +937,16 @@ namespace DataLayer
                     return "item was found but it is ot a found item of a company";
                 }
                 lItem.lostDate = lostDateNew;
-                lItem.colors = listOfColorsToString(colorsNew);
-                lItem.companyName = companyNameNew;
+                if (colorsNew != null)
+                {
+                    lItem.colors = listOfColorsToString(colorsNew);
+                }
                 lItem.delivered = deliveredNew;
                 lItem.description = descriptionNew;
                 lItem.itemType = itemTypeNew;
                 lItem.location = locationNew;
                 lItem.photoLocation = photoLocationNew;
-                updateCompanyItem(itemId, item.CompanyItems.serialNumber.Value, item.CompanyItems.contactName, item.CompanyItems.contactPhone, companyNameNew);
+                updateCompanyItem(itemId, item.CompanyItems.serialNumber.Value, item.CompanyItems.contactName, item.CompanyItems.contactPhone);
                 db.SaveChanges();
             }
             catch (Exception e)
@@ -1042,6 +1043,10 @@ namespace DataLayer
         {
             try
             {
+                if (userName.Equals(""))
+                {
+                    return "user name is empty";
+                }
                 User user = new User();
                 user.UserName = userName;
                 user.password = password;
@@ -1065,7 +1070,12 @@ namespace DataLayer
                 {
                     return "user does not exist in the system";
                 }
-                db.User.Remove(user);
+                List<Companies> companyList = db.Companies.ToList();
+                foreach(Companies company in companyList)
+                {
+                    removeCompany(company.companyName);
+                }
+                //db.User.Remove(user);
                 db.SaveChanges();
             }
             catch (Exception e)
@@ -1141,11 +1151,7 @@ namespace DataLayer
         {
             try
             {
-                List<Companies> companyList = new List<Companies>();
-                foreach(Companies company in db.Companies)
-                {
-                    companyList.Add(company);
-                }
+                List<Companies> companyList = db.Companies.ToList();
                 return companyList;
             }
             catch
@@ -1158,11 +1164,7 @@ namespace DataLayer
         {
             try
             {
-                List<FacebookGroups> facebookGroupsList = new List<FacebookGroups>();
-                foreach (FacebookGroups fbg in db.FacebookGroups)
-                {
-                    facebookGroupsList.Add(fbg);
-                }
+                List<FacebookGroups> facebookGroupsList = db.FacebookGroups.ToList();
                 return facebookGroupsList;
             }
             catch
@@ -1175,11 +1177,7 @@ namespace DataLayer
         {
             try
             {
-                List<LostItems> itemList = new List<LostItems>();
-                foreach (LostItems item in db.LostItems)
-                {
-                    itemList.Add(item);
-                }
+                List<LostItems> itemList = db.LostItems.ToList();
                 return itemList;
             }
             catch
@@ -1192,11 +1190,7 @@ namespace DataLayer
         {
             try
             {
-                List<FoundItems> itemList = new List<FoundItems>();
-                foreach (FoundItems item in db.FoundItems)
-                {
-                    itemList.Add(item);
-                }
+                List<FoundItems> itemList = db.FoundItems.ToList();
                 return itemList;
             }
             catch
@@ -1209,11 +1203,7 @@ namespace DataLayer
         {
             try
             {
-                List<FBItem> itemList = new List<FBItem>();
-                foreach (FBItem item in db.FBItem)
-                {
-                    itemList.Add(item);
-                }
+                List<FBItem> itemList = db.FBItem.ToList();
                 return itemList;
             }
             catch
@@ -1226,11 +1216,7 @@ namespace DataLayer
         {
             try
             {
-                List<Matches> matchList = new List<Matches>();
-                foreach (Matches match in db.Matches)
-                {
-                    matchList.Add(match);
-                }
+                List<Matches> matchList = db.Matches.ToList();
                 return matchList;
             }
             catch
@@ -1242,11 +1228,7 @@ namespace DataLayer
         {
             try
             {
-                List<Items> itemList = new List<Items>();
-                foreach (Items item in db.Items)
-                {
-                    itemList.Add(item);
-                }
+                List<Items> itemList = db.Items.ToList();
                 return itemList;
             }
             catch

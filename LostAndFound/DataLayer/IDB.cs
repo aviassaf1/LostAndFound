@@ -13,7 +13,7 @@ namespace DataLayer
         String removeCompany(string companyName);
         String updateCompany(string companyName, string userNameNew, string phoneNew);
         Companies findCompanyByCompanyName(string companyName);
-        String updateCompanyItem(int itemId, int serialNumberNew, string contactNameNew, string contactPhoneNew, string companyNameNew);
+        String updateCompanyItem(int itemId, int serialNumberNew, string contactNameNew, string contactPhoneNew);
         String addFacebookGroup(string companyName, string groupURL);
         String removeFacebookGroup(string companyName, string groupURL);
         FacebookGroups findFacebookGroup(string companyName, string groupUrl);
@@ -24,12 +24,12 @@ namespace DataLayer
                 string description, int serialNumber, string companyName, string contactName,
                 string contactPhone, string photoLocation, bool wasFound);
 
-        String updateFoundItem(int itemId, string companyNameNew, List<string> colorsNew, string itemTypeNew, DateTime findingDateNew, string locationNew, string descriptionNew, string photoLocationNew, bool deliveredNew);
+        String updateFoundItem(int itemId, List<string> colorsNew, string itemTypeNew, DateTime findingDateNew, string locationNew, string descriptionNew, string photoLocationNew, bool deliveredNew);
         String removeItem(int itemId);
         int addLostItem(List<string> colors, string itemType, DateTime lostDate, string location,
                 string description, int serialNumber, string companyName, string contactName,
                 string contactPhone, string photoLocation, bool wasFound);
-        String updateLostItem(int itemId, string companyNameNew, List<string> colorsNew, string itemTypeNew, DateTime lostDateNew, string locationNew, string descriptionNew, string photoLocationNew, bool deliveredNew);
+        String updateLostItem(int itemId, List<string> colorsNew, string itemTypeNew, DateTime lostDateNew, string locationNew, string descriptionNew, string photoLocationNew, bool deliveredNew);
         int addMatch(int companyItemId, int itemID, string matchStatus);
         String removeMatch(int matchId);
         String updateMatch(int matchId, string matchStatusNew);
