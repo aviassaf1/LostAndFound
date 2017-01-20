@@ -222,7 +222,7 @@ namespace Domain
             if (_lostItems[lostItemID] != null)
             {
                 _lostItems.Remove(lostItemID);
-                _db.removeLostItem(lostItemID);
+                _db.removeItem(lostItemID);
             }
         }
 
@@ -274,7 +274,7 @@ namespace Domain
             if (_lostItems[foundItemID] != null)
             {
                 _lostItems.Remove(foundItemID);
-                _db.removeLostItem(foundItemID);
+                _db.removeItem(foundItemID);
             }
         }
 
