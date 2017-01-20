@@ -414,6 +414,26 @@ namespace DataLayer
             }
         }
 
+        public bool findIdTests()
+        {
+            Items item = new Items();
+            db.Items.Add(item);
+            db.SaveChanges();
+            int id = item.itemID;
+            Items reItem = findItemByItemId(id);
+            if (reItem != item)
+            {
+                return false;
+            }
+            reItem = findItemByItemId(id+1);
+            if (reItem != null)
+            {
+                return false;
+            }
+            return true;
+        }
+
+
         public string addCompany(string userName, string password, string companyName, string phone, HashSet<string> facebookGroups)
         {
             try
@@ -565,39 +585,18 @@ namespace DataLayer
                 db.SaveChanges();
                 return cItem.itemId;
             }
-            catch(Exception e)
+            catch
             {
                 return -1;
             }
         }
 
-        public string removeCompanyItem(int itemId)
-        {
-            try
-            {
-                CompanyItems cItem = findCompanyItemByItemId(itemId);
-                removeFoundItem(cItem.FoundItems.itemID);
-                removeLostItem(cItem.LostItems.itemID);
-                if(cItem==null)
-                {
-                    return "the item does not exist in the system";
-                }
-                cItem.Companies.CompanyItems.Remove(cItem);
-                db.CompanyItems.Remove(cItem);
-                db.SaveChanges();
-                return "true";
-            }
-            catch(Exception e)
-            {
-                return e.ToString();
-            }
-        }
 
         public string updateCompanyItem(int itemId, int serialNumberNew, string contactNameNew, string contactPhoneNew, string companyNameNew)
         {
             try
             {
-                CompanyItems cItem = findCompanyItemByItemId(itemId);
+                CompanyItems cItem = findItemByItemId(itemId).CompanyItems;
                 if(cItem==null)
                 {
                     return "item does not exist in the system";
@@ -623,24 +622,6 @@ namespace DataLayer
                 return e.ToString();
             }
         }
-        public CompanyItems findCompanyItemByItemId(int itemId)
-        {
-            try
-            {
-                foreach(CompanyItems cItem in db.CompanyItems)
-                {
-                    if(cItem.itemId== itemId)
-                    {
-                        return cItem;
-                    }
-                }
-                return null;
-            }
-            catch
-            {
-                return null;
-            }
-        }
 
         public string addFacebookGroup(string companyName, string groupURL)
         {
@@ -648,12 +629,17 @@ namespace DataLayer
             {
                 FacebookGroups fbg = new FacebookGroups();
                 Companies company = findCompanyByCompanyName(companyName);
+                if (groupURL.Equals(""))
+                {
+                    return "the given url is empty";
+                }
                 if (company == null)
                 {
                     return "company does not exist";
                 }
                 company.FacebookGroups.Add(fbg);
                 fbg.Companies = company;
+                fbg.groupURL = groupURL;
                 fbg.CompanyName = companyName;
                 db.SaveChanges();
                 return "true";
@@ -685,7 +671,7 @@ namespace DataLayer
             }
         }
 
-        public string updateFacebookGroup(string companyName, string groupURL)
+        private string updateFacebookGroup(string companyName, string groupURL)
         {
             throw new NotImplementedException();
         }
@@ -762,17 +748,25 @@ namespace DataLayer
             db.Items.Add(item);
             db.SaveChanges();
             FBItem fbItem = new FBItem();
+            fbItem.itemID = item.itemID;
+            item.FBItem = fbItem;
+            fbItem.Items = item;
+            db.SaveChanges();
             try
             {
-                fbItem.colors = listOfColorsToString(colors);
+                fbItem.colors = null;
+                if (colors != null)
+                {
+                    fbItem.colors = listOfColorsToString(colors);
+                }
                 fbItem.description = decription;
                 fbItem.location = location;
                 fbItem.lostDate = lostDate;
                 fbItem.postId = postId;
                 fbItem.publisherName = publisherName;
                 fbItem.type = type;
-                fbItem.itemID = item.itemID;
-                fbItem.Items = item;
+                //item.FBItem = fbItem;
+                //db.FBItem.Add(fbItem);
                 db.SaveChanges();
             }
             catch
@@ -782,29 +776,7 @@ namespace DataLayer
             return fbItem.itemID;
         }
 
-        public string removeFBItem(int itemId)
-        {
-            try
-            {
-                Items item = findItemByItemId(itemId);
-                if (item == null)
-                {
-                    return "item does not exist in the system";
-                }
-                if (item.FBItem == null)
-                {
-                    return "item was found in the system but it is not an FBItem";
-                }
-                db.FBItem.Remove(item.FBItem);
-                db.Items.Remove(item);
-                db.SaveChanges();
-            }
-            catch(Exception e)
-            {
-                return e.ToString();
-            }
-            return "true";
-        }
+
 
         public string updateFBItem(int itemId, List<string> colorsNew, string itemTypeNew, DateTime lostDateNew, string locationNew, string decriptionNew, string postURLNew, string publisherNameNew, string typeNew)
         {
@@ -816,6 +788,7 @@ namespace DataLayer
                     return "the item was found but it is not a fbItem";
                 }
                 fbItem.colors = listOfColorsToString(colorsNew);
+                fbItem.location = locationNew;
                 fbItem.lostDate = lostDateNew;
                 fbItem.itemType = typeNew;
                 fbItem.postId = postURLNew;
@@ -836,7 +809,7 @@ namespace DataLayer
             try
             {
                 int citemId = AddCompanyItem(serialNumber, contactName, contactPhone, companyName);
-                CompanyItems cItem = findCompanyItemByItemId(citemId);
+                CompanyItems cItem = findItemByItemId(citemId).CompanyItems;
                 if (cItem == null)
                 {
                     return -2;
@@ -859,28 +832,6 @@ namespace DataLayer
                 return -1;
             }
             return fItem.itemID;
-        }
-
-        public string removeFoundItem(int itemId)
-        {
-            try
-            {
-                Items item = findItemByItemId(itemId);
-                FoundItems fItem = item.CompanyItems.FoundItems;
-                if (fItem == null)
-                {
-                    return "item was found but it is ot a found item of a company";
-                }
-                item.CompanyItems.FoundItems = null;
-                db.FoundItems.Remove(fItem);
-                removeCompanyItem(itemId);
-                db.SaveChanges();
-            }
-            catch (Exception e)
-            {
-                return e.ToString();
-            }
-            return "true";
         }
 
         public string updateFoundItem(int itemId, string companyNameNew, List<string> colorsNew, string itemTypeNew, DateTime findingDateNew, string locationNew, string descriptionNew, string photoLocationNew, bool deliveredNew)
@@ -951,7 +902,7 @@ namespace DataLayer
             try
             {
                 int citemId = AddCompanyItem(serialNumber, contactName, contactPhone, companyName);
-                CompanyItems cItem = findCompanyItemByItemId(citemId);
+                CompanyItems cItem = findItemByItemId(citemId).CompanyItems;
                 if (cItem == null)
                 {
                     return -2;
@@ -974,28 +925,6 @@ namespace DataLayer
                 return -1;
             }
             return lItem.itemID;
-        }
-
-        public string removeLostItem(int itemId)
-        {
-            try
-            {
-                Items item = findItemByItemId(itemId);
-                LostItems lItem = item.CompanyItems.LostItems;
-                if (lItem == null)
-                {
-                    return "item was found but it is ot a found item of a company";
-                }
-                item.CompanyItems.LostItems = null;
-                db.LostItems.Remove(lItem);
-                removeCompanyItem(itemId);
-                db.SaveChanges();
-            }
-            catch (Exception e)
-            {
-                return e.ToString();
-            }
-            return "true";
         }
 
         public string updateLostItem(int itemId, string companyNameNew, List<string> colorsNew, string itemTypeNew, DateTime lostDateNew, string locationNew, string descriptionNew, string photoLocationNew, bool deliveredNew)
@@ -1031,7 +960,7 @@ namespace DataLayer
             Matches match = new Matches();
             try
             {
-                CompanyItems cItem = findCompanyItemByItemId(companyItemId);
+                CompanyItems cItem = findItemByItemId(companyItemId).CompanyItems;
                 if (cItem == null)
                 {
                     return -2;

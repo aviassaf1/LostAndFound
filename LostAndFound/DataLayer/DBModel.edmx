@@ -35,7 +35,7 @@
           <Key>
             <PropertyRef Name="itemID" />
           </Key>
-          <Property Name="itemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="itemID" Type="int" Nullable="false" />
           <Property Name="colors" Type="varchar" MaxLength="50" />
           <Property Name="itemType" Type="varchar" MaxLength="50" />
           <Property Name="lostDate" Type="datetime" />
@@ -69,7 +69,7 @@
           <Key>
             <PropertyRef Name="itemID" />
           </Key>
-          <Property Name="itemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="itemID" Type="int" Nullable="false" />
           <Property Name="companyName" Type="varchar" MaxLength="50" />
           <Property Name="photoLocation" Type="varchar" MaxLength="50" />
           <Property Name="colors" Type="varchar" MaxLength="50" />
