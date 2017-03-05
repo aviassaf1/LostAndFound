@@ -15,5 +15,10 @@ namespace Domain.Managers
         String addFoundItem(List<string> sColors, string sType, DateTime date, string location, string description,
             int serialNumber, string companyName, string contactName, string contactPhone, string photoLocation, string token);
         string transactionComplete(int itemID);
+
+        String deleteItem(int itemID);
+
+        String editItem(int itemID, DateTime date, string location, string description,
+            int serialNumber, string contactName, string contactPhone, string photoLocation);
     }
 }

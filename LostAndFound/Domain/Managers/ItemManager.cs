@@ -86,5 +86,24 @@ namespace Domain.Managers
                 ((LostItem)item).WasFound = true;
             return "transactionComplete: completed successfully";
         }
+
+        public string deleteItem(int itemID)
+        {
+            CompanyItem item = cache.getCompanyItem(itemID);
+            if (item == null)
+                return "itemID wasn't found";
+            Company company = cache.getCompany(item.CompanyName);
+            if ((item.GetType()).Equals(typeof(FoundItem)))
+                return company.removeFoundItem(itemID);
+            if ((item.GetType()).Equals(typeof(LostItem)))
+                return company.removeLostItem(itemID);
+            return "";
+        }
+
+        public string editItem(int itemID, DateTime date, string location, string description, int serialNumber, string contactName, string contactPhone, string photoLocation)
+        {
+            CompanyItem item = cache.getCompanyItem(itemID);
+            return item.updateItem( date,  location,  description,  serialNumber,  contactName,  contactPhone);
+        }
     }
 }

@@ -77,5 +77,17 @@ namespace Domain.BLBackEnd
                 return _companyName;
             }
         }
+
+        internal string updateItem(DateTime date, string location, string description, int serialNumber, string contactName,
+            string contactPhone)
+        {
+            _date = date;
+            _location = location;
+            _description = description;
+            _serialNumber = serialNumber;
+            _contactName = contactName;
+            _contactPhone = contactPhone;
+            return cache.updateCompanyItem(this);
+        }
     }
 }

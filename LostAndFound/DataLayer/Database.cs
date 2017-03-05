@@ -495,17 +495,17 @@ namespace DataLayer
             }
         }
 
-        public string updateCompany(string companyName, string userNameNew, string phoneNew)
+        public string updateCompany(string companyName, string passwordNew, string phoneNew)
         {
             try
             {
                 Companies company = findCompanyByCompanyName(companyName);
-                User userNew = findUserByUserName(userNameNew);
+                User userNew = findUserByUserName(company.userName);
                 if(userNew==null)
                 {
                     return "the new user does not exist in the system";
                 }
-                company.userName = userNameNew;
+                userNew.password=passwordNew;
                 company.phone = phoneNew;
                 User oldUser = company.User;
                 oldUser.Companies.Remove(company);
@@ -1324,6 +1324,48 @@ namespace DataLayer
             {
                 return null;
             }
+        }
+
+        public string updateFoundItemDescription(int itemID, string description)
+        {
+            try
+            {
+                Items item = findItemByItemId(itemID);
+                FoundItems fItem = item.CompanyItems.FoundItems;
+                if (fItem == null)
+                {
+                    return "item was found but it is ot a found item of a company";
+                }
+                fItem.description = description;
+                updateCompanyItem(itemID, item.CompanyItems.serialNumber.Value, item.CompanyItems.contactName, item.CompanyItems.contactPhone, item.CompanyItems.companyName);
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+            return "true";
+        }
+
+        public String updateLostItemDescription(int itemID, string description)
+        {
+            try
+            {
+                Items item = findItemByItemId(itemID);
+                LostItems lItem = item.CompanyItems.LostItems;
+                if (lItem == null)
+                {
+                    return "item was found but it is ot a found item of a company";
+                }
+                lItem.description = description;
+                updateCompanyItem(itemID, item.CompanyItems.serialNumber.Value, item.CompanyItems.contactName, item.CompanyItems.contactPhone, item.CompanyItems.companyName);
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+            return "true";
         }
     }
 }

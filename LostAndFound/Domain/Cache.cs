@@ -136,6 +136,21 @@ namespace Domain
             }
         }
 
+        internal String editCompany(string companyName, string newPassword, string newPhone)
+        {
+            return _db.updateCompany(companyName, newPassword, newPhone);
+        }
+
+        internal String deleteCompany(string _userName, string _companyName)
+        {
+            if (_companies[_userName] != null)
+            {
+                _companies.Remove(_userName);
+                return _db.removeCompany(_userName);
+            }
+            return "Company didn't remove";
+        }
+
         internal CompanyItem getCompanyItem(int itemID)
         {
             if (_lostItems.ContainsKey(itemID))
@@ -268,9 +283,14 @@ namespace Domain
             foundItem.ItemID = id;
         }
 
-        internal void updateCompanyItem(CompanyItem companyItem)
+        internal String updateCompanyItem(CompanyItem companyItem)
         {
-            _db.updateCompanyItem(companyItem.ItemID, companyItem.SerialNumber, companyItem.ContactName, companyItem.ContactPhone, companyItem.CompanyName);
+            if ((companyItem.GetType()).Equals(typeof(FoundItem)))
+                _db.updateFoundItemDescription(companyItem.ItemID, companyItem.Description);
+            if ((companyItem.GetType()).Equals(typeof(LostItem)))
+                _db.updateLostItemDescription(companyItem.ItemID, companyItem.Description);
+            return _db.updateCompanyItem(companyItem.ItemID, companyItem.SerialNumber, companyItem.ContactName, companyItem.ContactPhone, companyItem.CompanyName, companyItem.Description);
+            
         }
 
         internal void removefoundItem(int foundItemID)
