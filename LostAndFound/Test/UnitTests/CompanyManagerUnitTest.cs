@@ -17,12 +17,12 @@ namespace Test.UnitTests
             db.clear();
             cache = Cache.getInstance;
             cache.initCache();
+            cache.setUp();
         }
 
         [TestCleanup]
         public void cleanUp()
         {
-            db.clear();
             cache.clear();
         }
 
