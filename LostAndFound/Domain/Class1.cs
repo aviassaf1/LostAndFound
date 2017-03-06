@@ -12,12 +12,12 @@ namespace Domain
     {
         public static void Main(string[] args)
         {
-            string token = "EAACEdEose0cBAFMSnt0e4tUnWsrLyXFxXbQ3KGH8Pka4CfARUSYWkYqtFx6vObgaR1jo1QLCdILQBW0fkbppaJJ1ZAhwSF6EePrUw0JSpn8klgH2cbAZC49xMjZBfZBOsMwoi1gKGKZCHaRBAzI3IwSh9nfwq0WkQweklTphq9m1kbGRjRT6cf7peWAP54tcZD";
+            string token = "EAACEdEose0cBAPHaC5zRwZCmSZCquCbxrCEjZAZBRUKB9JNA7ZBTHJQjEIIMOa9S3lXavZA1l9Hgw96XUax89b1pefzS4P2FsN0givVkG87eENOWwTZAOchXBbGck3tXrJOc88oPI0gEmahQPxYZAtCTu0BAVKVIzFPFIRPOW3tHHkjjylS42pedVFqxZCjZAUHVMZD";
             List<FBItem> list =  MatchManager.getInstance.getPostsFromGroup(token,
                 "1538105046204967");
             //List<string> colors = new List<string>() { "PINK" };
             HashSet<string> fbg = new HashSet<string>() { "1538105046204967" };
-            AdminManager.getInstance.addComapny("GuyCompany", "gG1", "GuyCompany", "050000000", fbg);
+            AdminManager.getInstance.addComapny("GuyCompany", "gG1244", "GuyCompany", "050000000", fbg);
             Console.WriteLine("Hello, welcom to FIND IT!");
             Console.WriteLine("Please enter the list of the item's colors.");
             string colorList = Console.ReadLine();
