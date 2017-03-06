@@ -49,6 +49,42 @@ namespace Domain
             }
         }
 
+        public void setUp()
+        {
+            new Company("Guy", "Hello6", "Guy", "05000000", new HashSet<string>());
+            new Company("Guy2", "Hello6", "Guy2", "05000000", new HashSet<string>());
+            addFacebookGroup("Guy", "1538105046204967");
+            addFacebookGroup("Guy2", "1538105046204967");
+            List<Color> colors1 = new List<Color>();
+            List<Color> colors2 = new List<Color>();
+            colors2.Add(Color.RED);
+            List<Color> colors3 = new List<Color>();
+            colors3.Add(Color.BLUE);
+            colors1.Add(Color.BLACK);
+            FoundItem fi1 = new FoundItem(colors1, ItemType.FOLDER, DateTime.Today, "BGU", "bla bla", 8876, "Guy", "Noam", "05000000", "c");
+            FoundItem fi2 = new FoundItem(colors2, ItemType.HEADPHONES, DateTime.Today, "BGU", "bla bla", 85656, "Guy", "Noam", "05000000", "c");
+            FoundItem fi3 = new FoundItem(colors3, ItemType.FOLDER, DateTime.Today, "BGU", "bla bla", 3376, "Guy", "Noam", "05000000", "c");
+            fi1.addToDB();
+            fi2.addToDB();
+            fi3.addToDB();
+
+            colors1 = new List<Color>();
+            colors2 = new List<Color>();
+            colors2.Add(Color.RED);
+            colors3 = new List<Color>();
+            colors3.Add(Color.BLUE);
+            colors1.Add(Color.BLACK);
+            LostItem li1 = new LostItem(colors1, ItemType.FOLDER, DateTime.Today, "BGU", "bla bla", 8876, "Guy", "Noam", "05000000", "c");
+            LostItem li2 = new LostItem(colors2, ItemType.HEADPHONES, DateTime.Today, "BGU", "bla bla", 85656, "Guy", "Noam", "05000000", "c");
+            LostItem li3 = new LostItem(colors3, ItemType.FOLDER, DateTime.Today, "BGU", "bla bla", 3376, "Guy", "Noam", "05000000", "c");
+            li1.addToDB();
+            li2.addToDB();
+            li3.addToDB();
+
+            addMatch(new Match(fi1.ItemID, li1.ItemID, MatchStatus.POSSIBLE));
+            addMatch(new Match(fi3.ItemID, li3.ItemID, MatchStatus.POSSIBLE));
+        }
+
         public void initCache()//public for test only
         {
             _admins = new Dictionary<string, Admin>();

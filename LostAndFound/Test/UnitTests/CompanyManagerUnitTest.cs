@@ -20,13 +20,16 @@ namespace Test.UnitTests
             db.clear();
             cache = Cache.getInstance;
             cache.initCache();
+
             ICM = ComapanyManager.getInstance;
+
+            cache.setUp();
+
         }
 
         [TestCleanup]
         public void cleanUp()
         {
-            db.clear();
             cache.clear();
         }
 
