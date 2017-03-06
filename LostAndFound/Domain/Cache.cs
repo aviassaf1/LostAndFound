@@ -227,7 +227,7 @@ namespace Domain
 
         internal void updateFoundItem(FoundItem foundItem)
         {
-            _db.updateFoundItem(foundItem.ItemID, foundItem.CompanyName, foundItem.getColorsList(), foundItem.ItemType.ToString(), foundItem.Date, foundItem.Location,
+            _db.updateFoundItem(foundItem.ItemID, foundItem.getColorsList(), foundItem.ItemType.ToString(), foundItem.Date, foundItem.Location,
                 foundItem.Description, foundItem.PhotoLocation, foundItem.Delivered);
         }
 
@@ -241,7 +241,7 @@ namespace Domain
             if (_lostItems[lostItemID] != null)
             {
                 _lostItems.Remove(lostItemID);
-                _db.removeLostItem(lostItemID);
+                _db.removeItem(lostItemID);
             }
         }
 
@@ -254,7 +254,7 @@ namespace Domain
 
         internal void updateLostItem(LostItem lostItem)
         {
-            _db.updateLostItem(lostItem.ItemID,lostItem.CompanyName , lostItem.getColorsList(), lostItem.ItemType.ToString(), lostItem.Date, lostItem.Location,
+            _db.updateLostItem(lostItem.ItemID , lostItem.getColorsList(), lostItem.ItemType.ToString(), lostItem.Date, lostItem.Location,
                 lostItem.Description, lostItem.PhotoLocation,lostItem.WasFound);
         }
 
@@ -290,7 +290,6 @@ namespace Domain
             if ((companyItem.GetType()).Equals(typeof(LostItem)))
                 _db.updateLostItemDescription(companyItem.ItemID, companyItem.Description);
             return _db.updateCompanyItem(companyItem.ItemID, companyItem.SerialNumber, companyItem.ContactName, companyItem.ContactPhone, companyItem.CompanyName, companyItem.Description);
-            
         }
 
         internal void removefoundItem(int foundItemID)
@@ -298,7 +297,7 @@ namespace Domain
             if (_lostItems[foundItemID] != null)
             {
                 _lostItems.Remove(foundItemID);
-                _db.removeLostItem(foundItemID);
+                _db.removeItem(foundItemID);
             }
         }
 

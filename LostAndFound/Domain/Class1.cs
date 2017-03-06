@@ -12,7 +12,7 @@ namespace Domain
     {
         public static void Main(string[] args)
         {
-            string token = "EAACEdEose0cBAJZAw64b2cIJReLnTCZCNZCuSRAM1RE10z4fgN1bakJ43UQbEeeqqU60ZAIZAgbuxH046bIt4gNjXFZBrqKHwjGR5cb7MDRDQWVH66KA6WAiOEqN3fZCva9DlCZBv00pVc8CAZCbweYdYspAw4Fc7knZAW27tlUJV6RAZDZD";
+            string token = "EAACEdEose0cBAFMSnt0e4tUnWsrLyXFxXbQ3KGH8Pka4CfARUSYWkYqtFx6vObgaR1jo1QLCdILQBW0fkbppaJJ1ZAhwSF6EePrUw0JSpn8klgH2cbAZC49xMjZBfZBOsMwoi1gKGKZCHaRBAzI3IwSh9nfwq0WkQweklTphq9m1kbGRjRT6cf7peWAP54tcZD";
             List<FBItem> list =  MatchManager.getInstance.getPostsFromGroup(token,
                 "1538105046204967");
             //List<string> colors = new List<string>() { "PINK" };
@@ -33,14 +33,14 @@ namespace Domain
             ItemManager.getInstance.addFoundItem(colors, itemType, DateTime.Today, "here", "desc",56658, "GuyCompany", cname,
                 cphone, "location",token);
 
-            for(int j = 0; j<5; j++)
+            /*for(int j = 0; j<5; j++)
             {
                 colors.Clear();
                 colors.Add(((Color)j).ToString());
                 itemType = ((ItemType)j).ToString();
                 ItemManager.getInstance.addFoundItem(colors, itemType, DateTime.Today, "here", "desc", 56658, "GuyCompany", cname,
                 cphone, "location", token);
-            }
+            }*/
             ComapanyManager.getInstance.publishInventory(token, "1538105046204967", 2, "GuyCompany");
             Cache cache = Cache.getInstance;
             int i = 0;

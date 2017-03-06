@@ -35,12 +35,12 @@
           <Key>
             <PropertyRef Name="itemID" />
           </Key>
-          <Property Name="itemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="itemID" Type="int" Nullable="false" />
           <Property Name="colors" Type="varchar" MaxLength="50" />
           <Property Name="itemType" Type="varchar" MaxLength="50" />
           <Property Name="lostDate" Type="datetime" />
           <Property Name="location" Type="varchar" MaxLength="50" />
-          <Property Name="description" Type="varchar" MaxLength="50" />
+          <Property Name="description" Type="varchar(max)" />
           <Property Name="postId" Type="varchar" MaxLength="50" />
           <Property Name="publisherName" Type="varchar" MaxLength="50" />
           <Property Name="type" Type="varchar" MaxLength="50" />
@@ -56,7 +56,7 @@
           <Property Name="itemType" Type="varchar" MaxLength="50" />
           <Property Name="findingDate" Type="datetime" />
           <Property Name="location" Type="varchar" MaxLength="50" />
-          <Property Name="description" Type="varchar" MaxLength="50" />
+          <Property Name="description" Type="varchar(max)" />
           <Property Name="delivered" Type="bit" />
         </EntityType>
         <EntityType Name="Items">
@@ -69,14 +69,14 @@
           <Key>
             <PropertyRef Name="itemID" />
           </Key>
-          <Property Name="itemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="itemID" Type="int" Nullable="false" />
           <Property Name="companyName" Type="varchar" MaxLength="50" />
           <Property Name="photoLocation" Type="varchar" MaxLength="50" />
           <Property Name="colors" Type="varchar" MaxLength="50" />
           <Property Name="itemType" Type="varchar" MaxLength="50" />
           <Property Name="lostDate" Type="datetime" />
           <Property Name="location" Type="varchar" MaxLength="50" />
-          <Property Name="description" Type="varchar" MaxLength="50" />
+          <Property Name="description" Type="varchar(max)" />
           <Property Name="delivered" Type="bit" />
         </EntityType>
         <EntityType Name="Matches">
@@ -300,7 +300,7 @@
           <Property Name="itemType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="lostDate" Type="DateTime" Precision="3" />
           <Property Name="location" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="postId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="publisherName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -317,7 +317,7 @@
           <Property Name="itemType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="findingDate" Type="DateTime" Precision="3" />
           <Property Name="location" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="delivered" Type="Boolean" />
           <NavigationProperty Name="CompanyItems" Relationship="Self.FK_FoundItems_ToTable" FromRole="FoundItems" ToRole="CompanyItems" />
         </EntityType>
@@ -341,7 +341,7 @@
           <Property Name="itemType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="lostDate" Type="DateTime" Precision="3" />
           <Property Name="location" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="delivered" Type="Boolean" />
           <NavigationProperty Name="CompanyItems" Relationship="Self.FK_LostItems_ToTable" FromRole="LostItems" ToRole="CompanyItems" />
         </EntityType>
