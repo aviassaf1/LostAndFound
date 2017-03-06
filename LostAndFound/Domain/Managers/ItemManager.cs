@@ -28,11 +28,12 @@ namespace Domain.Managers
 
         public List<CompanyItem> getAllCompanyItems(string companyName)
         {
-            Company c = cache.getCompany(companyName);
-            if (c != null)
-                return c.getAllItems();
-            else
+            if (companyName == null)
                 return null;
+            Company company = cache.getCompany(companyName);
+            if (company == null)
+                return null;
+            return company.getAllItems();
         }
 
         public string addFoundItem(List<string> sColors, string sType, DateTime date, string location, string description,
