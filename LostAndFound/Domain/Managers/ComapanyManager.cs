@@ -49,7 +49,15 @@ namespace Domain.Managers
 
         public string publishInventory(string token, string GroupID, int days, string companyName)
         {
-            var fb = new FacebookClient(token);
+            var fb = new FacebookClient();
+            try
+            {
+                fb = new FacebookClient(token);
+            }
+            catch(Exception e)
+            {
+                return e.Message;
+            }
             fb.Version = "v2.3";
             var parameters = new Dictionary<string, object>();
             List<CompanyItem> items = ItemManager.getInstance.getAllCompanyItems(companyName);
