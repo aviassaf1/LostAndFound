@@ -15,7 +15,7 @@ namespace Test.UnitTests
         private Database db;
         private IItemManager IIM;
         private ICompanyManager ICM;
-        private string token="";
+        private string token= "EAACEdEose0cBAPHaC5zRwZCmSZCquCbxrCEjZAZBRUKB9JNA7ZBTHJQjEIIMOa9S3lXavZA1l9Hgw96XUax89b1pefzS4P2FsN0givVkG87eENOWwTZAOchXBbGck3tXrJOc88oPI0gEmahQPxYZAtCTu0BAVKVIzFPFIRPOW3tHHkjjylS42pedVFqxZCjZAUHVMZD";
         [TestInitialize]
         public void setUp()
         {

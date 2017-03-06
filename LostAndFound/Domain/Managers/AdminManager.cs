@@ -118,7 +118,7 @@ namespace Domain.Managers
             {
                 string logg = "company not exists in the system";
                 logger.logPrint(logg, 0);
-                logger.logPrint(logg, 1);
+                logger.logPrint(logg, 2);
                 return logg;
             }            
             return company.delete();
@@ -132,7 +132,7 @@ namespace Domain.Managers
             {
                 logg = "one or more of the fields is missing";
                 logger.logPrint(logg, 0);
-                logger.logPrint(logg, 1);
+                logger.logPrint(logg, 2);
                 return logg;
             }
             // check if the password is strong enough
@@ -144,7 +144,7 @@ namespace Domain.Managers
             {
                 logg = "password should contain at least 6 ccharacters, edit company Fail";
                 logger.logPrint(logg, 0);
-                logger.logPrint(logg, 1);
+                logger.logPrint(logg, 2);
                 return logg;
             }
             for (int i = 0; i < password.Length; i++)
@@ -170,7 +170,7 @@ namespace Domain.Managers
             {
                 logg = "password isnt strong enough";
                 logger.logPrint(logg, 0);
-                logger.logPrint(logg, 1);
+                logger.logPrint(logg, 2);
                 return logg;
             }
             // check if the the phone is in a correct format

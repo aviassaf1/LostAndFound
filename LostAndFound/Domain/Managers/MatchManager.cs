@@ -11,7 +11,7 @@ namespace Domain.Managers
     public class MatchManager : IMatchManager
     {
         private static IMatchManager singleton;
-
+        private Logger logger = Logger.getInstance;
         public static IMatchManager getInstance
         {
             get
@@ -26,6 +26,7 @@ namespace Domain.Managers
 
         public string changeMatchStatus(int matchID,int statusNum)
         {
+            string logg;
             Match match = Cache.getInstance.getMatch(matchID);
             if (match != null)
             {
@@ -46,10 +47,21 @@ namespace Domain.Managers
                     match.delete();
                 }
                 else
-                    return "not good statusNumber";
+                {
+                    logg = "not good statusNumber";
+                    logger.logPrint(logg, 0);
+                    logger.logPrint(logg, 1);
+                    return logg;
+                }
+                logg = "match status Changed";
+                logger.logPrint(logg, 0);
+                logger.logPrint(logg, 1);
                 return "status Changed";
             }
-            return "no match with that id";
+            logg = "no match with that id";
+            logger.logPrint(logg, 0);
+            logger.logPrint(logg, 1);
+            return logg;
         }
 
         private void removeMatchesOfItemExcept(int matchID, int companyItemID)
@@ -169,6 +181,9 @@ namespace Domain.Managers
             fb.Version = "v2.3";
             var parameters = new Dictionary<string, object>();
             dynamic result = fb.Post(postID + "/comments", new { message = info });
+            string logg = "post commented";
+            logger.logPrint(logg, 0);
+            logger.logPrint(logg, 1);
             return true;
         }
         public List<FBItem> getPostsFromGroup(String token, String GroupID)
