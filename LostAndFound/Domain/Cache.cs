@@ -136,6 +136,21 @@ namespace Domain
             }
         }
 
+        internal String editCompany(string companyName, string newPassword, string newPhone)
+        {
+            return _db.updateCompany(companyName, newPassword, newPhone);
+        }
+
+        internal String deleteCompany(string _userName, string _companyName)
+        {
+            if (_companies[_userName] != null)
+            {
+                _companies.Remove(_userName);
+                return _db.removeCompany(_userName);
+            }
+            return "Company didn't remove";
+        }
+
         internal CompanyItem getCompanyItem(int itemID)
         {
             if (_lostItems.ContainsKey(itemID))
@@ -145,10 +160,10 @@ namespace Domain
             return null;
 		}
 		
-        internal void deleteMatch(int matchID)
+        internal String deleteMatch(int matchID)
         {
             _matches.Remove(matchID);
-            _db.removeMatch(matchID);
+            return _db.removeMatch(matchID);
         }
 
         internal BLBackEnd.FBItem getFBItemByPostID(string postID)
@@ -268,9 +283,13 @@ namespace Domain
             foundItem.ItemID = id;
         }
 
-        internal void updateCompanyItem(CompanyItem companyItem)
+        internal String updateCompanyItem(CompanyItem companyItem)
         {
-            _db.updateCompanyItem(companyItem.ItemID, companyItem.SerialNumber, companyItem.ContactName, companyItem.ContactPhone);
+            if ((companyItem.GetType()).Equals(typeof(FoundItem)))
+                _db.updateFoundItemDescription(companyItem.ItemID, companyItem.Description);
+            if ((companyItem.GetType()).Equals(typeof(LostItem)))
+                _db.updateLostItemDescription(companyItem.ItemID, companyItem.Description);
+            return _db.updateCompanyItem(companyItem.ItemID, companyItem.SerialNumber, companyItem.ContactName, companyItem.ContactPhone);
         }
 
         internal void removefoundItem(int foundItemID)

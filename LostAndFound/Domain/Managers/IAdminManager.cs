@@ -10,5 +10,9 @@ namespace Domain.Managers
     {
         String login();
         String addComapny(String userName, String password, String companyName, String phone, HashSet<String> facebookGroups);
+
+        String deleteCompany(String companyName);
+
+        String editCompany(String companyName, String password, String phone);
     }
 }

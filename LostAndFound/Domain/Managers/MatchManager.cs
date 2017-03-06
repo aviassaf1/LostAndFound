@@ -34,18 +34,16 @@ namespace Domain.Managers
                 if (statusNum == 1)
                 {
                     match.MatchStatus = MatchStatus.CORRECT;
-                    //remove other matches from that item
                     removeMatchesOfItemExcept(match.MatchID, match.CompanyItemID);
                     if (Cache.getInstance.getCompanyItem(match.Item2ID)!=null)
                         removeMatchesOfItemExcept(match.MatchID, match.Item2ID);
-                    //set item state
                 }
                 if (statusNum == 2)
                     match.MatchStatus = MatchStatus.COMPLETE;
                 if (statusNum == 4)
                 {
                     match.MatchStatus = MatchStatus.INCORRECT;
-                    //delete match?
+                    match.delete();
                 }
                 else
                     return "not good matchNumber";

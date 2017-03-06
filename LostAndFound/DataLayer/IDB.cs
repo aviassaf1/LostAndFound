@@ -46,12 +46,7 @@ namespace DataLayer
         List<FBItem> getFBItemsList();
         List<Matches> getMatchesList();
         List<Items> getItemsList();
-
-
-
-
-
-
-
+        String updateFoundItemDescription(int itemID, string description);
+        String updateLostItemDescription(int itemID, string description);
     }
 }

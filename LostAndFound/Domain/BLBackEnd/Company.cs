@@ -54,13 +54,13 @@ namespace Domain.BLBackEnd
             _lostItems.Add(lostItemID);
             return true;
         }
-        public Boolean removeLostItem(int lostItemID)
+        public String removeLostItem(int lostItemID)
         {
             if (!_lostItems.Contains(lostItemID))
-                return false;
+                return "The company doesn't have that item"; ;
             _lostItems.Remove(lostItemID);
             cache.removeLostItem(lostItemID);
-            return true;
+            return "Item Removed";
         }
 
         internal List<CompanyItem> getAllItems()
@@ -101,13 +101,34 @@ namespace Domain.BLBackEnd
             return matches;
         }
 
-        public Boolean removeFoundItem(int foundItemID)
+        public String removeFoundItem(int foundItemID)
         {
             if (!_foundItems.Contains(foundItemID))
-                return false;
+                return "The company doesn't have that item";
             _foundItems.Remove(foundItemID);
             cache.removefoundItem(foundItemID);
-            return true;
+            return "Item Removed";
+        }
+
+        internal String delete()
+        {
+            foreach(string group in FacebookGroups)
+            {
+                cache.removeFacebookGroup(_companyName, group);
+            }
+            foreach(int matchID in Matches)
+            {
+                removeMatch(matchID);
+            }
+            foreach (int foundItem in FoundItems)
+            {
+                removeFoundItem(foundItem);
+            }
+            foreach (int lostItem in LostItems)
+            {
+                removeLostItem(lostItem);
+            }
+            return cache.deleteCompany(_userName,_companyName);
         }
 
         public HashSet<int> Matches
@@ -141,6 +162,12 @@ namespace Domain.BLBackEnd
             return true;
         }
 
+        internal String edit(string password, string phone)
+        {
+            _password = password;
+            _phone = phone;
+            return cache.editCompany(_companyName, password, phone);
+        }
 
         public string Phone
         {

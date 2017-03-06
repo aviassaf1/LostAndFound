@@ -67,6 +67,11 @@ namespace Domain.BLBackEnd
             }
         }
 
+        internal string delete()
+        {
+            return cache.deleteMatch(MatchID);
+        }
+
         internal MatchStatus MatchStatus
         {
             get
