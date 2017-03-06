@@ -112,19 +112,19 @@ namespace Domain.BLBackEnd
 
         internal String delete()
         {
-            foreach(string group in FacebookGroups)
+            foreach(string group in FacebookGroups.ToArray())
             {
                 cache.removeFacebookGroup(_companyName, group);
             }
-            foreach(int matchID in Matches)
+            foreach(int matchID in Matches.ToArray())
             {
                 removeMatch(matchID);
             }
-            foreach (int foundItem in FoundItems)
+            foreach(int foundItem in FoundItems.ToArray())
             {
                 removeFoundItem(foundItem);
             }
-            foreach (int lostItem in LostItems)
+            foreach(int lostItem in LostItems.ToArray())
             {
                 removeLostItem(lostItem);
             }

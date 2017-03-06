@@ -28,21 +28,34 @@ namespace Domain.Managers
 
         public List<CompanyItem> getAllCompanyItems(string companyName)
         {
-            Company c = cache.getCompany(companyName);
-            if (c != null)
-                return c.getAllItems();
-            else
+            if (companyName == null)
                 return null;
+            Company company = cache.getCompany(companyName);
+            if (company == null)
+                return null;
+            return company.getAllItems();
         }
 
         public string addFoundItem(List<string> sColors, string sType, DateTime date, string location, string description,
             int serialNumber, string companyName, string contactName, string contactPhone, string photoLocation, string token)
         {
+            if (sColors == null || sType == null || date == null || location == null || description == null ||
+                companyName == null || contactName == null || contactPhone == null ||
+                photoLocation == null || token == null)
+            {
+                return "one of or more argument are null, add found itemm failed";
+            }
+            if (cache.getCompany(companyName) == null)
+                return "add found item fail, company does not exist";
             List<Color> colors = new List<Color>();
             foreach (string color in sColors)
             {
+                if (!enColors.ContainsKey(color))
+                    return "add found item fail, there is no color like that";
                 colors.Add(enColors[color]);
             }
+            if (!enTypes.ContainsKey(sType))
+                return "add found item fail, there is no item type like that";
             ItemType type = enTypes[sType];
             //check Date is not bigger than today
             if (date.CompareTo(DateTime.Now) > 0)
@@ -60,11 +73,23 @@ namespace Domain.Managers
         public string addLostItem(List<string> sColors, string sType, DateTime date, string location, string description,
             int serialNumber, string companyName, string contactName, string contactPhone, string photoLocation, string token)
         {
+            if(sColors==null|| sType == null || date == null || location == null || description == null || 
+                companyName == null || contactName == null || contactPhone == null ||
+                photoLocation == null || token == null)
+            {
+                return "one of or more argument are null, add lost itemm failed";
+            }
+            if (cache.getCompany(companyName) == null)
+                return "add lost item fail, company does not exist";
             List<Color> colors = new List<Color>();
             foreach (string color in sColors)
             {
+                if (!enColors.ContainsKey(color))
+                    return "add lost item fail, there is no color like that";
                 colors.Add(enColors[color]);
             }
+            if (!enTypes.ContainsKey(sType))
+                return "add lost item fail, there is no item type like that";
             ItemType type = enTypes[sType];
             //check Date is not bigger than today
             if (date.CompareTo(DateTime.Now) > 0)
@@ -104,9 +129,11 @@ namespace Domain.Managers
             return "";
         }
 
-        public string editItem(int itemID, DateTime date, string location, string description, int serialNumber, string contactName, string contactPhone, string photoLocation)
+        public string editItem(int itemID, DateTime date, string location, string description, int serialNumber, string contactName, string contactPhone)
         {
             CompanyItem item = cache.getCompanyItem(itemID);
+            if (item == null || date == null || location == null || description == null || contactName == null || contactName == null || contactPhone == null || DateTime.Today<date)
+                return "one or more of the arguments is incorrect, edit item fail";
             return item.updateItem( date,  location,  description,  serialNumber,  contactName,  contactPhone);
         }
     }

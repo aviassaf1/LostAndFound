@@ -51,10 +51,10 @@ namespace Domain
 
         public void setUp()
         {
-            new Company("Guy", "Hello6", "Guy", "05000000", new HashSet<string>());
-            new Company("Guy2", "Hello6", "Guy2", "05000000", new HashSet<string>());
-            addFacebookGroup("Guy", "1538105046204967");
-            addFacebookGroup("Guy2", "1538105046204967");
+            Company comp1= new Company("Guy", "Hello6", "Guy", "05000000", new HashSet<string>());
+            Company comp2 = new Company("Guy2", "Hello6", "Guy2", "05000000", new HashSet<string>());
+            comp1.addFacebookGroup("1538105046204967");
+            comp2.addFacebookGroup("1538105046204967");
             List<Color> colors1 = new List<Color>();
             List<Color> colors2 = new List<Color>();
             colors2.Add(Color.RED);
@@ -188,7 +188,7 @@ namespace Domain
 
         internal String deleteCompany(string _userName, string _companyName)
         {
-            if (_companies[_userName] != null)
+            if (_companies.ContainsKey(_userName))
             {
                 _companies.Remove(_userName);
                 return _db.removeCompany(_userName);
@@ -283,7 +283,7 @@ namespace Domain
 
         internal void removeLostItem(int lostItemID)
         {
-            if (_lostItems[lostItemID] != null)
+            if (_lostItems.ContainsKey(lostItemID))
             {
                 _lostItems.Remove(lostItemID);
                 _db.removeItem(lostItemID);
@@ -314,7 +314,7 @@ namespace Domain
                 lostItem.Description, lostItem.SerialNumber, lostItem.CompanyName, lostItem.ContactName,
                 lostItem.ContactPhone, lostItem.PhotoLocation, lostItem.WasFound);
             _lostItems.Add(id, lostItem);
-
+            getCompany(lostItem.CompanyName).addLostItem(id);
             lostItem.ItemID = id;
         }
 
@@ -324,6 +324,7 @@ namespace Domain
                 foundItem.Description, foundItem.SerialNumber, foundItem.CompanyName, foundItem.ContactName,
                 foundItem.ContactPhone, foundItem.PhotoLocation, foundItem.Delivered);
             _foundItems.Add(id, foundItem);
+            getCompany(foundItem.CompanyName).addFoundItem(id);
 
             foundItem.ItemID = id;
         }
@@ -339,9 +340,9 @@ namespace Domain
 
         internal void removefoundItem(int foundItemID)
         {
-            if (_lostItems[foundItemID] != null)
+            if (_foundItems.ContainsKey(foundItemID))
             {
-                _lostItems.Remove(foundItemID);
+                _foundItems.Remove(foundItemID);
                 _db.removeItem(foundItemID);
             }
         }
