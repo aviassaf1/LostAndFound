@@ -49,7 +49,7 @@ namespace Domain
             }
         }
 
-        private void initCache()
+        public void initCache()//public for test only
         {
             _admins = new Dictionary<string, Admin>();
             _companies = new Dictionary<string, Company>();
@@ -78,9 +78,12 @@ namespace Domain
             foreach (LostItems li in lostItems)
             {
                 List<Color> colors = new List<Color>();
-                foreach(string col in stringToListOfColors(li.colors))
+                if (li.colors != null)
                 {
-                    colors.Add(Colors[col]);
+                    foreach (string col in stringToListOfColors(li.colors))
+                    {
+                        colors.Add(Colors[col]);
+                    }
                 }
                 _lostItems.Add(li.itemID, new LostItem(li.itemID, colors, HebTypes[li.itemType], li.lostDate.Value, li.location, li.description,  li.CompanyItems.serialNumber.Value, li.companyName, li.CompanyItems.contactName, li.CompanyItems.contactPhone, li.photoLocation, li.delivered.Value));
             }
@@ -88,18 +91,24 @@ namespace Domain
             foreach (FoundItems fi in foundItems)
             {
                 List<Color> colors = new List<Color>();
-                foreach (string col in stringToListOfColors(fi.colors))
+                if (fi.colors != null)
                 {
-                    colors.Add(Colors[col]);
+                    foreach (string col in stringToListOfColors(fi.colors))
+                    {
+                        colors.Add(Colors[col]);
+                    }
                 }
                 _foundItems.Add(fi.itemID, new FoundItem(fi.itemID, colors, HebTypes[fi.itemType], fi.findingDate.Value, fi.location, fi.description, fi.CompanyItems.serialNumber.Value, fi.companyName, fi.CompanyItems.contactName, fi.CompanyItems.contactPhone, fi.photoLocation, fi.delivered.Value));
             }
             foreach (DataLayer.FBItem fbi in FBItems)
             {
                 List<Color> colors = new List<Color>();
-                foreach (string col in stringToListOfColors(fbi.colors))
+                if (fbi.colors != null)
                 {
-                    colors.Add(Colors[col]);
+                    foreach (string col in stringToListOfColors(fbi.colors))
+                    {
+                        colors.Add(Colors[col]);
+                    }
                 }
                 _FBItems.Add(fbi.postId, new Domain.BLBackEnd.FBItem(fbi.itemID, colors, HebTypes[fbi.itemType], fbi.lostDate.Value/* change lost date name*/, fbi.location, fbi.description, fbi.postId, fbi.publisherName, FBTypes[fbi.type]));
             }
