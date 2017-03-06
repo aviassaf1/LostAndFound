@@ -1248,7 +1248,7 @@ namespace DataLayer
                     return "item was found but it is ot a found item of a company";
                 }
                 fItem.description = description;
-                updateCompanyItem(itemID, item.CompanyItems.serialNumber.Value, item.CompanyItems.contactName, item.CompanyItems.contactPhone, item.CompanyItems.companyName);
+                updateCompanyItem(itemID, item.CompanyItems.serialNumber.Value, item.CompanyItems.contactName, item.CompanyItems.contactPhone);
                 db.SaveChanges();
             }
             catch (Exception e)
@@ -1269,7 +1269,7 @@ namespace DataLayer
                     return "item was found but it is ot a found item of a company";
                 }
                 lItem.description = description;
-                updateCompanyItem(itemID, item.CompanyItems.serialNumber.Value, item.CompanyItems.contactName, item.CompanyItems.contactPhone, item.CompanyItems.companyName);
+                updateCompanyItem(itemID, item.CompanyItems.serialNumber.Value, item.CompanyItems.contactName, item.CompanyItems.contactPhone);
                 db.SaveChanges();
             }
             catch (Exception e)

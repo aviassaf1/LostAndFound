@@ -160,10 +160,10 @@ namespace Domain
             return null;
 		}
 		
-        internal void deleteMatch(int matchID)
+        internal String deleteMatch(int matchID)
         {
             _matches.Remove(matchID);
-            _db.removeMatch(matchID);
+            return _db.removeMatch(matchID);
         }
 
         internal BLBackEnd.FBItem getFBItemByPostID(string postID)
@@ -289,7 +289,7 @@ namespace Domain
                 _db.updateFoundItemDescription(companyItem.ItemID, companyItem.Description);
             if ((companyItem.GetType()).Equals(typeof(LostItem)))
                 _db.updateLostItemDescription(companyItem.ItemID, companyItem.Description);
-            return _db.updateCompanyItem(companyItem.ItemID, companyItem.SerialNumber, companyItem.ContactName, companyItem.ContactPhone, companyItem.CompanyName, companyItem.Description);
+            return _db.updateCompanyItem(companyItem.ItemID, companyItem.SerialNumber, companyItem.ContactName, companyItem.ContactPhone);
         }
 
         internal void removefoundItem(int foundItemID)
