@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace ForumBuilder.Systems
+namespace Domain
 {
     class Logger
     {

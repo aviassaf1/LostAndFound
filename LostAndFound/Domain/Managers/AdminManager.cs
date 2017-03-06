@@ -11,6 +11,7 @@ namespace Domain.Managers
     {
         private static IAdminManager singleton;
         private Cache cache;
+        private Logger logger = Logger.getInstance;
 
         private AdminManager()
         {
@@ -34,16 +35,28 @@ namespace Domain.Managers
             //check not exist
             //check phone type
             //check password
+            string logg;
             if (userName == null || password == null || companyName == null || phone == null || facebookGroups == null)
-                return "one of the arguments or more is null, add company failed";
+            {
+                logg= "one of the arguments or more is null, add company failed";
+                logger.logPrint(logg, 0);
+                logger.logPrint(logg, 2);
+                return logg;
+            }
             Company company = cache.getCompany(companyName);
             if (company != null)
             {
-                return "company already exists in the system";
+                logg = "company already exists in the system";
+                logger.logPrint(logg, 0);
+                logger.logPrint(logg, 2);
+                return logg;
             }
             if (userName.Equals("") || password.Equals("") || phone.Equals("")|| companyName.Equals(""))
             {
-                return "one or more of the fields is missing";
+                logg = "one or more of the fields is missing";
+                logger.logPrint(logg, 0);
+                logger.logPrint(logg, 2);
+                return logg;
             }
             // check if the password is strong enough
             bool isNumExist = false;
@@ -51,7 +64,12 @@ namespace Domain.Managers
             bool isBigKeyExist = false;
             bool isKeyRepeting3Times = false;
             if (password.Length < 6)
-                return "password should contain at least 6 ccharacters, add company Fail" ;
+            {
+                logg = "password should contain at least 6 ccharacters, add company Fail";
+                logger.logPrint(logg, 0);
+                logger.logPrint(logg, 2);
+                return logg;
+            }
             for (int i = 0; i < password.Length; i++)
             {
                 if (password.ElementAt(i) <= '9' && password.ElementAt(i) >= '0')
@@ -73,15 +91,24 @@ namespace Domain.Managers
             }
             if (!(isNumExist && isSmallKeyExist && isBigKeyExist && !isKeyRepeting3Times))
             {
-                return "password isnt strong enough";
+                logg = "password isnt strong enough";
+                logger.logPrint(logg, 0);
+                logger.logPrint(logg, 2);
+                return logg;
             }
             // check if the the phone is in a correct format
             if (phone.Length!=10 && phone.Length!=9)
             {
-                return "phone number's length is invalid";
+                logg = "phone number's length is invalid";
+                logger.logPrint(logg, 0);
+                logger.logPrint(logg, 2);
+                return logg;
             }
             company = new Company(userName, password, companyName, phone, facebookGroups);
-            return "company has been added";            
+            logg = "company has been added";
+            logger.logPrint(logg, 0);
+            logger.logPrint(logg, 1);
+            return logg;
         }
 
         public string deleteCompany(string companyName)
@@ -89,17 +116,24 @@ namespace Domain.Managers
             Company company = cache.getCompany(companyName);
             if (company == null)
             {
-                return "company not exists in the system";
+                string logg = "company not exists in the system";
+                logger.logPrint(logg, 0);
+                logger.logPrint(logg, 1);
+                return logg;
             }            
             return company.delete();
         }
 
         public string editCompany(string companyName, string password, string phone)
         {
+            string logg;
             if (companyName==null || password==null|| phone==null||companyName.Equals("") || password.Equals("") ||
                 phone.Equals(""))
             {
-                return "one or more of the fields is missing";
+                logg = "one or more of the fields is missing";
+                logger.logPrint(logg, 0);
+                logger.logPrint(logg, 1);
+                return logg;
             }
             // check if the password is strong enough
             bool isNumExist = false;
@@ -107,7 +141,12 @@ namespace Domain.Managers
             bool isBigKeyExist = false;
             bool isKeyRepeting3Times = false;
             if (password.Length < 6)
-                return "password should contain at least 6 ccharacters, edit company Fail";
+            {
+                logg = "password should contain at least 6 ccharacters, edit company Fail";
+                logger.logPrint(logg, 0);
+                logger.logPrint(logg, 1);
+                return logg;
+            }
             for (int i = 0; i < password.Length; i++)
             {
                 if (password.ElementAt(i) <= '9' && password.ElementAt(i) >= '0')
@@ -129,12 +168,18 @@ namespace Domain.Managers
             }
             if (!(isNumExist && isSmallKeyExist && isBigKeyExist && !isKeyRepeting3Times))
             {
-                return "password isnt strong enough";
+                logg = "password isnt strong enough";
+                logger.logPrint(logg, 0);
+                logger.logPrint(logg, 1);
+                return logg;
             }
             // check if the the phone is in a correct format
             if (phone.Length != 10 && phone.Length != 9)
             {
-                return "phone number's length is invalid";
+                logg = "phone number's length is invalid";
+                logger.logPrint(logg, 0);
+                logger.logPrint(logg, 1);
+                return logg;
             }
             Company company = cache.getCompany(companyName);
             return company.edit(password, phone);
