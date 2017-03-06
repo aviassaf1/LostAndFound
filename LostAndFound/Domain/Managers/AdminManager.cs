@@ -34,6 +34,8 @@ namespace Domain.Managers
             //check not exist
             //check phone type
             //check password
+            if (userName == null || password == null || companyName == null || phone == null || facebookGroups == null)
+                return "one of the arguments or more is null, add company failed";
             Company company = cache.getCompany(companyName);
             if (company != null)
             {
@@ -48,6 +50,8 @@ namespace Domain.Managers
             bool isSmallKeyExist = false;
             bool isBigKeyExist = false;
             bool isKeyRepeting3Times = false;
+            if (password.Length < 6)
+                return "password should contain at least 6 ccharacters, add company Fail" ;
             for (int i = 0; i < password.Length; i++)
             {
                 if (password.ElementAt(i) <= '9' && password.ElementAt(i) >= '0')
@@ -83,7 +87,7 @@ namespace Domain.Managers
         public string deleteCompany(string companyName)
         {
             Company company = cache.getCompany(companyName);
-            if (company != null)
+            if (company == null)
             {
                 return "company not exists in the system";
             }            
@@ -92,7 +96,8 @@ namespace Domain.Managers
 
         public string editCompany(string companyName, string password, string phone)
         {
-            if (companyName.Equals("") || password.Equals("") || phone.Equals(""))
+            if (companyName==null || password==null|| phone==null||companyName.Equals("") || password.Equals("") ||
+                phone.Equals(""))
             {
                 return "one or more of the fields is missing";
             }
@@ -101,6 +106,8 @@ namespace Domain.Managers
             bool isSmallKeyExist = false;
             bool isBigKeyExist = false;
             bool isKeyRepeting3Times = false;
+            if (password.Length < 6)
+                return "password should contain at least 6 ccharacters, edit company Fail";
             for (int i = 0; i < password.Length; i++)
             {
                 if (password.ElementAt(i) <= '9' && password.ElementAt(i) >= '0')
