@@ -46,7 +46,7 @@ namespace Domain.Managers
                     match.delete();
                 }
                 else
-                    return "not good matchNumber";
+                    return "not good statusNumber";
                 return "status Changed";
             }
             return "no match with that id";
@@ -72,6 +72,8 @@ namespace Domain.Managers
 
         public List<Match> findMatches(CompanyItem cItem, String token)
         {
+            if (cItem == null || token == null)
+                return null;
             List<Match> newMatches = new List<Match>();
             List<Item> items = new List<Item>();
             List<Item> cItems;
@@ -171,8 +173,19 @@ namespace Domain.Managers
         }
         public List<FBItem> getPostsFromGroup(String token, String GroupID)
         {
+            if (token == null || GroupID == null)
+                return null;
             List<FBItem> answer = new List<FBItem>();
-            var fb = new FacebookClient(token);
+            var fb = new FacebookClient();
+            try
+            {
+                //make sure the token is good
+                fb = new FacebookClient(token);
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
             fb.Version = "v2.3";
             var parameters = new Dictionary<string, object>();
             int daysAgo = 3;
@@ -180,7 +193,17 @@ namespace Domain.Managers
             nDaysAgo = nDaysAgo.AddDays(-daysAgo);
             Int32 unixTimestamp = (Int32)(nDaysAgo.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
             parameters["since"] = unixTimestamp;
-            dynamic result = fb.Get(GroupID+"/feed"/*, new { since = unixTimestamp }*/);
+            dynamic result;
+            try
+            {
+                //make sure post succeeds with GID
+                result = fb.Get(GroupID + "/feed"/*, new { since = unixTimestamp }*/);
+            }
+            catch (Exception)
+            {
+
+                return null;
+            }
             var posts = result["data"];
             foreach (var post in posts)
             {
@@ -259,6 +282,11 @@ namespace Domain.Managers
                 colors.Add(Color.UNKNOWN);
             }
             return colors;
+        }
+
+        public Match getMatchByID(int matchID)
+        {
+               return Cache.getInstance.getMatch(matchID);
         }
     }
 }

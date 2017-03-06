@@ -62,7 +62,7 @@ namespace Domain.Managers
                 //make sure the token is good
                 fb = new FacebookClient(token);
             }
-            catch(Exception )
+            catch(Exception e)
             {
                 return "PublishInventory: token is invalid";
             }
@@ -138,6 +138,10 @@ namespace Domain.Managers
 
         public List<Item> getFoundItems3Days(string companyName, DateTime date)
         {
+            if (companyName == null || date == null)
+            {
+                return null;
+            }
             Company company = cache.getCompany(companyName);
             if (company == null)
             {
@@ -194,9 +198,13 @@ namespace Domain.Managers
 
         public Dictionary<string, string> getSystemCompanyFBGroup(string companyName, string token)
         {
+            if (companyName == null || token == null)
+            {
+                return null;
+            }
             Dictionary<string, string> result = new Dictionary<string, string>();
             Dictionary<string, string> allFBGroups = getAllCompanyFBGroup(companyName, token);
-            if(allFBGroups == null)
+            if (allFBGroups == null)
             {
                 return null;
             }
@@ -219,6 +227,15 @@ namespace Domain.Managers
 
         public Dictionary<string, string> getAllCompanyFBGroup(string companyName, string token)
         {
+            if (companyName == null || token == null)
+            {
+                return null;
+            }
+            Company c = getCompanyByName(companyName);
+            if (c == null)
+            {
+                return null;
+            }
             Dictionary<string, string> res = new Dictionary<string, string>();
             var fb = new FacebookClient();
             try
@@ -226,7 +243,7 @@ namespace Domain.Managers
                 //make sure the token is good
                 fb = new FacebookClient(token);
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return null;
             }

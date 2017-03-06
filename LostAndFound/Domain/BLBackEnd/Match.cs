@@ -72,12 +72,13 @@ namespace Domain.BLBackEnd
             return cache.deleteMatch(MatchID);
         }
 
-        internal MatchStatus MatchStatus
+        public MatchStatus MatchStatus
         {
             get
             {
                 return _matchStatus;
             }
+
 
             set
             {
