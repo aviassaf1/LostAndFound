@@ -14,5 +14,11 @@ namespace Domain.Managers
         String publishInventory(String token, String GroupID, int days, string compaynUserName);//max days=8
         List<Item> getLostItems3Days(string companyName, DateTime date);
         List<Item> getFoundItems3Days(string companyName, DateTime date);
+        String addFBGroup(string companyName, string groupID);
+        String removeFBGroup(string companyName, string groupID);
+        Dictionary<string, string> getSystemCompanyFBGroup(string companyName, string token);
+        Dictionary<string, string> getAllCompanyFBGroup(string companyName, string token);
+
+
     }
 }

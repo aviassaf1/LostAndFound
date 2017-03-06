@@ -122,5 +122,79 @@ namespace Domain.Managers
             }
             return itemsFromLastThreeDays;
         }
+
+        public string addFBGroup(string companyName, string groupID)
+        {
+            Company c = getCompanyByName(companyName);
+            bool ok = c.addFacebookGroup(groupID);
+            if (ok)
+                return "CompanyManager-addFBGroup: facebook group added to comapny";
+            else
+                return "CompanyManager-addFBGroup: facebook group was already added";
+        }
+
+        public string removeFBGroup(string companyName, string groupID)
+        {
+            Company c = getCompanyByName(companyName);
+            bool ok = c.removeFacebookGroup(groupID);
+            if (ok)
+                return "CompanyManager-removeFBGroup: facebook group was removed";
+            else
+                return "CompanyManager-removeFBGroup: facebook group is not in the groups list";
+        }
+
+        public Dictionary<string, string> getSystemCompanyFBGroup(string companyName, string token)
+        {
+            Dictionary<string, string> result = new Dictionary<string, string>();
+            Dictionary<string, string> allFBGroups = getAllCompanyFBGroup(companyName, token);
+            Company c = getCompanyByName(companyName);
+            HashSet<string> FBgroups = c.FacebookGroups;
+            foreach(string groupID in FBgroups)
+            {
+                if (allFBGroups.ContainsKey(groupID))
+                {
+                    result.Add(groupID, allFBGroups[groupID]);
+                }
+            }
+            return result;
+
+        }
+
+        public Dictionary<string, string> getAllCompanyFBGroup(string companyName, string token)
+        {
+            Dictionary<string, string> res = new Dictionary<string, string>();
+            var fb = new FacebookClient(token);
+            fb.Version = "v2.3";
+            var parameters = new Dictionary<string, object>();
+            parameters["fields"] = "groups{name}";
+            dynamic result = fb.Get("me", parameters);
+            var groups = result.groups["data"];
+            bool isNext = true;
+            var paging = result.groups["paging"];
+            int i = 0;
+            while (isNext)
+            {
+                foreach (var group in groups)
+                {
+                    string groupname = group["name"];
+                    var gid = group["id"];
+                    res.Add(gid, groupname);
+                }
+                if (i != 0)
+                    paging = result["paging"];
+                if (!paging.ContainsKey("next"))
+                    isNext = false;
+                else
+                {
+                    var nextURL = paging["next"];
+                    result = fb.Get((string)nextURL);
+                    groups = result["data"];
+                    i++;
+                }
+
+
+            }
+            return res;
+        }
     }
 }
