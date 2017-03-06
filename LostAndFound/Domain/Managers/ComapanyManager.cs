@@ -13,6 +13,7 @@ namespace Domain.Managers
         private Dictionary<String ,String > _FBTokens=new Dictionary<string, string>();//company name, token
         private static ICompanyManager singleton;
         private Cache cache;
+        private const int MAXDAYS = 8;
 
         private ComapanyManager()
         {
@@ -47,20 +48,31 @@ namespace Domain.Managers
             return "login was succeeded";
         }
 
-        public string publishInventory(string token, string GroupID, int days, string companyName)
+        public string publishInventory(string token, string groupID, int days, string companyName)
         {
+            if (token == null || groupID == null || companyName == null)
+            {
+                return "PublishInventory: values cannot be null";
+            }
+            if(days > MAXDAYS)
+                return "PublishInventory: days is more than MAXDAYS";
             var fb = new FacebookClient();
             try
             {
+                //make sure the token is good
                 fb = new FacebookClient(token);
             }
-            catch(Exception e)
+            catch(Exception )
             {
-                return e.Message;
+                return "PublishInventory: token is invalid";
             }
             fb.Version = "v2.3";
             var parameters = new Dictionary<string, object>();
             List<CompanyItem> items = ItemManager.getInstance.getAllCompanyItems(companyName);
+            if (items == null)
+            {
+                return "PublishInventory: companyName is invalid";
+            }
             string inventory = "אלו הפריטים הנמצאים במחלקת אבדות ומציאות: \n";
             string format = "item of type {0} and color(s) {1}\n";
             DateTime nDaysAgo = DateTime.Now;
@@ -76,8 +88,17 @@ namespace Domain.Managers
                     }
                 }
             }
+            dynamic result = null;
+            try
+            {
+                //make sure post succeeds with GID
+                result = fb.Post(groupID + "/feed", new { message = inventory });
+            }
+            catch(Exception)
+            {
 
-            dynamic result = fb.Post(GroupID + "/feed", new { message = inventory });
+                return "PublishInventory: post to facebook failed";
+            }
             return "true";
         }
 
@@ -93,6 +114,10 @@ namespace Domain.Managers
 
         public List<Item> getLostItems3Days(string companyName, DateTime date)
         {
+            if(companyName == null || date == null)
+            {
+                return null;
+            }
             Company company = cache.getCompany(companyName);
             if (company == null)
             {
@@ -133,20 +158,36 @@ namespace Domain.Managers
 
         public string addFBGroup(string companyName, string groupID)
         {
+            if (companyName == null || groupID == null)
+            {
+                return null;
+            }
             Company c = getCompanyByName(companyName);
+            if (c == null)
+            {
+                return "CompanyManager-addFBGroup: company name is not valid";
+            }
             bool ok = c.addFacebookGroup(groupID);
             if (ok)
-                return "CompanyManager-addFBGroup: facebook group added to comapny";
+                return "true";
             else
                 return "CompanyManager-addFBGroup: facebook group was already added";
         }
 
         public string removeFBGroup(string companyName, string groupID)
         {
+            if(companyName == null || groupID == null)
+            {
+                return null;
+            }
             Company c = getCompanyByName(companyName);
+            if (c == null)
+            {
+                return "CompanyManager-removeFBGroup: company name is not valid";
+            }
             bool ok = c.removeFacebookGroup(groupID);
             if (ok)
-                return "CompanyManager-removeFBGroup: facebook group was removed";
+                return "true";
             else
                 return "CompanyManager-removeFBGroup: facebook group is not in the groups list";
         }
@@ -155,7 +196,15 @@ namespace Domain.Managers
         {
             Dictionary<string, string> result = new Dictionary<string, string>();
             Dictionary<string, string> allFBGroups = getAllCompanyFBGroup(companyName, token);
+            if(allFBGroups == null)
+            {
+                return null;
+            }
             Company c = getCompanyByName(companyName);
+            if (c == null)
+            {
+                return null;
+            }
             HashSet<string> FBgroups = c.FacebookGroups;
             foreach(string groupID in FBgroups)
             {
@@ -171,7 +220,16 @@ namespace Domain.Managers
         public Dictionary<string, string> getAllCompanyFBGroup(string companyName, string token)
         {
             Dictionary<string, string> res = new Dictionary<string, string>();
-            var fb = new FacebookClient(token);
+            var fb = new FacebookClient();
+            try
+            {
+                //make sure the token is good
+                fb = new FacebookClient(token);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
             fb.Version = "v2.3";
             var parameters = new Dictionary<string, object>();
             parameters["fields"] = "groups{name}";
