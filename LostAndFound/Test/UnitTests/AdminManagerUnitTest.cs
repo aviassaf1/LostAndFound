@@ -34,8 +34,6 @@ namespace Test.UnitTests
             cache.clear();
         }
 
-
-
         [TestMethod]
         public void TestAddCompany()
         {
@@ -280,19 +278,5 @@ namespace Test.UnitTests
             Assert.AreNotEqual("T111111", comp.Password);
             Assert.AreNotEqual("051111111", comp.Phone);
         }
-        /*
-        [TestMethod]
-        public void TestAddCompanyWrong()
-        {
-            Assert.IsNull(ICM.getCompanyByName("TestAddCompany"));
-            IDM.addComapny("TestAddCompany", "Aa12345", "TestAddCompany", "050000000", new System.Collections.Generic.HashSet<string>());
-            Assert.IsNull(ICM.getCompanyByName("TestAddCompany"));
-            IDM.addComapny("TestAddCompany", "Aa12345", "TestAddCompany", "050000000", new System.Collections.Generic.HashSet<string>());
-            Assert.IsNull(ICM.getCompanyByName("TestAddCompany"));
-            IDM.addComapny("TestAddCompany", "Aa12345", "TestAddCompany", "050000000", new System.Collections.Generic.HashSet<string>());
-            Assert.IsNull(ICM.getCompanyByName("TestAddCompany"));
-        }
-        */
-
     }
 }
