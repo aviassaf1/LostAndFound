@@ -19,6 +19,6 @@ namespace Domain.Managers
         String deleteItem(int itemID);
 
         String editItem(int itemID, DateTime date, string location, string description,
-            int serialNumber, string contactName, string contactPhone, string photoLocation);
+            int serialNumber, string contactName, string contactPhone);
     }
 }

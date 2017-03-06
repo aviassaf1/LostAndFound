@@ -74,7 +74,7 @@ namespace Domain.Managers
                 return "PublishInventory: companyName is invalid";
             }
             string inventory = "אלו הפריטים הנמצאים במחלקת אבדות ומציאות: \n";
-            string format = "item of type {0} and color(s) {1}\n";
+            string format = " {0} בצבע {1}\n";
             DateTime nDaysAgo = DateTime.Now;
             nDaysAgo = nDaysAgo.AddDays(-days);
             foreach (CompanyItem item in items)

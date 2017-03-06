@@ -188,7 +188,7 @@ namespace Domain
 
         internal String deleteCompany(string _userName, string _companyName)
         {
-            if (_companies[_userName] != null)
+            if (_companies.ContainsKey(_userName))
             {
                 _companies.Remove(_userName);
                 return _db.removeCompany(_userName);
@@ -283,7 +283,7 @@ namespace Domain
 
         internal void removeLostItem(int lostItemID)
         {
-            if (_lostItems[lostItemID] != null)
+            if (_lostItems.ContainsKey(lostItemID))
             {
                 _lostItems.Remove(lostItemID);
                 _db.removeItem(lostItemID);
@@ -340,9 +340,9 @@ namespace Domain
 
         internal void removefoundItem(int foundItemID)
         {
-            if (_lostItems[foundItemID] != null)
+            if (_foundItems.ContainsKey(foundItemID))
             {
-                _lostItems.Remove(foundItemID);
+                _foundItems.Remove(foundItemID);
                 _db.removeItem(foundItemID);
             }
         }

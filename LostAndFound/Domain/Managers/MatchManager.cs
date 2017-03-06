@@ -194,16 +194,19 @@ namespace Domain.Managers
                     if (npost.ContainsKey("message"))
                     {
                         string description = post["message"];
-                        FBType fbType = getFBType(description);
-                        if (fbType != FBType.NO)
+                        if (!description.Contains("אלו הפריטים הנמצאים"))
                         {
-                            DateTime date = DateTime.Parse(post["created_time"]);
-                            string publisher = post["from"]["name"];
-                            List<Color> colors = getColors(description);
-                            ItemType itemType = getItemType(description);
-                            string location = "NeverLand";//"getLocation(description);
-                            FBItem item = new FBItem(colors, itemType, date, location, description, postID, publisher, fbType);
-                            answer.Add(item);
+                            FBType fbType = getFBType(description);
+                            if (fbType != FBType.NO)
+                            {
+                                DateTime date = DateTime.Parse(post["created_time"]);
+                                string publisher = post["from"]["name"];
+                                List<Color> colors = getColors(description);
+                                ItemType itemType = getItemType(description);
+                                string location = "NeverLand";//"getLocation(description);
+                                FBItem item = new FBItem(colors, itemType, date, location, description, postID, publisher, fbType);
+                                answer.Add(item);
+                            }
                         }
                     }
                 }
