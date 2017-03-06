@@ -15,7 +15,7 @@ namespace Test.UnitTests
         private Database db;
         private ICompanyManager ICM;
         private const string TRUESTRING = "true";
-        private const string TOKEN = "EAACEdEose0cBAEmt00lcO3ym3mdJaT1gqPZCaDlEDZBKa1O3nCXvMCBj6Ps7bgBHiCL3xqXhv2T1y2cx0n4h7aCZBwFDUUXWd5LS1CZBbmlft8Gh4u3t6PAZBmxETVpzZAN9L63uJKLhCKxG2ybVYeI5ADBUXSZB6PCNVStPR5cwjmeU26CoIpYKNAZCIXSi9agZD"; //TODO: use valid token 
+        private const string TOKEN = "EAACEdEose0cBAPHaC5zRwZCmSZCquCbxrCEjZAZBRUKB9JNA7ZBTHJQjEIIMOa9S3lXavZA1l9Hgw96XUax89b1pefzS4P2FsN0givVkG87eENOWwTZAOchXBbGck3tXrJOc88oPI0gEmahQPxYZAtCTu0BAVKVIzFPFIRPOW3tHHkjjylS42pedVFqxZCjZAUHVMZD"; //TODO: use valid token 
         private const string GID = "1538105046204967";
         private const string CName = "Guy";
 
@@ -67,10 +67,7 @@ namespace Test.UnitTests
         [TestMethod]
         public void PublishInvetoryInvalidArgs()
         {
-            string ans = ICM.publishInventory("notGoodToken", GID, 1, CName);
-            Assert.AreEqual(ans, "PublishInventory: token is invalid");
-
-            ans = ICM.publishInventory(TOKEN, "invalidGID", 1, CName);
+            string ans = ICM.publishInventory(TOKEN, "invalidGID", 1, CName);
             Assert.AreEqual(ans, "PublishInventory: post to facebook failed");
             
             ans = ICM.publishInventory(TOKEN, GID, 98, CName);
@@ -191,6 +188,67 @@ namespace Test.UnitTests
 
             ans = ICM.removeFBGroup(CName, null);
             Assert.IsNull(ans);
+        }
+
+        [TestMethod]
+        public void getSystemCompanyFBGroupValid()
+        {
+            Dictionary<string, string> ans;
+            ans = ICM.getSystemCompanyFBGroup(CName, TOKEN);
+            Company c = ICM.getCompanyByName(CName);
+            Assert.IsNotNull(ans);
+            Assert.AreEqual(c.FacebookGroups.Count, ans.Keys.Count);
+        }
+
+        [TestMethod]
+        public void getSystemCompanyFBGroupInvalid()
+        {
+            Dictionary<string, string> ans;
+            ans = ICM.getSystemCompanyFBGroup("notCompany", TOKEN);
+            Assert.IsNull(ans);
+
+        }
+
+        [TestMethod]
+        public void getSystemCompanyFBGroupNullArgs()
+        {
+            Dictionary<string, string> ans;
+            ans = ICM.getSystemCompanyFBGroup(null, TOKEN);
+            Assert.IsNull(ans);
+
+            ans = ICM.getSystemCompanyFBGroup(CName, null);
+            Assert.IsNull(ans);
+
+        }
+
+        [TestMethod]
+        public void getAllCompanyFBGroupValid()
+        {
+            Dictionary<string, string> ans;
+            ans = ICM.getAllCompanyFBGroup(CName, TOKEN);
+            Company c = ICM.getCompanyByName(CName);
+            Assert.IsNotNull(ans);
+            Assert.IsTrue(c.FacebookGroups.Count <= ans.Keys.Count);
+        }
+
+        [TestMethod]
+        public void getAllCompanyFBGroupInvalid()
+        {
+            Dictionary<string, string> ans;
+            ans = ICM.getAllCompanyFBGroup("notCompany", TOKEN);
+            Assert.IsNull(ans);
+        }
+
+        [TestMethod]
+        public void getAllCompanyFBGroupNullArgs()
+        {
+            Dictionary<string, string> ans;
+            ans = ICM.getAllCompanyFBGroup(null, TOKEN);
+            Assert.IsNull(ans);
+
+            ans = ICM.getAllCompanyFBGroup(CName, null);
+            Assert.IsNull(ans);
+
         }
     }
 }
