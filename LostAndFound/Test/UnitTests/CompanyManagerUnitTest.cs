@@ -15,7 +15,7 @@ namespace Test.UnitTests
         private Database db;
         private ICompanyManager ICM;
         private const string TRUESTRING = "true";
-        private const string TOKEN = "EAACEdEose0cBAPHaC5zRwZCmSZCquCbxrCEjZAZBRUKB9JNA7ZBTHJQjEIIMOa9S3lXavZA1l9Hgw96XUax89b1pefzS4P2FsN0givVkG87eENOWwTZAOchXBbGck3tXrJOc88oPI0gEmahQPxYZAtCTu0BAVKVIzFPFIRPOW3tHHkjjylS42pedVFqxZCjZAUHVMZD"; //TODO: use valid token 
+        private const string TOKEN = "EAACEdEose0cBALZCNDruEhZC3fiC5H7MceLKQ9fcjDbgWTeTK3J0tysMNnePpnOxcBgQxLgqbqN92XwMzlWPVhRHcMs7YvaJLYdet2foaZACFgcZCxFifQ0yMpm226gKnWlKQfcFx9daYGExJbCvGmzFg5y9maz0JTRtv7RvOWGzuvkTOrZC1"; //TODO: use valid token 
         private const string GID = "1538105046204967";
         private const string CName = "Guy";
 

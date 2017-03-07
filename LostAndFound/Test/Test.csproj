@@ -69,7 +69,6 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitTests\AdminManagerUnitTest.cs" />
     <Compile Include="UnitTests\CacheUnitTest.cs" />
