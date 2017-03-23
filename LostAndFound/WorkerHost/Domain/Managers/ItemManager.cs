@@ -87,7 +87,7 @@ namespace WorkerHost.Domain.Managers
             FoundItem newItem = new FoundItem(colors, type, date, location, description, serialNumber, companyName, contactName,
                 contactPhone, photoLocation);
             newItem.addToDB();
-            cache.getCompany(companyName).addFoundItem(newItem.ItemID);
+            //cache.getCompany(companyName).addFoundItem(newItem.ItemID);
             MatchManager.getInstance.findMatches(newItem, token);
             logg = "add found item: item was added successfully";
             logger.logPrint(logg, 0);
@@ -143,7 +143,7 @@ namespace WorkerHost.Domain.Managers
             LostItem newItem = new LostItem(colors, type, date, location, description, serialNumber, companyName, contactName,
                 contactPhone, photoLocation);
             newItem.addToDB();
-            Cache.getInstance.getCompany(companyName).addLostItem(newItem.ItemID);
+            //Cache.getInstance.getCompany(companyName).addLostItem(newItem.ItemID);
             MatchManager.getInstance.findMatches(newItem, token);
             logg = "add lost item: item was added successfully";
             logger.logPrint(logg, 0);

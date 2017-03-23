@@ -22,7 +22,7 @@ namespace WorkerHost.DataLayer
             {
                 singleton = new Database();
                 singleton.initializeDB();
-                singleton.clear();
+                //singleton.clear();
             }
             return singleton;
         }
@@ -732,7 +732,7 @@ namespace WorkerHost.DataLayer
                 return null;
             }
         }
-        public int addFBItem(List<string> colors, string itemType, DateTime lostDate, string location, string decription, string postId, string publisherName, string type)
+        public int addFBItem(List<string> colors, string itemType, DateTime lostDate, string location, string description, string postId, string publisherName, string type)
         {
             Items item = new Items();
             db.Items.Add(item);
@@ -741,7 +741,7 @@ namespace WorkerHost.DataLayer
             fbItem.itemID = item.itemID;
             item.FBItem = fbItem;
             fbItem.Items = item;
-            db.SaveChanges();
+            //db.SaveChanges();
             try
             {
                 fbItem.colors = null;
@@ -750,15 +750,17 @@ namespace WorkerHost.DataLayer
                     fbItem.colors = listOfColorsToString(colors);
                 }
                 //fbItem.description = decription;
-                db.SaveChanges();
+                //db.SaveChanges();
                 fbItem.location = location;
-                db.SaveChanges();
+                //db.SaveChanges();
                 fbItem.lostDate = lostDate;
                 fbItem.postId = postId;
-                db.SaveChanges();
+                //db.SaveChanges();
                 fbItem.publisherName = publisherName;
-                db.SaveChanges();
+                //db.SaveChanges();
                 fbItem.type = type;
+                fbItem.itemType = itemType;
+                fbItem.description = description;
                 //item.FBItem = fbItem;
                 //db.FBItem.Add(fbItem);
                 db.SaveChanges();

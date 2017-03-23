@@ -113,7 +113,6 @@ namespace WorkerHost.Domain.Managers
                         addMatch = false;
                         break;
                     }
-
                 }
                 if (addMatch)
                 {

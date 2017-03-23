@@ -13,13 +13,12 @@ namespace WorkerHost
     {
         public string testClass1(string color, string type, string name, string phone)
         {
-            string token = "EAACEdEose0cBANYjkoG8UgJnjAr13ZAvpExzHxAKSzuhlXpMReUAlZAl1fKgukBZAL3EgqkQhyvvbSXzHkTQl9qlvtbpLPeQCXivAvS7sRPGrlGyFUqZBZC4rzZAbiy4zPvmtwmXCiU3abFiOpt7WQzNFlGr9yxWPUQZCpDhhdjszgarjfZBjtykZBGIbZA3SZATgoZD";
+            string token = "EAACEdEose0cBAPoNTnMi17ZBZBrJgQRwuwkE6eLFzWDpiOKIzFbPPiJXEurEKmXu9yqDuZC6tlXZAsOfyxGIz0xGeYjhRXhZCG0lWPUI8CwrZBt8tDv21FBiJJ5XjUfY9uWGeob8sJL2p0fxD17BsgHLxsEJkyrUdfWu8rd9lB6qMX1ykr2Thu";
             List<FBItem> list = MatchManager.getInstance.getPostsFromGroup(token,
                 "1538105046204967");
-            //List<string> colors = new List<string>() { "PINK" };
             HashSet<string> fbg = new HashSet<string>() { "1538105046204967" };
             IAdminManager adm = AdminManager.getInstance;
-            string ans1 = adm.addComapny("GuyCompany", "gG123456", "GuyCompany", "050000000", fbg);
+            //string ans1 = adm.addComapny("GuyCompany", "gG123456", "GuyCompany", "050000000", fbg);
             string colorList = color;
             colorList = colorList.ToUpper();
             List<string> colors = stringToListOfColors(colorList);
@@ -30,7 +29,7 @@ namespace WorkerHost
             IItemManager itm = ItemManager.getInstance;
             string ans2 = itm.addFoundItem(colors, itemType, DateTime.Today, "here", "desc", 56658, "GuyCompany", cname,
                 cphone, "location", token);
-
+            /*
             for(int j = 0; j<5; j++)
             {
                 colors.Clear();
@@ -39,6 +38,7 @@ namespace WorkerHost
                 ItemManager.getInstance.addFoundItem(colors, itemType, DateTime.Today, "here", "desc", 56658, "GuyCompany", cname,
                 cphone, "location", token);
             }
+            */
             ComapanyManager.getInstance.publishInventory(token, "1538105046204967", 2, "GuyCompany");
              Domain.Cache cache = Domain.Cache.getInstance;
             int i = 0;
