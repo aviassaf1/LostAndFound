@@ -196,7 +196,7 @@ namespace WorkerHost.Domain.Managers
                 //make sure the token is good
                 fb = new FacebookClient(token);
             }
-            catch (Exception e)
+            catch
             {
                 return null;
             }
