@@ -68,5 +68,12 @@ namespace WorkerHost
             }
             return colorList;
         }
+
+        string IServerService.addLostItem(List<string> sColors, string sType, DateTime date, string location, string description, int serialNumber, string companyName, string contactName, string contactPhone, string photoLocation, string token)
+        {
+            IItemManager iim = ItemManager.getInstance;
+            return iim.addLostItem(sColors, sType, date, location, description,
+            serialNumber, companyName, contactName, contactPhone, photoLocation, token);
+        }
     }
 }
