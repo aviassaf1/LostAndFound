@@ -73,7 +73,7 @@ namespace WorkerHost.Domain.Managers
                 //make sure the token is good
                 fb = new FacebookClient(token);
             }
-            catch (Exception e)
+            catch
             {
                 logg = "PublishInventory: token is invalid";
                 logger.logPrint(logg, 0);
@@ -293,7 +293,7 @@ namespace WorkerHost.Domain.Managers
                 //make sure the token is good
                 fb = new FacebookClient(token);
             }
-            catch (Exception e)
+            catch
             {
                 return null;
             }
