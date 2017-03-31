@@ -66,11 +66,12 @@ namespace WebHost.WebPages
             {
                 showAlert("בבקשה להזין טלפון של מדווח האבידה");
             }
-            string token = "EAACEdEose0cBAPgpersMY9yjiN815tNP6IvchRcwqsFGJbUC7XZCsTpKZAnVFarhR0EQcqrhnDLk7WfGXHmxpyZA9SHTiYGmTZAZALwgKBcyJ2pVmxPefsIAvndck3vTNGxEu4JWw1vgt0cFLjn1wT5pGF7BWZA3qWEZCNU6pyo5TECqxLmCkj6";
+            string token = "EAACEdEose0cBAGzbmuXj2id4qU4Ed8riC947XaZCDJ9ZAy1kd5PIP2OKBf3Js1ThIF8ZBUr38AGDZATvIhZATFLetHUtRM560Xwt7tnsty9WgHS6zMyK9RvbJjNEPLUXFydDU1am3JsaZCjhOgs4OwWPlMRrbIunrZAPc6SYmZCpVIyV6zOGV9xU";
             var channel = Channel.getInstance;
             string ret = channel.addLostItem(sColors, sType, date, location, description,
             serialNumber, "GuyCompany", contactName,contactPhone, "D",token);
             int i = 0;
+            _contactName.Text = ret;
         }
         private void showAlert(String content)
         {

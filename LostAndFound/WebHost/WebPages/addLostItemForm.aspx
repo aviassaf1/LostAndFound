@@ -46,7 +46,6 @@
                 <p style="direction: rtl">
                     צבע הפריט:&nbsp;&nbsp;&nbsp;
                     <asp:CheckBoxList ID="_ColorsCheckBox" runat="server" Height="190px" Width="376px">
-                        <asp:ListItem Text="בחר צבע" Value="NONE"></asp:ListItem>
                         <asp:ListItem Text="ורוד" Value="PINK"></asp:ListItem>
                         <asp:ListItem Text="שחור" Value="BLACK"></asp:ListItem>
                         <asp:ListItem Text="כחול" Value="BLUE"></asp:ListItem>
