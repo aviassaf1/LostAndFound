@@ -25,9 +25,19 @@ namespace WebHost.WebPages
 
         protected void OnPaging(object sender, GridViewPageEventArgs e)
         {
-            
+
+            BindData();
             GridView1.PageIndex = e.NewPageIndex;
             GridView1.DataBind();
+        }
+
+        private void BindData()
+        {
+            //var channel = Channel.getInstance;
+            //string ret = channel.getCompanyItems();
+            //List<List<string>> 
+            //GridView1.DataSource =
+            //GridView1.DataBind();
         }
 
         protected void EditItem(object sender, GridViewEditEventArgs e)
