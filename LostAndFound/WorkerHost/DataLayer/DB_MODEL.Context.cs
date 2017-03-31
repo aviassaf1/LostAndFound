@@ -13,10 +13,10 @@ namespace WorkerHost.DataLayer
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class lostAndFoundDbEUEntities : DbContext
+    public partial class lostAndFoundDbEUEntities1 : DbContext
     {
-        public lostAndFoundDbEUEntities()
-            : base("name=lostAndFoundDbEUEntities")
+        public lostAndFoundDbEUEntities1()
+            : base("name=lostAndFoundDbEUEntities1")
         {
         }
     
@@ -26,6 +26,7 @@ namespace WorkerHost.DataLayer
         }
     
         public virtual DbSet<Companies> Companies { get; set; }
+        public virtual DbSet<CompanyFbConnection> CompanyFbConnection { get; set; }
         public virtual DbSet<CompanyItems> CompanyItems { get; set; }
         public virtual DbSet<FacebookGroups> FacebookGroups { get; set; }
         public virtual DbSet<FBItem> FBItem { get; set; }

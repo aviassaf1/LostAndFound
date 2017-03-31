@@ -17,6 +17,7 @@ namespace WorkerHost.DataLayer
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Companies()
         {
+            this.CompanyFbConnection = new HashSet<CompanyFbConnection>();
             this.CompanyItems = new HashSet<CompanyItems>();
             this.FacebookGroups = new HashSet<FacebookGroups>();
         }
@@ -26,6 +27,8 @@ namespace WorkerHost.DataLayer
         public string phone { get; set; }
     
         public virtual User User { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CompanyFbConnection> CompanyFbConnection { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CompanyItems> CompanyItems { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
