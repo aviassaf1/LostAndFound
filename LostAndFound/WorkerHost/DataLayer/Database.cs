@@ -9,7 +9,7 @@ namespace WorkerHost.DataLayer
     public class Database : IDB
     {
         private static Database singleton;
-        private lostAndFoundDbEUEntities db;
+        private lostAndFoundDbEUEntities1 db;
 
         private Database()
         {
@@ -89,7 +89,7 @@ namespace WorkerHost.DataLayer
         {
             try
             {
-                this.db = new lostAndFoundDbEUEntities();
+                this.db = new lostAndFoundDbEUEntities1();
                 string baseDir = AppDomain.CurrentDomain.BaseDirectory;
                 int index = baseDir.IndexOf("LostAndFound");
                 string dataDir = baseDir.Substring(0, index) + "LostAndFound\\LostAndFound\\";
@@ -199,6 +199,7 @@ namespace WorkerHost.DataLayer
                 foreach (FacebookGroups fbg in fbgList)
                 {
                     db.FacebookGroups.Remove(fbg);
+                    
                 }
                 db.SaveChanges();
             }
@@ -1279,6 +1280,99 @@ namespace WorkerHost.DataLayer
                 return e.ToString();
             }
             return "true";
+        }
+        private Companies getCompanyByCompanyName(string companyName)
+        {
+            try
+            {
+                foreach (Companies comp in db.Companies)
+                {
+                    if (comp.companyName.Equals(companyName))
+                    {
+                        return comp;
+                    }
+                }
+                return null;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+        public string addCompanyFbProfileConncection(string companyName, string fbProfile, bool isManager)
+        {
+            try
+            {
+                Companies company = getCompanyByCompanyName(companyName);
+                if (company == null)
+                {
+                    return "company was not found";
+                }
+                CompanyFbConnection cfbc = new CompanyFbConnection();
+                cfbc.companyName = companyName;
+                cfbc.fbProfile = fbProfile;
+                cfbc.isManager = isManager;
+                cfbc.Companies = company;
+                company.CompanyFbConnection.Add(cfbc);
+                db.SaveChanges();
+                return "company was added successfully";
+            }
+            catch(Exception e)
+            {
+                return e.ToString();
+            }
+        }
+
+        public string removeCompanyFbProfileConncection(string companyName, string fbProfile)
+        {
+            try
+            {
+                CompanyFbConnection cfbc = getCompanyFbProfileConncection(companyName, fbProfile);
+                if (cfbc == null)
+                {
+                    return "item was not found";
+                }
+                cfbc.Companies.CompanyFbConnection.Remove(cfbc);
+                cfbc.Companies = null;
+                db.CompanyFbConnection.Remove(cfbc);
+                db.SaveChanges();
+                return "item was removed successfully";
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+        }
+
+        public CompanyFbConnection getCompanyFbProfileConncection(string companyName, string fbProfile)
+        {
+            try
+            {
+                foreach (CompanyFbConnection cfbc in db.CompanyFbConnection)
+                {
+                    if (cfbc.companyName.Equals(companyName) && cfbc.fbProfile.Equals(fbProfile))
+                    {
+                        return cfbc;
+                    }
+                }
+                return null;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public List<CompanyFbConnection> getCompanyFbProfileConncectionList()
+        {
+            try
+            {
+                return db.CompanyFbConnection.ToList();
+            }
+            catch
+            {
+                return null;
+            }
         }
     }
 }

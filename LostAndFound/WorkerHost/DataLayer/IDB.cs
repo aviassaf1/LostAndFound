@@ -48,5 +48,9 @@ namespace WorkerHost.DataLayer
         List<Items> getItemsList();
         String updateFoundItemDescription(int itemID, string description);
         String updateLostItemDescription(int itemID, string description);
+        String addCompanyFbProfileConncection(string companyName, string fbProfile, bool isManager);
+        String removeCompanyFbProfileConncection(string companyName, string fbProfile);
+        CompanyFbConnection getCompanyFbProfileConncection(string companyName, string fbProfile);
+        List<CompanyFbConnection> getCompanyFbProfileConncectionList();
     }
 }
