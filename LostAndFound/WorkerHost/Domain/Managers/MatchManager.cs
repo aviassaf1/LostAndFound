@@ -302,5 +302,17 @@ namespace WorkerHost.Domain.Managers
         {
             return Cache.getInstance.getMatch(matchID);
         }
+
+        public List<Match> getMatchesByItemID(int itemID)
+        {
+            IItemManager iim = ItemManager.getInstance;
+            CompanyItem ci = Cache.getInstance.getCompanyItem(itemID);
+            if ( ci!= null)
+            {
+                return Cache.getInstance.getItemMatches(itemID,ci.CompanyName);
+            }
+            else
+                return null;
+        }
     }
 }

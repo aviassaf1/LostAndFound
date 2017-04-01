@@ -69,8 +69,13 @@ namespace WorkerHost
             return colorList;
         }
 
-        string IServerService.addLostItem(List<string> sColors, string sType, DateTime date, string location, string description, int serialNumber, string companyName, string contactName, string contactPhone, string photoLocation, string token)
+        string IServerService.addLostItem(List<string> sColors, string sType, DateTime date, string location, string description,
+            int serialNumber, string companyName, string contactName, string contactPhone, string photoLocation, string token)
         {
+
+            HashSet<string> fbg = new HashSet<string>() { "1538105046204967" };
+            string ans = AdminManager.getInstance.addComapny("GuyCompany", "gG123456", "GuyCompany", "050000000", fbg);
+
             IItemManager iim = ItemManager.getInstance;
             return iim.addLostItem(sColors, sType, date, location, description,
             serialNumber, companyName, contactName, contactPhone, photoLocation, token);

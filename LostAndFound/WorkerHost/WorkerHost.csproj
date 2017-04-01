@@ -163,10 +163,20 @@
     <Compile Include="Domain\Managers\IMatchManager.cs" />
     <Compile Include="Domain\Managers\ItemManager.cs" />
     <Compile Include="Domain\Managers\MatchManager.cs" />
-    <Compile Include="IServerService.cs" />
+    <Compile Include="ServiceLayer\Controllers\AdminController.cs" />
+    <Compile Include="ServiceLayer\Controllers\CompanyController.cs" />
+    <Compile Include="ServiceLayer\Controllers\IAdminController.cs" />
+    <Compile Include="ServiceLayer\Controllers\ICompanyController.cs" />
+    <Compile Include="ServiceLayer\Controllers\IItemController.cs" />
+    <Compile Include="ServiceLayer\Controllers\IMatchController.cs" />
+    <Compile Include="ServiceLayer\Controllers\ItemController.cs" />
+    <Compile Include="ServiceLayer\Controllers\MatchController.cs" />
+    <Compile Include="ServiceLayer\DataContracts\CompanyItemData.cs" />
+    <Compile Include="ServiceLayer\DataContracts\MatchData.cs" />
+    <Compile Include="ServiceLayer\IServerService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServerService.cs" />
-    <Compile Include="WorkerRole.cs" />
+    <Compile Include="ServiceLayer\ServerService.cs" />
+    <Compile Include="ServiceLayer\WorkerRole.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -194,6 +204,7 @@
       <LastGenOutput>Database_Model.cs</LastGenOutput>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

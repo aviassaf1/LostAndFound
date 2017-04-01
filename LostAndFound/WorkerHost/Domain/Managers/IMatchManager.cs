@@ -13,6 +13,7 @@ namespace WorkerHost.Domain.Managers
         String changeMatchStatus(int matchID, int statusNum);
         List<FBItem> getPostsFromGroup(String token, String GroupID);
         Match getMatchByID(int matchID);
+        List<Match> getMatchesByItemID(int itemID);
 
     }
 }

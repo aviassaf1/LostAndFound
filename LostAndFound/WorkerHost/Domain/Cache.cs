@@ -272,6 +272,21 @@ namespace WorkerHost.Domain
             _db.clear();
         }
 
+        internal List<Match> getItemMatches(int itemID,string companyName)
+        {
+            List<Match> matches = new List<Match>();
+            Match match;
+            foreach(int matchID in _companies[companyName].Matches)
+            {
+                match = _matches[matchID];
+                if (match.CompanyItemID == itemID || match.Item2ID == itemID)
+                {
+                    matches.Add(match);
+                }
+            }
+            return matches;
+        }
+
         internal void updateFoundItem(FoundItem foundItem)
         {
             _db.updateFoundItem(foundItem.ItemID, foundItem.getColorsList(), foundItem.ItemType.ToString(), foundItem.Date, foundItem.Location,
