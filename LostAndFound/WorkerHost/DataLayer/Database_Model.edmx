@@ -524,7 +524,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="lostAndFoundDbEUEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="lostAndFoundDbEUEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Companies" EntityType="Self.Companies" />
           <EntitySet Name="CompanyFbConnection" EntityType="Self.CompanyFbConnection" />
           <EntitySet Name="CompanyItems" EntityType="Self.CompanyItems" />
@@ -581,7 +581,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="lostAndFoundDbEUModelStoreContainer" CdmEntityContainer="lostAndFoundDbEUEntities1">
+        <EntityContainerMapping StorageEntityContainer="lostAndFoundDbEUModelStoreContainer" CdmEntityContainer="lostAndFoundDbEUEntities">
           <EntitySetMapping Name="Companies">
             <EntityTypeMapping TypeName="lostAndFoundDbEUModel.Companies">
               <MappingFragment StoreEntitySet="Companies">

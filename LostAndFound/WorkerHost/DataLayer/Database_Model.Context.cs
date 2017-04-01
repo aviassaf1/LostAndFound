@@ -13,10 +13,10 @@ namespace WorkerHost.DataLayer
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class lostAndFoundDbEUEntities1 : DbContext
+    public partial class lostAndFoundDbEUEntities : DbContext
     {
-        public lostAndFoundDbEUEntities1()
-            : base("name=lostAndFoundDbEUEntities1")
+        public lostAndFoundDbEUEntities()
+            : base("name=lostAndFoundDbEUEntities")
         {
         }
     
