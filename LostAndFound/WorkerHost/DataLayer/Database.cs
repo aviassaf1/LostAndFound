@@ -9,7 +9,7 @@ namespace WorkerHost.DataLayer
     public class Database : IDB
     {
         private static Database singleton;
-        private lostAndFoundDbEUEntities db;
+        private lostAndFoundDbEUEntities1 db;
 
         private Database()
         {
@@ -89,7 +89,7 @@ namespace WorkerHost.DataLayer
         {
             try
             {
-                this.db = new lostAndFoundDbEUEntities();
+                this.db = new lostAndFoundDbEUEntities1();
                 string baseDir = AppDomain.CurrentDomain.BaseDirectory;
                 int index = baseDir.IndexOf("LostAndFound");
                 string dataDir = baseDir.Substring(0, index) + "LostAndFound\\LostAndFound\\";
@@ -1299,21 +1299,48 @@ namespace WorkerHost.DataLayer
                 return null;
             }
         }
-        public string addCompanyFbProfileConncection(string companyName, string fbProfile, bool isManager)
+        private User getUserByUserName(string userName)
+        {
+            try
+            {
+                foreach (User u in db.User)
+                {
+                    if (u.UserName.Equals(userName))
+                    {
+                        return u;
+                    }
+                }
+                return null;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+        public string addCompanyUsers(string companyName, string fbProfileId, bool isManager, string userName, string password)
         {
             try
             {
                 Companies company = getCompanyByCompanyName(companyName);
+                User user = getUserByUserName(userName);
                 if (company == null)
                 {
                     return "company was not found";
                 }
-                CompanyFbConnection cfbc = new CompanyFbConnection();
-                cfbc.companyName = companyName;
-                cfbc.fbProfile = fbProfile;
-                cfbc.isManager = isManager;
-                cfbc.Companies = company;
-                company.CompanyFbConnection.Add(cfbc);
+                if (user == null)
+                {
+                    return "user was not found";
+                }
+                CompanyUsers cu = new CompanyUsers();
+                cu.companyName = companyName;
+                cu.fbProfileId = fbProfileId;
+                cu.isManager = isManager;
+                cu.userName = userName;
+                cu.password = password;
+                cu.Companies = company;
+                cu.User = user;
+                company.CompanyUsers.Add(cu);
+                user.CompanyUsers = cu;
                 db.SaveChanges();
                 return "company was added successfully";
             }
@@ -1323,18 +1350,20 @@ namespace WorkerHost.DataLayer
             }
         }
 
-        public string removeCompanyFbProfileConncection(string companyName, string fbProfile)
+        public string removeCompanyUsers(string userName)
         {
             try
             {
-                CompanyFbConnection cfbc = getCompanyFbProfileConncection(companyName, fbProfile);
-                if (cfbc == null)
+                CompanyUsers cu = getCompanyUsers(userName);
+                if (cu == null)
                 {
                     return "item was not found";
                 }
-                cfbc.Companies.CompanyFbConnection.Remove(cfbc);
-                cfbc.Companies = null;
-                db.CompanyFbConnection.Remove(cfbc);
+                cu.Companies.CompanyUsers.Remove(cu);
+                cu.Companies = null;
+                cu.User.CompanyUsers = null;
+                cu.User = null;
+                db.CompanyUsers.Remove(cu);
                 db.SaveChanges();
                 return "item was removed successfully";
             }
@@ -1344,15 +1373,15 @@ namespace WorkerHost.DataLayer
             }
         }
 
-        public CompanyFbConnection getCompanyFbProfileConncection(string companyName, string fbProfile)
+        public CompanyUsers getCompanyUsers(string userName)
         {
             try
             {
-                foreach (CompanyFbConnection cfbc in db.CompanyFbConnection)
+                foreach (CompanyUsers cu in db.CompanyUsers)
                 {
-                    if (cfbc.companyName.Equals(companyName) && cfbc.fbProfile.Equals(fbProfile))
+                    if (cu.userName.Equals(userName))
                     {
-                        return cfbc;
+                        return cu;
                     }
                 }
                 return null;
@@ -1363,11 +1392,11 @@ namespace WorkerHost.DataLayer
             }
         }
 
-        public List<CompanyFbConnection> getCompanyFbProfileConncectionList()
+        public List<CompanyUsers> getCompanyUsersList()
         {
             try
             {
-                return db.CompanyFbConnection.ToList();
+                return db.CompanyUsers.ToList();
             }
             catch
             {
