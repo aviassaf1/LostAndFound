@@ -103,7 +103,7 @@ namespace WorkerHost.Domain
             List<FoundItems> foundItems = _db.getFoundItemsList();//int itemID, List<Color> colors, ItemType itemType, DateTime date, String location, String description, int serialNumber, String companyName, String contactName, String contactPhone, String photoLocation
             List<DataLayer.FBItem> FBItems = _db.getFBItemsList();//int itemID, List<Color> colors, ItemType itemType, DateTime date, String location, String description, String postUrl, String publisherName, FBType fbType
             List<Matches> matches = _db.getMatchesList();//int matchID, int companyItemID, int item2ID, MatchStatus matchStatus
-            List<> companyUsers = new ;
+            List<CompanyUsers> companyUsers = new  List<CompanyUsers>();
             foreach (DataLayer.User user in admins)
             {
                 _admins.Add(user.UserName, new Admin(user.UserName, user.password));//add encryption to pass
@@ -179,7 +179,26 @@ namespace WorkerHost.Domain
                     if (LostItems.Contains(m.CompanyItemID) || FoundItems.Contains(m.CompanyItemID))
                         Matches.Add(m.MatchID);
                 }
-                _companies.Add(company.userName, new Company(company.userName, company.User.password, company.companyName, company.phone, FBGroups, LostItems, FoundItems, Matches));//add encryption to pass
+                Dictionary<string, string>  managers = new Dictionary<string, string>();
+                Dictionary<string, string>  workers = new Dictionary<string, string>();
+                String fbID = "";
+                foreach (CompanyUsers cu in companyUsers)
+                {
+                    if (cu.companyName.Equals(company.companyName))
+                    {
+                        if (cu.isManager)
+                        {
+                            managers.Add(cu.userName, cu.password);
+                            fbID = cu.fbProfileId;
+                        }
+                        else
+                        {
+                            workers.Add(cu.userName, cu.password);
+                        }
+                    }
+                        
+                }
+                _companies.Add(company.userName, new Company(company.userName, company.User.password, company.companyName, company.phone, FBGroups,fbID,managers,workers, LostItems, FoundItems, Matches));//add encryption to pass
             }
         }
 
@@ -382,7 +401,7 @@ namespace WorkerHost.Domain
         internal void addNewCompany(Company company)
         {
             _companies.Add(company.UserName, company);
-            _db.addCompany(company.UserName, company.Password, company.CompanyName, company.Phone, company.FacebookGroups,);
+            _db.addCompany(company.UserName, company.Password, company.CompanyName, company.Phone, company.FacebookGroups,company.FbProfileID, company.Managers, company.Workers);
         }
 
         internal void updateFacebbokItem(Domain.BLBackEnd.FBItem fBItem)

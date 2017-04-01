@@ -29,10 +29,10 @@ namespace WorkerHost.Domain.BLBackEnd
             _lostItems = new HashSet<int>();
             _foundItems = new HashSet<int>();
             _matches = new HashSet<int>();
-            Managers = new Dictionary<string, string>();
+            _managers = new Dictionary<string, string>();
             Managers.Add(managerUserName, managerPassword);
-            Workers = new Dictionary<string, string>();
-            FbProfileID = companyProfileID;
+            _workers = new Dictionary<string, string>();
+            _fbProfileID = companyProfileID;
             cache.addNewCompany(this);
         }
         public Company(String userName, String password, String companyName, String phone, HashSet<string> facebookGroups,
@@ -47,9 +47,9 @@ namespace WorkerHost.Domain.BLBackEnd
             _lostItems = lostItems;
             _foundItems = foundItems;
             _matches = matches;
-            Managers = managers;
-            Workers = workers;
-            FbProfileID = companyProfileID;
+            _managers = managers;
+            _workers = workers;
+            _fbProfileID = companyProfileID;
         }
 
         public HashSet<int> LostItems

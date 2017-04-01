@@ -9,7 +9,7 @@ namespace WorkerHost.DataLayer
     public class Database : IDB
     {
         private static Database singleton;
-        private lostAndFoundDbEUEntities1 db;
+        private lostAndFoundDbEUEntities2 db;
 
         private Database()
         {
@@ -89,7 +89,7 @@ namespace WorkerHost.DataLayer
         {
             try
             {
-                this.db = new lostAndFoundDbEUEntities1();
+                this.db = new lostAndFoundDbEUEntities2();
                 string baseDir = AppDomain.CurrentDomain.BaseDirectory;
                 int index = baseDir.IndexOf("LostAndFound");
                 string dataDir = baseDir.Substring(0, index) + "LostAndFound\\LostAndFound\\";
@@ -435,7 +435,8 @@ namespace WorkerHost.DataLayer
         }
 
 
-        public string addCompany(string userName, string password, string companyName, string phone, HashSet<string> facebookGroups)
+        public string addCompany(string userName, string password, string companyName, string phone, HashSet<string> facebookGroups,
+            String fbID, Dictionary<string, string> managers, Dictionary<string, string> workers)add here
         {
             try
             {

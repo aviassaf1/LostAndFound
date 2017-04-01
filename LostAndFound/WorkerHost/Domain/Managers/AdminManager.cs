@@ -30,7 +30,8 @@ namespace WorkerHost.Domain.Managers
             }
         }
 
-        public string addComapny(string userName, string password, string companyName, string phone, HashSet<string> facebookGroups, String companyProfileID, String managerUserName, String managerPassword)
+        public string addComapny(string userName, string password, string companyName, string phone, 
+            HashSet<string> facebookGroups, String companyProfileID, String managerUserName, String managerPassword)
         {
             //check not exist
             //check phone type
