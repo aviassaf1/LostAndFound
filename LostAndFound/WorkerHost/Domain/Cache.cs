@@ -103,7 +103,7 @@ namespace WorkerHost.Domain
             List<FoundItems> foundItems = _db.getFoundItemsList();//int itemID, List<Color> colors, ItemType itemType, DateTime date, String location, String description, int serialNumber, String companyName, String contactName, String contactPhone, String photoLocation
             List<DataLayer.FBItem> FBItems = _db.getFBItemsList();//int itemID, List<Color> colors, ItemType itemType, DateTime date, String location, String description, String postUrl, String publisherName, FBType fbType
             List<Matches> matches = _db.getMatchesList();//int matchID, int companyItemID, int item2ID, MatchStatus matchStatus
-
+            List<> companyUsers = new ;
             foreach (DataLayer.User user in admins)
             {
                 _admins.Add(user.UserName, new Admin(user.UserName, user.password));//add encryption to pass
@@ -382,7 +382,7 @@ namespace WorkerHost.Domain
         internal void addNewCompany(Company company)
         {
             _companies.Add(company.UserName, company);
-            _db.addCompany(company.UserName, company.Password, company.CompanyName, company.Phone, company.FacebookGroups);
+            _db.addCompany(company.UserName, company.Password, company.CompanyName, company.Phone, company.FacebookGroups,);
         }
 
         internal void updateFacebbokItem(Domain.BLBackEnd.FBItem fBItem)

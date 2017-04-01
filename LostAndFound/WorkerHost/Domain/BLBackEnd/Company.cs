@@ -14,8 +14,12 @@ namespace WorkerHost.Domain.BLBackEnd
         private HashSet<int> _foundItems;
         private HashSet<int> _matches;
         private HashSet<string> _facebookGroups;
+        private Dictionary<String, String> _managers;
+        private Dictionary<String, String> _workers;
+        private String _fbProfileID;
 
-        public Company(String userName, String password, String companyName, String phone, HashSet<string> facebookGroups)
+        public Company(String userName, String password, String companyName, String phone, HashSet<string> facebookGroups,
+            String companyProfileID, String managerUserName, String managerPassword)
         {
             _userName = userName;
             _password = password;
@@ -25,10 +29,15 @@ namespace WorkerHost.Domain.BLBackEnd
             _lostItems = new HashSet<int>();
             _foundItems = new HashSet<int>();
             _matches = new HashSet<int>();
+            Managers = new Dictionary<string, string>();
+            Managers.Add(managerUserName, managerPassword);
+            Workers = new Dictionary<string, string>();
+            FbProfileID = companyProfileID;
             cache.addNewCompany(this);
         }
         public Company(String userName, String password, String companyName, String phone, HashSet<string> facebookGroups,
-            HashSet<int> lostItems, HashSet<int> foundItems, HashSet<int> matches)
+            String companyProfileID, Dictionary<String, String> managers, Dictionary<String, String> workers,
+        HashSet<int> lostItems, HashSet<int> foundItems, HashSet<int> matches)
         {
             _userName = userName;
             _password = password;
@@ -38,6 +47,9 @@ namespace WorkerHost.Domain.BLBackEnd
             _lostItems = lostItems;
             _foundItems = foundItems;
             _matches = matches;
+            Managers = managers;
+            Workers = workers;
+            FbProfileID = companyProfileID;
         }
 
         public HashSet<int> LostItems
@@ -193,6 +205,31 @@ namespace WorkerHost.Domain.BLBackEnd
                 return _facebookGroups;
             }
         }
+
+        public Dictionary<string, string> Managers
+        {
+            get
+            {
+                return _managers;
+            }
+        }
+
+        public Dictionary<string, string> Workers
+        {
+            get
+            {
+                return _workers;
+            }
+        }
+
+        public string FbProfileID
+        {
+            get
+            {
+                return _fbProfileID;
+            }
+        }
+
         public Boolean addFacebookGroup(string url)
         {
             if (!_facebookGroups.Contains(url))

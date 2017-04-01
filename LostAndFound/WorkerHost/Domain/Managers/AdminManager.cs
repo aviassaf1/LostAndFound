@@ -30,13 +30,14 @@ namespace WorkerHost.Domain.Managers
             }
         }
 
-        public string addComapny(string userName, string password, string companyName, string phone, HashSet<string> facebookGroups)
+        public string addComapny(string userName, string password, string companyName, string phone, HashSet<string> facebookGroups, String companyProfileID, String managerUserName, String managerPassword)
         {
             //check not exist
             //check phone type
             //check password
             string logg;
-            if (userName == null || password == null || companyName == null || phone == null || facebookGroups == null)
+            if (userName == null || password == null || companyName == null || phone == null || facebookGroups == null 
+                || companyProfileID==null || managerUserName==null|| managerPassword==null)
             {
                 logg = "one of the arguments or more is null, add company failed";
                 logger.logPrint(logg, 0);
@@ -51,7 +52,8 @@ namespace WorkerHost.Domain.Managers
                 logger.logPrint(logg, 2);
                 return logg;
             }
-            if (userName.Equals("") || password.Equals("") || phone.Equals("") || companyName.Equals(""))
+            if (userName.Equals("") || password.Equals("") || phone.Equals("") || companyName.Equals("")
+                || companyProfileID.Equals("") || managerUserName.Equals("") || managerPassword.Equals(""))
             {
                 logg = "one or more of the fields is missing";
                 logger.logPrint(logg, 0);
@@ -100,6 +102,43 @@ namespace WorkerHost.Domain.Managers
             if (phone.Length != 10 && phone.Length != 9)
             {
                 logg = "phone number's length is invalid";
+                logger.logPrint(logg, 0);
+                logger.logPrint(logg, 2);
+                return logg;
+            }
+            isNumExist = false;
+            isSmallKeyExist = false;
+            isBigKeyExist = false;
+            isKeyRepeting3Times = false;
+            if (managerPassword.Length < 6)
+            {
+                logg = "password should contain at least 6 ccharacters, add company Fail";
+                logger.logPrint(logg, 0);
+                logger.logPrint(logg, 2);
+                return logg;
+            }
+            for (int i = 0; i < managerPassword.Length; i++)
+            {
+                if (managerPassword.ElementAt(i) <= '9' && managerPassword.ElementAt(i) >= '0')
+                {
+                    isNumExist = true;
+                }
+                if (managerPassword.ElementAt(i) <= 'Z' && managerPassword.ElementAt(i) >= 'A')
+                {
+                    isBigKeyExist = true;
+                }
+                if (managerPassword.ElementAt(i) <= 'z' && managerPassword.ElementAt(i) >= 'a')
+                {
+                    isSmallKeyExist = true;
+                }
+                if (i < managerPassword.Length - 2 && (managerPassword.ElementAt(i).Equals(managerPassword.ElementAt(i + 1)) && managerPassword.ElementAt(i).Equals(managerPassword.ElementAt(i + 2))))
+                {
+                    isKeyRepeting3Times = true;
+                }
+            }
+            if (!(isNumExist && isSmallKeyExist && isBigKeyExist && !isKeyRepeting3Times))
+            {
+                logg = "password isnt strong enough";
                 logger.logPrint(logg, 0);
                 logger.logPrint(logg, 2);
                 return logg;
