@@ -92,48 +92,51 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataLayer\Companies.cs">
-      <DependentUpon>NoamAccountDB.tt</DependentUpon>
+      <DependentUpon>Database_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataLayer\CompanyFbConnection.cs">
+      <DependentUpon>Database_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DataLayer\CompanyItems.cs">
-      <DependentUpon>NoamAccountDB.tt</DependentUpon>
+      <DependentUpon>Database_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DataLayer\Database.cs" />
+    <Compile Include="DataLayer\Database_Model.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Database_Model.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataLayer\Database_Model.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Database_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataLayer\Database_Model.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Database_Model.edmx</DependentUpon>
+    </Compile>
     <Compile Include="DataLayer\FacebookGroups.cs">
-      <DependentUpon>NoamAccountDB.tt</DependentUpon>
+      <DependentUpon>Database_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DataLayer\FBItem.cs">
-      <DependentUpon>NoamAccountDB.tt</DependentUpon>
+      <DependentUpon>Database_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DataLayer\FoundItems.cs">
-      <DependentUpon>NoamAccountDB.tt</DependentUpon>
+      <DependentUpon>Database_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DataLayer\IDB.cs" />
     <Compile Include="DataLayer\Items.cs">
-      <DependentUpon>NoamAccountDB.tt</DependentUpon>
+      <DependentUpon>Database_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DataLayer\LostItems.cs">
-      <DependentUpon>NoamAccountDB.tt</DependentUpon>
+      <DependentUpon>Database_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DataLayer\Matches.cs">
-      <DependentUpon>NoamAccountDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataLayer\NoamAccountDB.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>NoamAccountDB.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataLayer\NoamAccountDB.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>NoamAccountDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataLayer\NoamAccountDB.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>NoamAccountDB.edmx</DependentUpon>
+      <DependentUpon>Database_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DataLayer\User.cs">
-      <DependentUpon>NoamAccountDB.tt</DependentUpon>
+      <DependentUpon>Database_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Domain\BLBackEnd\Admin.cs" />
     <Compile Include="Domain\BLBackEnd\Color.cs" />
@@ -167,12 +170,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <EntityDeploy Include="DataLayer\NoamAccountDB.edmx">
+    <EntityDeploy Include="DataLayer\Database_Model.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>NoamAccountDB.Designer.cs</LastGenOutput>
+      <LastGenOutput>Database_Model.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="DataLayer\NoamAccountDB.edmx.diagram">
-      <DependentUpon>NoamAccountDB.edmx</DependentUpon>
+    <None Include="DataLayer\Database_Model.edmx.diagram">
+      <DependentUpon>Database_Model.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
@@ -180,15 +183,15 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DataLayer\NoamAccountDB.Context.tt">
+    <Content Include="DataLayer\Database_Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>NoamAccountDB.edmx</DependentUpon>
-      <LastGenOutput>NoamAccountDB.Context.cs</LastGenOutput>
+      <DependentUpon>Database_Model.edmx</DependentUpon>
+      <LastGenOutput>Database_Model.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="DataLayer\NoamAccountDB.tt">
+    <Content Include="DataLayer\Database_Model.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>NoamAccountDB.edmx</DependentUpon>
-      <LastGenOutput>NoamAccountDB.cs</LastGenOutput>
+      <DependentUpon>Database_Model.edmx</DependentUpon>
+      <LastGenOutput>Database_Model.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
