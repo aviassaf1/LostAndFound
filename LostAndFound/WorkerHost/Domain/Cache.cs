@@ -53,8 +53,8 @@ namespace WorkerHost.Domain
 
         public void setUp()
         {
-            Company comp1 = new Company("Guy", "Hello6", "Guy", "05000000", new HashSet<string>());
-            Company comp2 = new Company("Guy2", "Hello6", "Guy2", "05000000", new HashSet<string>());
+            Company comp1 = new Company("Guy", "Hello6", "Guy", "05000000", new HashSet<string>(), "10205175970541279", "Guy", "Mc123456");
+            Company comp2 = new Company("Guy2", "Hello6", "Guy2", "05000000", new HashSet<string>(), "10205175970541279", "Guy", "Mc123456");
             comp1.addFacebookGroup("1538105046204967");
             comp2.addFacebookGroup("1538105046204967");
             List<Color> colors1 = new List<Color>();

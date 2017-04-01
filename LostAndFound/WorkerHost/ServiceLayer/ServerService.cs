@@ -18,7 +18,7 @@ namespace WorkerHost
                 "1538105046204967");
             HashSet<string> fbg = new HashSet<string>() { "1538105046204967" };
             IAdminManager adm = AdminManager.getInstance;
-            string ans1 = adm.addComapny("GuyCompany", "gG123456", "GuyCompany", "050000000", fbg);
+            string ans1 = adm.addComapny("GuyCompany", "gG123456", "GuyCompany", "050000000", fbg, "10205175970541279", "Guy", "Mc123456");
             string colorList = color;
             colorList = colorList.ToUpper();
             List<string> colors = stringToListOfColors(colorList);
@@ -74,7 +74,8 @@ namespace WorkerHost
         {
 
             HashSet<string> fbg = new HashSet<string>() { "1538105046204967" };
-            string ans = AdminManager.getInstance.addComapny("GuyCompany", "gG123456", "GuyCompany", "050000000", fbg);
+            string ans = AdminManager.getInstance.addComapny("GuyCompany", "gG123456", "GuyCompany", "050000000", fbg,
+                "10205175970541279","Guy","Mc123456");
 
             IItemManager iim = ItemManager.getInstance;
             return iim.addLostItem(sColors, sType, date, location, description,

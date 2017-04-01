@@ -17,7 +17,7 @@ namespace WorkerHost.Domain
                 "1538105046204967");
             //List<string> colors = new List<string>() { "PINK" };
             HashSet<string> fbg = new HashSet<string>() { "1538105046204967" };
-            AdminManager.getInstance.addComapny("GuyCompany", "gG1", "GuyCompany", "050000000", fbg);
+            AdminManager.getInstance.addComapny("GuyCompany", "gG1", "GuyCompany", "050000000", fbg, "10205175970541279", "Guy", "Mc123456");
             Console.WriteLine("Hello, welcom to FIND IT!");
             Console.WriteLine("Please enter the list of the item's colors.");
             string colorList = Console.ReadLine();

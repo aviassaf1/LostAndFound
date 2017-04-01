@@ -144,7 +144,7 @@ namespace WorkerHost.Domain.Managers
                 logger.logPrint(logg, 2);
                 return logg;
             }
-            company = new Company(userName, password, companyName, phone, facebookGroups);
+            company = new Company(userName, password, companyName, phone, facebookGroups, companyProfileID,managerUserName, managerPassword);
             logg = "company has been added";
             logger.logPrint(logg, 0);
             logger.logPrint(logg, 1);

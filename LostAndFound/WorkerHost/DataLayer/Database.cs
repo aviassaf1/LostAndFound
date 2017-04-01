@@ -436,7 +436,7 @@ namespace WorkerHost.DataLayer
 
 
         public string addCompany(string userName, string password, string companyName, string phone, HashSet<string> facebookGroups,
-            String fbID, Dictionary<string, string> managers, Dictionary<string, string> workers)add here
+            String fbID, Dictionary<string, string> managers, Dictionary<string, string> workers)
         {
             try
             {
@@ -470,6 +470,16 @@ namespace WorkerHost.DataLayer
                 }
                 //db.Companies.Add(company);
                 db.SaveChanges();
+                foreach (string managersName in managers.Keys)
+                {
+                    addCompanyUsers(companyName,fbID,true,managersName,managers[managersName]);
+                }
+                foreach (string workersName in workers.Keys)
+                {
+                    addCompanyUsers(companyName, fbID, false, workersName, managers[workersName]);
+                }
+                db.SaveChanges();
+
                 return "true";
             }
             catch (Exception e)
