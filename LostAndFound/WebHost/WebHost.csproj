@@ -103,8 +103,38 @@
     <Content Include="WebPages\ItemsTablePage.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\WorkerHost\ServiceLayer\Controllers\AdminController.cs">
+      <Link>ClientService\Controllers\AdminController.cs</Link>
+    </Compile>
+    <Compile Include="..\WorkerHost\ServiceLayer\Controllers\CompanyController.cs">
+      <Link>ClientService\Controllers\CompanyController.cs</Link>
+    </Compile>
+    <Compile Include="..\WorkerHost\ServiceLayer\Controllers\IAdminController.cs">
+      <Link>ClientService\Controllers\IAdminController.cs</Link>
+    </Compile>
+    <Compile Include="..\WorkerHost\ServiceLayer\Controllers\ICompanyController.cs">
+      <Link>ClientService\Controllers\ICompanyController.cs</Link>
+    </Compile>
+    <Compile Include="..\WorkerHost\ServiceLayer\Controllers\IItemController.cs">
+      <Link>ClientService\Controllers\IItemController.cs</Link>
+    </Compile>
+    <Compile Include="..\WorkerHost\ServiceLayer\Controllers\IMatchController.cs">
+      <Link>ClientService\Controllers\IMatchController.cs</Link>
+    </Compile>
+    <Compile Include="..\WorkerHost\ServiceLayer\Controllers\ItemController.cs">
+      <Link>ClientService\Controllers\ItemController.cs</Link>
+    </Compile>
+    <Compile Include="..\WorkerHost\ServiceLayer\Controllers\MatchController.cs">
+      <Link>ClientService\Controllers\MatchController.cs</Link>
+    </Compile>
+    <Compile Include="..\WorkerHost\ServiceLayer\DataContracts\CompanyItemData.cs">
+      <Link>ClientService\DataContracts\CompanyItemData.cs</Link>
+    </Compile>
+    <Compile Include="..\WorkerHost\ServiceLayer\DataContracts\MatchData.cs">
+      <Link>ClientService\DataContracts\MatchData.cs</Link>
+    </Compile>
     <Compile Include="..\WorkerHost\ServiceLayer\IServerService.cs">
-      <Link>IServerService.cs</Link>
+      <Link>ClientService\IServerService.cs</Link>
     </Compile>
     <Compile Include="Channel.cs" />
     <Compile Include="WebPages\addLostItemForm.aspx.cs">
@@ -132,7 +162,7 @@
     <Compile Include="Service1.svc.cs">
       <DependentUpon>Service1.svc</DependentUpon>
     </Compile>
-    <Compile Include="IService1.cs" />
+    <Compile Include="ClientService\IService1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebForm1.aspx.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>

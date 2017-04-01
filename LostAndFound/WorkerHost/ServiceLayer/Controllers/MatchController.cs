@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WorkerHost.Domain.Managers;
+using WorkerHost.Domain.BLBackEnd;
 using WorkerHost.ServiceLayer.DataContracts;
 
 namespace WorkerHost.ServiceLayer.Controllers
@@ -45,7 +46,20 @@ namespace WorkerHost.ServiceLayer.Controllers
 
         public List<MatchData> getMatchesByItemID(int itemID)
         {
-            throw new NotImplementedException();//TODO: implement function
+            List<Match> matches= IMM.getMatchesByItemID(itemID);
+            List<MatchData> ret = new List<MatchData>();
+            foreach(Match match in matches)
+            {
+                if (match.MatchStatus == MatchStatus.COMPLETE)
+                    ret.Add(new MatchData(match.MatchID, match.CompanyItemID, match.Item2ID, "הושלם"));
+                else if (match.MatchStatus == MatchStatus.CORRECT)
+                    ret.Add(new MatchData(match.MatchID, match.CompanyItemID, match.Item2ID, "מתאים"));
+                else if (match.MatchStatus == MatchStatus.INCORRECT)
+                    ret.Add(new MatchData(match.MatchID, match.CompanyItemID, match.Item2ID, "לא מתאים"));
+                else //if (match.MatchStatus == MatchStatus.POSSIBLE)
+                    ret.Add(new MatchData(match.MatchID, match.CompanyItemID, match.Item2ID, "אפשרי"));
+            }
+            return ret;
         }
     }
 }
