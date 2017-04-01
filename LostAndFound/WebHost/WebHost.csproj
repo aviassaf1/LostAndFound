@@ -103,7 +103,7 @@
     <Content Include="WebPages\ItemsTablePage.aspx" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\WorkerHost\IServerService.cs">
+    <Compile Include="..\WorkerHost\ServiceLayer\IServerService.cs">
       <Link>IServerService.cs</Link>
     </Compile>
     <Compile Include="Channel.cs" />
