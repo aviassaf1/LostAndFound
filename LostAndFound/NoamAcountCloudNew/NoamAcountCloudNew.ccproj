@@ -38,6 +38,14 @@
     <ServiceConfiguration Include="ServiceConfiguration.Cloud.cscfg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\NewWebClient\NewWebClient.csproj">
+      <Name>NewWebClient</Name>
+      <Project>{2f321cfe-ce55-4a40-941e-6955321764aa}</Project>
+      <Private>True</Private>
+      <RoleType>Web</RoleType>
+      <RoleName>NewWebClient</RoleName>
+      <UpdateDiagnosticsConnectionStringOnPublish>True</UpdateDiagnosticsConnectionStringOnPublish>
+    </ProjectReference>
     <ProjectReference Include="..\WebHost\WebHost.csproj">
       <Name>WebHost</Name>
       <Project>{24a1d094-ab27-4974-a177-73af495aac71}</Project>
@@ -56,10 +64,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="NewWebClientContent\" />
     <Folder Include="WebHostContent\" />
     <Folder Include="WorkerHostContent\" />
   </ItemGroup>
   <ItemGroup>
+    <DiagnosticsConfiguration Include="NewWebClientContent\diagnostics.wadcfgx" />
     <DiagnosticsConfiguration Include="WebHostContent\diagnostics.wadcfgx" />
     <DiagnosticsConfiguration Include="WorkerHostContent\diagnostics.wadcfgx" />
   </ItemGroup>
