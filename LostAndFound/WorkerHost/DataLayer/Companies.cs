@@ -19,6 +19,7 @@ namespace WorkerHost.DataLayer
         {
             this.CompanyFbConnection = new HashSet<CompanyFbConnection>();
             this.CompanyItems = new HashSet<CompanyItems>();
+            this.CompanyUsers = new HashSet<CompanyUsers>();
             this.FacebookGroups = new HashSet<FacebookGroups>();
         }
     
@@ -31,6 +32,8 @@ namespace WorkerHost.DataLayer
         public virtual ICollection<CompanyFbConnection> CompanyFbConnection { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CompanyItems> CompanyItems { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CompanyUsers> CompanyUsers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FacebookGroups> FacebookGroups { get; set; }
     }

@@ -32,6 +32,16 @@
           <Property Name="contactPhone" Type="varchar" MaxLength="50" />
           <Property Name="companyName" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="CompanyUsers">
+          <Key>
+            <PropertyRef Name="userName" />
+          </Key>
+          <Property Name="companyName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="fbProfileId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="isManager" Type="bit" Nullable="false" />
+          <Property Name="userName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="FacebookGroups">
           <Key>
             <PropertyRef Name="CompanyName" />
@@ -154,6 +164,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CompanyUsers_ToTable">
+          <End Role="Companies" Type="Self.Companies" Multiplicity="1" />
+          <End Role="CompanyUsers" Type="Self.CompanyUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Companies">
+              <PropertyRef Name="companyName" />
+            </Principal>
+            <Dependent Role="CompanyUsers">
+              <PropertyRef Name="companyName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyUsers_ToTable_1">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="CompanyUsers" Type="Self.CompanyUsers" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserName" />
+            </Principal>
+            <Dependent Role="CompanyUsers">
+              <PropertyRef Name="userName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_FacebookGroups_ToTable">
           <End Role="Companies" Type="Self.Companies" Multiplicity="1" />
           <End Role="FacebookGroups" Type="Self.FacebookGroups" Multiplicity="*" />
@@ -230,6 +264,7 @@
           <EntitySet Name="Companies" EntityType="Self.Companies" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CompanyFbConnection" EntityType="Self.CompanyFbConnection" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CompanyItems" EntityType="Self.CompanyItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompanyUsers" EntityType="Self.CompanyUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FacebookGroups" EntityType="Self.FacebookGroups" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FBItem" EntityType="Self.FBItem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FoundItems" EntityType="Self.FoundItems" Schema="dbo" store:Type="Tables" />
@@ -252,6 +287,14 @@
           <AssociationSet Name="FK_CompanyItems_ToTable_1" Association="Self.FK_CompanyItems_ToTable_1">
             <End Role="Items" EntitySet="Items" />
             <End Role="CompanyItems" EntitySet="CompanyItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyUsers_ToTable" Association="Self.FK_CompanyUsers_ToTable">
+            <End Role="Companies" EntitySet="Companies" />
+            <End Role="CompanyUsers" EntitySet="CompanyUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyUsers_ToTable_1" Association="Self.FK_CompanyUsers_ToTable_1">
+            <End Role="User" EntitySet="User" />
+            <End Role="CompanyUsers" EntitySet="CompanyUsers" />
           </AssociationSet>
           <AssociationSet Name="FK_FacebookGroups_ToTable" Association="Self.FK_FacebookGroups_ToTable">
             <End Role="Companies" EntitySet="Companies" />
@@ -293,6 +336,7 @@
           <NavigationProperty Name="User" Relationship="Self.FK_Companies_ToTable" FromRole="Companies" ToRole="User" />
           <NavigationProperty Name="CompanyFbConnection" Relationship="Self.FK_CompanyFbConnection_ToTable" FromRole="Companies" ToRole="CompanyFbConnection" />
           <NavigationProperty Name="CompanyItems" Relationship="Self.FK_CompanyItems_ToTable" FromRole="Companies" ToRole="CompanyItems" />
+          <NavigationProperty Name="CompanyUsers" Relationship="Self.FK_CompanyUsers_ToTable" FromRole="Companies" ToRole="CompanyUsers" />
           <NavigationProperty Name="FacebookGroups" Relationship="Self.FK_FacebookGroups_ToTable" FromRole="Companies" ToRole="FacebookGroups" />
         </EntityType>
         <EntityType Name="CompanyFbConnection">
@@ -319,6 +363,18 @@
           <NavigationProperty Name="FoundItems" Relationship="Self.FK_FoundItems_ToTable" FromRole="CompanyItems" ToRole="FoundItems" />
           <NavigationProperty Name="LostItems" Relationship="Self.FK_LostItems_ToTable" FromRole="CompanyItems" ToRole="LostItems" />
           <NavigationProperty Name="Matches" Relationship="Self.FK_Matches_ToTable_1" FromRole="CompanyItems" ToRole="Matches" />
+        </EntityType>
+        <EntityType Name="CompanyUsers">
+          <Key>
+            <PropertyRef Name="userName" />
+          </Key>
+          <Property Name="companyName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fbProfileId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="isManager" Type="Boolean" Nullable="false" />
+          <Property Name="userName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Companies" Relationship="Self.FK_CompanyUsers_ToTable" FromRole="CompanyUsers" ToRole="Companies" />
+          <NavigationProperty Name="User" Relationship="Self.FK_CompanyUsers_ToTable_1" FromRole="CompanyUsers" ToRole="User" />
         </EntityType>
         <EntityType Name="FacebookGroups">
           <Key>
@@ -403,6 +459,7 @@
           <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="isAdmin" Type="Boolean" />
           <NavigationProperty Name="Companies" Relationship="Self.FK_Companies_ToTable" FromRole="User" ToRole="Companies" />
+          <NavigationProperty Name="CompanyUsers" Relationship="Self.FK_CompanyUsers_ToTable_1" FromRole="User" ToRole="CompanyUsers" />
         </EntityType>
         <Association Name="FK_Companies_ToTable">
           <End Role="User" Type="Self.User" Multiplicity="1" />
@@ -436,6 +493,18 @@
               <PropertyRef Name="companyName" />
             </Principal>
             <Dependent Role="CompanyItems">
+              <PropertyRef Name="companyName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyUsers_ToTable">
+          <End Role="Companies" Type="Self.Companies" Multiplicity="1" />
+          <End Role="CompanyUsers" Type="Self.CompanyUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Companies">
+              <PropertyRef Name="companyName" />
+            </Principal>
+            <Dependent Role="CompanyUsers">
               <PropertyRef Name="companyName" />
             </Dependent>
           </ReferentialConstraint>
@@ -500,6 +569,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CompanyUsers_ToTable_1">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="CompanyUsers" Type="Self.CompanyUsers" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserName" />
+            </Principal>
+            <Dependent Role="CompanyUsers">
+              <PropertyRef Name="userName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_FBItem_ToTable">
           <End Role="Items" Type="Self.Items" Multiplicity="1" />
           <End Role="FBItem" Type="Self.FBItem" Multiplicity="0..1" />
@@ -524,10 +605,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="lostAndFoundDbEUEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="lostAndFoundDbEUEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Companies" EntityType="Self.Companies" />
           <EntitySet Name="CompanyFbConnection" EntityType="Self.CompanyFbConnection" />
           <EntitySet Name="CompanyItems" EntityType="Self.CompanyItems" />
+          <EntitySet Name="CompanyUsers" EntityType="Self.CompanyUsers" />
           <EntitySet Name="FacebookGroups" EntityType="Self.FacebookGroups" />
           <EntitySet Name="FBItem" EntityType="Self.FBItem" />
           <EntitySet Name="FoundItems" EntityType="Self.FoundItems" />
@@ -546,6 +628,10 @@
           <AssociationSet Name="FK_CompanyItems_ToTable" Association="Self.FK_CompanyItems_ToTable">
             <End Role="Companies" EntitySet="Companies" />
             <End Role="CompanyItems" EntitySet="CompanyItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyUsers_ToTable" Association="Self.FK_CompanyUsers_ToTable">
+            <End Role="Companies" EntitySet="Companies" />
+            <End Role="CompanyUsers" EntitySet="CompanyUsers" />
           </AssociationSet>
           <AssociationSet Name="FK_FacebookGroups_ToTable" Association="Self.FK_FacebookGroups_ToTable">
             <End Role="Companies" EntitySet="Companies" />
@@ -567,6 +653,10 @@
             <End Role="CompanyItems" EntitySet="CompanyItems" />
             <End Role="Matches" EntitySet="Matches" />
           </AssociationSet>
+          <AssociationSet Name="FK_CompanyUsers_ToTable_1" Association="Self.FK_CompanyUsers_ToTable_1">
+            <End Role="User" EntitySet="User" />
+            <End Role="CompanyUsers" EntitySet="CompanyUsers" />
+          </AssociationSet>
           <AssociationSet Name="FK_FBItem_ToTable" Association="Self.FK_FBItem_ToTable">
             <End Role="Items" EntitySet="Items" />
             <End Role="FBItem" EntitySet="FBItem" />
@@ -581,7 +671,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="lostAndFoundDbEUModelStoreContainer" CdmEntityContainer="lostAndFoundDbEUEntities">
+        <EntityContainerMapping StorageEntityContainer="lostAndFoundDbEUModelStoreContainer" CdmEntityContainer="lostAndFoundDbEUEntities1">
           <EntitySetMapping Name="Companies">
             <EntityTypeMapping TypeName="lostAndFoundDbEUModel.Companies">
               <MappingFragment StoreEntitySet="Companies">
@@ -608,6 +698,17 @@
                 <ScalarProperty Name="contactName" ColumnName="contactName" />
                 <ScalarProperty Name="contactPhone" ColumnName="contactPhone" />
                 <ScalarProperty Name="companyName" ColumnName="companyName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompanyUsers">
+            <EntityTypeMapping TypeName="lostAndFoundDbEUModel.CompanyUsers">
+              <MappingFragment StoreEntitySet="CompanyUsers">
+                <ScalarProperty Name="companyName" ColumnName="companyName" />
+                <ScalarProperty Name="fbProfileId" ColumnName="fbProfileId" />
+                <ScalarProperty Name="isManager" ColumnName="isManager" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="password" ColumnName="password" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
