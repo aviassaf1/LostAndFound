@@ -13,12 +13,12 @@ namespace WorkerHost
     {
         public string testClass1(string color, string type, string name, string phone)
         {
-            string token = "EAACEdEose0cBAPoNTnMi17ZBZBrJgQRwuwkE6eLFzWDpiOKIzFbPPiJXEurEKmXu9yqDuZC6tlXZAsOfyxGIz0xGeYjhRXhZCG0lWPUI8CwrZBt8tDv21FBiJJ5XjUfY9uWGeob8sJL2p0fxD17BsgHLxsEJkyrUdfWu8rd9lB6qMX1ykr2Thu";
+            string token = "EAACEdEose0cBAEZArIlzyRuf3du6KgtFrpAcSPJdPp0mUGZB1TiZA7FRSsBaII5oxFuI1z6BH6HGZBuOJv8m4WOt2FcZBvadGVOWOa7ShfyLoK7WfUwXSfE8xmndLCbgRmAXIvnA7LuiERa60ZCcJLmvicx9IaA5Luz29LPCyZBx89zQC0nn5yK";
             List<FBItem> list = MatchManager.getInstance.getPostsFromGroup(token,
                 "1538105046204967");
             HashSet<string> fbg = new HashSet<string>() { "1538105046204967" };
             IAdminManager adm = AdminManager.getInstance;
-            //string ans1 = adm.addComapny("GuyCompany", "gG123456", "GuyCompany", "050000000", fbg);
+            string ans1 = adm.addComapny("GuyCompany", "gG123456", "GuyCompany", "050000000", fbg);
             string colorList = color;
             colorList = colorList.ToUpper();
             List<string> colors = stringToListOfColors(colorList);
