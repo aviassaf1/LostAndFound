@@ -11,7 +11,7 @@ namespace WorkerHost
 {
     class ServerService : IServerService
     {
-        public string testClass1(string color, string type, string name, string phone)
+        /*public string testClass1(string color, string type, string name, string phone)
         {
             string token = "EAACEdEose0cBAEZArIlzyRuf3du6KgtFrpAcSPJdPp0mUGZB1TiZA7FRSsBaII5oxFuI1z6BH6HGZBuOJv8m4WOt2FcZBvadGVOWOa7ShfyLoK7WfUwXSfE8xmndLCbgRmAXIvnA7LuiERa60ZCcJLmvicx9IaA5Luz29LPCyZBx89zQC0nn5yK";
             List<FBItem> list = MatchManager.getInstance.getPostsFromGroup(token,
@@ -39,13 +39,14 @@ namespace WorkerHost
                 cphone, "location", token);
             }
             */
+            /*
             ComapanyManager.getInstance.publishInventory(token, "1538105046204967", 2, "GuyCompany");
              Domain.Cache cache = Domain.Cache.getInstance;
             int i = 0;
             i++;
             return i.ToString();
         }
-
+        */
         private static List<string> stringToListOfColors(string colors)
         {
             string color = "";
@@ -70,16 +71,16 @@ namespace WorkerHost
         }
 
         string IServerService.addLostItem(List<string> sColors, string sType, DateTime date, string location, string description,
-            int serialNumber, string companyName, string contactName, string contactPhone, string photoLocation, string token)
+            int serialNumber, string companyName, string contactName, string contactPhone, string photoLocation, string token, int key)
         {
 
             HashSet<string> fbg = new HashSet<string>() { "1538105046204967" };
             string ans = AdminManager.getInstance.addComapny("GuyCompany", "gG123456", "GuyCompany", "050000000", fbg,
-                "10205175970541279","Guy","Mc123456");
+                "10205175970541279","Guy","Mc123456",key);
 
             IItemManager iim = ItemManager.getInstance;
             return iim.addLostItem(sColors, sType, date, location, description,
-            serialNumber, companyName, contactName, contactPhone, photoLocation, token);
+            serialNumber, companyName, contactName, contactPhone, photoLocation, token,  key);
         }
     }
 }

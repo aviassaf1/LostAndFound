@@ -12,7 +12,7 @@ namespace WorkerHost.Domain
     {
         public static void Main(string[] args)
         {
-            string token = "EAACEdEose0cBAFMSnt0e4tUnWsrLyXFxXbQ3KGH8Pka4CfARUSYWkYqtFx6vObgaR1jo1QLCdILQBW0fkbppaJJ1ZAhwSF6EePrUw0JSpn8klgH2cbAZC49xMjZBfZBOsMwoi1gKGKZCHaRBAzI3IwSh9nfwq0WkQweklTphq9m1kbGRjRT6cf7peWAP54tcZD";
+            /*string token = "EAACEdEose0cBAFMSnt0e4tUnWsrLyXFxXbQ3KGH8Pka4CfARUSYWkYqtFx6vObgaR1jo1QLCdILQBW0fkbppaJJ1ZAhwSF6EePrUw0JSpn8klgH2cbAZC49xMjZBfZBOsMwoi1gKGKZCHaRBAzI3IwSh9nfwq0WkQweklTphq9m1kbGRjRT6cf7peWAP54tcZD";
             List<FBItem> list =  MatchManager.getInstance.getPostsFromGroup(token,
                 "1538105046204967");
             //List<string> colors = new List<string>() { "PINK" };
@@ -41,10 +41,11 @@ namespace WorkerHost.Domain
                 ItemManager.getInstance.addFoundItem(colors, itemType, DateTime.Today, "here", "desc", 56658, "GuyCompany", cname,
                 cphone, "location", token);
             }*/
+            /*
             ComapanyManager.getInstance.publishInventory(token, "1538105046204967", 2, "GuyCompany");
             Cache cache = Cache.getInstance;
             int i = 0;
-            i++;
+            i++;*/
         }
 
         public static List<string> stringToListOfColors(string colors)

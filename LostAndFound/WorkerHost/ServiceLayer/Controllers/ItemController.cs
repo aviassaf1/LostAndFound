@@ -31,31 +31,31 @@ namespace WorkerHost.ServiceLayer.Controllers
         }
 
         public string addFoundItem(List<string> sColors, string sType, DateTime date, string location, string description, int serialNumber, string companyName,
-            string contactName, string contactPhone, string photoLocation, string token)
+            string contactName, string contactPhone, string photoLocation, string token, int key)
         {
-            return IIM.addFoundItem(sColors, sType, date, location, description, serialNumber, companyName, contactName, contactPhone, photoLocation, token);
+            return IIM.addFoundItem(sColors, sType, date, location, description, serialNumber, companyName, contactName, contactPhone, photoLocation, token, key);
         }
 
         public string addLostItem(List<string> sColors, string sType, DateTime date, string location, string description, int serialNumber, string companyName, 
-            string contactName, string contactPhone, string photoLocation, string token)
+            string contactName, string contactPhone, string photoLocation, string token, int key)
         {
-            return IIM.addLostItem(sColors, sType, date, location, description, serialNumber, companyName, contactName, contactPhone, photoLocation, token);
+            return IIM.addLostItem(sColors, sType, date, location, description, serialNumber, companyName, contactName, contactPhone, photoLocation, token, key);
         }
 
-        public string deleteItem(int itemID)
+        public string deleteItem(int itemID, int key)
         {
-            return IIM.deleteItem(itemID);
+            return IIM.deleteItem(itemID, key);
         }
 
-        public string editItem(int itemID, DateTime date, string location, string description, int serialNumber, string contactName, string contactPhone)
+        public string editItem(int itemID, DateTime date, string location, string description, int serialNumber, string contactName, string contactPhone, int key)
         {
-            return IIM.editItem( itemID,  date,  location,  description,  serialNumber,  contactName,  contactPhone);
+            return IIM.editItem( itemID,  date,  location,  description,  serialNumber,  contactName,  contactPhone, key);
         }
 
-        public List<CompanyItemData> getAllCompanyItems(string companyName)
+        public List<CompanyItemData> getAllCompanyItems(string companyName, int key)
         {
             List<CompanyItemData> res = new List<CompanyItemData>();
-            List<CompanyItem> items = IIM.getAllCompanyItems(companyName);
+            List<CompanyItem> items = IIM.getAllCompanyItems(companyName, key);
             bool stat;
             string type;
             foreach ( CompanyItem i in items)
@@ -77,9 +77,9 @@ namespace WorkerHost.ServiceLayer.Controllers
             return res;
         }
 
-        public string transactionComplete(int itemID)
+        public string transactionComplete(int itemID, int key)
         {
-            return IIM.transactionComplete(itemID);
+            return IIM.transactionComplete(itemID, key);
         }
     }
 }

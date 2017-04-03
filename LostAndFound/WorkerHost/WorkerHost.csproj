@@ -166,6 +166,7 @@
     <Compile Include="Domain\Managers\IMatchManager.cs" />
     <Compile Include="Domain\Managers\ItemManager.cs" />
     <Compile Include="Domain\Managers\MatchManager.cs" />
+    <Compile Include="Domain\SessionDirector.cs" />
     <Compile Include="ServiceLayer\Controllers\AdminController.cs" />
     <Compile Include="ServiceLayer\Controllers\CompanyController.cs" />
     <Compile Include="ServiceLayer\Controllers\IAdminController.cs" />

@@ -31,7 +31,7 @@ namespace WorkerHost.Domain.Managers
         }
 
         public string addComapny(string userName, string password, string companyName, string phone, 
-            HashSet<string> facebookGroups, String companyProfileID, String managerUserName, String managerPassword)
+            HashSet<string> facebookGroups, String companyProfileID, String managerUserName, String managerPassword, int key)
         {
             //check not exist
             //check phone type
@@ -151,7 +151,7 @@ namespace WorkerHost.Domain.Managers
             return logg;
         }
 
-        public string deleteCompany(string companyName)
+        public string deleteCompany(string companyName, int key)
         {
             Company company = cache.getCompany(companyName);
             if (company == null)
@@ -164,7 +164,7 @@ namespace WorkerHost.Domain.Managers
             return company.delete();
         }
 
-        public string editCompany(string companyName, string password, string phone)
+        public string editCompany(string companyName, string password, string phone, int key)
         {
             string logg;
             if (companyName == null || password == null || phone == null || companyName.Equals("") || password.Equals("") ||

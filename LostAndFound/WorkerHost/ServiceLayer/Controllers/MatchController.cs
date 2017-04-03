@@ -30,7 +30,7 @@ namespace WorkerHost.ServiceLayer.Controllers
             }
         }
 
-        public string changeMatchStatus(int matchID, string statusNum)
+        public string changeMatchStatus(int matchID, string statusNum, int key)
         {
             int num = 1;
             if (statusNum.Equals("אפשרי"))
@@ -41,12 +41,12 @@ namespace WorkerHost.ServiceLayer.Controllers
                 num = 3;
             else if (statusNum.Equals("לא נכון"))
                 num = 4;
-            return IMM.changeMatchStatus(matchID, num);
+            return IMM.changeMatchStatus(matchID, num, key);
         }
 
-        public List<MatchData> getMatchesByItemID(int itemID)
+        public List<MatchData> getMatchesByItemID(int itemID, int key)
         {
-            List<Match> matches= IMM.getMatchesByItemID(itemID);
+            List<Match> matches= IMM.getMatchesByItemID(itemID, key);
             List<MatchData> ret = new List<MatchData>();
             foreach(Match match in matches)
             {

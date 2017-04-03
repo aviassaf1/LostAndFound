@@ -26,7 +26,7 @@ namespace WorkerHost.Domain.Managers
             }
         }
 
-        public List<CompanyItem> getAllCompanyItems(string companyName)
+        public List<CompanyItem> getAllCompanyItems(string companyName, int key)
         {
             if (companyName == null)
                 return null;
@@ -37,7 +37,7 @@ namespace WorkerHost.Domain.Managers
         }
 
         public string addFoundItem(List<string> sColors, string sType, DateTime date, string location, string description,
-            int serialNumber, string companyName, string contactName, string contactPhone, string photoLocation, string token)
+            int serialNumber, string companyName, string contactName, string contactPhone, string photoLocation, string token, int key)
         {
             string logg;
             if (sColors == null || sType == null || date == null || location == null || description == null ||
@@ -96,7 +96,7 @@ namespace WorkerHost.Domain.Managers
         }
 
         public string addLostItem(List<string> sColors, string sType, DateTime date, string location, string description,
-            int serialNumber, string companyName, string contactName, string contactPhone, string photoLocation, string token)
+            int serialNumber, string companyName, string contactName, string contactPhone, string photoLocation, string token, int key)
         {
             string logg;
             if (sColors == null || sType == null || date == null || location == null || description == null ||
@@ -151,7 +151,7 @@ namespace WorkerHost.Domain.Managers
             return logg;
         }
 
-        public string transactionComplete(int itemID)
+        public string transactionComplete(int itemID, int key)
         {
             CompanyItem item = cache.getCompanyItem(itemID);
             string logg;
@@ -172,7 +172,7 @@ namespace WorkerHost.Domain.Managers
             return logg;
         }
 
-        public string deleteItem(int itemID)
+        public string deleteItem(int itemID, int key)
         {
             CompanyItem item = cache.getCompanyItem(itemID);
             string logg;
@@ -194,7 +194,7 @@ namespace WorkerHost.Domain.Managers
             return logg;
         }
 
-        public string editItem(int itemID, DateTime date, string location, string description, int serialNumber, string contactName, string contactPhone)
+        public string editItem(int itemID, DateTime date, string location, string description, int serialNumber, string contactName, string contactPhone, int key)
         {
             string logg;
             CompanyItem item = cache.getCompanyItem(itemID);

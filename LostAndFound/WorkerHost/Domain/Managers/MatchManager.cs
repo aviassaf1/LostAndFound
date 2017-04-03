@@ -24,7 +24,7 @@ namespace WorkerHost.Domain.Managers
             }
         }
 
-        public string changeMatchStatus(int matchID, int statusNum)
+        public string changeMatchStatus(int matchID, int statusNum, int key)
         {
             string logg;
             Match match = Cache.getInstance.getMatch(matchID);
@@ -303,7 +303,7 @@ namespace WorkerHost.Domain.Managers
             return Cache.getInstance.getMatch(matchID);
         }
 
-        public List<Match> getMatchesByItemID(int itemID)
+        public List<Match> getMatchesByItemID(int itemID, int key)
         {
             IItemManager iim = ItemManager.getInstance;
             CompanyItem ci = Cache.getInstance.getCompanyItem(itemID);

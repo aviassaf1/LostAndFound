@@ -268,5 +268,21 @@ namespace WorkerHost.Domain.BLBackEnd
             }
             return items;
         }
+        public String addManager(String username, String password)
+        {
+            _managers.Add(username, password);
+            return cache.addWorkerToCompany(username, password, _companyName, _fbProfileID, true);
+        }
+        public String addWorker(String username, String password)
+        {
+            _managers.Add(username, password);
+            return cache.addWorkerToCompany(username, password, _companyName, _fbProfileID, false);
+        }
+        public String removeWorker(String username)
+        {
+            _managers.Remove(username);
+            _workers.Remove(username);
+            return cache.removeWorkerFromCompany(username);
+        }
     }
 }
