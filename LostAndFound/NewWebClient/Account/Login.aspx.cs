@@ -88,6 +88,7 @@ namespace NewWebClient.Account
                 {
                     res = res.Substring(res.IndexOf("," + 1));
                     Session["token"] = res;
+                    Username.Text = res;////////////////////////////////////
                 }
                 
 

@@ -121,9 +121,6 @@
     <Compile Include="..\WorkerHost\ServiceLayer\DataContracts\MatchData.cs">
       <Link>ClientService\DataContracts\MatchData.cs</Link>
     </Compile>
-    <Compile Include="..\WorkerHost\ServiceLayer\IServerService.cs">
-      <Link>ClientService\IServerService.cs</Link>
-    </Compile>
     <Compile Include="Channel.cs" />
     <Compile Include="WebPages\addLostItemForm.aspx.cs">
       <DependentUpon>addLostItemForm.aspx</DependentUpon>
