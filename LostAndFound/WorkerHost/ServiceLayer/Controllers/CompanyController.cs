@@ -38,9 +38,9 @@ namespace WorkerHost.ServiceLayer.Controllers
             return ICM.getSystemCompanyFBGroup( key);
         }
 
-        public string login(string companyName, string token, String userName, String userPassword)
+        public string login( string token, String userName, String userPassword)
         {
-            return ICM.login(companyName, token , userName,  userPassword);
+            return ICM.login(token , userName,  userPassword);
         }
 
         public string publishInventory(string GroupID, int days, int key)

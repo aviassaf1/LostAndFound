@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace WorkerHost.ServiceLayer.DataContracts
 {
     [DataContract]
-    class MatchData
+    public class MatchData
     {
         [DataMember]
         private int _matchID;

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace WorkerHost.ServiceLayer.Controllers
 {
     [ServiceContract]
-    interface IAdminController
+    public interface IAdminController
     {
         [OperationContract]
         String login(String username, String password);

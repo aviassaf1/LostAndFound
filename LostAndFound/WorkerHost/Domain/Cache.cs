@@ -89,6 +89,18 @@ namespace WorkerHost.Domain
             addMatch(new Match(fi3.ItemID, li3.ItemID, MatchStatus.POSSIBLE));
         }
 
+        internal Company getCompanyByfb(string fbid)
+        {
+            foreach(Company comp in _companies.Values)
+            {
+                if (comp.FbProfileID.Equals(fbid))
+                {
+                    return comp;
+                }
+            }
+            return null;
+        }
+
         public void initCache()//public for test only
         {
             _admins = new Dictionary<string, Admin>();

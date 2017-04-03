@@ -66,17 +66,32 @@ namespace NewWebClient.Account
         {
             if (IsValid)
             {
-                // Validate the user password
+                /*/ Validate the user password
                 var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
                 var signinManager = Context.GetOwinContext().GetUserManager<ApplicationSignInManager>();
 
                 // This doen't count login failures towards account lockout
                 // To enable password failures to trigger lockout, change to shouldLockout: true
                 var result = signinManager.PasswordSignIn(Username.Text, Password.Text, IsAdmin.Checked, shouldLockout: false);
+                */
                 var channel = WebHost.Channel.getInstance;
-                string res = channel.login(Username.Text, Password.Text, IsAdmin.Checked, fbToken);
+                string res;
+                if (IsAdmin.Checked)
+                {
+                    res = channel.AdminChannel.login(Username.Text, Password.Text);
+                }
+                else
+                {
+                     res=channel.CompanyChannel.login(fbToken,Username.Text, Password.Text);
+                }
+                if (res.Contains("login succeeded,"))
+                {
+                    res = res.Substring(res.IndexOf("," + 1));
+                    Session["token"] = res;
+                }
+                
 
-                switch (result)
+                /*switch (result)
                 {
                     case SignInStatus.Success:
                         IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
@@ -95,7 +110,7 @@ namespace NewWebClient.Account
                         FailureText.Text = "Invalid login attempt";
                         ErrorMessage.Visible = true;
                         break;
-                }
+                }*/
             }
         }
     }

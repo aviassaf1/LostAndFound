@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 namespace WorkerHost.ServiceLayer.Controllers
 {
     [ServiceContract]
-    interface ICompanyController
+    public interface ICompanyController
     {
         [OperationContract]
-        String login(String companyName, String token, String userName, String userPassword);
+        String login(String token, String userName, String userPassword);
         //Company getCompanyByName(string companyName); //returns null if fails
         [OperationContract]
         String publishInventory( String GroupID, int days, int key);//max days=8, string "true" is ok
