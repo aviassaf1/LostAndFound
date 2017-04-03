@@ -8,7 +8,7 @@ namespace WorkerHost.Domain.BLBackEnd
 {
     public abstract class User
     {
-        protected static Cache cache = Cache.getInstance;
+        //protected static Cache cache = Cache.getInstance;
         protected String _userName;
         protected String _password;
 
@@ -22,7 +22,7 @@ namespace WorkerHost.Domain.BLBackEnd
             set
             {
                 _password = value;
-                cache.updateUser(_userName, _password);
+                Cache.getInstance.updateUser(_userName, _password);
             }
         }
 

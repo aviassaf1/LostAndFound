@@ -17,6 +17,7 @@ namespace WorkerHost.Domain.BLBackEnd
         private Dictionary<String, String> _managers;
         private Dictionary<String, String> _workers;
         private String _fbProfileID;
+        private static Cache cache;
 
         public Company(  String companyName, String phone, HashSet<string> facebookGroups,
             String companyProfileID, String managerUserName, String managerPassword)
@@ -33,6 +34,10 @@ namespace WorkerHost.Domain.BLBackEnd
             Managers.Add(managerUserName, managerPassword);
             _workers = new Dictionary<string, string>();
             _fbProfileID = companyProfileID;
+            if (cache == null)
+            {
+                cache = Cache.getInstance;
+            }
             cache.addNewCompany(this);
         }
         public Company(  String companyName,  String phone, HashSet<string> facebookGroups,
