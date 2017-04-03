@@ -70,6 +70,11 @@ namespace WorkerHost
             return colorList;
         }
 
+        public string login(string text1, string text2, bool @checked, string fbToken)
+        {
+            throw new NotImplementedException();
+        }
+
         string IServerService.addLostItem(List<string> sColors, string sType, DateTime date, string location, string description,
             int serialNumber, string contactName, string contactPhone, string photoLocation, int key)
         {
