@@ -66,7 +66,7 @@ namespace NewWebClient
             }
             string token = "EAACEdEose0cBAGzbmuXj2id4qU4Ed8riC947XaZCDJ9ZAy1kd5PIP2OKBf3Js1ThIF8ZBUr38AGDZATvIhZATFLetHUtRM560Xwt7tnsty9WgHS6zMyK9RvbJjNEPLUXFydDU1am3JsaZCjhOgs4OwWPlMRrbIunrZAPc6SYmZCpVIyV6zOGV9xU";
             var channel = WebHost.Channel.getInstance;
-            string ret = channel.ItemChannel.addLostItem(sColors, sType, date, location, description,
+            string ret = channel.ServerService.addLostItem(sColors, sType, date, location, description,
             serialNumber, contactName, contactPhone, "D", 564/*key*/);
             int i = 0;
             _contactName.Text = ret;

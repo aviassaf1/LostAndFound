@@ -4,17 +4,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
 using System.Web;
-using WorkerHost.ServiceLayer.Controllers;
+using WorkerHost;
 
 namespace WebHost
 {
     public class Channel
     {
         private static Channel singleton;
-        private  IAdminController adminChannel;
-        private  ICompanyController companyChannel;
-        private  IItemController itemChannel;
-        private  IMatchController matchChannel;
+        private IServerService  serverService;
+        //private  IAdminController adminChannel;
+        //private  ICompanyController companyChannel;
+        //private  IItemController itemChannel;
+        //private  IMatchController matchChannel;
 
         public static Channel getInstance
         {
@@ -28,7 +29,31 @@ namespace WebHost
             }
         }
 
-        public  IAdminController AdminChannel
+        public IServerService ServerService
+        {
+            get
+            {
+                return serverService;
+            }
+        }
+
+        private Channel()
+        {
+            var channelFactory = new ChannelFactory<IServerService>(new NetTcpBinding(SecurityMode.None));
+
+            EndpointAddress ea = GetRandomEndPoint();
+            serverService = channelFactory.CreateChannel(ea);
+        }
+
+
+        private static EndpointAddress GetRandomEndPoint()
+        {
+            var endpoints = RoleEnvironment.Roles["WorkerHost"].Instances.Select(i => i.InstanceEndpoints["ServerService"]).ToArray();
+            var r = new Random(DateTime.Now.Millisecond);
+            return new EndpointAddress(String.Format("net.tcp://{0}/server", endpoints[r.Next(endpoints.Count() - 1)].IPEndpoint));
+        }
+
+        /*public  IAdminController AdminChannel
         {
             get
             {
@@ -81,5 +106,6 @@ namespace WebHost
             var r = new Random(DateTime.Now.Millisecond);
             return new EndpointAddress(String.Format("net.tcp://{0}/server", endpoints[r.Next(endpoints.Count() - 1)].IPEndpoint));
         }
+        */
     }
 }

@@ -78,11 +78,11 @@ namespace NewWebClient.Account
                 string res;
                 if (IsAdmin.Checked)
                 {
-                    res = channel.AdminChannel.login(Username.Text, Password.Text);
+                    res = channel.ServerService.login(Username.Text, Password.Text);
                 }
                 else
                 {
-                     res=channel.CompanyChannel.login(fbToken,Username.Text, Password.Text);
+                     res=channel.ServerService.login(fbToken,Username.Text, Password.Text);
                 }
                 if (res.Contains("login succeeded,"))
                 {
