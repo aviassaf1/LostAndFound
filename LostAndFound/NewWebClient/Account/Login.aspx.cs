@@ -79,6 +79,7 @@ namespace NewWebClient.Account
                 if (IsAdmin.Checked)
                 {
                     res = channel.ServerService.Adminlogin(Username.Text, Password.Text);
+                    Username.Text = res;
                 }
                 else
                 {
