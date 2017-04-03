@@ -8,10 +8,10 @@
     </div>
         <p style="direction: rtl">
             &nbsp;</p>
-            <asp:Panel ID="Panel1" runat="server" HorizontalAlign="Right" Height="948px" style="margin-left: 465px">
+            <asp:Panel ID="Panel1" runat="server" HorizontalAlign="Right" Height="948px" style="border-right:none">
                 <p style="direction: rtl">
                 סוג הפריט:&nbsp;&nbsp;&nbsp;&nbsp;
-                <asp:DropDownList ID="_TypeList" runat="server" Height="16px" Width="133px">
+                <asp:DropDownList ID="_TypeList" runat="server" Height="16px" Width="133px" style="direction:rtl">
                     <asp:ListItem Text="תעודה" Value="ID"></asp:ListItem>
                     <asp:ListItem Text="ארנק" Value="WALLET"></asp:ListItem>
                     <asp:ListItem Text="עכבר מחשב" Value="PCMOUSE"></asp:ListItem>
@@ -38,7 +38,7 @@
             </p>
                 <p style="direction: rtl">
                     צבע הפריט:&nbsp;&nbsp;&nbsp;
-                    <asp:CheckBoxList ID="_ColorsCheckBox" runat="server" Height="190px" Width="376px">
+                    <asp:CheckBoxList ID="_ColorsCheckBox" runat="server" Height="190px" Style="margin-left:auto">
                         <asp:ListItem Text="ורוד" Value="PINK"></asp:ListItem>
                         <asp:ListItem Text="שחור" Value="BLACK"></asp:ListItem>
                         <asp:ListItem Text="כחול" Value="BLUE"></asp:ListItem>
@@ -56,7 +56,7 @@
                     </asp:CheckBoxList>
                 </p>
                 <p style="direction: rtl">
-                    תאריך האבידה:<asp:Calendar ID="_dateCalendar" runat="server" BackColor="White" BorderColor="#3366CC" BorderWidth="1px" CellPadding="1" DayNameFormat="Shortest" Font-Names="Verdana" Font-Size="14pt" ForeColor="#003399" Height="200px" Width="220px">
+                    תאריך האבידה:<asp:Calendar ID="_dateCalendar" runat="server" BackColor="White" BorderColor="#3366CC" BorderWidth="1px" CellPadding="1" DayNameFormat="Shortest" Font-Names="Verdana" Font-Size="14pt" ForeColor="#003399" Height="200px" Style="margin-left:auto">
                         <DayHeaderStyle BackColor="#99CCCC" ForeColor="#336666" Height="1px" />
                         <NextPrevStyle Font-Size="8pt" ForeColor="#CCCCFF" />
                         <OtherMonthDayStyle ForeColor="#999999" />
