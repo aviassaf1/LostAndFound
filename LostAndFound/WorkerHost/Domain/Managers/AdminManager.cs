@@ -12,6 +12,7 @@ namespace WorkerHost.Domain.Managers
         private static IAdminManager singleton;
         private Cache cache;
         private Logger logger = Logger.getInstance;
+        private SessionDirector sd = SessionDirector.getInstance;
 
         private AdminManager()
         {
@@ -33,10 +34,15 @@ namespace WorkerHost.Domain.Managers
         public string addComapny(string userName, string password, string companyName, string phone, 
             HashSet<string> facebookGroups, String companyProfileID, String managerUserName, String managerPassword, int key)
         {
+            
             //check not exist
             //check phone type
             //check password
             string logg;
+            if (sd.getAdminName(key) == null)
+            {
+                return "user no admin";
+            }
             if (userName == null || password == null || companyName == null || phone == null || facebookGroups == null 
                 || companyProfileID==null || managerUserName==null|| managerPassword==null)
             {
@@ -153,6 +159,11 @@ namespace WorkerHost.Domain.Managers
 
         public string deleteCompany(string companyName, int key)
         {
+            if (sd.getAdminName(key) == null)
+            {
+                return "user no admin";
+            }
+
             Company company = cache.getCompany(companyName);
             if (company == null)
             {
@@ -167,6 +178,10 @@ namespace WorkerHost.Domain.Managers
         public string editCompany(string companyName, string password, string phone, int key)
         {
             string logg;
+            if (sd.getAdminName(key) == null)
+            {
+                return "user no admin";
+            }
             if (companyName == null || password == null || phone == null || companyName.Equals("") || password.Equals("") ||
                 phone.Equals(""))
             {
@@ -225,9 +240,14 @@ namespace WorkerHost.Domain.Managers
             return company.edit(password, phone);
         }
 
-        public string login()
+        public string login(String username, String password)
         {
-            throw new NotImplementedException();
+            if(cache.isAdmin(username, password)){
+                int key = sd.generateAdminKey(username);
+                return "login succeeded," + key;
+            }
+            else 
+                return "login failed, user name or password are invalid";
         }
     }
 }

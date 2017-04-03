@@ -44,9 +44,9 @@ namespace WorkerHost.ServiceLayer.Controllers
             return IAM.editCompany(companyName, password, phone, key);
         }
 
-        public string login()
+        public string login(String username, String password)
         {
-            return IAM.login();
+            return IAM.login(username, password);
         }
     }
 }

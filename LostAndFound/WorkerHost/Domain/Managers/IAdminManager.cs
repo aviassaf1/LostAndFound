@@ -8,7 +8,7 @@ namespace WorkerHost.Domain.Managers
 {
     public interface IAdminManager
     {
-        String login();
+        String login(String username, String password);
         String addComapny(String userName, String password, String companyName, String phone, HashSet<String> facebookGroups,
             String companyProfileID, String managerUserName, String managerPassword, int key);
 

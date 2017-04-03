@@ -465,5 +465,20 @@ namespace WorkerHost.Domain
             }
             return null;
         }
+
+        internal bool isAdmin(string username, string password)
+        {
+            if (_admins.ContainsKey(username))
+            {
+                Admin admin = _admins[username];
+                if (admin.Password.Equals(password))
+                    return true;
+                else
+                    return false;
+            }
+            else
+                return false;
+
+        }
     }
 }
