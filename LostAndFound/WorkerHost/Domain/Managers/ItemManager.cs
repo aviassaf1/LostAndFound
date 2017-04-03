@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WorkerHost.Domain.BLBackEnd;
+using WorkerHost.Domain.Managers;
 
 namespace WorkerHost.Domain.Managers
 {
@@ -26,10 +27,25 @@ namespace WorkerHost.Domain.Managers
             }
         }
 
-        public List<CompanyItem> getAllCompanyItems(string companyName, int key)
+        public List<CompanyItem> getAllCompanyItems(int key)
         {
-            if (companyName == null)
+            string logg;
+            String user = SessionDirector.getInstance.getUserName(key);
+            if (user == null)
+            {
+                logg = "getAllCompanyItems: session key does not exist";
+                logger.logPrint(logg, 0);
+                logger.logPrint(logg, 2);
                 return null;
+            }
+            string companyName = cache.getCompanyNameByUsername(user);
+            if (companyName == null)
+            {
+                logg = "getAllCompanyItems: session key does not exist";
+                logger.logPrint(logg, 0);
+                logger.logPrint(logg, 2);
+                return null;
+            }
             Company company = cache.getCompany(companyName);
             if (company == null)
                 return null;
@@ -37,9 +53,30 @@ namespace WorkerHost.Domain.Managers
         }
 
         public string addFoundItem(List<string> sColors, string sType, DateTime date, string location, string description,
-            int serialNumber, string companyName, string contactName, string contactPhone, string photoLocation, string token, int key)
+            int serialNumber, string contactName, string contactPhone, string photoLocation, int key)
         {
             string logg;
+            String user = SessionDirector.getInstance.getUserName(key);
+            if (user == null)
+            {
+                logg = "addFoundItem: session key does not exist";
+                logger.logPrint(logg, 0);
+                logger.logPrint(logg, 2);
+                return null;
+            }
+            string companyName = cache.getCompanyNameByUsername(user);
+            if (companyName == null)
+            {
+                logg = "PublishInventory: session key does not exist";
+                logger.logPrint(logg, 0);
+                logger.logPrint(logg, 2);
+                return logg;
+            }
+            string token = CompanyManager.getInstance.getToken(companyName);
+            if (token == null)
+            {
+                return null;
+            }
             if (sColors == null || sType == null || date == null || location == null || description == null ||
                 companyName == null || contactName == null || contactPhone == null ||
                 photoLocation == null || token == null)
@@ -96,9 +133,30 @@ namespace WorkerHost.Domain.Managers
         }
 
         public string addLostItem(List<string> sColors, string sType, DateTime date, string location, string description,
-            int serialNumber, string companyName, string contactName, string contactPhone, string photoLocation, string token, int key)
+            int serialNumber, string contactName, string contactPhone, string photoLocation, int key)
         {
             string logg;
+            String user = SessionDirector.getInstance.getUserName(key);
+            if (user == null)
+            {
+                logg = "addLostItem: session key does not exist";
+                logger.logPrint(logg, 0);
+                logger.logPrint(logg, 2);
+                return null;
+            }
+            string companyName = cache.getCompanyNameByUsername(user);
+            if (companyName == null)
+            {
+                logg = "PublishInventory: session key does not exist";
+                logger.logPrint(logg, 0);
+                logger.logPrint(logg, 2);
+                return logg;
+            }
+            string token = CompanyManager.getInstance.getToken(companyName);
+            if (token == null)
+            {
+                return null;
+            }
             if (sColors == null || sType == null || date == null || location == null || description == null ||
                 companyName == null || contactName == null || contactPhone == null ||
                 photoLocation == null || token == null)

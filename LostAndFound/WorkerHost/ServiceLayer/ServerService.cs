@@ -71,7 +71,7 @@ namespace WorkerHost
         }
 
         string IServerService.addLostItem(List<string> sColors, string sType, DateTime date, string location, string description,
-            int serialNumber, string companyName, string contactName, string contactPhone, string photoLocation, string token, int key)
+            int serialNumber, string contactName, string contactPhone, string photoLocation, int key)
         {
 
             HashSet<string> fbg = new HashSet<string>() { "1538105046204967" };
@@ -80,7 +80,7 @@ namespace WorkerHost
 
             IItemManager iim = ItemManager.getInstance;
             return iim.addLostItem(sColors, sType, date, location, description,
-            serialNumber, companyName, contactName, contactPhone, photoLocation, token,  key);
+            serialNumber, contactName, contactPhone, photoLocation, key);
         }
     }
 }

@@ -30,16 +30,16 @@ namespace WorkerHost.ServiceLayer.Controllers
             }
         }
 
-        public string addFoundItem(List<string> sColors, string sType, DateTime date, string location, string description, int serialNumber, string companyName,
-            string contactName, string contactPhone, string photoLocation, string token, int key)
+        public string addFoundItem(List<string> sColors, string sType, DateTime date, string location, string description, int serialNumber,
+            string contactName, string contactPhone, string photoLocation, int key)
         {
-            return IIM.addFoundItem(sColors, sType, date, location, description, serialNumber, companyName, contactName, contactPhone, photoLocation, token, key);
+            return IIM.addFoundItem(sColors, sType, date, location, description, serialNumber, contactName, contactPhone, photoLocation,  key);
         }
 
-        public string addLostItem(List<string> sColors, string sType, DateTime date, string location, string description, int serialNumber, string companyName, 
-            string contactName, string contactPhone, string photoLocation, string token, int key)
+        public string addLostItem(List<string> sColors, string sType, DateTime date, string location, string description, int serialNumber, 
+            string contactName, string contactPhone, string photoLocation, int key)
         {
-            return IIM.addLostItem(sColors, sType, date, location, description, serialNumber, companyName, contactName, contactPhone, photoLocation, token, key);
+            return IIM.addLostItem(sColors, sType, date, location, description, serialNumber, contactName, contactPhone, photoLocation, key);
         }
 
         public string deleteItem(int itemID, int key)
@@ -52,10 +52,10 @@ namespace WorkerHost.ServiceLayer.Controllers
             return IIM.editItem( itemID,  date,  location,  description,  serialNumber,  contactName,  contactPhone, key);
         }
 
-        public List<CompanyItemData> getAllCompanyItems(string companyName, int key)
+        public List<CompanyItemData> getAllCompanyItems(int key)
         {
             List<CompanyItemData> res = new List<CompanyItemData>();
-            List<CompanyItem> items = IIM.getAllCompanyItems(companyName, key);
+            List<CompanyItem> items = IIM.getAllCompanyItems(key);
             bool stat;
             string type;
             foreach ( CompanyItem i in items)

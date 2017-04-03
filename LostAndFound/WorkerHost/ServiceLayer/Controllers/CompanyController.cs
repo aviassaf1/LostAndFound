@@ -28,14 +28,14 @@ namespace WorkerHost.ServiceLayer.Controllers
             }
         }
 
-        public string addFBGroup(string companyName, string groupID, int key)
+        public string addFBGroup( string groupID, int key)
         {
-            return ICM.addFBGroup(companyName, groupID, key);
+            return ICM.addFBGroup( groupID, key);
         }
 
-        public Dictionary<string, string> getSystemCompanyFBGroup(string companyName, string token, int key)
+        public Dictionary<string, string> getSystemCompanyFBGroup(int key)
         {
-            return ICM.getSystemCompanyFBGroup(companyName, token, key);
+            return ICM.getSystemCompanyFBGroup( key);
         }
 
         public string login(string companyName, string token, String userName, String userPassword)
@@ -43,14 +43,14 @@ namespace WorkerHost.ServiceLayer.Controllers
             return ICM.login(companyName, token , userName,  userPassword);
         }
 
-        public string publishInventory(string token, string GroupID, int days, string companyUserName, int key)
+        public string publishInventory(string GroupID, int days, int key)
         {
-            return ICM.publishInventory(token, GroupID, days, companyUserName, key);
+            return ICM.publishInventory(GroupID, days,  key);
         }
 
-        public string removeFBGroup(string companyName, string groupID, int key)
+        public string removeFBGroup(string groupID, int key)
         {
-            return ICM.removeFBGroup(companyName, groupID, key);
+            return ICM.removeFBGroup(groupID, key);
         }
 
         public string removeWorker(string delUsername, int key)

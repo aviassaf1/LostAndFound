@@ -9,11 +9,11 @@ namespace WorkerHost.Domain.Managers
 {
     public interface IItemManager
     {
-        List<CompanyItem> getAllCompanyItems(String companyName, int key); //returns null if name is not valid
+        List<CompanyItem> getAllCompanyItems( int key); //returns null if name is not valid
         String addLostItem(List<string> sColors, string sType, DateTime date, string location, string description,
-            int serialNumber, string companyName, string contactName, string contactPhone, string photoLocation, string token, int key);
+            int serialNumber, string contactName, string contactPhone, string photoLocation,  int key);
         String addFoundItem(List<string> sColors, string sType, DateTime date, string location, string description,
-            int serialNumber, string companyName, string contactName, string contactPhone, string photoLocation, string token, int key);
+            int serialNumber, string companyName, string contactPhone, string photoLocation, int key);
         string transactionComplete(int itemID, int key);
 
         String deleteItem(int itemID, int key);
