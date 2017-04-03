@@ -159,7 +159,7 @@
     <Compile Include="Domain\Class1.cs" />
     <Compile Include="Domain\Logger.cs" />
     <Compile Include="Domain\Managers\AdminManager.cs" />
-    <Compile Include="Domain\Managers\ComapanyManager.cs" />
+    <Compile Include="Domain\Managers\CompanyManager.cs" />
     <Compile Include="Domain\Managers\IAdminManager.cs" />
     <Compile Include="Domain\Managers\ICompanyManager.cs" />
     <Compile Include="Domain\Managers\IItemManager.cs" />

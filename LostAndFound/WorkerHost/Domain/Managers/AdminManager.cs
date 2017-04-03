@@ -31,7 +31,7 @@ namespace WorkerHost.Domain.Managers
             }
         }
 
-        public string addComapny(string userName, string password, string companyName, string phone, 
+        public string addComapny(string companyName, string phone, 
             HashSet<string> facebookGroups, String companyProfileID, String managerUserName, String managerPassword, int key)
         {
             
@@ -43,7 +43,7 @@ namespace WorkerHost.Domain.Managers
             {
                 return "user no admin";
             }
-            if (userName == null || password == null || companyName == null || phone == null || facebookGroups == null 
+            if (companyName == null ||  phone == null || facebookGroups == null 
                 || companyProfileID==null || managerUserName==null|| managerPassword==null)
             {
                 logg = "one of the arguments or more is null, add company failed";
@@ -59,48 +59,10 @@ namespace WorkerHost.Domain.Managers
                 logger.logPrint(logg, 2);
                 return logg;
             }
-            if (userName.Equals("") || password.Equals("") || phone.Equals("") || companyName.Equals("")
+            if (companyName.Equals("") || phone.Equals("")
                 || companyProfileID.Equals("") || managerUserName.Equals("") || managerPassword.Equals(""))
             {
                 logg = "one or more of the fields is missing";
-                logger.logPrint(logg, 0);
-                logger.logPrint(logg, 2);
-                return logg;
-            }
-            // check if the password is strong enough
-            bool isNumExist = false;
-            bool isSmallKeyExist = false;
-            bool isBigKeyExist = false;
-            bool isKeyRepeting3Times = false;
-            if (password.Length < 6)
-            {
-                logg = "password should contain at least 6 ccharacters, add company Fail";
-                logger.logPrint(logg, 0);
-                logger.logPrint(logg, 2);
-                return logg;
-            }
-            for (int i = 0; i < password.Length; i++)
-            {
-                if (password.ElementAt(i) <= '9' && password.ElementAt(i) >= '0')
-                {
-                    isNumExist = true;
-                }
-                if (password.ElementAt(i) <= 'Z' && password.ElementAt(i) >= 'A')
-                {
-                    isBigKeyExist = true;
-                }
-                if (password.ElementAt(i) <= 'z' && password.ElementAt(i) >= 'a')
-                {
-                    isSmallKeyExist = true;
-                }
-                if (i < password.Length - 2 && (password.ElementAt(i).Equals(password.ElementAt(i + 1)) && password.ElementAt(i).Equals(password.ElementAt(i + 2))))
-                {
-                    isKeyRepeting3Times = true;
-                }
-            }
-            if (!(isNumExist && isSmallKeyExist && isBigKeyExist && !isKeyRepeting3Times))
-            {
-                logg = "password isnt strong enough";
                 logger.logPrint(logg, 0);
                 logger.logPrint(logg, 2);
                 return logg;
@@ -113,10 +75,10 @@ namespace WorkerHost.Domain.Managers
                 logger.logPrint(logg, 2);
                 return logg;
             }
-            isNumExist = false;
-            isSmallKeyExist = false;
-            isBigKeyExist = false;
-            isKeyRepeting3Times = false;
+            bool isNumExist = false;
+            bool isSmallKeyExist = false;
+            bool isBigKeyExist = false;
+            bool isKeyRepeting3Times = false;
             if (managerPassword.Length < 6)
             {
                 logg = "password should contain at least 6 ccharacters, add company Fail";
@@ -150,7 +112,7 @@ namespace WorkerHost.Domain.Managers
                 logger.logPrint(logg, 2);
                 return logg;
             }
-            company = new Company(userName, password, companyName, phone, facebookGroups, companyProfileID,managerUserName, managerPassword);
+            company = new Company(companyName, phone, facebookGroups, companyProfileID,managerUserName, managerPassword);
             logg = "company has been added";
             logger.logPrint(logg, 0);
             logger.logPrint(logg, 1);

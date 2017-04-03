@@ -18,11 +18,11 @@ namespace WorkerHost.Domain.BLBackEnd
         private Dictionary<String, String> _workers;
         private String _fbProfileID;
 
-        public Company(String userName, String password, String companyName, String phone, HashSet<string> facebookGroups,
+        public Company(  String companyName, String phone, HashSet<string> facebookGroups,
             String companyProfileID, String managerUserName, String managerPassword)
         {
-            _userName = userName;
-            _password = password;
+            _userName = companyName;
+            _password = "";
             _companyName = companyName;
             _phone = phone;
             _facebookGroups = facebookGroups;
@@ -35,12 +35,12 @@ namespace WorkerHost.Domain.BLBackEnd
             _fbProfileID = companyProfileID;
             cache.addNewCompany(this);
         }
-        public Company(String userName, String password, String companyName, String phone, HashSet<string> facebookGroups,
+        public Company(  String companyName,  String phone, HashSet<string> facebookGroups,
             String companyProfileID, Dictionary<String, String> managers, Dictionary<String, String> workers,
         HashSet<int> lostItems, HashSet<int> foundItems, HashSet<int> matches)
         {
-            _userName = userName;
-            _password = password;
+            _userName = companyName;
+            _password = "";
             _companyName = companyName;
             _phone = phone;
             _facebookGroups = facebookGroups;

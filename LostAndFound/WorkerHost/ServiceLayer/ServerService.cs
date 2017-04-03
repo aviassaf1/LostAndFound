@@ -75,7 +75,7 @@ namespace WorkerHost
         {
 
             HashSet<string> fbg = new HashSet<string>() { "1538105046204967" };
-            string ans = AdminManager.getInstance.addComapny("GuyCompany", "gG123456", "GuyCompany", "050000000", fbg,
+            string ans = AdminManager.getInstance.addComapny("GuyCompany", "050000000", fbg,
                 "10205175970541279","Guy","Mc123456",key);
 
             IItemManager iim = ItemManager.getInstance;

@@ -13,7 +13,7 @@ namespace WorkerHost.ServiceLayer.Controllers
         private static ICompanyManager ICM;
         private CompanyController()
         {
-            ICM = ComapanyManager.getInstance;
+            ICM = CompanyManager.getInstance;
         }
 
         public static ICompanyController getInstance

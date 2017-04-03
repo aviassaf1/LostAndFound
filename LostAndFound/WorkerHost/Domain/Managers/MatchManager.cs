@@ -27,6 +27,37 @@ namespace WorkerHost.Domain.Managers
         public string changeMatchStatus(int matchID, int statusNum, int key)
         {
             string logg;
+            String user = SessionDirector.getInstance.getUserName(key);
+            if (user == null)
+            {
+                logg = "changeMatchStatus: session key does not exist";
+                logger.logPrint(logg, 0);
+                logger.logPrint(logg, 2);
+                return logg;
+            }
+            string companyName = Cache.getInstance.getCompanyNameByUsername(user);
+            if (companyName == null)
+            {
+                logg = "changeMatchStatus: session key does not exist";
+                logger.logPrint(logg, 0);
+                logger.logPrint(logg, 2);
+                return logg;
+            }
+            Company company = CompanyManager.getInstance.getCompanyByName(companyName);
+            if (company == null)
+            {
+                logg = "changeMatchStatus: company name is not valid";
+                logger.logPrint(logg, 0);
+                logger.logPrint(logg, 2);
+                return logg;
+            }
+            if (!company.Matches.Contains(matchID))
+            {
+                logg = "changeMatchStatus: match id is not valid";
+                logger.logPrint(logg, 0);
+                logger.logPrint(logg, 2);
+                return logg;
+            }
             Match match = Cache.getInstance.getMatch(matchID);
             if (match != null)
             {
@@ -90,9 +121,9 @@ namespace WorkerHost.Domain.Managers
             List<Item> items = new List<Item>();
             List<Item> cItems;
             if (cItem.GetType() == typeof(FoundItem))
-                cItems = ComapanyManager.getInstance.getLostItems3Days(cItem.CompanyName, cItem.Date);
+                cItems = CompanyManager.getInstance.getLostItems3Days(cItem.CompanyName, cItem.Date);
             else
-                cItems = ComapanyManager.getInstance.getFoundItems3Days(cItem.CompanyName, cItem.Date);
+                cItems = CompanyManager.getInstance.getFoundItems3Days(cItem.CompanyName, cItem.Date);
             foreach (Item item in cItems)
             {
                 items.Add(item);
@@ -305,6 +336,38 @@ namespace WorkerHost.Domain.Managers
 
         public List<Match> getMatchesByItemID(int itemID, int key)
         {
+            string logg;
+            String user = SessionDirector.getInstance.getUserName(key);
+            if (user == null)
+            {
+                logg = "getMatchesByItemID: session key does not exist";
+                logger.logPrint(logg, 0);
+                logger.logPrint(logg, 2);
+                return null;
+            }
+            string companyName = Cache.getInstance.getCompanyNameByUsername(user);
+            if (companyName == null)
+            {
+                logg = "getMatchesByItemID: session key does not exist";
+                logger.logPrint(logg, 0);
+                logger.logPrint(logg, 2);
+                return null;
+            }
+            Company company = CompanyManager.getInstance.getCompanyByName(companyName);
+            if (company == null)
+            {
+                logg = "getMatchesByItemID: company name is not valid";
+                logger.logPrint(logg, 0);
+                logger.logPrint(logg, 2);
+                return null;
+            }
+            if (!(company.LostItems.Contains(itemID)|| company.FoundItems.Contains(itemID)))
+            {
+                logg = "getMatchesByItemID: item id is not valid";
+                logger.logPrint(logg, 0);
+                logger.logPrint(logg, 2);
+                return null;
+            }
             IItemManager iim = ItemManager.getInstance;
             CompanyItem ci = Cache.getInstance.getCompanyItem(itemID);
             if ( ci!= null)

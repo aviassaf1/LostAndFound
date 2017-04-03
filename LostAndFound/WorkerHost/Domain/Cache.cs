@@ -55,8 +55,8 @@ namespace WorkerHost.Domain
 
         public void setUp()
         {
-            Company comp1 = new Company("Guy", "Hello6", "Guy", "05000000", new HashSet<string>(), "10205175970541279", "Guy", "Mc123456");
-            Company comp2 = new Company("Guy2", "Hello6", "Guy2", "05000000", new HashSet<string>(), "10205175970541279", "Guy", "Mc123456");
+            Company comp1 = new Company("Guy", "05000000", new HashSet<string>(), "10205175970541279", "Guy", "Mc123456");
+            Company comp2 = new Company("Guy2", "05000000", new HashSet<string>(), "10205175970541279", "Guy", "Mc123456");
             comp1.addFacebookGroup("1538105046204967");
             comp2.addFacebookGroup("1538105046204967");
             List<Color> colors1 = new List<Color>();
@@ -201,7 +201,7 @@ namespace WorkerHost.Domain
                     }
                         
                 }
-                _companies.Add(company.userName, new Company(company.userName, company.User.password, company.companyName, company.phone, FBGroups,fbID,managers,workers, LostItems, FoundItems, Matches));//add encryption to pass
+                _companies.Add(company.userName, new Company(company.companyName, company.phone, FBGroups,fbID,managers,workers, LostItems, FoundItems, Matches));//add encryption to pass
             }
             foreach (CompanyUsers cu in companyUsers)
             {
