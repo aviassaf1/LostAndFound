@@ -275,25 +275,9 @@ namespace WorkerHost.Domain
 
         private List<string> stringToListOfColors(string colors)
         {
-            string color = "";
-            List<string> colorList = new List<string>();
-            for (int i = 0; i < colors.Length; i++)
-            {
-                if ((i == colors.Length - 1) || colors.ElementAt(i).Equals(","))
-                {
-                    if (i == colors.Length - 1)
-                    {
-                        color += colors.ElementAt(i);
-                    }
-                    colorList.Add(color);
-                    color = "";
-                }
-                else
-                {
-                    color += colors.ElementAt(i);
-                }
-            }
-            return colorList;
+            char[] delimiterChars = {  ','};
+            String[] colorList = colors.Split(delimiterChars);
+            return colorList.ToList();
         }
 
         internal Company getCompany(string companyName)
