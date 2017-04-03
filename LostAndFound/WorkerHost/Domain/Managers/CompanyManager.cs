@@ -39,7 +39,7 @@ namespace WorkerHost.Domain.Managers
             return cache.getCompany(companyName);
         }
 
-        public String login(String companyName, String token, String userName, String userPassword)
+        public String login(String token, String userName, String userPassword)
         {
             string fbid = "";
             var fb = new FacebookClient();
@@ -66,16 +66,16 @@ namespace WorkerHost.Domain.Managers
 
                 return null;
             }
-            Company company = cache.getCompany(companyName);
+            Company company = cache.getCompanyByfb(fbid);
             if (company != null && company.FbProfileID.Equals(fbid)&&(
                 (company.Workers.Keys.Contains(userName)&& company.Workers[userName].Equals(userPassword)) || 
                 (company.Managers.Keys.Contains(userName) && company.Managers[userName].Equals(userPassword))))
             {
-                if (_FBTokens.ContainsKey(companyName))
-                    _FBTokens[companyName] = token;
+                if (_FBTokens.ContainsKey(company.CompanyName))
+                    _FBTokens[company.CompanyName] = token;
                 else
                 {
-                    _FBTokens.Add(companyName, token);
+                    _FBTokens.Add(company.CompanyName, token);
                 }
                 int key = SessionDirector.getInstance.generateKey(userName);
                 return "login succeeded,"+key;

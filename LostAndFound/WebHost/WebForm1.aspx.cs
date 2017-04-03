@@ -20,7 +20,7 @@ namespace WorkerHost.Web
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            var factory = new ChannelFactory<WorkerHost.IServerService>(new NetTcpBinding(SecurityMode.None));
+            var factory = new ChannelFactory<ServiceLayer.Controllers.IItemController>(new NetTcpBinding(SecurityMode.None));
 
             var channel = factory.CreateChannel(GetTandomEndPoint());
 

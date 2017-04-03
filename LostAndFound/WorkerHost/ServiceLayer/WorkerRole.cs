@@ -10,6 +10,7 @@ using Microsoft.WindowsAzure.Diagnostics;
 using Microsoft.WindowsAzure.ServiceRuntime;
 using Microsoft.WindowsAzure.Storage;
 using System.ServiceModel;
+using WorkerHost.ServiceLayer.Controllers;
 
 namespace WorkerHost
 {
@@ -52,16 +53,28 @@ namespace WorkerHost
 
         private void StartWCFHost()
         {
-            var baseAddress = String.Format("net.tcp://{0}", RoleEnvironment.CurrentRoleInstance.InstanceEndpoints["ServerService"].IPEndpoint);
-            var host = new ServiceHost(typeof(ServerService), new Uri(baseAddress));
+            var itemBaseAddress = String.Format("net.tcp://{0}", RoleEnvironment.CurrentRoleInstance.InstanceEndpoints["ItemController"].IPEndpoint);
+            var itemHost = new ServiceHost(typeof(ItemController), new Uri(itemBaseAddress));
+            var companyBaseAddress = String.Format("net.tcp://{0}", RoleEnvironment.CurrentRoleInstance.InstanceEndpoints["CompanyController"].IPEndpoint);
+            var companyHost = new ServiceHost(typeof(CompanyController), new Uri(companyBaseAddress));
+            var matchBaseAddress = String.Format("net.tcp://{0}", RoleEnvironment.CurrentRoleInstance.InstanceEndpoints["MatchController"].IPEndpoint);
+            var matchHost = new ServiceHost(typeof(MatchController), new Uri(matchBaseAddress));
+            var adminBaseAddress = String.Format("net.tcp://{0}", RoleEnvironment.CurrentRoleInstance.InstanceEndpoints["AdminController"].IPEndpoint);
+            var adminHost = new ServiceHost(typeof(AdminController), new Uri(adminBaseAddress));
 
-            host.AddServiceEndpoint(typeof(IServerService), new NetTcpBinding(SecurityMode.None), "server");
+            itemHost.AddServiceEndpoint(typeof(IItemController), new NetTcpBinding(SecurityMode.None), "server");
+            companyHost.AddServiceEndpoint(typeof(ICompanyController), new NetTcpBinding(SecurityMode.None), "server");
+            matchHost.AddServiceEndpoint(typeof(IMatchController), new NetTcpBinding(SecurityMode.None), "server");
+            adminHost.AddServiceEndpoint(typeof(IAdminController), new NetTcpBinding(SecurityMode.None), "server");
 
             while (true)
             {
                 try
                 {
-                    host.Open();
+                    itemHost.Open();
+                    companyHost.Open();
+                    matchHost.Open();
+                    adminHost.Open();
                     break;
                 }
                 catch

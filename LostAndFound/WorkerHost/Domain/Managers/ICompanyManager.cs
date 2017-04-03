@@ -9,7 +9,7 @@ namespace WorkerHost.Domain.Managers
 {
     public interface ICompanyManager
     {
-        String login(String companyName, String token, String userName, String userPassword);
+        String login(String token, String userName, String userPassword);
         Company getCompanyByName(string companyName); //returns null if fails
         String publishInventory( String GroupID, int days, int key);//max days=8, string "true" is ok
         List<Item> getLostItems3Days(string companyName, DateTime date); //returns null if fails

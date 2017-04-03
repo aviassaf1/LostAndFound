@@ -9,7 +9,7 @@ using WorkerHost.ServiceLayer.DataContracts;
 namespace WorkerHost.ServiceLayer.Controllers
 {
     [ServiceContract]
-    interface IItemController
+    public interface IItemController
     {
         [OperationContract]
         List<CompanyItemData> getAllCompanyItems(int key); //returns null if name is not valid
