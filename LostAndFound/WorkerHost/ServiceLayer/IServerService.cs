@@ -9,7 +9,7 @@ namespace WorkerHost
     public interface IServerService
     {
         [OperationContract]
-        String login(String username, String password);
+        String Adminlogin(String username, String password);
         [OperationContract]
         String addComapny(String companyName, String phone, HashSet<String> facebookGroups,
             String companyProfileID, String managerUserName, String managerPassword, int key);

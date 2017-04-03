@@ -78,7 +78,7 @@ namespace WorkerHost
             throw new NotImplementedException();
         }
 
-        public string login(string username, string password)
+        public string Adminlogin(string username, string password)
         {
             return AdminController.getInstance.login(username, password);
         }
