@@ -12,13 +12,13 @@ namespace WorkerHost.ServiceLayer.Controllers
     interface IItemController
     {
         [OperationContract]
-        List<CompanyItemData> getAllCompanyItems(String companyName, int key); //returns null if name is not valid
+        List<CompanyItemData> getAllCompanyItems(int key); //returns null if name is not valid
         [OperationContract]
         String addLostItem(List<string> sColors, string sType, DateTime date, string location, string description,
-            int serialNumber, string companyName, string contactName, string contactPhone, string photoLocation, string token, int key);
+            int serialNumber, string contactName, string contactPhone, string photoLocation, int key);
         [OperationContract]
         String addFoundItem(List<string> sColors, string sType, DateTime date, string location, string description,
-            int serialNumber, string companyName, string contactName, string contactPhone, string photoLocation, string token, int key);
+            int serialNumber, string contactName, string contactPhone, string photoLocation, int key);
         [OperationContract]
         string transactionComplete(int itemID, int key);
         [OperationContract]

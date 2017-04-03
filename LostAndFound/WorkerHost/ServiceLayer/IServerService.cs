@@ -12,6 +12,6 @@ namespace WorkerHost
 
         [OperationContract]
         String addLostItem(List<string> sColors, string sType, DateTime date, string location, string description,
-            int serialNumber, string companyName, string contactName, string contactPhone, string photoLocation, string token, int key);
+            int serialNumber, string contactName, string contactPhone, string photoLocation, int key);
     }
 }
