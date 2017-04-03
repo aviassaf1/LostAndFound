@@ -24,7 +24,7 @@ namespace WorkerHost.Domain.BLBackEnd
             set
             {
                 _serialNumber = value;
-                cache.updateCompanyItem(this);
+                Cache.getInstance.updateCompanyItem(this);
             }
         }
 
@@ -38,7 +38,7 @@ namespace WorkerHost.Domain.BLBackEnd
             set
             {
                 _contactName = value;
-                cache.updateCompanyItem(this);
+                Cache.getInstance.updateCompanyItem(this);
             }
         }
 
@@ -52,7 +52,7 @@ namespace WorkerHost.Domain.BLBackEnd
             set
             {
                 _contactPhone = value;
-                cache.updateCompanyItem(this);
+                Cache.getInstance.updateCompanyItem(this);
             }
         }
 
@@ -66,7 +66,7 @@ namespace WorkerHost.Domain.BLBackEnd
             set
             {
                 _photoLocation = value;
-                cache.updateCompanyItem(this);
+                Cache.getInstance.updateCompanyItem(this);
             }
         }
 
@@ -87,7 +87,7 @@ namespace WorkerHost.Domain.BLBackEnd
             _serialNumber = serialNumber;
             _contactName = contactName;
             _contactPhone = contactPhone;
-            return cache.updateCompanyItem(this);
+            return Cache.getInstance.updateCompanyItem(this);
         }
     }
 }

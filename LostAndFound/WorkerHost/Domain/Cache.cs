@@ -163,7 +163,13 @@ namespace WorkerHost.Domain
                         colors.Add(Colors[col]);
                     }
                 }
-                _FBItems.Add(fbi.postId, new Domain.BLBackEnd.FBItem(fbi.itemID, colors, HebTypes[fbi.itemType], fbi.lostDate.Value/* change lost date name*/, fbi.location, fbi.description, fbi.postId, fbi.publisherName, FBTypes[fbi.type]));
+                try {
+                    _FBItems.Add(fbi.postId, new BLBackEnd.FBItem(fbi.itemID, colors, HebTypes[fbi.itemType], fbi.lostDate.Value/* change lost date name*/, fbi.location, fbi.description, fbi.postId, fbi.publisherName, FBTypes[fbi.type]));
+                }
+                catch(Exception e)
+                {
+                    int x=5;
+                }
             }
             foreach (Matches m in matches)
             {
