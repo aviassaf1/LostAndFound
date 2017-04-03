@@ -13,7 +13,7 @@ namespace WorkerHost.ServiceLayer.Controllers
         private static ICompanyManager ICM;
         private CompanyController()
         {
-            ICM = ComapanyManager.getInstance;
+            ICM = CompanyManager.getInstance;
         }
 
         public static ICompanyController getInstance
@@ -28,29 +28,39 @@ namespace WorkerHost.ServiceLayer.Controllers
             }
         }
 
-        public string addFBGroup(string companyName, string groupID)
+        public string addFBGroup( string groupID, int key)
         {
-            return ICM.addFBGroup(companyName, groupID);
+            return ICM.addFBGroup( groupID, key);
         }
 
-        public Dictionary<string, string> getSystemCompanyFBGroup(string companyName, string token)
+        public Dictionary<string, string> getSystemCompanyFBGroup(int key)
         {
-            return ICM.getSystemCompanyFBGroup(companyName, token);
+            return ICM.getSystemCompanyFBGroup( key);
         }
 
-        public string login(string companyName, string token)
+        public string login( string token, String userName, String userPassword)
         {
-            return ICM.login(companyName, token);
+            return ICM.login(token , userName,  userPassword);
         }
 
-        public string publishInventory(string token, string GroupID, int days, string companyUserName)
+        public string publishInventory(string GroupID, int days, int key)
         {
-            return ICM.publishInventory(token, GroupID, days, companyUserName);
+            return ICM.publishInventory(GroupID, days,  key);
         }
 
-        public string removeFBGroup(string companyName, string groupID)
+        public string removeFBGroup(string groupID, int key)
         {
-            return ICM.removeFBGroup(companyName, groupID);
+            return ICM.removeFBGroup(groupID, key);
+        }
+
+        public string removeWorker(string delUsername, int key)
+        {
+            return ICM.removeWorker(delUsername, key);
+        }
+
+        public string addWorker(string newUsername, string newPassword, bool isManager, int key)
+        {
+            return ICM.addWorker( newUsername,  newPassword,  isManager,  key);
         }
     }
 }

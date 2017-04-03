@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Facebook.aspx.cs" Inherits="NewWebClient.Facebook" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Facebook.aspx.cs" Inherits="NewWebClient.Facebook.Facebook" %>
 
 <!DOCTYPE html>
 
@@ -41,7 +41,7 @@
         }
 
         function FacebookLoggedIn(response) {
-            var loc = '/Facebook/callback.aspx';
+            var loc = '/Account/Login.aspx';
             if (loc.indexOf('?') > -1)
                 window.location = loc + '&authprv=facebook&access_token=' + response.authResponse.accessToken;
             else

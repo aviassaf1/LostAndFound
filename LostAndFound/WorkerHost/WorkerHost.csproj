@@ -92,51 +92,54 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataLayer\Companies.cs">
-      <DependentUpon>Database_Model.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="DataLayer\CompanyFbConnection.cs">
-      <DependentUpon>Database_Model.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="DataLayer\CompanyItems.cs">
-      <DependentUpon>Database_Model.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataLayer\CompanyUsers.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="DataLayer\Database.cs" />
-    <Compile Include="DataLayer\Database_Model.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Database_Model.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataLayer\Database_Model.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Database_Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataLayer\Database_Model.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Database_Model.edmx</DependentUpon>
-    </Compile>
     <Compile Include="DataLayer\FacebookGroups.cs">
-      <DependentUpon>Database_Model.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="DataLayer\FBItem.cs">
-      <DependentUpon>Database_Model.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="DataLayer\FoundItems.cs">
-      <DependentUpon>Database_Model.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="DataLayer\IDB.cs" />
     <Compile Include="DataLayer\Items.cs">
-      <DependentUpon>Database_Model.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="DataLayer\LostItems.cs">
-      <DependentUpon>Database_Model.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="DataLayer\Matches.cs">
-      <DependentUpon>Database_Model.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataLayer\Model1.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataLayer\Model1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataLayer\Model1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
     <Compile Include="DataLayer\User.cs">
-      <DependentUpon>Database_Model.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Domain\BLBackEnd\Admin.cs" />
     <Compile Include="Domain\BLBackEnd\Color.cs" />
@@ -156,13 +159,14 @@
     <Compile Include="Domain\Class1.cs" />
     <Compile Include="Domain\Logger.cs" />
     <Compile Include="Domain\Managers\AdminManager.cs" />
-    <Compile Include="Domain\Managers\ComapanyManager.cs" />
+    <Compile Include="Domain\Managers\CompanyManager.cs" />
     <Compile Include="Domain\Managers\IAdminManager.cs" />
     <Compile Include="Domain\Managers\ICompanyManager.cs" />
     <Compile Include="Domain\Managers\IItemManager.cs" />
     <Compile Include="Domain\Managers\IMatchManager.cs" />
     <Compile Include="Domain\Managers\ItemManager.cs" />
     <Compile Include="Domain\Managers\MatchManager.cs" />
+    <Compile Include="Domain\SessionDirector.cs" />
     <Compile Include="ServiceLayer\Controllers\AdminController.cs" />
     <Compile Include="ServiceLayer\Controllers\CompanyController.cs" />
     <Compile Include="ServiceLayer\Controllers\IAdminController.cs" />
@@ -180,12 +184,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <EntityDeploy Include="DataLayer\Database_Model.edmx">
+    <EntityDeploy Include="DataLayer\Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Database_Model.Designer.cs</LastGenOutput>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="DataLayer\Database_Model.edmx.diagram">
-      <DependentUpon>Database_Model.edmx</DependentUpon>
+    <None Include="DataLayer\Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
@@ -193,18 +197,17 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DataLayer\Database_Model.Context.tt">
+    <Content Include="DataLayer\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Database_Model.edmx</DependentUpon>
-      <LastGenOutput>Database_Model.Context.cs</LastGenOutput>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="DataLayer\Database_Model.tt">
+    <Content Include="DataLayer\Model1.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Database_Model.edmx</DependentUpon>
-      <LastGenOutput>Database_Model.cs</LastGenOutput>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

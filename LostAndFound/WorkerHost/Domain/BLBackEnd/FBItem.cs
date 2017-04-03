@@ -67,14 +67,14 @@ namespace WorkerHost.Domain.BLBackEnd
 
         protected override void updateItem()
         {
-            cache.updateFacebbokItem(this);
+            Cache.getInstance.updateFacebbokItem(this);
         }
 
         public override void addToDB()
         {
             if (ItemID == -1)
             {
-                cache.addNewFBItemToDB(this);
+                Cache.getInstance.addNewFBItemToDB(this);
             }
         }
     }

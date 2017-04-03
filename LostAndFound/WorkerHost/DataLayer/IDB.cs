@@ -9,7 +9,8 @@ namespace WorkerHost.DataLayer
     public interface IDB
     {
         void clear();
-        String addCompany(string userName, string password, string companyName, string phone, HashSet<String> facebookGroups);
+        String addCompany(string userName, string password, string companyName, string phone, HashSet<String> facebookGroups,
+            String fbID, Dictionary<string, string> managers, Dictionary<string, string> workers);
         String removeCompany(string companyName);
         String updateCompany(string companyName, string userNameNew, string phoneNew);
         Companies findCompanyByCompanyName(string companyName);

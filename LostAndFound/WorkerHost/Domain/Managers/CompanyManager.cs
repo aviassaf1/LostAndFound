@@ -8,15 +8,16 @@ using Facebook;
 
 namespace WorkerHost.Domain.Managers
 {
-    public class ComapanyManager : ICompanyManager
+    public class CompanyManager : ICompanyManager
     {
         private Dictionary<String, String> _FBTokens = new Dictionary<string, string>();//company name, token
+        
         private static ICompanyManager singleton;
         private Cache cache;
         private Logger logger = Logger.getInstance;
         private const int MAXDAYS = 8;
 
-        private ComapanyManager()
+        private CompanyManager()
         {
             cache = Cache.getInstance;
         }
@@ -26,7 +27,7 @@ namespace WorkerHost.Domain.Managers
             {
                 if (singleton == null)
                 {
-                    singleton = new ComapanyManager();
+                    singleton = new CompanyManager();
                 }
                 return singleton;
             }
@@ -38,21 +39,132 @@ namespace WorkerHost.Domain.Managers
             return cache.getCompany(companyName);
         }
 
-        public String login(String companyName, String token)
+        public String login(String token, String userName, String userPassword)
         {
-            //check if company exist
-            if (_FBTokens.ContainsKey(companyName))
-                _FBTokens[companyName] = token;
+            string fbid = "";
+            var fb = new FacebookClient();
+            try
+            {
+                //make sure the token is good
+                fb = new FacebookClient(token);
+            }
+            catch
+            {
+                return null;
+            }
+            var parameters = new Dictionary<string, object>();
+            parameters["fields"]="id";
+            dynamic result;
+            try
+            {
+                //make sure post succeeds with GID
+                result = fb.Get("me",parameters);
+                fbid = result.id;
+            }
+            catch (Exception)
+            {
+
+                return null;
+            }
+            Company company = cache.getCompanyByfb(fbid);
+            if (company != null && company.FbProfileID.Equals(fbid)&&(
+                (company.Workers.Keys.Contains(userName)&& company.Workers[userName].Equals(userPassword)) || 
+                (company.Managers.Keys.Contains(userName) && company.Managers[userName].Equals(userPassword))))
+            {
+                if (_FBTokens.ContainsKey(company.CompanyName))
+                    _FBTokens[company.CompanyName] = token;
+                else
+                {
+                    _FBTokens.Add(company.CompanyName, token);
+                }
+                int key = SessionDirector.getInstance.generateKey(userName);
+                return "login succeeded,"+key;
+            }
             else
             {
-                _FBTokens.Add(companyName, token);
+                return "login failed, user name or password are invalid";
             }
-            return "login was succeeded";
+
         }
 
-        public string publishInventory(string token, string groupID, int days, string companyName)
+        public String addWorker(String newUsername,String newPassword,bool isManager, int key)
+        {
+            String user= SessionDirector.getInstance.getUserName(key);
+            if (user != null)
+            {
+                String companyName=cache.getCompanyNameByUsername(user);
+                if(companyName != null)
+                {
+                    Company company = cache.getCompany(companyName);
+                    if(company != null&&company.Managers.Keys.Contains(user))
+                    {
+                        if (cache.getCompanyNameByUsername(newUsername) == null)
+                        {
+                            if (!isManager)
+                            {
+                                return company.addWorker(newUsername, newPassword);
+                            }
+                            else
+                            {
+                                return company.addManager(newUsername, newPassword);
+                            }
+                        }
+                        return "add worker failed, username already exists";
+                    }
+
+                }
+            }
+            return "add worker failed";
+        }
+
+        public String removeWorker(String delUsername,  int key)
+        {
+            String user = SessionDirector.getInstance.getUserName(key);
+            if (user != null&& !user.Equals(delUsername))
+            {
+                String companyName = cache.getCompanyNameByUsername(user);
+                if (companyName != null)
+                {
+                    Company company = cache.getCompany(companyName);
+                    if (company != null && company.Managers.Keys.Contains(user))
+                    {
+                        if (cache.getCompanyNameByUsername(delUsername) != null)
+                        {
+                            return company.removeWorker(delUsername);
+                        }
+                        return "remove worker failed, username not exists";
+                    }
+
+                }
+            }
+            return "remove worker failed";
+        }
+
+
+        public string publishInventory( string groupID, int days, int key)
         {
             string logg;
+            String user = SessionDirector.getInstance.getUserName(key);
+            if (user == null)
+            {
+                logg = "PublishInventory: session key does not exist";
+                logger.logPrint(logg, 0);
+                logger.logPrint(logg, 2);
+                return logg;
+            }
+            string companyName = cache.getCompanyNameByUsername(user);
+            if (companyName == null)
+            {
+                logg = "PublishInventory: session key does not exist";
+                logger.logPrint(logg, 0);
+                logger.logPrint(logg, 2);
+                return logg;
+            }
+            string token = _FBTokens[companyName];
+            if (token == null)
+            {
+                return null;
+            }
             if (token == null || groupID == null || companyName == null)
             {
                 logg = "PublishInventory: values cannot be null";
@@ -60,7 +172,7 @@ namespace WorkerHost.Domain.Managers
                 logger.logPrint(logg, 2);
                 return logg;
             }
-            if (days > MAXDAYS)
+                if (days > MAXDAYS)
             {
                 logg = "PublishInventory: days is more than MAXDAYS";
                 logger.logPrint(logg, 0);
@@ -82,7 +194,7 @@ namespace WorkerHost.Domain.Managers
             }
             fb.Version = "v2.3";
             var parameters = new Dictionary<string, object>();
-            List<CompanyItem> items = ItemManager.getInstance.getAllCompanyItems(companyName);
+            List<CompanyItem> items = ItemManager.getInstance.getAllCompanyItems(key);
             if (items == null)
             {
                 logg = "PublishInventory: companyName is invalid";
@@ -182,9 +294,25 @@ namespace WorkerHost.Domain.Managers
             return itemsFromLastThreeDays;
         }
 
-        public string addFBGroup(string companyName, string groupID)
+        public string addFBGroup( string groupID, int key)
         {
             string logg;
+            String user = SessionDirector.getInstance.getUserName(key);
+            if (user == null)
+            {
+                logg = "CompanyManager-addFBGroup: session key does not exist";
+                logger.logPrint(logg, 0);
+                logger.logPrint(logg, 2);
+                return logg;
+            }
+            string companyName = cache.getCompanyNameByUsername(user);
+            if (companyName == null)
+            {
+                logg = "CompanyManager-addFBGroup: session key does not exist";
+                logger.logPrint(logg, 0);
+                logger.logPrint(logg, 2);
+                return logg;
+            }
             if (companyName == null || groupID == null)
             {
                 return null;
@@ -214,9 +342,25 @@ namespace WorkerHost.Domain.Managers
             }
         }
 
-        public string removeFBGroup(string companyName, string groupID)
+        public string removeFBGroup( string groupID, int key)
         {
             string logg;
+            String user = SessionDirector.getInstance.getUserName(key);
+            if (user == null)
+            {
+                logg = "CompanyManager-removeFBGroup: session key does not exist";
+                logger.logPrint(logg, 0);
+                logger.logPrint(logg, 2);
+                return logg;
+            }
+            string companyName = cache.getCompanyNameByUsername(user);
+            if (companyName == null)
+            {
+                logg = "CompanyManager-removeFBGroup: session key does not exist";
+                logger.logPrint(logg, 0);
+                logger.logPrint(logg, 2);
+                return logg;
+            }
             if (companyName == null || groupID == null)
             {
                 return null;
@@ -246,14 +390,32 @@ namespace WorkerHost.Domain.Managers
             }
         }
 
-        public Dictionary<string, string> getSystemCompanyFBGroup(string companyName, string token)
+        public Dictionary<string, string> getSystemCompanyFBGroup( int key)
         {
-            if (companyName == null || token == null)
+            string logg;
+            String user = SessionDirector.getInstance.getUserName(key);
+            if (user == null)
+            {
+                logg = "CompanyManager-getSystemCompanyFBGroup: session key does not exist";
+                logger.logPrint(logg, 0);
+                logger.logPrint(logg, 2);
+                return null;
+            }
+            string companyName = cache.getCompanyNameByUsername(user);
+            if (companyName == null)
+            {
+                logg = "CompanyManager-getSystemCompanyFBGroup: session key does not exist";
+                logger.logPrint(logg, 0);
+                logger.logPrint(logg, 2);
+                return null;
+            }
+            string token = _FBTokens[companyName];
+            if (token == null)
             {
                 return null;
             }
             Dictionary<string, string> result = new Dictionary<string, string>();
-            Dictionary<string, string> allFBGroups = getAllCompanyFBGroup(companyName, token);
+            Dictionary<string, string> allFBGroups = getAllCompanyFBGroup( token);
             if (allFBGroups == null)
             {
                 return null;
@@ -275,9 +437,14 @@ namespace WorkerHost.Domain.Managers
 
         }
 
-        public Dictionary<string, string> getAllCompanyFBGroup(string companyName, string token)
+        public Dictionary<string, string> getAllCompanyFBGroup(string companyName)
         {
-            if (companyName == null || token == null)
+            if (companyName == null )
+            {
+                return null;
+            }
+            string token = _FBTokens[companyName];
+            if ( token == null)
             {
                 return null;
             }
@@ -328,6 +495,11 @@ namespace WorkerHost.Domain.Managers
 
             }
             return res;
+        }
+
+        public string getToken(string companyName)
+        {
+            return _FBTokens[companyName];
         }
     }
 }

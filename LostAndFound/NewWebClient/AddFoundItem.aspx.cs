@@ -1,15 +1,13 @@
-﻿using Microsoft.WindowsAzure.ServiceRuntime;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.ServiceModel;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace WebHost.WebPages
+namespace NewWebClient
 {
-    public partial class addLostItem : System.Web.UI.Page
+    public partial class AddFoundItem : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -18,7 +16,7 @@ namespace WebHost.WebPages
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            
+
             List<string> sColors = new List<string>();//בעיה
             foreach (ListItem item in _ColorsCheckBox.Items)
             {
@@ -36,14 +34,14 @@ namespace WebHost.WebPages
             {
                 showAlert("לא נבחר סוג פריט");
             }
-            DateTime date=_dateCalendar.SelectedDate;
+            DateTime date = _dateCalendar.SelectedDate;
             if (date > DateTime.Today)
             {
                 showAlert("תאריך לא תקין, נא לבחור תאריך אמיתי");
             }
             string location = _location.Text;
             string description = _description.Text;
-            int serialNumber=0;
+            int serialNumber = 0;
             try
             {
                 serialNumber = Int32.Parse(_serial.Text);
@@ -52,7 +50,7 @@ namespace WebHost.WebPages
                     showAlert("בבקשה להזין מספר סידורי תקין, במידה ואין לך, הזן 0");
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 showAlert("בבקשה להזין מספר סידורי תקין, במידה ואין לך, הזן 0");
             }
@@ -67,9 +65,9 @@ namespace WebHost.WebPages
                 showAlert("בבקשה להזין טלפון של מדווח האבידה");
             }
             string token = "EAACEdEose0cBAGzbmuXj2id4qU4Ed8riC947XaZCDJ9ZAy1kd5PIP2OKBf3Js1ThIF8ZBUr38AGDZATvIhZATFLetHUtRM560Xwt7tnsty9WgHS6zMyK9RvbJjNEPLUXFydDU1am3JsaZCjhOgs4OwWPlMRrbIunrZAPc6SYmZCpVIyV6zOGV9xU";
-            var channel = Channel.getInstance;
+            var channel = WebHost.Channel.getInstance;
             string ret = channel.ServerService.addLostItem(sColors, sType, date, location, description,
-            serialNumber, contactName,contactPhone, "D", 564/*key*/);
+            serialNumber, contactName, contactPhone, "D", 564/*key*/);
             int i = 0;
             _contactName.Text = ret;
         }
@@ -77,5 +75,5 @@ namespace WebHost.WebPages
         {
             Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "popup", "<script>alert(\"" + content + "\");</script>");
         }
-}
+    }
 }

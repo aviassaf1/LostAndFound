@@ -17,6 +17,7 @@ namespace WorkerHost.Domain
         private Dictionary<int, FoundItem> _foundItems;
         private Dictionary<string, Domain.BLBackEnd.FBItem> _FBItems;
         private Dictionary<int, Match> _matches;
+        Dictionary<string, string> _workers;
 
         private static Cache singleton;
         public static Cache getInstance
@@ -46,15 +47,16 @@ namespace WorkerHost.Domain
                 _foundItems = new Dictionary<int, FoundItem>();
                 _FBItems = new Dictionary<string, Domain.BLBackEnd.FBItem>();
                 _matches = new Dictionary<int, Match>();
-                HashSet<string> fbg = new HashSet<string>() { "1538105046204967" };
+                _workers = new Dictionary<string, string>();
+                HashSet<string> fbg = new HashSet<string>() { };//"1538105046204967" };
                 //_companies.Add("GuyCompany", new Company("GuyCompany", "guy", "GuyComapany", "050000000",fbg, new HashSet<int>(), new HashSet<int>(), new HashSet<int>()));
             }
         }
 
         public void setUp()
         {
-            Company comp1 = new Company("Guy", "Hello6", "Guy", "05000000", new HashSet<string>());
-            Company comp2 = new Company("Guy2", "Hello6", "Guy2", "05000000", new HashSet<string>());
+            Company comp1 = new Company("Guy", "05000000", new HashSet<string>(), "10205175970541279", "Guy", "Mc123456");
+            Company comp2 = new Company("Guy2", "05000000", new HashSet<string>(), "10205175970541279", "Guy", "Mc123456");
             comp1.addFacebookGroup("1538105046204967");
             comp2.addFacebookGroup("1538105046204967");
             List<Color> colors1 = new List<Color>();
@@ -87,6 +89,18 @@ namespace WorkerHost.Domain
             addMatch(new Match(fi3.ItemID, li3.ItemID, MatchStatus.POSSIBLE));
         }
 
+        internal Company getCompanyByfb(string fbid)
+        {
+            foreach(Company comp in _companies.Values)
+            {
+                if (comp.FbProfileID.Equals(fbid))
+                {
+                    return comp;
+                }
+            }
+            return null;
+        }
+
         public void initCache()//public for test only
         {
             _admins = new Dictionary<string, Admin>();
@@ -95,6 +109,7 @@ namespace WorkerHost.Domain
             _foundItems = new Dictionary<int, FoundItem>();
             _FBItems = new Dictionary<string, Domain.BLBackEnd.FBItem>();
             _matches = new Dictionary<int, Match>();
+            _workers = new Dictionary<string, string>();
 
             List<DataLayer.User> admins = _db.getAdminsList();//String userName,String password
             List<Companies> companies = _db.getCompaniesList();//String userName,String password, String companyName, String phone, 
@@ -103,7 +118,7 @@ namespace WorkerHost.Domain
             List<FoundItems> foundItems = _db.getFoundItemsList();//int itemID, List<Color> colors, ItemType itemType, DateTime date, String location, String description, int serialNumber, String companyName, String contactName, String contactPhone, String photoLocation
             List<DataLayer.FBItem> FBItems = _db.getFBItemsList();//int itemID, List<Color> colors, ItemType itemType, DateTime date, String location, String description, String postUrl, String publisherName, FBType fbType
             List<Matches> matches = _db.getMatchesList();//int matchID, int companyItemID, int item2ID, MatchStatus matchStatus
-
+            List<CompanyUsers> companyUsers = new  List<CompanyUsers>();
             foreach (DataLayer.User user in admins)
             {
                 _admins.Add(user.UserName, new Admin(user.UserName, user.password));//add encryption to pass
@@ -148,7 +163,13 @@ namespace WorkerHost.Domain
                         colors.Add(Colors[col]);
                     }
                 }
-                _FBItems.Add(fbi.postId, new Domain.BLBackEnd.FBItem(fbi.itemID, colors, HebTypes[fbi.itemType], fbi.lostDate.Value/* change lost date name*/, fbi.location, fbi.description, fbi.postId, fbi.publisherName, FBTypes[fbi.type]));
+                try {
+                    _FBItems.Add(fbi.postId, new BLBackEnd.FBItem(fbi.itemID, colors, HebTypes[fbi.itemType], fbi.lostDate.Value/* change lost date name*/, fbi.location, fbi.description, fbi.postId, fbi.publisherName, FBTypes[fbi.type]));
+                }
+                catch(Exception e)
+                {
+                    int x=5;
+                }
             }
             foreach (Matches m in matches)
             {
@@ -179,8 +200,43 @@ namespace WorkerHost.Domain
                     if (LostItems.Contains(m.CompanyItemID) || FoundItems.Contains(m.CompanyItemID))
                         Matches.Add(m.MatchID);
                 }
-                _companies.Add(company.userName, new Company(company.userName, company.User.password, company.companyName, company.phone, FBGroups, LostItems, FoundItems, Matches));//add encryption to pass
+                Dictionary<string, string>  managers = new Dictionary<string, string>();
+                Dictionary<string, string>  workers = new Dictionary<string, string>();
+                String fbID = "";
+                foreach (CompanyUsers cu in companyUsers)
+                {
+                    if (cu.companyName.Equals(company.companyName))
+                    {
+                        if (cu.isManager)
+                        {
+                            managers.Add(cu.userName, cu.password);
+                            fbID = cu.fbProfileId;
+                        }
+                        else
+                        {
+                            workers.Add(cu.userName, cu.password);
+                        }
+                    }
+                        
+                }
+                _companies.Add(company.userName, new Company(company.companyName, company.phone, FBGroups,fbID,managers,workers, LostItems, FoundItems, Matches));//add encryption to pass
             }
+            foreach (CompanyUsers cu in companyUsers)
+            {
+                _workers.Add(cu.userName, cu.companyName);
+            }
+        }
+
+        internal string removeWorkerFromCompany(string username)
+        {
+            _workers.Remove(username);
+            return _db.removeCompanyUsers(username);
+        }
+
+        internal string addWorkerToCompany(string username, string password, string companyName, string fbProfileID, bool isManager)
+        {
+            _workers.Add(username, companyName);
+            return _db.addCompanyUsers(companyName, fbProfileID, isManager, username, password);
         }
 
         internal String editCompany(string companyName, string newPassword, string newPhone)
@@ -225,25 +281,9 @@ namespace WorkerHost.Domain
 
         private List<string> stringToListOfColors(string colors)
         {
-            string color = "";
-            List<string> colorList = new List<string>();
-            for (int i = 0; i < colors.Length; i++)
-            {
-                if ((i == colors.Length - 1) || colors.ElementAt(i).Equals(","))
-                {
-                    if (i == colors.Length - 1)
-                    {
-                        color += colors.ElementAt(i);
-                    }
-                    colorList.Add(color);
-                    color = "";
-                }
-                else
-                {
-                    color += colors.ElementAt(i);
-                }
-            }
-            return colorList;
+            char[] delimiterChars = {  ','};
+            String[] colorList = colors.Split(delimiterChars);
+            return colorList.ToList();
         }
 
         internal Company getCompany(string companyName)
@@ -269,6 +309,8 @@ namespace WorkerHost.Domain
                 this._FBItems.Clear();
             if (this._matches != null)
                 this._matches.Clear();
+            if (this._workers != null)
+                this._workers.Clear();
             _db.clear();
         }
 
@@ -382,7 +424,7 @@ namespace WorkerHost.Domain
         internal void addNewCompany(Company company)
         {
             _companies.Add(company.UserName, company);
-            _db.addCompany(company.UserName, company.Password, company.CompanyName, company.Phone, company.FacebookGroups);
+            _db.addCompany(company.UserName, company.Password, company.CompanyName, company.Phone, company.FacebookGroups,company.FbProfileID, company.Managers, company.Workers);
         }
 
         internal void updateFacebbokItem(Domain.BLBackEnd.FBItem fBItem)
@@ -417,6 +459,28 @@ namespace WorkerHost.Domain
                 itemList.Add(fItem);
             }
             return itemList;
+        }
+        internal String getCompanyNameByUsername(String username)
+        {
+            if (_workers.Keys.Contains(username)){
+                return _workers[username];
+            }
+            return null;
+        }
+
+        internal bool isAdmin(string username, string password)
+        {
+            if (_admins.ContainsKey(username))
+            {
+                Admin admin = _admins[username];
+                if (admin.Password.Equals(password))
+                    return true;
+                else
+                    return false;
+            }
+            else
+                return false;
+
         }
     }
 }

@@ -9,11 +9,11 @@ using WorkerHost.ServiceLayer.DataContracts;
 namespace WorkerHost.ServiceLayer.Controllers
 {
     [ServiceContract]
-    interface IMatchController
+    public interface IMatchController
     {
         [OperationContract]
-        String changeMatchStatus(int matchID, string statusNum);
+        String changeMatchStatus(int matchID, string statusNum, int key);
         [OperationContract]
-        List<MatchData> getMatchesByItemID(int itemID);
+        List<MatchData> getMatchesByItemID(int itemID, int key);
     }
 }

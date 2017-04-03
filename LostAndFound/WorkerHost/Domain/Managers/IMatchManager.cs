@@ -10,10 +10,10 @@ namespace WorkerHost.Domain.Managers
     public interface IMatchManager
     {
         List<Match> findMatches(CompanyItem item, String token);
-        String changeMatchStatus(int matchID, int statusNum);
+        String changeMatchStatus(int matchID, int statusNum, int key);
         List<FBItem> getPostsFromGroup(String token, String GroupID);
         Match getMatchByID(int matchID);
-        List<Match> getMatchesByItemID(int itemID);
+        List<Match> getMatchesByItemID(int itemID, int key);
 
     }
 }

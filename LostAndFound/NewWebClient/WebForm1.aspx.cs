@@ -26,7 +26,7 @@ namespace NewWebClient
             string cname = TextBox3.Text;
             string cphone = TextBox4.Text;
 
-            string ret = channel.testClass1(colorList, itemType, cname, cphone);
+            string ret ="";// channel.testClass1(colorList, itemType, cname, cphone);
             TextBox1.Text = ret;
         }
 

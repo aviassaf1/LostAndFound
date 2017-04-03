@@ -8,11 +8,12 @@ namespace WorkerHost.Domain.Managers
 {
     public interface IAdminManager
     {
-        String login();
-        String addComapny(String userName, String password, String companyName, String phone, HashSet<String> facebookGroups);
+        String login(String username, String password);
+        String addComapny(String companyName, String phone, HashSet<String> facebookGroups,
+            String companyProfileID, String managerUserName, String managerPassword, int key);
 
-        String deleteCompany(String companyName);
+        String deleteCompany(String companyName, int key);
 
-        String editCompany(String companyName, String password, String phone);
+        String editCompany(String companyName, String password, String phone, int key);
     }
 }

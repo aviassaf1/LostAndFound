@@ -20,7 +20,7 @@ namespace WorkerHost.Web
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            var factory = new ChannelFactory<WorkerHost.IServerService>(new NetTcpBinding(SecurityMode.None));
+            var factory = new ChannelFactory<ServiceLayer.Controllers.IItemController>(new NetTcpBinding(SecurityMode.None));
 
             var channel = factory.CreateChannel(GetTandomEndPoint());
 
@@ -29,7 +29,7 @@ namespace WorkerHost.Web
             string cname = TextBox3.Text;
             string cphone = TextBox4.Text;
 
-            string ret = channel.testClass1(colorList, itemType, cname, cphone);
+            string ret = "";//channel.testClass1(colorList, itemType, cname, cphone);
             TextBox1.Text = ret;
         }
 

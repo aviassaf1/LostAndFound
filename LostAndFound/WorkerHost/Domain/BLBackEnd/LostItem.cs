@@ -47,7 +47,7 @@ namespace WorkerHost.Domain.BLBackEnd
          {
             if (ItemID == -1)
             {
-                cache.addLostItem(this);
+                Cache.getInstance.addLostItem(this);
             }
         }
 
@@ -67,7 +67,7 @@ namespace WorkerHost.Domain.BLBackEnd
 
         protected override void updateItem()
         {
-            cache.updateLostItem(this);
+            Cache.getInstance.updateLostItem(this);
         }
     }
 }

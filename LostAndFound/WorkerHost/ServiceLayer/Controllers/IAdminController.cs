@@ -8,15 +8,16 @@ using System.Threading.Tasks;
 namespace WorkerHost.ServiceLayer.Controllers
 {
     [ServiceContract]
-    interface IAdminController
+    public interface IAdminController
     {
         [OperationContract]
-        String login();
+        String login(String username, String password);
         [OperationContract]
-        String addComapny(String userName, String password, String companyName, String phone, HashSet<String> facebookGroups);
+        String addComapny(String companyName, String phone, HashSet<String> facebookGroups,
+            String companyProfileID, String managerUserName, String managerPassword, int key);
         [OperationContract]
-        String deleteCompany(String companyName);
+        String deleteCompany(String companyName, int key);
         [OperationContract]
-        String editCompany(String companyName, String password, String phone);
+        String editCompany(String companyName, String password, String phone, int key);
     }
 }

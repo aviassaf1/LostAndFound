@@ -14,30 +14,42 @@ namespace WorkerHost.Domain.BLBackEnd
         private HashSet<int> _foundItems;
         private HashSet<int> _matches;
         private HashSet<string> _facebookGroups;
+        private Dictionary<String, String> _managers;
+        private Dictionary<String, String> _workers;
+        private String _fbProfileID;
 
-        public Company(String userName, String password, String companyName, String phone, HashSet<string> facebookGroups)
+        public Company(  String companyName, String phone, HashSet<string> facebookGroups,
+            String companyProfileID, String managerUserName, String managerPassword)
         {
-            _userName = userName;
-            _password = password;
+            _userName = companyName;
+            _password = "";
             _companyName = companyName;
             _phone = phone;
             _facebookGroups = facebookGroups;
             _lostItems = new HashSet<int>();
             _foundItems = new HashSet<int>();
             _matches = new HashSet<int>();
-            cache.addNewCompany(this);
+            _managers = new Dictionary<string, string>();
+            Managers.Add(managerUserName, managerPassword);
+            _workers = new Dictionary<string, string>();
+            _fbProfileID = companyProfileID;
+            Cache.getInstance.addNewCompany(this);
         }
-        public Company(String userName, String password, String companyName, String phone, HashSet<string> facebookGroups,
-            HashSet<int> lostItems, HashSet<int> foundItems, HashSet<int> matches)
+        public Company(  String companyName,  String phone, HashSet<string> facebookGroups,
+            String companyProfileID, Dictionary<String, String> managers, Dictionary<String, String> workers,
+        HashSet<int> lostItems, HashSet<int> foundItems, HashSet<int> matches)
         {
-            _userName = userName;
-            _password = password;
+            _userName = companyName;
+            _password = "";
             _companyName = companyName;
             _phone = phone;
             _facebookGroups = facebookGroups;
             _lostItems = lostItems;
             _foundItems = foundItems;
             _matches = matches;
+            _managers = managers;
+            _workers = workers;
+            _fbProfileID = companyProfileID;
         }
 
         public HashSet<int> LostItems
@@ -59,7 +71,7 @@ namespace WorkerHost.Domain.BLBackEnd
             if (!_lostItems.Contains(lostItemID))
                 return "The company doesn't have that item"; ;
             _lostItems.Remove(lostItemID);
-            cache.removeLostItem(lostItemID);
+            Cache.getInstance.removeLostItem(lostItemID);
             return "Item Removed";
         }
 
@@ -68,11 +80,11 @@ namespace WorkerHost.Domain.BLBackEnd
             List<CompanyItem> items = new List<CompanyItem>();
             foreach (int li in _lostItems)
             {
-                items.Add(cache.getCompanyItem(li));
+                items.Add(Cache.getInstance.getCompanyItem(li));
             }
             foreach (int fi in _foundItems)
             {
-                items.Add(cache.getCompanyItem(fi));
+                items.Add(Cache.getInstance.getCompanyItem(fi));
             }
             return items;
         }
@@ -97,7 +109,7 @@ namespace WorkerHost.Domain.BLBackEnd
             List<Match> matches = new List<Match>();
             foreach (int mID in _matches)
             {
-                matches.Add(cache.getMatch(mID));
+                matches.Add(Cache.getInstance.getMatch(mID));
             }
             return matches;
         }
@@ -107,7 +119,7 @@ namespace WorkerHost.Domain.BLBackEnd
             if (!_foundItems.Contains(foundItemID))
                 return "The company doesn't have that item";
             _foundItems.Remove(foundItemID);
-            cache.removefoundItem(foundItemID);
+            Cache.getInstance.removefoundItem(foundItemID);
             return "Item Removed";
         }
 
@@ -115,7 +127,7 @@ namespace WorkerHost.Domain.BLBackEnd
         {
             foreach (string group in FacebookGroups.ToArray())
             {
-                cache.removeFacebookGroup(_companyName, group);
+                Cache.getInstance.removeFacebookGroup(_companyName, group);
             }
             foreach (int matchID in Matches.ToArray())
             {
@@ -129,7 +141,7 @@ namespace WorkerHost.Domain.BLBackEnd
             {
                 removeLostItem(lostItem);
             }
-            return cache.deleteCompany(_userName, _companyName);
+            return Cache.getInstance.deleteCompany(_userName, _companyName);
         }
 
         public HashSet<int> Matches
@@ -143,7 +155,7 @@ namespace WorkerHost.Domain.BLBackEnd
         {
             if (Matches.Contains(matchID))
                 return false;
-            Match match = cache.getMatch(matchID);
+            Match match = Cache.getInstance.getMatch(matchID);
             if (match != null && (_lostItems.Contains(match.CompanyItemID) || _foundItems.Contains(match.CompanyItemID)))
             {
                 Matches.Add(matchID);
@@ -159,7 +171,7 @@ namespace WorkerHost.Domain.BLBackEnd
             if (!Matches.Contains(matchID))
                 return false;
             Matches.Remove(matchID);
-            cache.deleteMatch(matchID);
+            Cache.getInstance.deleteMatch(matchID);
             return true;
         }
 
@@ -167,7 +179,7 @@ namespace WorkerHost.Domain.BLBackEnd
         {
             _password = password;
             _phone = phone;
-            return cache.editCompany(_companyName, password, phone);
+            return Cache.getInstance.editCompany(_companyName, password, phone);
         }
 
         public string Phone
@@ -193,11 +205,36 @@ namespace WorkerHost.Domain.BLBackEnd
                 return _facebookGroups;
             }
         }
+
+        public Dictionary<string, string> Managers
+        {
+            get
+            {
+                return _managers;
+            }
+        }
+
+        public Dictionary<string, string> Workers
+        {
+            get
+            {
+                return _workers;
+            }
+        }
+
+        public string FbProfileID
+        {
+            get
+            {
+                return _fbProfileID;
+            }
+        }
+
         public Boolean addFacebookGroup(string url)
         {
             if (!_facebookGroups.Contains(url))
             {
-                cache.addFacebookGroup(_companyName, url);
+                Cache.getInstance.addFacebookGroup(_companyName, url);
                 _facebookGroups.Add(url);
                 return true;
             }
@@ -207,7 +244,7 @@ namespace WorkerHost.Domain.BLBackEnd
         {
             if (_facebookGroups.Contains(url))
             {
-                cache.removeFacebookGroup(_companyName, url);
+                Cache.getInstance.removeFacebookGroup(_companyName, url);
                 _facebookGroups.Remove(url);
                 return true;
             }
@@ -218,7 +255,7 @@ namespace WorkerHost.Domain.BLBackEnd
             List<LostItem> items = new List<LostItem>();
             foreach (int item in _lostItems)
             {
-                items.Add((LostItem)(cache.getCompanyItem(item)));
+                items.Add((LostItem)(Cache.getInstance.getCompanyItem(item)));
             }
             return items;
         }
@@ -227,9 +264,25 @@ namespace WorkerHost.Domain.BLBackEnd
             List<FoundItem> items = new List<FoundItem>();
             foreach (int item in _foundItems)
             {
-                items.Add((FoundItem)(cache.getCompanyItem(item)));
+                items.Add((FoundItem)(Cache.getInstance.getCompanyItem(item)));
             }
             return items;
+        }
+        public String addManager(String username, String password)
+        {
+            _managers.Add(username, password);
+            return Cache.getInstance.addWorkerToCompany(username, password, _companyName, _fbProfileID, true);
+        }
+        public String addWorker(String username, String password)
+        {
+            _managers.Add(username, password);
+            return Cache.getInstance.addWorkerToCompany(username, password, _companyName, _fbProfileID, false);
+        }
+        public String removeWorker(String username)
+        {
+            _managers.Remove(username);
+            _workers.Remove(username);
+            return Cache.getInstance.removeWorkerFromCompany(username);
         }
     }
 }
