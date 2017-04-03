@@ -8,7 +8,7 @@ using System.Web.Script.Serialization;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace FacebookLogin
+namespace NewWebClient.Facebook
 {
     public partial class Facebook : System.Web.UI.Page
     {
@@ -54,7 +54,6 @@ namespace FacebookLogin
             string s = reader.ReadToEnd();
             data.Close();
             reader.Close();
-
             return s;
         }
 

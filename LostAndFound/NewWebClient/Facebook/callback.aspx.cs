@@ -10,7 +10,7 @@ using System.IO;
 using System.Runtime.Serialization.Json;
 using System.Text;
 
-namespace NewWebClient
+namespace NewWebClient.Facebook
 {
     public partial class callback : System.Web.UI.Page
     {

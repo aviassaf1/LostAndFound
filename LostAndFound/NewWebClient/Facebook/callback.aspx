@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="callback.aspx.cs" Inherits="NewWebClient.callback" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="callback.aspx.cs" Inherits="NewWebClient.Facebook.callback" %>
 
 <!DOCTYPE html>
 

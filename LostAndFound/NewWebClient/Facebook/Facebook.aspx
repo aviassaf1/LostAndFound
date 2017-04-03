@@ -41,7 +41,7 @@
         }
 
         function FacebookLoggedIn(response) {
-            var loc = '/Facebook/callback.aspx';
+            var loc = '/Account/Login.aspx';
             if (loc.indexOf('?') > -1)
                 window.location = loc + '&authprv=facebook&access_token=' + response.authResponse.accessToken;
             else
