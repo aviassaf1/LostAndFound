@@ -43,10 +43,10 @@ namespace WorkerHost.Domain
         private int generate()
         {
             Random random = new Random();
-            int result = random.Next(10000000, 100000000);
+            int result = random.Next(100000000, 1000000000);
             while (_sessions.Keys.Contains(result) && _adminSessions.Keys.Contains(result))
             {
-                result = random.Next(10000000, 100000000);
+                result = random.Next(100000000, 1000000000);
             }
             return result;
         }

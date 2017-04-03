@@ -79,7 +79,6 @@ namespace NewWebClient.Account
                 if (IsAdmin.Checked)
                 {
                     res = channel.ServerService.Adminlogin(Username.Text, Password.Text);
-                    Username.Text = res;
                 }
                 else
                 {
@@ -87,7 +86,9 @@ namespace NewWebClient.Account
                 }
                 if (res.Contains("login succeeded,"))
                 {
-                    res = res.Substring(res.IndexOf("," + 1));
+                    char[] ar = { ',' };
+                    res = res.Split(ar)[1];
+                    Username.Text = res;
                     Session["token"] = res;
                 }
                 

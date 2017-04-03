@@ -7,9 +7,7 @@ using System.Threading.Tasks;
 namespace WorkerHost.Domain.BLBackEnd
 {
     public class Match
-    {
-        private static Cache cache = Cache.getInstance;
-
+    {        
         private int _matchID;
         private int _companyItemID;
         private int _item2ID;
@@ -32,7 +30,7 @@ namespace WorkerHost.Domain.BLBackEnd
 
         public void addToDB()
         {
-            cache.addMatch(this);
+            Cache.getInstance.addMatch(this);
         }
 
         public int MatchID
@@ -69,7 +67,7 @@ namespace WorkerHost.Domain.BLBackEnd
 
         internal string delete()
         {
-            return cache.deleteMatch(MatchID);
+            return Cache.getInstance.deleteMatch(MatchID);
         }
 
         public MatchStatus MatchStatus
@@ -83,7 +81,7 @@ namespace WorkerHost.Domain.BLBackEnd
             set
             {
                 _matchStatus = value;
-                cache.updateMatch(_matchID, _matchStatus);
+                Cache.getInstance.updateMatch(_matchID, _matchStatus);
             }
         }
     }
