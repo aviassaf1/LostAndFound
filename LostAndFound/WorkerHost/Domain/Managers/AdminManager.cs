@@ -10,13 +10,12 @@ namespace WorkerHost.Domain.Managers
     public class AdminManager : IAdminManager
     {
         private static IAdminManager singleton;
-        private Cache cache;
+        private static Cache cache= Cache.getInstance;
         private Logger logger = Logger.getInstance;
         private SessionDirector sd = SessionDirector.getInstance;
 
         private AdminManager()
         {
-            cache = Cache.getInstance;
         }
 
         public static IAdminManager getInstance
