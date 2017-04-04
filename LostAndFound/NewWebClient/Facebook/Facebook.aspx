@@ -1,14 +1,9 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Facebook.aspx.cs" Inherits="NewWebClient.Facebook.Facebook" %>
+﻿<%@ Page Title="דף כניסה" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Facebook.aspx.cs" Inherits="NewWebClient.Facebook.Facebook" %>
 
-<!DOCTYPE html>
+<asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent" >
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
     <div id="fb-root"></div>
-    <a href="#" onclick="loginByFacebook();">Login with Facebook</a>
+    <a href="#" onclick="loginByFacebook();">לחץ על מנת להתחבר למערכת</a>
 
     <%-- now this is some required facebook's JS, two things to pay attention to
     1. setting the ApplicationID, To make this project work you have to edit "callback.aspx.cs" and put your facebook-app-key there
@@ -48,5 +43,4 @@
                 window.location = loc + '?authprv=facebook&access_token=' + response.authResponse.accessToken;
         }
     </script>
-</body>
-</html>
+</asp:Content>

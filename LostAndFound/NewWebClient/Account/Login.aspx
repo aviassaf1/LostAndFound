@@ -3,7 +3,7 @@
 <%@ Register Src="~/Account/OpenAuthProviders.ascx" TagPrefix="uc" TagName="OpenAuthProviders" %>
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent" >
-    <h2><%: Title %>.</h2>
+    <h2 dir="rtl"><%: Title %></h2>
 
     <div class="row" dir="rtl">
         <div class="col-md-12" dir="rtl">
@@ -18,7 +18,7 @@
                     </asp:PlaceHolder>
                     <div class="form-group">
                         <div class="col-md-10">
-                            <asp:TextBox runat="server" ID="Username" CssClass="form-control" TextMode="SingleLine" />
+                            <asp:TextBox runat="server" ID="Username" CssClass="form-control" TextMode="SingleLine" style="direction:ltr"/>
                             <asp:RequiredFieldValidator runat="server" ControlToValidate="Username"
                                 CssClass="text-danger" ErrorMessage="אנא הזן שם משתשמש בבקשה" />
                         </div>
@@ -26,7 +26,7 @@
                     </div>
                     <div class="form-group" dir="rtl">
                         <div class="col-md-10">
-                            <asp:TextBox runat="server" ID="Password" TextMode="Password" CssClass="form-control" />
+                            <asp:TextBox runat="server" ID="Password" TextMode="Password" CssClass="form-control" style="direction:ltr" />
                             <asp:RequiredFieldValidator runat="server" ControlToValidate="Password" CssClass="text-danger" ErrorMessage="אנא הזן סיסמה בבקשה" />
                         </div>
                         <asp:Label runat="server" AssociatedControlID="Password" CssClass="col-md-2 control-label">סיסמה</asp:Label>
