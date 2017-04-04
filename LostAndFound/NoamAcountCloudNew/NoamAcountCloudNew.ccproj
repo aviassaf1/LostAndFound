@@ -46,14 +46,6 @@
       <RoleName>NewWebClient</RoleName>
       <UpdateDiagnosticsConnectionStringOnPublish>True</UpdateDiagnosticsConnectionStringOnPublish>
     </ProjectReference>
-    <ProjectReference Include="..\WebHost\WebHost.csproj">
-      <Name>WebHost</Name>
-      <Project>{24a1d094-ab27-4974-a177-73af495aac71}</Project>
-      <Private>True</Private>
-      <RoleType>Web</RoleType>
-      <RoleName>WebHost</RoleName>
-      <UpdateDiagnosticsConnectionStringOnPublish>True</UpdateDiagnosticsConnectionStringOnPublish>
-    </ProjectReference>
     <ProjectReference Include="..\WorkerHost\WorkerHost.csproj">
       <Name>WorkerHost</Name>
       <Project>{061b290a-8b85-4d37-bce2-4db4f7072b57}</Project>
@@ -65,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="NewWebClientContent\" />
+    <Folder Include="Profiles" />
     <Folder Include="WebHostContent\" />
     <Folder Include="WorkerHostContent\" />
   </ItemGroup>
@@ -72,6 +65,9 @@
     <DiagnosticsConfiguration Include="NewWebClientContent\diagnostics.wadcfgx" />
     <DiagnosticsConfiguration Include="WebHostContent\diagnostics.wadcfgx" />
     <DiagnosticsConfiguration Include="WorkerHostContent\diagnostics.wadcfgx" />
+  </ItemGroup>
+  <ItemGroup>
+    <PublishProfile Include="Profiles\cloudEUProduction.azurePubxml" />
   </ItemGroup>
   <!-- Import the target files for this project template -->
   <PropertyGroup>
