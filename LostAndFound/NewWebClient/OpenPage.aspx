@@ -50,33 +50,38 @@
     </p>
     </div>
 
-    <div class="row">
+    <div class="row" dir="rtl">
         <div class="col-md-4">
-            <h2>Getting started</h2>
+            <h2>יצירת קשר</h2>
             <p>
-                ASP.NET Web Forms lets you build dynamic websites using a familiar drag-and-drop, event-driven model.
-            A design surface and hundreds of controls and components let you rapidly build sophisticated, powerful UI-driven sites with data access.
+                לפרטים נוספים ויצירת קשר לחברות המתעניינות במערכת ניתן ליצור קשר בטלפון 0509659522
             </p>
             <p>
-                <a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301948">Learn more &raquo;</a>
+                נציגנו ישמחו לעמוד לשירותכם 24/7, גם בשעות הקטנות של הלילה
             </p>
         </div>
         <div class="col-md-4">
-            <h2>Get more libraries</h2>
+            <h2>קצת עלינו</h2>
             <p>
-                NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.
+                המערכת נכתבה על ידי הסטודנטים: גיא אביאסף, תומר רוזנברגר ונעם ברקאי                
             </p>
             <p>
-                <a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301949">Learn more &raquo;</a>
+                 בהנחייתם של ד"ר גרא וייס מהמחלקה למדעי המחשב וד"ר יוסי אורן מהמחלקה למערכות מידע
+            </p>
+            <p>                
+                לטובת פרוייקט גמר לתואר ראשון בהנדסת תוכנה באוניברסיטת בן גוריון בנגב
             </p>
         </div>
         <div class="col-md-4">
-            <h2>Web Hosting</h2>
+            <h2>על המערכת</h2>
             <p>
-                You can easily find a web hosting company that offers the right mix of features and price for your applications.
+                מדובר באפליקציית אבדות ומציאות למען ארגונים וחברות לצורך ניהול מלאי הפריטים.
             </p>
             <p>
-                <a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301950">Learn more &raquo;</a>
+                המערכת תסייע לאיתור אנשים שאיבדו את רכושם או מצאו רכוש של אחרים ולהתאימם למציאות הנמצאים באותו הגוף.
+            </p>
+            <p>
+                המערכת תבצע סריקות בעמודי פייסבוק רלוונטים וכן בפריטים וובפניות החברה ותבצע התאמה בעזרת אלגוריתם ייעודי.
             </p>
         </div>
     </div>
