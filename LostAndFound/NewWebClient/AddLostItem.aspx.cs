@@ -65,7 +65,7 @@ namespace NewWebClient
                 showAlert("בבקשה להזין טלפון של מדווח האבידה");
             }
             string token = "EAACEdEose0cBAGzbmuXj2id4qU4Ed8riC947XaZCDJ9ZAy1kd5PIP2OKBf3Js1ThIF8ZBUr38AGDZATvIhZATFLetHUtRM560Xwt7tnsty9WgHS6zMyK9RvbJjNEPLUXFydDU1am3JsaZCjhOgs4OwWPlMRrbIunrZAPc6SYmZCpVIyV6zOGV9xU";
-            var channel = WebHost.Channel.getInstance;
+            var channel = Channel.getInstance;
             string ret = channel.ServerService.addLostItem(sColors, sType, date, location, description,
             serialNumber, contactName, contactPhone, "D", 564/*key*/);
             int i = 0;

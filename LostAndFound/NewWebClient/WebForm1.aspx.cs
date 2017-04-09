@@ -19,7 +19,7 @@ namespace NewWebClient
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            var channel = WebHost.Channel.getInstance;
+            var channel = Channel.getInstance;
 
             string colorList = TextBox1.Text;
             string itemType = TextBox2.Text;

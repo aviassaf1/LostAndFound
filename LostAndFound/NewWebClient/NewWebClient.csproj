@@ -267,6 +267,15 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\workerhost\servicelayer\datacontracts\CompanyItemData.cs">
+      <Link>ClientService\DataContracts\CompanyItemData.cs</Link>
+    </Compile>
+    <Compile Include="..\workerhost\servicelayer\datacontracts\MatchData.cs">
+      <Link>ClientService\DataContracts\MatchData.cs</Link>
+    </Compile>
+    <Compile Include="..\workerhost\servicelayer\IServerService.cs">
+      <Link>ClientService\IServerService.cs</Link>
+    </Compile>
     <Compile Include="Account\AddPhoneNumber.aspx.cs">
       <DependentUpon>AddPhoneNumber.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -397,6 +406,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Channel.cs" />
     <Compile Include="Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -474,13 +484,13 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\WebHost\WebHost.csproj">
-      <Project>{24a1d094-ab27-4974-a177-73af495aac71}</Project>
-      <Name>WebHost</Name>
-    </ProjectReference>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Service References\" />
+    <ProjectReference Include="..\WorkerHost\WorkerHost.csproj">
+      <Project>{061b290a-8b85-4d37-bce2-4db4f7072b57}</Project>
+      <Name>WorkerHost</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

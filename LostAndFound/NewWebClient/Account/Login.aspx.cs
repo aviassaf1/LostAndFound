@@ -74,7 +74,7 @@ namespace NewWebClient.Account
                 // To enable password failures to trigger lockout, change to shouldLockout: true
                 var result = signinManager.PasswordSignIn(Username.Text, Password.Text, IsAdmin.Checked, shouldLockout: false);
                 */
-                var channel = WebHost.Channel.getInstance;
+                var channel = Channel.getInstance;
                 string res;
                 if (IsAdmin.Checked)
                 {
