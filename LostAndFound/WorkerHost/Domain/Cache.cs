@@ -118,7 +118,7 @@ namespace WorkerHost.Domain
             List<FoundItems> foundItems = _db.getFoundItemsList();//int itemID, List<Color> colors, ItemType itemType, DateTime date, String location, String description, int serialNumber, String companyName, String contactName, String contactPhone, String photoLocation
             List<DataLayer.FBItem> FBItems = _db.getFBItemsList();//int itemID, List<Color> colors, ItemType itemType, DateTime date, String location, String description, String postUrl, String publisherName, FBType fbType
             List<Matches> matches = _db.getMatchesList();//int matchID, int companyItemID, int item2ID, MatchStatus matchStatus
-            List<CompanyUsers> companyUsers = new  List<CompanyUsers>();
+            List<CompanyUsers> companyUsers = _db.getCompanyUsersList();
             foreach (DataLayer.User user in admins)
             {
                 _admins.Add(user.UserName, new Admin(user.UserName, user.password));//add encryption to pass

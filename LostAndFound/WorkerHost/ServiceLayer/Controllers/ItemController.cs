@@ -71,7 +71,7 @@ namespace WorkerHost.ServiceLayer.Controllers
                     stat = ((LostItem)i).WasFound;
                     type = "lost";
                 }
-                res.Add(new CompanyItemData(i.ItemID, i.getColorsList(), i.ItemType.ToString(), i.Location, i.Date, i.Description,
+                res.Add(new CompanyItemData(i.ItemID, i.getHebColorsList(),  DataType.EnglishTypes2Hebrew[i.ItemType], i.Location, i.Date, i.Description,
                     i.SerialNumber, i.CompanyName, i.ContactName, i.ContactPhone, stat, type));
             }
             return res;

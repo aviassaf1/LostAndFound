@@ -34,7 +34,7 @@ namespace WorkerHost.ServiceLayer.DataContracts
         [DataMember]
         private string _type;
 
-        protected int ItemID
+        public int ItemID
         {
             get
             {
@@ -47,20 +47,24 @@ namespace WorkerHost.ServiceLayer.DataContracts
             }
         }
 
-        protected List<string> Colors
+        public string Colors
         {
             get
             {
-                return _colors;
-            }
-
-            set
-            {
-                _colors = value;
+                string str = "";
+                foreach (string color in _colors)
+                {
+                    str = str + "," + color;
+                }
+                if (!str.Equals(""))
+                {
+                    str = str.Substring(1);
+                }
+                return str;
             }
         }
 
-        protected string ItemType
+        public string ItemType
         {
             get
             {
@@ -73,7 +77,7 @@ namespace WorkerHost.ServiceLayer.DataContracts
             }
         }
 
-        protected DateTime Date
+        public DateTime Date
         {
             get
             {
@@ -86,7 +90,7 @@ namespace WorkerHost.ServiceLayer.DataContracts
             }
         }
 
-        protected string Location
+        public string Location
         {
             get
             {
@@ -99,7 +103,7 @@ namespace WorkerHost.ServiceLayer.DataContracts
             }
         }
 
-        protected string Description
+        public string Description
         {
             get
             {
@@ -112,7 +116,7 @@ namespace WorkerHost.ServiceLayer.DataContracts
             }
         }
 
-        protected int SerialNumber
+        public int SerialNumber
         {
             get
             {
@@ -125,7 +129,7 @@ namespace WorkerHost.ServiceLayer.DataContracts
             }
         }
 
-        protected string CompanyName
+        public string CompanyName
         {
             get
             {
@@ -138,7 +142,7 @@ namespace WorkerHost.ServiceLayer.DataContracts
             }
         }
 
-        protected string ContactName
+        public string ContactName
         {
             get
             {
@@ -151,7 +155,7 @@ namespace WorkerHost.ServiceLayer.DataContracts
             }
         }
 
-        protected string ContactPhone
+        public string ContactPhone
         {
             get
             {
@@ -164,7 +168,7 @@ namespace WorkerHost.ServiceLayer.DataContracts
             }
         }
 
-        protected bool Status
+        public bool Status
         {
             get
             {
@@ -177,7 +181,7 @@ namespace WorkerHost.ServiceLayer.DataContracts
             }
         }
 
-        protected string Type
+        public string Type
         {
             get
             {
@@ -207,7 +211,7 @@ namespace WorkerHost.ServiceLayer.DataContracts
             int serNum, string comName, string conName, string conPhone, bool stat, string type)
         {
             ItemID = itemID;
-            Colors = colors;
+            _colors = colors;
             ItemType = itemType;
             Location = location;
             Date = date;

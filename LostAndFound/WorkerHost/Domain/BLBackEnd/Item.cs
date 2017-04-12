@@ -117,5 +117,14 @@ namespace WorkerHost.Domain.BLBackEnd
             }
             return colors;
         }
+        public List<string> getHebColorsList()
+        {
+            List<string> colors = new List<string>();
+            foreach (Color color in _colors)
+            {
+                colors.Add(DataType.Colors2Heb[color]);
+            }
+            return colors;
+        }
     }
 }

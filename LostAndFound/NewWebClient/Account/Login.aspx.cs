@@ -79,17 +79,24 @@ namespace NewWebClient.Account
                 if (IsAdmin.Checked)
                 {
                     res = channel.ServerService.Adminlogin(Username.Text, Password.Text);
+                    if (res.Contains("login succeeded,"))
+                    {
+                        char[] ar = { ',' };
+                        res = res.Split(ar)[1];
+                        Username.Text = res;
+                        Session["token"] = int.Parse(res);
+                    }
                 }
                 else
                 {
                      res=channel.ServerService.login(fbToken,Username.Text, Password.Text);
-                }
-                if (res.Contains("login succeeded,"))
-                {
-                    char[] ar = { ',' };
-                    res = res.Split(ar)[1];
-                    Username.Text = res;
-                    Session["token"] = res;
+                    if (res.Contains("login succeeded,"))
+                    {
+                        char[] ar = { ',' };
+                        res = res.Split(ar)[1];
+                        Session["token"] = int.Parse(res);
+                        Response.Redirect("../ViewItems.aspx");
+                    }
                 }
                 
 

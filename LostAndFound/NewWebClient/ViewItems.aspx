@@ -1,8 +1,7 @@
 ﻿<%@ Page Title="View Items" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ViewItems.aspx.cs" Inherits="NewWebClient.ViewItems" %>
 
 <asp:Content ID="bodyContent" ContentPlaceHolderID="MainContent" runat="server">
-        <asp:ScriptManager ID="ScriptManger1" runat="Server">
-            </asp:ScriptManager>
+        
         <div id = "dvGrid" style ="padding:10px;width:1108px">
 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
 <ContentTemplate>
@@ -15,10 +14,10 @@ onrowupdating="UpdateItem"  onrowcancelingedit="CancelEdit"
 PageSize = "10" style="direction: rtl" >
 <Columns>
 
-<asp:TemplateField ItemStyle-Width = "30px"  HeaderText = "מזהה פריט">
+<asp:TemplateField ItemStyle-Width = "30px"  HeaderText = "מזהה פריט" runat="server" >
     <ItemTemplate>
         <asp:Label ID="ItemID" runat="server"
-        Text='<%# Eval("CustomerID+++++")%>'></asp:Label>
+        Text='<%# Eval("ItemID")%>'></asp:Label>
     </ItemTemplate>
 </asp:TemplateField>
 
@@ -26,35 +25,35 @@ PageSize = "10" style="direction: rtl" >
 <asp:TemplateField ItemStyle-Width = "100px"  HeaderText = "סוג">
     <ItemTemplate>
         <asp:Label ID="itemType" runat="server"
-                Text='<%# Eval("ContactName")%>'></asp:Label>
+                Text='<%# Eval("ItemType")%>'></asp:Label>
     </ItemTemplate>
 </asp:TemplateField>
 
 <asp:TemplateField   HeaderText = "צבע">
     <ItemTemplate>
         <asp:Label ID="itemColors" runat="server"
-                Text='<%# Eval("ContactName")%>'></asp:Label>
+                Text='<%# Eval("Colors")%>'></asp:Label>
     </ItemTemplate>
 </asp:TemplateField>
 
 <asp:TemplateField ItemStyle-Width = "100px"  HeaderText = "תאריך">
     <ItemTemplate>
         <asp:Label ID="itemDate" runat="server"
-                Text='<%# Eval("ContactName")%>'></asp:Label>
+                Text='<%# Eval("Date")%>'></asp:Label>
     </ItemTemplate>
 </asp:TemplateField>
 
 <asp:TemplateField ItemStyle-Width = "100px"  HeaderText = "מיקום">
     <ItemTemplate>
         <asp:Label ID="itemLocation" runat="server"
-                Text='<%# Eval("ContactName")%>'></asp:Label>
+                Text='<%# Eval("Location")%>'></asp:Label>
     </ItemTemplate>
 </asp:TemplateField>
 
 <asp:TemplateField ItemStyle-Width = "100px"  HeaderText = "מספר סידורי">
     <ItemTemplate>
         <asp:Label ID="itemSerial" runat="server"
-                Text='<%# Eval("ContactName")%>'></asp:Label>
+                Text='<%# Eval("SerialNumber")%>'></asp:Label>
     </ItemTemplate>
 </asp:TemplateField>
 
@@ -68,7 +67,7 @@ PageSize = "10" style="direction: rtl" >
 <asp:TemplateField ItemStyle-Width = "100px"  HeaderText = "טלפון מדווח">
     <ItemTemplate>
         <asp:Label ID="contactPhone" runat="server"
-                Text='<%# Eval("ContactName")%>'></asp:Label>
+                Text='<%# Eval("ContactPhone")%>'></asp:Label>
     </ItemTemplate>
 </asp:TemplateField>
 
@@ -79,8 +78,8 @@ PageSize = "10" style="direction: rtl" >
 <asp:TemplateField>
     <ItemTemplate>
         <asp:LinkButton ID="itemRemove" runat="server"
-            CommandArgument = '<%# Eval("CustomerID++")%>'
-         OnClientClick = "return confirm('Do you want to delete?')"
+            CommandArgument = '<%# Eval("ItemID")%>'
+         OnClientClick = "return confirm('?האם אתה בטוח שברצונך למחוק את הפריט')"
         Text = "מחיקה" OnClick = "deleteItem"></asp:LinkButton>
     </ItemTemplate>
 </asp:TemplateField>

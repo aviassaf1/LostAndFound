@@ -7,10 +7,48 @@
     
     
     </div>
-        <p style="direction: rtl">
-            &nbsp;</p>
-            <asp:Panel ID="Panel1" runat="server" HorizontalAlign="Right" Height="948px" style="border-right:none">
+    <div class="row" dir="rtl">
+        <div class="col-md-4">
+            <p style="direction: rtl">
+                    
+                    <asp:Label runat="server" Width="100" Font-Underline="true">תאריך המציאה:</asp:Label>
+
+
+                    <asp:Calendar ID="_dateCalendar" runat="server" BackColor="White" BorderColor="#3366CC" BorderWidth="1px" CellPadding="1" DayNameFormat="Shortest" Font-Names="Verdana" Font-Size="14pt" ForeColor="#003399" Height="200px" Style="margin-left:auto" Width="278px">
+                        <DayHeaderStyle BackColor="#99CCCC" ForeColor="#336666" Height="1px" />
+                        <NextPrevStyle Font-Size="8pt" ForeColor="#CCCCFF" />
+                        <OtherMonthDayStyle ForeColor="#999999" />
+                        <SelectedDayStyle BackColor="#009999" Font-Bold="True" ForeColor="#CCFF99" />
+                        <SelectorStyle BackColor="#99CCCC" BorderColor="#FF3300" ForeColor="#336666" />
+                        <TitleStyle BackColor="#003399" BorderColor="#3366CC" BorderWidth="1px" Font-Bold="True" Font-Size="10pt" ForeColor="#CCCCFF" Height="25px" />
+                        <TodayDayStyle BackColor="#99CCCC" ForeColor="White" />
+                        <WeekendDayStyle BackColor="#CCCCFF" />
+                    </asp:Calendar>
+                </p>
                 <p style="direction: rtl">
+                    <asp:Label runat="server" Width="120" Font-Underline="true"> מיקום מציאת הפריט:</asp:Label>
+                    <asp:TextBox ID="_location" runat="server" style="margin-right: 30px" Width="120"></asp:TextBox>
+                </p>
+                <p style="direction: rtl">
+                    <asp:Label runat="server" Width="120" Font-Underline="true">תיאור המציאה:</asp:Label>
+                    <asp:TextBox ID="_description" runat="server" style="margin-right: 30px" Width="120"></asp:TextBox>
+                </p>
+                <p style="direction: rtl">
+                    <asp:Label runat="server" Width="120" Font-Underline="true">מספר סידורי:</asp:Label>
+                    <asp:TextBox ID="_serial" runat="server" style="margin-right: 30px" Width="120"></asp:TextBox>
+                </p>
+                <p style="direction: rtl">
+                    <asp:Label runat="server" Width="120" Font-Underline="true">שם מדווח המציאה:</asp:Label>
+                    <asp:TextBox ID="_contactName" runat="server" style="margin-right: 30px" Width="120"></asp:TextBox>
+                </p>
+                <p style="direction: rtl">
+                   <asp:Label runat="server" Width="120" Font-Underline="true">טלפון מדווח המציאה:</asp:Label> 
+                    <asp:TextBox ID="_contactPhone" runat="server" style="margin-right: 30px" Width="120"></asp:TextBox>
+                </p>
+            <asp:Button ID="OK" runat="server" Text="הוסף מציאה למערכת" OnClick="Button1_Click" style="margin-left: 0px" Width="261px" />
+        </div>
+        <div class="col-md-6">
+            <p style="direction: rtl">
                 <asp:Label runat="server" Width="60" Font-Underline="true">סוג פריט</asp:Label>
                
                 <asp:DropDownList ID="_TypeList" runat="server" Height="16px" Width="133px" style="direction:rtl">
@@ -58,42 +96,6 @@
                         <asp:ListItem Text="צבע אחר"></asp:ListItem>
                     </asp:CheckBoxList>
                 </p>
-                <p style="direction: rtl">
-                    
-                    <asp:Label runat="server" Width="100" Font-Underline="true">תאריך המציאה:</asp:Label>
-
-
-                    <asp:Calendar ID="_dateCalendar" runat="server" BackColor="White" BorderColor="#3366CC" BorderWidth="1px" CellPadding="1" DayNameFormat="Shortest" Font-Names="Verdana" Font-Size="14pt" ForeColor="#003399" Height="200px" Style="margin-left:auto">
-                        <DayHeaderStyle BackColor="#99CCCC" ForeColor="#336666" Height="1px" />
-                        <NextPrevStyle Font-Size="8pt" ForeColor="#CCCCFF" />
-                        <OtherMonthDayStyle ForeColor="#999999" />
-                        <SelectedDayStyle BackColor="#009999" Font-Bold="True" ForeColor="#CCFF99" />
-                        <SelectorStyle BackColor="#99CCCC" BorderColor="#FF3300" ForeColor="#336666" />
-                        <TitleStyle BackColor="#003399" BorderColor="#3366CC" BorderWidth="1px" Font-Bold="True" Font-Size="10pt" ForeColor="#CCCCFF" Height="25px" />
-                        <TodayDayStyle BackColor="#99CCCC" ForeColor="White" />
-                        <WeekendDayStyle BackColor="#CCCCFF" />
-                    </asp:Calendar>
-                </p>
-                <p style="direction: rtl">
-                    <asp:Label runat="server" Width="120" Font-Underline="true"> מיקום מציאת הפריט:</asp:Label>
-                    <asp:TextBox ID="_location" runat="server" style="margin-right: 30px" Width="120"></asp:TextBox>
-                </p>
-                <p style="direction: rtl">
-                    <asp:Label runat="server" Width="120" Font-Underline="true">תיאור המציאה:</asp:Label>
-                    <asp:TextBox ID="_description" runat="server" style="margin-right: 30px" Width="120"></asp:TextBox>
-                </p>
-                <p style="direction: rtl">
-                    <asp:Label runat="server" Width="120" Font-Underline="true">מספר סידורי:</asp:Label>
-                    <asp:TextBox ID="_serial" runat="server" style="margin-right: 30px" Width="120"></asp:TextBox>
-                </p>
-                <p style="direction: rtl">
-                    <asp:Label runat="server" Width="120" Font-Underline="true">שם מדווח המציאה:</asp:Label>
-                    <asp:TextBox ID="_contactName" runat="server" style="margin-right: 30px" Width="120"></asp:TextBox>
-                </p>
-                <p style="direction: rtl">
-                   <asp:Label runat="server" Width="120" Font-Underline="true">טלפון מדווח המציאה:</asp:Label> 
-                    <asp:TextBox ID="_contactPhone" runat="server" style="margin-right: 30px" Width="120"></asp:TextBox>
-                </p>
-            <asp:Button ID="OK" runat="server" Text="הוסף מציאה למערכת" OnClick="Button1_Click" style="margin-left: 0px" Width="261px" />
-        </asp:Panel>
+        </div>
+    </div>       
 </asp:Content>

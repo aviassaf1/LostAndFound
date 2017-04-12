@@ -15,67 +15,69 @@ namespace WorkerHost
 
         public string addComapny(string companyName, string phone, HashSet<string> facebookGroups, string companyProfileID, string managerUserName, string managerPassword, int key)
         {
-            throw new NotImplementedException();
+            return AdminController.getInstance.addComapny(companyName, phone, facebookGroups, companyProfileID,
+                managerUserName, managerPassword, key);
         }
 
         public string addFBGroup(string groupID, int key)
         {
-            throw new NotImplementedException();
+            return CompanyController.getInstance.addFBGroup(groupID, key);
         }
 
         public string addFoundItem(List<string> sColors, string sType, DateTime date, string location, string description, int serialNumber, string contactName, string contactPhone, string photoLocation, int key)
         {
-            throw new NotImplementedException();
+            return ItemController.getInstance.addFoundItem(sColors, sType, date, location, description, serialNumber, contactName, contactPhone, photoLocation, key);
         }
 
         public string addLostItem(List<string> sColors, string sType, DateTime date, string location, string description, int serialNumber, string contactName, string contactPhone, string photoLocation, int key)
         {
-            throw new NotImplementedException();
+            return ItemController.getInstance.addLostItem(sColors, sType, date, location, description, serialNumber, contactName, contactPhone, photoLocation, key);
         }
 
         public string addWorker(string newUsername, string newPassword, bool isManager, int key)
         {
-            throw new NotImplementedException();
+            return CompanyController.getInstance.addWorker(newUsername, newPassword, isManager, key);
         }
 
         public string changeMatchStatus(int matchID, string statusNum, int key)
         {
-            throw new NotImplementedException();
+            return MatchController.getInstance.changeMatchStatus(matchID,statusNum, key);
         }
 
         public string deleteCompany(string companyName, int key)
         {
-            throw new NotImplementedException();
+            return AdminController.getInstance.deleteCompany(companyName, key);
         }
 
         public string deleteItem(int itemID, int key)
         {
-            throw new NotImplementedException();
+            return ItemController.getInstance.deleteItem(itemID, key);
         }
 
         public string editCompany(string companyName, string password, string phone, int key)
         {
-            throw new NotImplementedException();
+            return AdminController.getInstance.editCompany(companyName,password,phone, key);
         }
 
         public string editItem(int itemID, DateTime date, string location, string description, int serialNumber, string contactName, string contactPhone, int key)
         {
-            throw new NotImplementedException();
+            return ItemController.getInstance.editItem(itemID, date, location, description, serialNumber, contactName,
+                contactPhone, key);
         }
 
         public List<CompanyItemData> getAllCompanyItems(int key)
         {
-            throw new NotImplementedException();
+            return ItemController.getInstance.getAllCompanyItems(key);
         }
 
         public List<MatchData> getMatchesByItemID(int itemID, int key)
         {
-            throw new NotImplementedException();
+            return MatchController.getInstance.getMatchesByItemID(itemID, key);
         }
 
         public Dictionary<string, string> getSystemCompanyFBGroup(int key)
         {
-            throw new NotImplementedException();
+            return CompanyController.getInstance.getSystemCompanyFBGroup( key);
         }
 
         public string Adminlogin(string username, string password)
@@ -83,29 +85,29 @@ namespace WorkerHost
             return AdminController.getInstance.login(username, password);
         }
 
-        public string login(string token, string userName, string userPassword)
+        public string login(string token, string username, string userPassword)
         {
-            throw new NotImplementedException();
+            return CompanyController.getInstance.login(token, username, userPassword);
         }
 
         public string publishInventory(string GroupID, int days, int key)
         {
-            throw new NotImplementedException();
+            return CompanyController.getInstance.publishInventory(GroupID,days, key);
         }
 
         public string removeFBGroup(string groupID, int key)
         {
-            throw new NotImplementedException();
+            return CompanyController.getInstance.removeFBGroup(groupID, key);
         }
 
         public string removeWorker(string delUsername, int key)
         {
-            throw new NotImplementedException();
+            return CompanyController.getInstance.removeWorker(delUsername, key);
         }
 
         public string transactionComplete(int itemID, int key)
         {
-            throw new NotImplementedException();
+            return ItemController.getInstance.transactionComplete(itemID, key);
         }
 
         /*public string testClass1(string color, string type, string name, string phone)
