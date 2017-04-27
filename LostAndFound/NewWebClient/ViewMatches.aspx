@@ -62,7 +62,7 @@ PageSize = "10" style="direction: rtl" OnSelectedIndexChanged="GridView1_Selecte
     <ItemTemplate>
         <asp:LinkButton ID="itemRemove" runat="server"
             CommandArgument = '<%# Eval("ItemID")%>'
-         OnClientClick = "return confirm('?האם אתה בטוח שברצונך למחוק את הפריט')"
+         OnClientClick = "return confirm('?האם אתה בטוח שברצונך למחוק את ההתאמה')"
         Text = "מחיקה" OnClick = "deleteItem"></asp:LinkButton>
     </ItemTemplate>
 </asp:TemplateField>

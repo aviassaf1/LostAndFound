@@ -9,7 +9,7 @@
 AutoGenerateColumns = "false" Font-Names = "Arial"
 Font-Size = "11pt" AlternatingRowStyle-BackColor = "#C2D69B" 
 HeaderStyle-BackColor = "#6699ff" AllowPaging ="true"  ShowFooter = "false" 
-OnPageIndexChanging = "OnPaging" onrowediting="EditItem"
+OnPageIndexChanging = "OnPaging" 
 PageSize = "10" style="direction: rtl" >
 <Columns>
 
@@ -94,7 +94,7 @@ PageSize = "10" style="direction: rtl" >
     <ItemTemplate>
         <asp:LinkButton ID="viewItemMatches" runat="server"
             CommandArgument = '<%# Eval("ItemID")%>'
-        Text = "צפה" PostBackUrl="~/ViewMatches.aspx?ID=iddddddddddddddddddddddddddddd"></asp:LinkButton>
+        Text = "צפה" OnClick = "viewItemMatches" ></asp:LinkButton>
     </ItemTemplate>
 </asp:TemplateField>
 
@@ -103,7 +103,7 @@ PageSize = "10" style="direction: rtl" >
         <asp:LinkButton ID="itemRemove" runat="server"
             CommandArgument = '<%# Eval("ItemID")%>'
          OnClientClick = "return confirm('?האם אתה בטוח שברצונך למחוק את הפריט')"
-        Text = "מחיקה" OnClick = "deleteItem"></asp:LinkButton>
+        Text = "מחיקה" OnClick = "deleteItem2"></asp:LinkButton>
     </ItemTemplate>
 </asp:TemplateField>
 
@@ -111,7 +111,7 @@ PageSize = "10" style="direction: rtl" >
     <ItemTemplate>
         <asp:LinkButton ID="editItem" runat="server"
             CommandArgument = '<%# Eval("ItemID")%>'
-        Text = "ערוך"  PostBackUrl="~/EditItem.aspx?ID=idddddddddddddddddddd"></asp:LinkButton>
+        Text = "ערוך"  onClick="EditItem2"></asp:LinkButton>
     </ItemTemplate>
 </asp:TemplateField>
 

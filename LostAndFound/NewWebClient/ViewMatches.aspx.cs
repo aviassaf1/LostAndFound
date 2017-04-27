@@ -10,7 +10,8 @@ namespace NewWebClient
 {
     public partial class ViewMatches : System.Web.UI.Page
     {
-        private List<CompanyItemData> items;
+        private List<MatchData> matches;
+
         private string item1ID;
         public void showAlert(string content)
         {
@@ -35,10 +36,17 @@ namespace NewWebClient
         {
             var channel = Channel.getInstance;
             int token = (int)(Session["token"]);
-            items = channel.ServerService.getAllCompanyItems(token);
-            GridView1.DataSource = items;
-            GridView1.DataBind();
             item1ID = Request.QueryString["ID"];
+            matches = channel.ServerService.getMatchesByItemID(Int32.Parse(item1ID),token);
+            /*List<ItemsForMatchesData> items = new List<ItemsForMatchesData>();
+            foreach(MatchData match in matches)
+            {
+
+                items.stasus =;
+            }
+            GridView1.DataSource = items;*/
+            GridView1.DataBind();
+            
             CompanyItemData cid= channel.ServerService.getCompanyItem(Int32.Parse(item1ID), token);
             item1.Text = "פריט מספר" + cid.ItemID + "בצבע " + cid.Colors + "ותיאורו " + cid.Description;
 

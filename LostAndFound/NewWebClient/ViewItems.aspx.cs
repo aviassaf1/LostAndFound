@@ -23,19 +23,23 @@ namespace NewWebClient
                 BindData();
             }
         }
-        protected void deleteItem(object sender, GridViewUpdateEventArgs e)
+        protected void deleteItem2(object sender, EventArgs e)
         {
-            int index = e.RowIndex;
+            int index = ((GridViewUpdateEventArgs)e).RowIndex;
             string ans=Channel.getInstance.ServerService.deleteItem(items.ElementAt(index).ItemID, (int)(Session["token"]));
             items = Channel.getInstance.ServerService.getAllCompanyItems((int)(Session["token"]));
             GridView1.DataSource = items;
             GridView1.DataBind();
             showAlert(ans);
         }
-
-        protected void viewItemMatches(object sender, GridViewPageEventArgs e)
+        protected void deleteItem(object sender, GridViewUpdateEventArgs e)
         {
+        }
 
+        protected void viewItemMatches(object sender, EventArgs e)
+        {
+            int index = ((GridViewUpdateEventArgs) e).RowIndex;
+            Response.Redirect("../ViewMatches.aspx?ID="+ items.ElementAt(index).ItemID);
         }
 
         protected void OnPaging(object sender, GridViewPageEventArgs e)
@@ -55,23 +59,14 @@ namespace NewWebClient
             GridView1.DataBind();
         }
 
+        protected void EditItem2(object sender, EventArgs e)
+        {
+            int index = ((GridViewUpdateEventArgs)e).RowIndex;
+            Response.Redirect("../EditItem.aspx?ID=" + items.ElementAt(index).ItemID);
+        }
+
         protected void EditItem(object sender, GridViewEditEventArgs e)
         {
-            //int index = e.NewEditIndex;
-            //GridView1.EditIndex = index;
-            //Channel.getInstance.ServerService.editItem(items.ElementAt(index).ItemID, DateTime.Today, "loc", "des", 0, "con", "pho", (int)(Session["token"]));
-            //BindData();
-        }
-        protected void CancelEdit(object sender, GridViewCancelEditEventArgs e)
-        {
-            GridView1.EditIndex = -1;
-        }
-        protected void UpdateItem(object sender, GridViewUpdateEventArgs e)
-        {
-
-            GridView1.EditIndex = -1;
-
-            GridView1.DataBind();
         }
     }
 }
