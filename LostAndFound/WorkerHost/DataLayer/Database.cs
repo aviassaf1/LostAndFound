@@ -1349,9 +1349,9 @@ namespace WorkerHost.DataLayer
                 cu.userName = userName;
                 cu.password = password;
                 cu.Companies = company;
-                cu.User = user;
+                //cu.User = user;
                 company.CompanyUsers.Add(cu);
-                user.CompanyUsers = cu;
+                //user.CompanyUsers = cu;
                 db.SaveChanges();
                 return "company was added successfully";
             }
@@ -1372,8 +1372,8 @@ namespace WorkerHost.DataLayer
                 }
                 cu.Companies.CompanyUsers.Remove(cu);
                 cu.Companies = null;
-                cu.User.CompanyUsers = null;
-                cu.User = null;
+                //cu.User.CompanyUsers = null;
+                //cu.User = null;
                 db.CompanyUsers.Remove(cu);
                 db.SaveChanges();
                 return "item was removed successfully";

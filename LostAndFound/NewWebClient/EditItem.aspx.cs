@@ -16,6 +16,18 @@ namespace NewWebClient
         protected void Page_Load(object sender, EventArgs e)
         {
             itemid = Request.QueryString["ID"];
+            item = Channel.getInstance.ServerService.getCompanyItem(Int32.Parse(itemid), (int)(Session["token"]));
+            ListItemCollection typelist = _TypeList.Items;
+            foreach(ListItem type in typelist)
+            {
+                if (type.Value.Equals(item.ItemType))
+                    _TypeList.SelectedValue = type.Value;
+            }
+            _dateCalendar.SelectedDate = item.Date;
+            _location.Text = item.Location;
+            _description.Text = item.Description;
+            _contactName.Text = item.ContactName;
+            _contactPhone.Text = item.ContactPhone;
         }
 
         protected void Button1_Click(object sender, EventArgs e)
@@ -39,10 +51,6 @@ namespace NewWebClient
                 showAlert("לא נבחר סוג פריט");
             }
             DateTime date = _dateCalendar.SelectedDate;
-            if (date > DateTime.Today)
-            {
-                showAlert("תאריך לא תקין, נא לבחור תאריך אמיתי");
-            }
             string location = _location.Text;
             string description = _description.Text;
             int serialNumber = 0;
@@ -68,7 +76,6 @@ namespace NewWebClient
             {
                 showAlert("בבקשה להזין טלפון של מדווח האבידה");
             }
-            string token = "EAACEdEose0cBAGzbmuXj2id4qU4Ed8riC947XaZCDJ9ZAy1kd5PIP2OKBf3Js1ThIF8ZBUr38AGDZATvIhZATFLetHUtRM560Xwt7tnsty9WgHS6zMyK9RvbJjNEPLUXFydDU1am3JsaZCjhOgs4OwWPlMRrbIunrZAPc6SYmZCpVIyV6zOGV9xU";
             var channel = Channel.getInstance;
             string ret = channel.ServerService.editItem(Int32.Parse(itemid), date, location, description,
             serialNumber, contactName, contactPhone, 564/*key*/);
