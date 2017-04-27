@@ -177,7 +177,7 @@ namespace WorkerHost.Domain.BLBackEnd
 
         internal String edit(string password, string phone)
         {
-            _password = password;
+            //_password = password;
             _phone = phone;
             return Cache.getInstance.editCompany(_companyName, password, phone);
         }

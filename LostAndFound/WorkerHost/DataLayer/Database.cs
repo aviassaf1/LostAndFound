@@ -536,7 +536,7 @@ namespace WorkerHost.DataLayer
                 {
                     return "the new user does not exist in the system";
                 }
-                userNew.password = passwordNew;
+                //userNew.password = passwordNew;
                 company.phone = phoneNew;
                 User oldUser = company.User;
                 oldUser.Companies.Remove(company);
