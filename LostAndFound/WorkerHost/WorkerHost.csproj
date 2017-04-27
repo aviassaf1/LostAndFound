@@ -92,36 +92,51 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataLayer\Companies.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>FreeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataLayer\CompanyFbConnection.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>FreeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataLayer\CompanyItems.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>FreeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataLayer\CompanyUsers.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>FreeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataLayer\Database.cs" />
     <Compile Include="DataLayer\FacebookGroups.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>FreeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataLayer\FBItem.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>FreeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataLayer\FoundItems.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>FreeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataLayer\FreeModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FreeModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataLayer\FreeModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FreeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataLayer\FreeModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FreeModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="DataLayer\IDB.cs" />
     <Compile Include="DataLayer\Items.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>FreeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataLayer\LostItems.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>FreeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataLayer\Matches.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>FreeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataLayer\Model1.Context.cs">
       <AutoGen>True</AutoGen>
@@ -139,7 +154,7 @@
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
     <Compile Include="DataLayer\User.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>FreeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Domain\BLBackEnd\Admin.cs" />
     <Compile Include="Domain\BLBackEnd\Color.cs" />
@@ -188,6 +203,13 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <EntityDeploy Include="DataLayer\FreeModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>FreeModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="DataLayer\FreeModel.edmx.diagram">
+      <DependentUpon>FreeModel.edmx</DependentUpon>
+    </None>
     <None Include="DataLayer\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </None>
@@ -197,6 +219,16 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DataLayer\FreeModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>FreeModel.edmx</DependentUpon>
+      <LastGenOutput>FreeModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DataLayer\FreeModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>FreeModel.edmx</DependentUpon>
+      <LastGenOutput>FreeModel.cs</LastGenOutput>
+    </Content>
     <Content Include="DataLayer\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
