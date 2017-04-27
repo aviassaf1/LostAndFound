@@ -26,5 +26,6 @@ namespace WorkerHost.ServiceLayer.Controllers
         [OperationContract]
         String editItem(int itemID, DateTime date, string location, string description,
             int serialNumber, string contactName, string contactPhone, int key);
+        CompanyItemData getCompanyItem(int itemID, int key);
     }
 }

@@ -72,6 +72,9 @@ namespace WorkerHost
         [OperationContract]
         List<MatchData> getMatchesByItemID(int itemID, int key);
 
+        [OperationContract]
+        CompanyItemData getCompanyItem(int itemID, int key);
+
         /*/[OperationContract]
         //string testClass1(string color, string type, string name, string phone);
 

@@ -81,5 +81,24 @@ namespace WorkerHost.ServiceLayer.Controllers
         {
             return IIM.transactionComplete(itemID, key);
         }
+
+        public CompanyItemData getCompanyItem(int itemID, int key)
+        {
+            bool stat;
+            string type;
+            CompanyItem i = IIM.getCompanyItem(itemID, key);
+            if (i.GetType() == typeof(FoundItem))
+            {
+                stat = ((FoundItem)i).Delivered;
+                type = "found";
+            }
+            else
+            {
+                stat = ((LostItem)i).WasFound;
+                type = "lost";
+            }
+            return new CompanyItemData(i.ItemID, i.getHebColorsList(), DataType.EnglishTypes2Hebrew[i.ItemType], i.Location, i.Date, i.Description,
+                i.SerialNumber, i.CompanyName, i.ContactName, i.ContactPhone, stat, type);
+        }
     }
 }

@@ -63,7 +63,6 @@ namespace WorkerHost.Domain.Managers
             }
             catch (Exception)
             {
-
                 return null;
             }
             Company company = cache.getCompanyByfb(fbid);

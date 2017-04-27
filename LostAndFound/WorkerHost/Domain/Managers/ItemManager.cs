@@ -232,14 +232,39 @@ namespace WorkerHost.Domain.Managers
 
         public string deleteItem(int itemID, int key)
         {
-            CompanyItem item = cache.getCompanyItem(itemID);
             string logg;
+            String user = SessionDirector.getInstance.getUserName(key);
+            if (user == null)
+            {
+                logg = "getCompanyItem: session key does not exist";
+                logger.logPrint(logg, 0);
+                logger.logPrint(logg, 2);
+                return null;
+            }
+            string companyName = cache.getCompanyNameByUsername(user);
+            if (companyName == null)
+            {
+                logg = "getCompanyItem: session key does not exist";
+                logger.logPrint(logg, 0);
+                logger.logPrint(logg, 2);
+                return null;
+            }
+
+            CompanyItem item = cache.getCompanyItem(itemID);
             if (item == null)
             {
                 logg = "itemID wasn't found";
                 logger.logPrint(logg, 0);
                 logger.logPrint(logg, 2);
                 return logg;
+            }
+
+            if (!item.CompanyName.Equals(companyName))
+            {
+                logg = "someone tried to hack our system";
+                logger.logPrint(logg, 0);
+                logger.logPrint(logg, 2);
+                return "bye bye";
             }
             Company company = cache.getCompany(item.CompanyName);
             if ((item.GetType()).Equals(typeof(FoundItem)))
@@ -267,6 +292,41 @@ namespace WorkerHost.Domain.Managers
             logger.logPrint(logg, 0);
             logger.logPrint(logg, 1);
             return logg;
+        }
+
+        public CompanyItem getCompanyItem(int itemID, int key)
+        {
+            string logg;
+            String user = SessionDirector.getInstance.getUserName(key);
+            if (user == null)
+            {
+                logg = "getCompanyItem: session key does not exist";
+                logger.logPrint(logg, 0);
+                logger.logPrint(logg, 2);
+                return null;
+            }
+            string companyName = cache.getCompanyNameByUsername(user);
+            if (companyName == null)
+            {
+                logg = "getCompanyItem: session key does not exist";
+                logger.logPrint(logg, 0);
+                logger.logPrint(logg, 2);
+                return null;
+            }
+            CompanyItem item = cache.getCompanyItem(itemID);
+            if (item == null)
+            {
+                logg = "itemID wasn't found";
+                logger.logPrint(logg, 0);
+                logger.logPrint(logg, 2);
+            }
+            if (!item.CompanyName.Equals(companyName))
+            {
+                logg = "someone tried to hack our system";
+                logger.logPrint(logg, 0);
+                logger.logPrint(logg, 2);
+            }
+            return item;
         }
     }
 }
