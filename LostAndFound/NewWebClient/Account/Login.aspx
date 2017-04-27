@@ -1,4 +1,4 @@
-﻿<%@ Page Title="התחברות למערכת" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="NewWebClient.Account.Login" Async="true" %>
+﻿<%@ Page Title="התחברות למערכת" Language="C#" MasterPageFile="~/Site2.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="NewWebClient.Account.Login" Async="true" %>
 
 <%@ Register Src="~/Account/OpenAuthProviders.ascx" TagPrefix="uc" TagName="OpenAuthProviders" %>
 
