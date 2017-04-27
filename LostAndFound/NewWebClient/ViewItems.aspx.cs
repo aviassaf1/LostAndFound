@@ -68,5 +68,12 @@ namespace NewWebClient
         protected void EditItem(object sender, GridViewEditEventArgs e)
         {
         }
+
+        protected void publishButton_Click(object sender, EventArgs e)
+        {
+            var channel = Channel.getInstance;
+            int key = (int)Session["token"];
+            channel.ServerService.publishInventory(/*should be a group id*/ "0", 0, key);
+        }
     }
 }

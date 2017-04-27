@@ -13,7 +13,6 @@ namespace WorkerHost.DataLayer
 
         private Database()
         {
-
         }
 
         public static Database getInstance()
