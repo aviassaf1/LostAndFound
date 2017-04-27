@@ -48,16 +48,11 @@ namespace WorkerHost.ServiceLayer.DataContracts
             }
         }
 
-        public DateTime Date
+        public String Date
         {
             get
             {
-                return _date;
-            }
-
-            set
-            {
-                _date = value;
+                return _date.ToString("dd/MM/yyyy");
             }
         }
 
@@ -149,7 +144,7 @@ namespace WorkerHost.ServiceLayer.DataContracts
             MatchStatus = status;
             _colors = colors;
             Location = location;
-            Date = date;
+            _date = date;
             Description = desc;
         }
     }

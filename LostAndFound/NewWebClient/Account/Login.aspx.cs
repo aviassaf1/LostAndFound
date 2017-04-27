@@ -15,7 +15,6 @@ namespace NewWebClient.Account
     public partial class Login : Page
     {
         public const string FaceBookAppKey = "f2631cbbee9a9ccbcdb09558a6f1bc52";
-        private char[] userInfo;
         private string fbToken;
 
 
@@ -33,7 +32,7 @@ namespace NewWebClient.Account
 
             if (string.IsNullOrEmpty(Request.QueryString["access_token"])) return; //ERROR! No token returned from Facebook!!
             Session["token"] = Request.QueryString["access_token"];
-            Session["token"] = "EAACEdEose0cBAIvcjQUCwPgQ7iZBNbn3DV9mUuZCG6f3FEC0FD1LAEnWLIiZBKIbexdt3Wmdy0CPytl6IQWlPFTpqBwdhxJnwol0ZAUU96LzZCHZBI5ZC5aKEGKvrasXUCEZCRnBz72BjaAOZBmyK3PgjQV6y1b5Y1AkUjZCGxLisyfGAZAnoUq8MMhstHmEg1k8AgZD";
+            Session["token"] = "EAACEdEose0cBABpWTxEZByqzSZBTWYXZBia89ZCPc0gAtNvsfGx9ZAZAaz3UqgZBktSlcw41yF8KZB1dQJFPmHTTZBn6oGplggXLNxNtF6ZCcmpCBKkkBRdcYj2nnUZB9YXZC0KaD5HZB8Aqmi2M1wHjHAtoi5qqBurOfJPdGM20xZAYeu4aw3a62byZCny";
             //let's send an http-request to facebook using the token            
             string json = GetFacebookUserJSON(Request.QueryString["access_token"]);
 
@@ -45,7 +44,7 @@ namespace NewWebClient.Account
             if (oUser != null)
             {
                 fbToken = Request.QueryString["access_token"];
-                fbToken = "EAACEdEose0cBAIvcjQUCwPgQ7iZBNbn3DV9mUuZCG6f3FEC0FD1LAEnWLIiZBKIbexdt3Wmdy0CPytl6IQWlPFTpqBwdhxJnwol0ZAUU96LzZCHZBI5ZC5aKEGKvrasXUCEZCRnBz72BjaAOZBmyK3PgjQV6y1b5Y1AkUjZCGxLisyfGAZAnoUq8MMhstHmEg1k8AgZD";
+                fbToken = "EAACEdEose0cBABpWTxEZByqzSZBTWYXZBia89ZCPc0gAtNvsfGx9ZAZAaz3UqgZBktSlcw41yF8KZB1dQJFPmHTTZBn6oGplggXLNxNtF6ZCcmpCBKkkBRdcYj2nnUZB9YXZC0KaD5HZB8Aqmi2M1wHjHAtoi5qqBurOfJPdGM20xZAYeu4aw3a62byZCny";
             }
         }
 

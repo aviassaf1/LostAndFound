@@ -23,7 +23,7 @@ namespace NewWebClient
                 if (type.Value.Equals(item.ItemType))
                     _TypeList.SelectedValue = type.Value;
             }
-            _dateCalendar.SelectedDate = item.Date;
+            _dateCalendar.SelectedDate = item.Date1;
             _location.Text = item.Location;
             _description.Text = item.Description;
             _contactName.Text = item.ContactName;
@@ -62,7 +62,7 @@ namespace NewWebClient
                     showAlert("בבקשה להזין מספר סידורי תקין, במידה ואין לך, הזן 0");
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 showAlert("בבקשה להזין מספר סידורי תקין, במידה ואין לך, הזן 0");
             }
@@ -79,7 +79,6 @@ namespace NewWebClient
             var channel = Channel.getInstance;
             string ret = channel.ServerService.editItem(Int32.Parse(itemid), date, location, description,
             serialNumber, contactName, contactPhone, 564/*key*/);
-            int i = 0;
             _contactName.Text = ret;
         }
         private void showAlert(String content)

@@ -77,16 +77,11 @@ namespace WorkerHost.ServiceLayer.DataContracts
             }
         }
 
-        public DateTime Date
+        public String Date
         {
             get
             {
-                return Date1;
-            }
-
-            set
-            {
-                Date1 = value;
+                return _date.ToString("dd/MM/yyyy");
             }
         }
 
@@ -222,7 +217,7 @@ namespace WorkerHost.ServiceLayer.DataContracts
             _colors = colors;
             ItemType = itemType;
             Location = location;
-            Date = date;
+            _date = date;
             Description = desc;
             SerialNumber = serNum;
             CompanyName = comName;

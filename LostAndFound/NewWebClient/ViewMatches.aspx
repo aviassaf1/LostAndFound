@@ -18,15 +18,15 @@ PageSize = "10" style="direction: rtl"  >
 
 <asp:TemplateField ItemStyle-Width = "100px"  HeaderText = "מזהה פריט">
     <ItemTemplate>
-        <asp:Label ID="itemType" runat="server"
-                Text='<%# Eval("ItemType")%>'></asp:Label>
+        <asp:Label ID="matchID" runat="server"
+                Text='<%# Eval("MatchID")%>'></asp:Label>
     </ItemTemplate>
 </asp:TemplateField>
 
 <asp:TemplateField   HeaderText = "סטטוס התאמה">
     <ItemTemplate>
         <asp:Label ID="itemStatus" runat="server"
-                Text='<%# Eval("Status")%>'></asp:Label>
+                Text='<%# Eval("MatchStatus")%>'></asp:Label>
     </ItemTemplate>
 </asp:TemplateField>
     
@@ -61,7 +61,7 @@ PageSize = "10" style="direction: rtl"  >
 <asp:TemplateField>
     <ItemTemplate>
         <asp:LinkButton ID="matchCorrect" runat="server"
-            CommandArgument = '<%# Eval("matchID")%>'
+            CommandArgument = '<%# Eval("MatchID")%>'
          OnClientClick = "return confirm('?האם אתה בטוח שההתאמה נכונה')"
         Text = "ההתאמה נכונה" OnClick = "correctMatch"></asp:LinkButton>
     </ItemTemplate>
@@ -70,7 +70,7 @@ PageSize = "10" style="direction: rtl"  >
 <asp:TemplateField>
     <ItemTemplate>
         <asp:LinkButton ID="matchDone" runat="server"
-            CommandArgument = '<%# Eval("matchID")%>'
+            CommandArgument = '<%# Eval("MatchID")%>'
          OnClientClick = "return confirm('?האם אתה בטוח שההתאמה נמסרה')"
         Text = "התבצעה מסירה" OnClick = "doneMatch"></asp:LinkButton>
     </ItemTemplate>
@@ -79,7 +79,7 @@ PageSize = "10" style="direction: rtl"  >
 <asp:TemplateField>
     <ItemTemplate>
         <asp:LinkButton ID="matchRemove" runat="server"
-            CommandArgument = '<%# Eval("matchID")%>'
+            CommandArgument = '<%# Eval("MatchID")%>'
          OnClientClick = "return confirm('?האם אתה בטוח שברצונך למחוק את ההתאמה')"
         Text = "מחיקה" OnClick = "deleteMatch"></asp:LinkButton>
     </ItemTemplate>

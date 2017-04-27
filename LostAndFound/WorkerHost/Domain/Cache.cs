@@ -17,7 +17,7 @@ namespace WorkerHost.Domain
         private Dictionary<int, FoundItem> _foundItems;
         private Dictionary<string, Domain.BLBackEnd.FBItem> _FBItems;
         private Dictionary<int, Match> _matches;
-        Dictionary<string, string> _workers;
+        private Dictionary<string, string> _workers;
 
         private static Cache singleton;
         public static Cache getInstance
@@ -166,9 +166,8 @@ namespace WorkerHost.Domain
                 try {
                     _FBItems.Add(fbi.postId, new BLBackEnd.FBItem(fbi.itemID, colors, HebTypes[fbi.itemType], fbi.lostDate.Value/* change lost date name*/, fbi.location, fbi.description, fbi.postId, fbi.publisherName, FBTypes[fbi.type]));
                 }
-                catch(Exception e)
+                catch(Exception )
                 {
-                    int x=5;
                 }
             }
             foreach (Matches m in matches)
@@ -370,6 +369,9 @@ namespace WorkerHost.Domain
             int id = _db.addMatch(match.CompanyItemID, match.Item2ID, match.MatchStatus.ToString());
             _matches.Add(id, match);
             match.MatchID = id;
+            CompanyItem ci = getCompanyItem(match.CompanyItemID);
+            Company comp = _companies[ci.CompanyName];
+            comp.addMatch(match.MatchID);
         }
 
         internal void updateLostItem(LostItem lostItem)

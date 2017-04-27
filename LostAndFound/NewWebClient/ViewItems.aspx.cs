@@ -61,16 +61,9 @@ namespace NewWebClient
 
         protected void EditItem2(object sender, EventArgs e)
         {
-            try
-            {
-                var argument = ((LinkButton)sender).CommandArgument;
+            var argument = ((LinkButton)sender).CommandArgument;
 
-                Response.Redirect("/EditItem.aspx?ID=" + argument);
-            }
-            catch(Exception e1)
-            {
-                int i = 0;
-            }
+            Response.Redirect("/EditItem.aspx?ID=" + argument);
         }
 
         protected void EditItem(object sender, GridViewEditEventArgs e)
