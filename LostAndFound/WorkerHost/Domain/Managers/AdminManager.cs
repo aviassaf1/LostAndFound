@@ -210,5 +210,15 @@ namespace WorkerHost.Domain.Managers
             else 
                 return "login failed, user name or password are invalid";
         }
+
+        public List<Company> getAllCompanies(int key)
+        {
+            if (sd.getAdminName(key) == null)
+            {
+                return null;
+            }
+
+            return cache.getAllCompanies();
+        }
     }
 }

@@ -17,7 +17,8 @@ namespace WorkerHost
         String deleteCompany(String companyName, int key);
         [OperationContract]
         String editCompany(String companyName, String password, String phone, int key);
-
+        [OperationContract]
+        List<CompanyData> getAllCompanies(int key);
 
 
 

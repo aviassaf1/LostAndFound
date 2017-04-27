@@ -226,6 +226,11 @@ namespace WorkerHost.Domain
                 _workers.Add(cu.userName, cu.companyName);
             }
         }
+        
+        internal List<Company> getAllCompanies()
+        {
+            return _companies.Values.ToList();
+        }
 
         internal string removeWorkerFromCompany(string username)
         {

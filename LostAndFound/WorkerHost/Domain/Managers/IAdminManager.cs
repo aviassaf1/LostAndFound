@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WorkerHost.Domain.BLBackEnd;
 
 namespace WorkerHost.Domain.Managers
 {
@@ -15,5 +16,7 @@ namespace WorkerHost.Domain.Managers
         String deleteCompany(String companyName, int key);
 
         String editCompany(String companyName, String password, String phone, int key);
+
+        List<Company> getAllCompanies(int key);
     }
 }

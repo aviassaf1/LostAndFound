@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WorkerHost.Domain.Managers;
+using WorkerHost.ServiceLayer.DataContracts;
+using WorkerHost.Domain.BLBackEnd;
 
 namespace WorkerHost.ServiceLayer.Controllers
 {
@@ -47,6 +49,17 @@ namespace WorkerHost.ServiceLayer.Controllers
         public string login(String username, String password)
         {
             return IAM.login(username, password);
+        }
+
+        public List<CompanyData> getAllCompanies(int key)
+        {
+            List<Company> companies = IAM.getAllCompanies(key);
+            List<CompanyData> res = new List<CompanyData>();
+            foreach(Company c in companies)
+            {
+                res.Add(new CompanyData(c.CompanyName, c.Phone));
+            }
+            return res;
         }
     }
 }
