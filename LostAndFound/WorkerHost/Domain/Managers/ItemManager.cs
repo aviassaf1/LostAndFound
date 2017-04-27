@@ -328,5 +328,10 @@ namespace WorkerHost.Domain.Managers
             }
             return item;
         }
+
+        public Item getItem(int item2ID)
+        {
+            return cache.getItem(item2ID);
+        }
     }
 }

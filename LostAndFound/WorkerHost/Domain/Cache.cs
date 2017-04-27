@@ -293,7 +293,23 @@ namespace WorkerHost.Domain
             return null;
         }
 
-
+        internal Item getItem(int item2ID)
+        {
+            Item item=null;
+            if (_foundItems.ContainsKey(item2ID))
+                item = _foundItems[item2ID];
+            else if (_lostItems.ContainsKey(item2ID))
+                item = _lostItems[item2ID];
+            else
+            {
+                foreach(BLBackEnd.FBItem fbi in _FBItems.Values)
+                {
+                    if (fbi.ItemID == item2ID)
+                        return fbi;
+                }
+            }
+            return item;
+        }
 
         public void clear()
         {

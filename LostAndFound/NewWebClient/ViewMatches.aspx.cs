@@ -38,18 +38,44 @@ namespace NewWebClient
             int token = (int)(Session["token"]);
             item1ID = Request.QueryString["ID"];
             matches = channel.ServerService.getMatchesByItemID(Int32.Parse(item1ID),token);
-            /*List<ItemsForMatchesData> items = new List<ItemsForMatchesData>();
-            foreach(MatchData match in matches)
-            {
-
-                items.stasus =;
-            }
-            GridView1.DataSource = items;*/
+            GridView1.DataSource = matches;
             GridView1.DataBind();
             
             CompanyItemData cid= channel.ServerService.getCompanyItem(Int32.Parse(item1ID), token);
             item1.Text = "פריט מספר" + cid.ItemID + "בצבע " + cid.Colors + "ותיאורו " + cid.Description;
+        }
 
+        protected void correctMatch(object sender, EventArgs e)
+        {
+            int index = ((GridViewUpdateEventArgs)e).RowIndex;
+            if (matches.ElementAt(index).MatchStatus.Equals("נכונה"))
+            {
+                string ans = Channel.getInstance.ServerService.changeMatchStatus(matches.ElementAt(index).MatchID, "נכון", (int)(Session["token"]));
+                matches = Channel.getInstance.ServerService.getMatchesByItemID(Int32.Parse(item1ID), (int)(Session["token"]));
+                GridView1.DataSource = matches;
+                GridView1.DataBind();
+                showAlert(ans);
+            }
+        }
+
+        protected void doneMatch(object sender, EventArgs e)
+        {
+            int index = ((GridViewUpdateEventArgs)e).RowIndex;
+            string ans = Channel.getInstance.ServerService.changeMatchStatus(matches.ElementAt(index).MatchID, "הושלם", (int)(Session["token"]));
+            matches = Channel.getInstance.ServerService.getMatchesByItemID(Int32.Parse(item1ID), (int)(Session["token"]));
+            GridView1.DataSource = matches;
+            GridView1.DataBind();
+            showAlert(ans);
+        }
+
+        protected void deleteMatch(object sender, EventArgs e)
+        {
+            int index = ((GridViewUpdateEventArgs)e).RowIndex;
+            string ans = Channel.getInstance.ServerService.changeMatchStatus(matches.ElementAt(index).MatchID,"לא נכון", (int)(Session["token"]));
+            matches = Channel.getInstance.ServerService.getMatchesByItemID(Int32.Parse(item1ID), (int)(Session["token"]));
+            GridView1.DataSource = matches;
+            GridView1.DataBind();
+            showAlert(ans);
         }
     }
 }

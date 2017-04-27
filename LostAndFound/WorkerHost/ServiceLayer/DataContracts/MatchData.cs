@@ -19,6 +19,75 @@ namespace WorkerHost.ServiceLayer.DataContracts
         [DataMember]
         private string _matchStatus;
 
+        [DataMember]
+        private List<string> _colors;
+        [DataMember]
+        private DateTime _date;
+        [DataMember]
+        private string _location;
+        [DataMember]
+        private string _description;
+
+
+
+
+        public string Colors
+        {
+            get
+            {
+                string str = "";
+                foreach (string color in _colors)
+                {
+                    str = str + "," + color;
+                }
+                if (!str.Equals(""))
+                {
+                    str = str.Substring(1);
+                }
+                return str;
+            }
+        }
+
+        public DateTime Date
+        {
+            get
+            {
+                return _date;
+            }
+
+            set
+            {
+                _date = value;
+            }
+        }
+
+        public string Location
+        {
+            get
+            {
+                return _location;
+            }
+
+            set
+            {
+                _location = value;
+            }
+        }
+
+        public string Description
+        {
+            get
+            {
+                return _description;
+            }
+
+            set
+            {
+                _description = value;
+            }
+        }
+
+
         public int MatchID
         {
             get
@@ -71,12 +140,17 @@ namespace WorkerHost.ServiceLayer.DataContracts
             }
         }
 
-        public MatchData(int matchID,int companyItemID,int item2ID,string status)
+        public MatchData(int matchID,int companyItemID,int item2ID,string status, 
+            List<string> colors, string location, DateTime date, string desc)
         {
             MatchID = matchID;
             CompanyItemID = companyItemID;
             Item2ID = item2ID;
             MatchStatus = status;
+            _colors = colors;
+            Location = location;
+            Date = date;
+            Description = desc;
         }
     }
 }

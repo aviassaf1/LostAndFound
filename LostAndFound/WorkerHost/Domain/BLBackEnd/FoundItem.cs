@@ -39,7 +39,7 @@ namespace WorkerHost.Domain.BLBackEnd
             _serialNumber = serialNumber;
             _companyName = companyName;
             _contactName = contactName;
-            _contactPhone = ContactPhone;
+            _contactPhone = contactPhone;
             _photoLocation = photoLocation;
             _delivered = false;
         }

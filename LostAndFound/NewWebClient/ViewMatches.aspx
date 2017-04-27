@@ -11,8 +11,8 @@
 AutoGenerateColumns = "false" Font-Names = "Arial"
 Font-Size = "11pt" AlternatingRowStyle-BackColor = "#C2D69B" 
 HeaderStyle-BackColor = "#6699ff" AllowPaging ="true"  ShowFooter = "false" 
-OnPageIndexChanging = "OnPaging" onrowediting="EditItem"
-PageSize = "10" style="direction: rtl" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" >
+OnPageIndexChanging = "OnPaging" 
+PageSize = "10" style="direction: rtl"  >
 
 <Columns>
 
@@ -25,8 +25,8 @@ PageSize = "10" style="direction: rtl" OnSelectedIndexChanged="GridView1_Selecte
 
 <asp:TemplateField   HeaderText = "סטטוס התאמה">
     <ItemTemplate>
-        <asp:Label ID="itemColors" runat="server"
-                Text='<%# Eval("Colors")%>'></asp:Label>
+        <asp:Label ID="itemStatus" runat="server"
+                Text='<%# Eval("Status")%>'></asp:Label>
     </ItemTemplate>
 </asp:TemplateField>
     
@@ -60,13 +60,30 @@ PageSize = "10" style="direction: rtl" OnSelectedIndexChanged="GridView1_Selecte
 
 <asp:TemplateField>
     <ItemTemplate>
-        <asp:LinkButton ID="itemRemove" runat="server"
-            CommandArgument = '<%# Eval("ItemID")%>'
-         OnClientClick = "return confirm('?האם אתה בטוח שברצונך למחוק את ההתאמה')"
-        Text = "מחיקה" OnClick = "deleteItem"></asp:LinkButton>
+        <asp:LinkButton ID="matchCorrect" runat="server"
+            CommandArgument = '<%# Eval("matchID")%>'
+         OnClientClick = "return confirm('?האם אתה בטוח שההתאמה נכונה')"
+        Text = "ההתאמה נכונה" OnClick = "correctMatch"></asp:LinkButton>
     </ItemTemplate>
 </asp:TemplateField>
-<asp:CommandField  ShowEditButton="True" EditText="עריכה"/>
+
+<asp:TemplateField>
+    <ItemTemplate>
+        <asp:LinkButton ID="matchDone" runat="server"
+            CommandArgument = '<%# Eval("matchID")%>'
+         OnClientClick = "return confirm('?האם אתה בטוח שההתאמה נמסרה')"
+        Text = "התבצעה מסירה" OnClick = "doneMatch"></asp:LinkButton>
+    </ItemTemplate>
+</asp:TemplateField>
+
+<asp:TemplateField>
+    <ItemTemplate>
+        <asp:LinkButton ID="matchRemove" runat="server"
+            CommandArgument = '<%# Eval("matchID")%>'
+         OnClientClick = "return confirm('?האם אתה בטוח שברצונך למחוק את ההתאמה')"
+        Text = "מחיקה" OnClick = "deleteMatch"></asp:LinkButton>
+    </ItemTemplate>
+</asp:TemplateField>
 
 </Columns>
 <AlternatingRowStyle BackColor="#99ccff"  />

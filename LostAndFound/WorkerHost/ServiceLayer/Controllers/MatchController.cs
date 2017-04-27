@@ -50,14 +50,19 @@ namespace WorkerHost.ServiceLayer.Controllers
             List<MatchData> ret = new List<MatchData>();
             foreach(Match match in matches)
             {
+                Item item = ItemManager.getInstance.getItem(match.Item2ID);
                 if (match.MatchStatus == MatchStatus.COMPLETE)
-                    ret.Add(new MatchData(match.MatchID, match.CompanyItemID, match.Item2ID, "הושלם"));
+                    ret.Add(new MatchData(match.MatchID, match.CompanyItemID, match.Item2ID, "הושלם",
+                        item.getHebColorsList(),item.Location,item.Date,item.Description ));
                 else if (match.MatchStatus == MatchStatus.CORRECT)
-                    ret.Add(new MatchData(match.MatchID, match.CompanyItemID, match.Item2ID, "מתאים"));
+                    ret.Add(new MatchData(match.MatchID, match.CompanyItemID, match.Item2ID, "מתאים",
+                        item.getHebColorsList(), item.Location, item.Date, item.Description));
                 else if (match.MatchStatus == MatchStatus.INCORRECT)
-                    ret.Add(new MatchData(match.MatchID, match.CompanyItemID, match.Item2ID, "לא מתאים"));
+                    ret.Add(new MatchData(match.MatchID, match.CompanyItemID, match.Item2ID, "לא מתאים",
+                        item.getHebColorsList(), item.Location, item.Date, item.Description));
                 else //if (match.MatchStatus == MatchStatus.POSSIBLE)
-                    ret.Add(new MatchData(match.MatchID, match.CompanyItemID, match.Item2ID, "אפשרי"));
+                    ret.Add(new MatchData(match.MatchID, match.CompanyItemID, match.Item2ID, "אפשרי",
+                        item.getHebColorsList(), item.Location, item.Date, item.Description));
             }
             return ret;
         }
