@@ -25,11 +25,11 @@
                     <asp:TextBox ID="GroupNamesTextBox" runat="server" style="margin-right: 30px" Width="120"></asp:TextBox>
                 </p>
                 <p style="direction: rtl">
-                    <asp:Label runat="server" Width="120" Font-Underline="true">שם מנהל הקבוצה:</asp:Label>
+                    <asp:Label runat="server" Width="120" Font-Underline="true">שם מנהל החברה:</asp:Label>
                     <asp:TextBox ID="GroupManager" runat="server" style="margin-right: 30px" Width="120"></asp:TextBox>
                 </p>
                 <p style="direction: rtl">
-                   <asp:Label runat="server" Width="120" Font-Underline="true">סיסמת מנהל הקבוצה:</asp:Label> 
+                   <asp:Label runat="server" Width="120" Font-Underline="true">סיסמת מנהל החברה:</asp:Label> 
                     <asp:TextBox ID="GroupManagerPass" runat="server" style="margin-right: 30px" Width="120"></asp:TextBox>
                 </p>
               <p style="direction: rtl">
