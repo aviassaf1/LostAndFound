@@ -85,6 +85,7 @@ namespace NewWebClient.Account
                         res = res.Split(ar)[1];
                         Username.Text = res;
                         Session["token"] = int.Parse(res);
+                        Response.Redirect("../AddCompany.aspx");
                     }
                 }
                 else

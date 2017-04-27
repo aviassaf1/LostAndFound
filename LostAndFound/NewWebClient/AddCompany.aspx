@@ -8,7 +8,7 @@
     
     </div>
     <div class="row" dir="rtl">
-        <div class="col-md-4">
+        <div>
             <p style="direction: rtl">
                     
                     &nbsp;</p>
@@ -38,11 +38,6 @@
                 </p>
             <asp:Button ID="OK" runat="server" Text="הוסף מציאה למערכת" OnClick="Button1_Click" style="margin-left: 0px" Width="261px" />
         </div>
-        <div class="col-md-6">
-            <p style="direction: rtl">
-                &nbsp;</p>
-                <p style="direction: rtl">
-                    &nbsp;</p>
-        </div>
+        
     </div>       
 </asp:Content>
