@@ -41,7 +41,7 @@ namespace NewWebClient
                 if (type.Value.Equals(item.ItemType))
                     _TypeList.SelectedItem.Value = type.Value;
             }*/
-            _dateCalendar.SelectedDate = item.Date;
+            _dateCalendar.SelectedDate = item.Date1;
             _location.Text = item.Location;
             _description.Text = item.Description;
             _contactName.Text = item.ContactName;
