@@ -42,15 +42,15 @@ namespace NewWebClient
             GridView1.DataBind();
             
             CompanyItemData cid= channel.ServerService.getCompanyItem(Int32.Parse(item1ID), token);
-            item1.Text = "פריט מספר" + cid.ItemID + "בצבע " + cid.Colors + "ותיאורו " + cid.Description;
+            item1.Text = "פריט מספר " + cid.ItemID + "בצבע " + cid.Colors ;
         }
 
         protected void correctMatch(object sender, EventArgs e)
         {
-            int index = ((GridViewUpdateEventArgs)e).RowIndex;
-            if (matches.ElementAt(index).MatchStatus.Equals("נכונה"))
+            var argument = ((LinkButton)sender).CommandArgument;
+            if (matches.ElementAt(int.Parse(argument)).MatchStatus.Equals("נכונה"))
             {
-                string ans = Channel.getInstance.ServerService.changeMatchStatus(matches.ElementAt(index).MatchID, "נכון", (int)(Session["token"]));
+                string ans = Channel.getInstance.ServerService.changeMatchStatus(matches.ElementAt(int.Parse(argument)).MatchID, "נכון", (int)(Session["token"]));
                 matches = Channel.getInstance.ServerService.getMatchesByItemID(Int32.Parse(item1ID), (int)(Session["token"]));
                 GridView1.DataSource = matches;
                 GridView1.DataBind();
@@ -60,8 +60,8 @@ namespace NewWebClient
 
         protected void doneMatch(object sender, EventArgs e)
         {
-            int index = ((GridViewUpdateEventArgs)e).RowIndex;
-            string ans = Channel.getInstance.ServerService.changeMatchStatus(matches.ElementAt(index).MatchID, "הושלם", (int)(Session["token"]));
+            var argument = ((LinkButton)sender).CommandArgument;
+            string ans = Channel.getInstance.ServerService.changeMatchStatus(matches.ElementAt(int.Parse(argument)).MatchID, "הושלם", (int)(Session["token"]));
             matches = Channel.getInstance.ServerService.getMatchesByItemID(Int32.Parse(item1ID), (int)(Session["token"]));
             GridView1.DataSource = matches;
             GridView1.DataBind();
@@ -70,8 +70,8 @@ namespace NewWebClient
 
         protected void deleteMatch(object sender, EventArgs e)
         {
-            int index = ((GridViewUpdateEventArgs)e).RowIndex;
-            string ans = Channel.getInstance.ServerService.changeMatchStatus(matches.ElementAt(index).MatchID,"לא נכון", (int)(Session["token"]));
+            var argument = ((LinkButton)sender).CommandArgument;
+            string ans = Channel.getInstance.ServerService.changeMatchStatus(matches.ElementAt(int.Parse(argument)).MatchID,"לא נכון", (int)(Session["token"]));
             matches = Channel.getInstance.ServerService.getMatchesByItemID(Int32.Parse(item1ID), (int)(Session["token"]));
             GridView1.DataSource = matches;
             GridView1.DataBind();

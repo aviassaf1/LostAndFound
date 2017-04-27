@@ -25,8 +25,8 @@ namespace NewWebClient
         }
         protected void deleteItem2(object sender, EventArgs e)
         {
-            int index = ((GridViewUpdateEventArgs)e).RowIndex;
-            string ans=Channel.getInstance.ServerService.deleteItem(items.ElementAt(index).ItemID, (int)(Session["token"]));
+            var argument = ((LinkButton)sender).CommandArgument;
+            string ans=Channel.getInstance.ServerService.deleteItem(int.Parse(argument), (int)(Session["token"]));
             items = Channel.getInstance.ServerService.getAllCompanyItems((int)(Session["token"]));
             GridView1.DataSource = items;
             GridView1.DataBind();
@@ -38,8 +38,8 @@ namespace NewWebClient
 
         protected void viewItemMatches(object sender, EventArgs e)
         {
-            int index = ((GridViewUpdateEventArgs) e).RowIndex;
-            Response.Redirect("../ViewMatches.aspx?ID="+ items.ElementAt(index).ItemID);
+            var argument = ((LinkButton)sender).CommandArgument;
+            Response.Redirect("/ViewMatches.aspx?ID="+argument);
         }
 
         protected void OnPaging(object sender, GridViewPageEventArgs e)
@@ -61,8 +61,16 @@ namespace NewWebClient
 
         protected void EditItem2(object sender, EventArgs e)
         {
-            int index = ((GridViewUpdateEventArgs)e).RowIndex;
-            Response.Redirect("../EditItem.aspx?ID=" + items.ElementAt(index).ItemID);
+            try
+            {
+                var argument = ((LinkButton)sender).CommandArgument;
+
+                Response.Redirect("/EditItem.aspx?ID=" + argument);
+            }
+            catch(Exception e1)
+            {
+                int i = 0;
+            }
         }
 
         protected void EditItem(object sender, GridViewEditEventArgs e)
