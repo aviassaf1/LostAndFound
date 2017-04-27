@@ -18,6 +18,7 @@ namespace NewWebClient
 
         protected void Page_Init(object sender, EventArgs e)
         {
+            
             // The code below helps to protect against XSRF attacks
             var requestCookie = Request.Cookies[AntiXsrfTokenKey];
             Guid requestCookieGuidValue;
@@ -69,11 +70,13 @@ namespace NewWebClient
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            
 
         }
 
         protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)
         {
+            
             Context.GetOwinContext().Authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
         }
     }
