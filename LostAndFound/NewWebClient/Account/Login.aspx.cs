@@ -96,6 +96,7 @@ namespace NewWebClient.Account
                         res = res.Split(ar)[1];
                         Session["token"] = int.Parse(res);
                         Response.Redirect("../ViewItems.aspx");
+                        //string sessionToken = Session["token"].ToString();
                     }
                 }
                 
