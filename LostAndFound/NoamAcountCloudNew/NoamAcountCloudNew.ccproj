@@ -12,7 +12,7 @@
     <AssemblyName>NoamAcountCloudNew</AssemblyName>
     <StartDevelopmentStorage>True</StartDevelopmentStorage>
     <Name>NoamAcountCloudNew</Name>
-    <UseWebProjectPorts>False</UseWebProjectPorts>
+    <UseWebProjectPorts>True</UseWebProjectPorts>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
