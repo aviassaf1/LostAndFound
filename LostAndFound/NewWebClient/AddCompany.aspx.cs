@@ -56,7 +56,6 @@ namespace NewWebClient
                 groupsSet.Add(s);
             }
             string ret = channel.ServerService.addComapny(companyNameTextBox.Text, PhoneTextBox.Text, groupsSet, FacebookIdTextBox.Text, GroupManager.Text, GroupManagerPass.Text, key);
-            int i = 0;
             companyNameTextBox.Text = ret;
         }
         private void showAlert(String content)

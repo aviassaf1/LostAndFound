@@ -50,7 +50,7 @@ namespace NewWebClient
                     showAlert("בבקשה להזין מספר סידורי תקין, במידה ואין לך, הזן 0");
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 showAlert("בבקשה להזין מספר סידורי תקין, במידה ואין לך, הזן 0");
             }
@@ -68,8 +68,8 @@ namespace NewWebClient
             var channel = Channel.getInstance;
             string ret = channel.ServerService.addLostItem(sColors, sType, date, location, description,
             serialNumber, contactName, contactPhone, "D", token);
-            int i = 0;
-            _contactName.Text = ret;
+            showAlert(ret);
+            Response.Redirect("/ViewItems.aspx");
         }
         private void showAlert(String content)
         {

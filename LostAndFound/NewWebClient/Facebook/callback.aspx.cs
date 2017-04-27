@@ -15,7 +15,6 @@ namespace NewWebClient.Facebook
     public partial class callback : System.Web.UI.Page
     {
         public const string FaceBookAppKey = "f2631cbbee9a9ccbcdb09558a6f1bc52";
-        private char[] userInfo;
 
         protected void Page_Load(object sender, EventArgs e)
         {
