@@ -20,5 +20,6 @@ namespace WorkerHost.Domain.Managers
 
         String editItem(int itemID, DateTime date, string location, string description,
             int serialNumber, string contactName, string contactPhone, int key);
+        CompanyItem getCompanyItem(int itemID, int key);
     }
 }

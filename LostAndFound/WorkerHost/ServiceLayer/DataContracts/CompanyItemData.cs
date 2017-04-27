@@ -168,16 +168,24 @@ namespace WorkerHost.ServiceLayer.DataContracts
             }
         }
 
-        public bool Status
+        public String Status
         {
             get
             {
-                return _status;
-            }
-
-            set
-            {
-                _status = value;
+                if (_status) { 
+                    if(_type.Equals("found"))
+                        return "נמסר";
+                    else if (_type.Equals("lost"))
+                        return "נמצא";
+                }
+                else 
+                {
+                    if (_type.Equals("found"))
+                        return "לא נמסר";
+                    else if (_type.Equals("lost"))
+                        return "לא נמצא";
+                }
+                return "";
             }
         }
 
@@ -220,7 +228,7 @@ namespace WorkerHost.ServiceLayer.DataContracts
             CompanyName = comName;
             ContactName = conName;
             ContactPhone = conPhone;
-            Status = stat;
+            _status = stat;
             Type = type;
         }
     }

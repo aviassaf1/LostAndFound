@@ -33,7 +33,7 @@ namespace NewWebClient
             showAlert(ans);
         }
 
-        protected void AddNewItem(object sender, EventArgs e)
+        protected void viewItemMatches(object sender, GridViewPageEventArgs e)
         {
 
         }
@@ -65,7 +65,6 @@ namespace NewWebClient
         protected void CancelEdit(object sender, GridViewCancelEditEventArgs e)
         {
             GridView1.EditIndex = -1;
-
         }
         protected void UpdateItem(object sender, GridViewUpdateEventArgs e)
         {

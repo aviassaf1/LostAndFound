@@ -217,6 +217,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Account\Web.config" />
     <Content Include="ViewItems.aspx" />
+    <Content Include="ViewMatches.aspx" />
     <Content Include="WebForm1.aspx" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -471,6 +472,13 @@
     </Compile>
     <Compile Include="ViewItems.aspx.designer.cs">
       <DependentUpon>ViewItems.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewMatches.aspx.cs">
+      <DependentUpon>ViewMatches.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewMatches.aspx.designer.cs">
+      <DependentUpon>ViewMatches.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>

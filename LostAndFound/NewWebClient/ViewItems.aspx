@@ -10,7 +10,6 @@ AutoGenerateColumns = "false" Font-Names = "Arial"
 Font-Size = "11pt" AlternatingRowStyle-BackColor = "#C2D69B" 
 HeaderStyle-BackColor = "#6699ff" AllowPaging ="true"  ShowFooter = "false" 
 OnPageIndexChanging = "OnPaging" onrowediting="EditItem"
-onrowupdating="UpdateItem"  onrowcancelingedit="CancelEdit"
 PageSize = "10" style="direction: rtl" >
 <Columns>
 
@@ -71,9 +70,33 @@ PageSize = "10" style="direction: rtl" >
     </ItemTemplate>
 </asp:TemplateField>
 
+<asp:TemplateField ItemStyle-Width = "100px"  HeaderText = "סטטוס">
+    <ItemTemplate>
+        <asp:Label ID="status" runat="server"
+                Text='<%# Eval("Status")%>'></asp:Label>
+    </ItemTemplate>
+</asp:TemplateField>
+
+<asp:TemplateField ItemStyle-Width = "100px"  HeaderText = "תיאור">
+    <ItemTemplate>
+        <asp:Label ID="description" runat="server"
+                Text='<%# Eval("Description")%>'></asp:Label>
+    </ItemTemplate>
+</asp:TemplateField>
 
 
 
+
+
+
+
+<asp:TemplateField ItemStyle-Width = "100px"  HeaderText = "התאמות">
+    <ItemTemplate>
+        <asp:LinkButton ID="viewItemMatches" runat="server"
+            CommandArgument = '<%# Eval("ItemID")%>'
+        Text = "צפה" PostBackUrl="~/ViewMatches.aspx?ID=iddddddddddddddddddddddddddddd"></asp:LinkButton>
+    </ItemTemplate>
+</asp:TemplateField>
 
 <asp:TemplateField>
     <ItemTemplate>
@@ -83,7 +106,14 @@ PageSize = "10" style="direction: rtl" >
         Text = "מחיקה" OnClick = "deleteItem"></asp:LinkButton>
     </ItemTemplate>
 </asp:TemplateField>
-<asp:CommandField  ShowEditButton="True" EditText="עריכה"/>
+
+<asp:TemplateField ItemStyle-Width = "100px"  HeaderText = "עריכה">
+    <ItemTemplate>
+        <asp:LinkButton ID="editItem" runat="server"
+            CommandArgument = '<%# Eval("ItemID")%>'
+        Text = "ערוך"  PostBackUrl="~/EditItem.aspx?ID=idddddddddddddddddddd"></asp:LinkButton>
+    </ItemTemplate>
+</asp:TemplateField>
 
 </Columns>
 <AlternatingRowStyle BackColor="#99ccff"  />
