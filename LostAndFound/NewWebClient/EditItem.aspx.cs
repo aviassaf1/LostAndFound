@@ -12,17 +12,35 @@ namespace NewWebClient
     {
         private string itemid;
         private CompanyItemData item;
+        public static Dictionary<string, string> EnglishTypes2Hebrew = new Dictionary<string, string>(){{"ID" , "תעודה" }, {"WALLET", "ארנק"  },
+                {"PCMOUSE", "עכבר"  }, { "CHARGER","מטען" },{ "PC","מחשב" }, { "PHONE","טלפון" }, { "KEYS","מפתח" }, {"BAG", "תיק" }, { "UMBRELLA","מטריה" },
+                { "SWEATSHIRT","סווטשרט" }, { "GLASSES","משקפיים" }, {"SHOES", "נעל" },{ "FLIPFLOPS","כפכפים" },
+                {"FOLDER" , "תיקיה/מחברת/קלסר"}, { "EARING", "עגיל" }, {  "RING" ,"טבעת"},
+                { "NECKLACE","שרשרת/תליון" },{ "BRACELET", "צמיד" }, {"HEADPHONES","אוזניות" }, {"PencilCase","קלמר" } };
 
         protected void Page_Load(object sender, EventArgs e)
         {
             itemid = Request.QueryString["ID"];
             item = Channel.getInstance.ServerService.getCompanyItem(Int32.Parse(itemid), (int)(Session["token"]));
+            string hebItem;
+            foreach (ListItem litem in _TypeList.Items)
+            {
+                EnglishTypes2Hebrew.TryGetValue(litem.Value, out hebItem);
+                if (hebItem!=null && hebItem.Equals(item.ItemType))
+                {
+                    litem.Selected = true;
+                }
+            }
+           // ListItem selectedListItem = _TypeList.Items.FindByValue(item.ItemType);
+           // if (selectedListItem != null)
+            //    selectedListItem.Selected = true;
+
             ListItemCollection typelist = _TypeList.Items;
-            foreach(ListItem type in typelist)
+            /*foreach(ListItem type in typelist)
             {
                 if (type.Value.Equals(item.ItemType))
-                    _TypeList.SelectedValue = type.Value;
-            }
+                    _TypeList.SelectedItem.Value = type.Value;
+            }*/
             _dateCalendar.SelectedDate = item.Date;
             _location.Text = item.Location;
             _description.Text = item.Description;
