@@ -38,6 +38,14 @@
     <ServiceConfiguration Include="ServiceConfiguration.Cloud.cscfg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\NewWebClient\NewWebClient.csproj">
+      <Name>NewWebClient</Name>
+      <Project>{2f321cfe-ce55-4a40-941e-6955321764aa}</Project>
+      <Private>True</Private>
+      <RoleType>Web</RoleType>
+      <RoleName>NewWebClient</RoleName>
+      <UpdateDiagnosticsConnectionStringOnPublish>True</UpdateDiagnosticsConnectionStringOnPublish>
+    </ProjectReference>
     <ProjectReference Include="..\WorkerHost\WorkerHost.csproj">
       <Name>WorkerHost</Name>
       <Project>{061b290a-8b85-4d37-bce2-4db4f7072b57}</Project>
