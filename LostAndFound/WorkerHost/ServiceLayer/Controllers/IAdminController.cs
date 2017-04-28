@@ -4,6 +4,7 @@ using System.Linq;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
+using WorkerHost.ServiceLayer.DataContracts;
 
 namespace WorkerHost.ServiceLayer.Controllers
 {
@@ -19,5 +20,8 @@ namespace WorkerHost.ServiceLayer.Controllers
         String deleteCompany(String companyName, int key);
         [OperationContract]
         String editCompany(String companyName, String password, String phone, int key);
+        [OperationContract]
+        List<CompanyData> getAllCompanies(int key);
+        
     }
 }
