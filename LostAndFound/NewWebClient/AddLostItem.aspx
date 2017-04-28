@@ -64,12 +64,12 @@
                     <asp:ListItem Text="קלמר" Value="PENCILCASE"></asp:ListItem>
                     <asp:ListItem Text="משקפיים" Value="GLASSES"></asp:ListItem>
                     <asp:ListItem Text="נעליים" Value="SHOES"></asp:ListItem>
-                    <asp:ListItem Text="כפכפים" Value="FLIPLOPS"></asp:ListItem>
+                    <asp:ListItem Text="כפכפים" Value="FLIPFLOPS"></asp:ListItem>
                     <asp:ListItem Text="קלסר" Value="FOLDER"></asp:ListItem>
                     <asp:ListItem Text="מטען" Value="CHARGER"></asp:ListItem>
                     <asp:ListItem Text="עגילים" Value="EARINGS"></asp:ListItem>
                     <asp:ListItem Text="טבעת" Value="RING"></asp:ListItem>
-                    <asp:ListItem Text="שרשרת" Value="KNECKLESS"></asp:ListItem>
+                    <asp:ListItem Text="שרשרת" Value="NECKLACE"></asp:ListItem>
                     <asp:ListItem Text="צמיד"></asp:ListItem>
                     <asp:ListItem Text="אוזניות" Value="HEADPHONES"></asp:ListItem>
                     <asp:ListItem Text="סוג אחר"></asp:ListItem>

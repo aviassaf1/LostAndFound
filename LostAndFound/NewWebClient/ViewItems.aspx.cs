@@ -74,7 +74,8 @@ namespace NewWebClient
         {
             var channel = Channel.getInstance;
             int key = (int)Session["token"];
-            channel.ServerService.publishInventory(/*should be a group id*/ "0", 0, key);
+            string ret = channel.ServerService.publishInventory("1538105046204967", 3, key);
+            showAlert(ret);
         }
     }
 }

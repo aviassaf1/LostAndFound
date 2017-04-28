@@ -61,7 +61,7 @@ namespace WorkerHost.Domain.Managers
                 result = fb.Get("me",parameters);
                 fbid = result.id;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return null;
             }
@@ -211,8 +211,13 @@ namespace WorkerHost.Domain.Managers
                 {
                     if (!((FoundItem)item).Delivered && item.Date.CompareTo(nDaysAgo) > 0)
                     {
-                        string type = DataType.Hebrew2EnglishTypes.FirstOrDefault(x => x.Value == item.ItemType).Key;
-                        inventory += String.Format(format, type, getColorsString(item.Colors));
+                        string type = DataType.EnglishTypes2Hebrew[item.ItemType];//DataType.Hebrew2EnglishTypes.FirstOrDefault(x => x.Value == item.ItemType).Key;
+                        string color = "";
+                        foreach(string col in item.getHebColorsList())
+                        {
+                            color += col+" ";
+                        }
+                        inventory += String.Format(format, type, color);
                     }
                 }
             }

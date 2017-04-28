@@ -52,8 +52,8 @@
                     <asp:LoginView runat="server" ViewStateMode="Disabled">
                         <AnonymousTemplate>
                             <ul class="nav navbar-nav navbar-right">
-                                <li><a runat="server" href="~/AddLostItem">הוסף מציאה</a></li>
-                                <li><a runat="server" href="~/AddFoundItem">הוסף אבידה</a></li>
+                                <li><a runat="server" href="~/AddFoundItem">הוסף מציאה</a></li>
+                                <li><a runat="server" href="~/AddLostItem">הוסף אבידה</a></li>
                                 <li><a runat="server" href="~/ViewItems">צפה בפריט</a></li>
 
                        

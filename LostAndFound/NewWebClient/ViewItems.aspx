@@ -123,6 +123,6 @@ PageSize = "5" style="direction: rtl" >
 <asp:AsyncPostBackTrigger ControlID = "GridView1" />
 </Triggers>
 </asp:UpdatePanel>
-            <asp:Button ID="publishButton" runat="server" Text="פרסם מאגר פריטים" OnClick="publishButton_Click" />
+            <asp:Button ID="publishButton" runat="server" Text="פרסם מאגר מציאות" OnClick="publishButton_Click" />
 </div>
 </asp:Content>
