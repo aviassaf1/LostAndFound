@@ -10,7 +10,7 @@ namespace NewWebClient
 {
     public partial class ViewCompanies : System.Web.UI.Page
     {
-        private List<MatchData> companies;
+        private List<CompanyData> companies;
 
         private string item1ID;
         public void showAlert(string content)
