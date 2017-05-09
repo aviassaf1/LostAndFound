@@ -69,5 +69,16 @@ namespace WorkerHost.ServiceLayer.Controllers
         {
             return ICM.addWorker( newUsername,  newPassword,  isManager,  key);
         }
+
+        public List<WorkerData> getCompanyWorkers(int key)
+        {
+            Dictionary<string, bool> workers2 = ICM.getCompanyWorkers(key);
+            List<WorkerData> workers = new List<WorkerData>();
+            foreach (string userName in workers2.Keys)
+            {
+                workers.Add(new WorkerData(userName, workers2[userName]));
+            }
+            return workers;
+        }
     }
 }

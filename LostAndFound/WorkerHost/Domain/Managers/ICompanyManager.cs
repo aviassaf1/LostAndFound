@@ -21,5 +21,6 @@ namespace WorkerHost.Domain.Managers
         String removeWorker(String delUsername, int key);
         String addWorker(String newUsername, String newPassword, bool isManager, int key);
         string getToken(string companyName);
+        Dictionary<string, bool> getCompanyWorkers(int key);
     }
 }

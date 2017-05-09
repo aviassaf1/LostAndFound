@@ -190,6 +190,7 @@
     <Compile Include="ServiceLayer\Controllers\IMatchController.cs" />
     <Compile Include="ServiceLayer\Controllers\ItemController.cs" />
     <Compile Include="ServiceLayer\Controllers\MatchController.cs" />
+    <Compile Include="ServiceLayer\DataContracts\WorkerData.cs" />
     <Compile Include="ServiceLayer\DataContracts\GroupData.cs" />
     <Compile Include="ServiceLayer\DataContracts\CompanyData.cs" />
     <Compile Include="ServiceLayer\DataContracts\CompanyItemData.cs" />

@@ -120,6 +120,11 @@ namespace WorkerHost
             return AdminController.getInstance.getAllCompanies(key);
         }
 
+        public List<WorkerData> getCompanyWorkers(int token)
+        {
+            return CompanyController.getInstance.getCompanyWorkers(token);
+        }
+
         /*public string testClass1(string color, string type, string name, string phone)
         {
             string token = "EAACEdEose0cBAEZArIlzyRuf3du6KgtFrpAcSPJdPp0mUGZB1TiZA7FRSsBaII5oxFuI1z6BH6HGZBuOJv8m4WOt2FcZBvadGVOWOa7ShfyLoK7WfUwXSfE8xmndLCbgRmAXIvnA7LuiERa60ZCcJLmvicx9IaA5Luz29LPCyZBx89zQC0nn5yK";
