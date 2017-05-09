@@ -9,11 +9,14 @@ namespace NewWebClient
 {
     public partial class EditCompany : System.Web.UI.Page
     {
-        private string _companyId; 
+        private string _companyName; 
         protected void Page_Load(object sender, EventArgs e)
         {
-            _companyId = Request.QueryString["ID"];
-            
+            _companyName = Request.QueryString["ID"];
+
+            companyNameTextBox.Text = _companyName;
+            PhoneTextBox.Text = Request.QueryString["phone"];
+
         }
 
         protected void Button1_Click(object sender, EventArgs e)
@@ -29,12 +32,19 @@ namespace NewWebClient
                 return;
             }
 
-            
-            int key = (int)Session["token"];
-            var channel = Channel.getInstance;
-            string ret = channel.ServerService.editCompany(companyNameTextBox.Text,null, PhoneTextBox.Text, key);
-            int i = 0;
-            companyNameTextBox.Text = ret;
+            try
+            {
+                int key = (int)Session["token"];
+                var channel = Channel.getInstance;
+                string ret = channel.ServerService.editCompany(companyNameTextBox.Text, null, PhoneTextBox.Text, key);
+                int i = 0;
+                companyNameTextBox.Text = ret;
+                Response.Redirect("/ViewCompanies.aspx");
+            }
+            catch(Exception exc)
+            {
+                showAlert(exc+"לא הצלחנו לערוך את החברה אנא נסה שנית. שגיאה:");
+            }
         }
         private void showAlert(String content)
         {

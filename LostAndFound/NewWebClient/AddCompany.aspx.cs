@@ -46,17 +46,24 @@ namespace NewWebClient
                 showAlert("סיסמת מנהל לא הוזנה");
                 return;
             }
-            
-            int key = (int)Session["token"];
-            var channel = Channel.getInstance;
-            string [] groupsArray = GroupNamesTextBox.Text.Split(',');
-            HashSet<string> groupsSet = new HashSet<string>();
-            foreach(string s in groupsArray)
+            try
             {
-                groupsSet.Add(s);
+                int key = (int)Session["token"];
+                var channel = Channel.getInstance;
+                string[] groupsArray = GroupNamesTextBox.Text.Split(',');
+                HashSet<string> groupsSet = new HashSet<string>();
+                foreach (string s in groupsArray)
+                {
+                    groupsSet.Add(s);
+                }
+                string ret = channel.ServerService.addComapny(companyNameTextBox.Text, PhoneTextBox.Text, groupsSet, FacebookIdTextBox.Text, GroupManager.Text, GroupManagerPass.Text, key);
+                companyNameTextBox.Text = ret;
+                Response.Redirect("/ViewCompanies.aspx");
             }
-            string ret = channel.ServerService.addComapny(companyNameTextBox.Text, PhoneTextBox.Text, groupsSet, FacebookIdTextBox.Text, GroupManager.Text, GroupManagerPass.Text, key);
-            companyNameTextBox.Text = ret;
+            catch (Exception exc)
+            {
+                showAlert(exc + "לא הצלחנו להוסיף את החברה אנא נסה שנית. שגיאה:");
+            }
         }
         private void showAlert(String content)
         {
