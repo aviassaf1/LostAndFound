@@ -202,6 +202,7 @@
     <Content Include="Account\ResetPasswordConfirmation.aspx" />
     <Content Include="Account\TwoFactorAuthenticationSignIn.aspx" />
     <Content Include="Account\VerifyPhoneNumber.aspx" />
+    <Content Include="ViewGroups.aspx" />
     <Content Include="ViewCompanies.aspx" />
     <Content Include="AddFacebookGroup.aspx" />
     <Content Include="AddCompany.aspx" />
@@ -387,6 +388,13 @@
     </Compile>
     <Compile Include="Account\VerifyPhoneNumber.aspx.designer.cs">
       <DependentUpon>VerifyPhoneNumber.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewGroups.aspx.cs">
+      <DependentUpon>ViewGroups.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewGroups.aspx.designer.cs">
+      <DependentUpon>ViewGroups.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewCompanies.aspx.cs">
       <DependentUpon>ViewCompanies.aspx</DependentUpon>
