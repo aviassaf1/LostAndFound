@@ -10,9 +10,8 @@ namespace NewWebClient
 {
     public partial class ViewCompanies : System.Web.UI.Page
     {
-        private List<CompanyData> companies;
+        private List<GroupData> groups;
 
-        private string item1ID;
         public void showAlert(string content)
         {
             Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "popup", "<script>alert(\"" + content + "\");</script>");
@@ -36,31 +35,16 @@ namespace NewWebClient
         {
             var channel = Channel.getInstance;
             int token = (int)(Session["token"]);
-            item1ID = Request.QueryString["ID"];
-            companies = channel.ServerService.getAllCompanies(token);
-            GridView1.DataSource = companies;
+            groups = channel.ServerService.getSystemCompanyFBGroup(token);
+            GridView1.DataSource = groups;
             GridView1.DataBind();
         }
 
-        protected void deleteCompany(object sender, EventArgs e)
+        protected void deleteGroup(object sender, EventArgs e)
         {
             var argument = ((LinkButton)sender).CommandArgument;
-            string ans = Channel.getInstance.ServerService.deleteCompany(argument, (int)Session["token"]);
+            string ans = Channel.getInstance.ServerService.removeFBGroup(argument, (int)Session["token"]);
             BindData();
-        }
-
-        protected void editCompany(object sender, EventArgs e)
-        {
-            var argument = ((LinkButton)sender).CommandArgument;
-            string phone="";
-            foreach (CompanyData cd in companies) {
-                if (cd.CompanyName.Equals(argument))
-                {
-                    phone = cd.PhoneNumber;
-                    break;
-                }
-            }
-            Response.Redirect("/EditCompany.aspx?ID=" + argument+ "&phone="+phone);
         }
     }
 }
