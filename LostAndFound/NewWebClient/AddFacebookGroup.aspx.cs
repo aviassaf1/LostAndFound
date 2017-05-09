@@ -32,13 +32,19 @@ namespace NewWebClient
                 return;
             }
 
-
-            int key = (int)Session["token"];
-            var channel = Channel.getInstance;
-            string ret = channel.ServerService.addFBGroup(FbIdTextBox.Text, key);
-            int i = 0;
-            showAlert("הקבוצה נוספה");
-            Response.Redirect("/AddCompany.aspx");
+            try
+            {
+                int key = (int)Session["token"];
+                var channel = Channel.getInstance;
+                string ret = channel.ServerService.addFBGroup(FbIdTextBox.Text, key);
+                int i = 0;
+                showAlert("הקבוצה נוספה");
+                Response.Redirect("/AddCompany.aspx");
+            }
+            catch (Exception exc)
+            {
+                showAlert(exc + "לא הצלחנו להוסיף את הקבוצה אנא נסה שנית. שגיאה:");
+            }
         }
         private void showAlert(String content)
         {

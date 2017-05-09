@@ -80,7 +80,7 @@ namespace NewWebClient
                     showAlert("בבקשה להזין מספר סידורי תקין, במידה ואין לך, הזן 0");
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 showAlert("בבקשה להזין מספר סידורי תקין, במידה ואין לך, הזן 0");
             }
@@ -94,10 +94,18 @@ namespace NewWebClient
             {
                 showAlert("בבקשה להזין טלפון של מדווח האבידה");
             }
-            var channel = Channel.getInstance;
-            string ret = channel.ServerService.editItem(Int32.Parse(itemid), date, location, description,
-            serialNumber, contactName, contactPhone, 564/*key*/);
-            _contactName.Text = ret;
+            try
+            {
+                var channel = Channel.getInstance;
+                string ret = channel.ServerService.editItem(Int32.Parse(itemid), date, location, description,
+                serialNumber, contactName, contactPhone, 564/*key*/);
+                int i = 0;
+                _contactName.Text = ret;
+            }
+            catch (Exception exc)
+            {
+                showAlert(exc + "לא הצלחנו לערוך את הפריט אנא נסה שנית. שגיאה:");
+            }
         }
         private void showAlert(String content)
         {

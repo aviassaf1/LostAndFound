@@ -72,10 +72,17 @@ namespace NewWebClient
 
         protected void publishButton_Click(object sender, EventArgs e)
         {
-            var channel = Channel.getInstance;
-            int key = (int)Session["token"];
-            string ret = channel.ServerService.publishInventory("1538105046204967", 3, key);
-            showAlert(ret);
+            try
+            {
+                var channel = Channel.getInstance;
+                int key = (int)Session["token"];
+                string ret = channel.ServerService.publishInventory("1538105046204967", 3, key);
+                showAlert(ret);
+            }
+            catch (Exception exc)
+            {
+                showAlert(exc + "לא הצלחנו לפרסם את הפריטים אנא נסה שנית. שגיאה:");
+            }
         }
     }
 }

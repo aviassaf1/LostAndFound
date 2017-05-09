@@ -3,7 +3,7 @@
 <asp:Content ID="bodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <div style="direction: rtl">
     
-        <asp:Label runat="server" Font-Size="Larger" Font-Bold="true">הוספת חברה למערכת</asp:Label>
+        <asp:Label runat="server" Font-Size="Larger" Font-Bold="true">עריכת חברה</asp:Label>
     
     
     </div>
@@ -22,7 +22,7 @@
                 </p>
               <p style="direction: rtl">
                    &nbsp;</p>
-            <asp:Button ID="OK" runat="server" Text="הוסף מציאה למערכת" OnClick="Button1_Click" style="margin-left: 0px" Width="261px" />
+            <asp:Button ID="OK" runat="server" Text="ערוך חברה" OnClick="Button1_Click" style="margin-left: 0px" Width="261px" />
         </div>
         
     </div>       

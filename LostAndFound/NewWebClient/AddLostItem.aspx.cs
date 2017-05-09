@@ -64,12 +64,19 @@ namespace NewWebClient
             {
                 showAlert("בבקשה להזין טלפון של מדווח האבידה");
             }
-            int token = (int)Session["token"];
-            var channel = Channel.getInstance;
-            string ret = channel.ServerService.addLostItem(sColors, sType, date, location, description,
-            serialNumber, contactName, contactPhone, "D", token);
-            showAlert(ret);
-            Response.Redirect("/ViewItems.aspx");
+            try
+            {
+                int token = (int)Session["token"];
+                var channel = Channel.getInstance;
+                string ret = channel.ServerService.addLostItem(sColors, sType, date, location, description,
+                serialNumber, contactName, contactPhone, "D", token);
+                showAlert(ret);
+                Response.Redirect("/ViewItems.aspx");
+            }
+            catch (Exception exc)
+            {
+                showAlert(exc + "לא הצלחנו להוסיף את הפריט אנא נסה שנית. שגיאה:");
+            }
         }
         private void showAlert(String content)
         {
