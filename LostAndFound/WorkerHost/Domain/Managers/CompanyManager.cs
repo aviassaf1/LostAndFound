@@ -419,23 +419,32 @@ namespace WorkerHost.Domain.Managers
                 return null;
             }
             Dictionary<string, string> result = new Dictionary<string, string>();
-            Dictionary<string, string> allFBGroups = getAllCompanyFBGroup( token);
+            /*Dictionary<string, string> allFBGroups = getAllCompanyFBGroup( token);
             if (allFBGroups == null)
             {
                 return null;
-            }
+            }*/
             Company c = getCompanyByName(companyName);
             if (c == null)
+            {
+                return null;
+            }
+            Dictionary<string, string> res = new Dictionary<string, string>();
+            var fb = new FacebookClient();
+            try
+            {
+                //make sure the token is good
+                fb = new FacebookClient(token);
+            }
+            catch
             {
                 return null;
             }
             HashSet<string> FBgroups = c.FacebookGroups;
             foreach (string groupID in FBgroups)
             {
-                if (allFBGroups.ContainsKey(groupID))
-                {
-                    result.Add(groupID, allFBGroups[groupID]);
-                }
+                dynamic fbResult = fb.Get(groupID);
+                result.Add(groupID, fbResult["name"]);
             }
             return result;
 
@@ -470,7 +479,7 @@ namespace WorkerHost.Domain.Managers
             }
             fb.Version = "v2.3";
             var parameters = new Dictionary<string, object>();
-            parameters["fields"] = "groups{name}";
+            parameters["fields"] = "name";
             dynamic result = fb.Get("me", parameters);
             var groups = result.groups["data"];
             bool isNext = true;
