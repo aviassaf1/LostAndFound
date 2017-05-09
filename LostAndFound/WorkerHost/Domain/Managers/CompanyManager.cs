@@ -514,5 +514,32 @@ namespace WorkerHost.Domain.Managers
         {
             return _FBTokens[companyName];
         }
+
+        public Dictionary<string, bool> getCompanyWorkers(int key)
+        {
+            String user = SessionDirector.getInstance.getUserName(key);
+            if (user != null)
+            {
+                String companyName = cache.getCompanyNameByUsername(user);
+                if (companyName != null)
+                {
+                    Company company = cache.getCompany(companyName);
+                    if (company != null && company.Managers.Keys.Contains(user))
+                    {
+                        Dictionary<string, bool> workers = new Dictionary<string, bool>();
+                        foreach(string manager in company.Managers.Keys)
+                        {
+                            workers.Add(manager, true);
+                        }
+                        foreach (string worker in company.Workers.Keys)
+                        {
+                            workers.Add(worker, false);
+                        }
+                        return workers;
+                    }
+                }
+            }
+            return null;
+        }
     }
 }

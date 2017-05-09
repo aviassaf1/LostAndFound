@@ -80,7 +80,7 @@ namespace NewWebClient
                     showAlert("בבקשה להזין מספר סידורי תקין, במידה ואין לך, הזן 0");
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 showAlert("בבקשה להזין מספר סידורי תקין, במידה ואין לך, הזן 0");
             }
@@ -99,7 +99,6 @@ namespace NewWebClient
                 var channel = Channel.getInstance;
                 string ret = channel.ServerService.editItem(Int32.Parse(itemid), date, location, description,
                 serialNumber, contactName, contactPhone, 564/*key*/);
-                int i = 0;
                 _contactName.Text = ret;
             }
             catch (Exception exc)

@@ -37,7 +37,6 @@ namespace NewWebClient
                 int key = (int)Session["token"];
                 var channel = Channel.getInstance;
                 string ret = channel.ServerService.addFBGroup(FbIdTextBox.Text, key);
-                int i = 0;
                 showAlert("הקבוצה נוספה");
                 Response.Redirect("/AddCompany.aspx");
             }
