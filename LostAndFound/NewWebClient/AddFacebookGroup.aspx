@@ -17,6 +17,13 @@
                     <asp:TextBox ID="FbIdTextBox" runat="server" style="margin-right: 30px" Width="120"></asp:TextBox>
                 </p>
                 <p style="direction: rtl">
+                    <asp:Label runat="server" Width="498px">על מנת להשיג את מזהה הקבוצה ניתן לקחת מתוך ה- url</asp:Label>
+                </p>
+                <p style="direction: rtl">
+                    <asp:Label runat="server" Width="97px">או דרך האתר:  </asp:Label>
+                    <asp:Label runat="server" Width="372px">https://lookup-id.com/  או דרך האתר: https://findmyfbid.com/  </asp:Label>
+                </p>
+                <p style="direction: rtl">
                     &nbsp;</p>
                 <p style="direction: rtl">
                     &nbsp;</p>
