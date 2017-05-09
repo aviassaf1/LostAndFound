@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WorkerHost.Domain.Managers;
+using WorkerHost.ServiceLayer.DataContracts;
 
 namespace WorkerHost.ServiceLayer.Controllers
 {
@@ -33,9 +34,15 @@ namespace WorkerHost.ServiceLayer.Controllers
             return ICM.addFBGroup( groupID, key);
         }
 
-        public Dictionary<string, string> getSystemCompanyFBGroup(int key)
+        public List<GroupData> getSystemCompanyFBGroup(int key)
         {
-            return ICM.getSystemCompanyFBGroup( key);
+            Dictionary<string, string> fbs=ICM.getSystemCompanyFBGroup( key);
+            List<GroupData> fbgs = new List<GroupData>();
+            foreach(string id in fbs.Keys)
+            {
+                fbgs.Add(new GroupData(fbs[id], id));
+            }
+            return fbgs;
         }
 
         public string login( string token, String userName, String userPassword)

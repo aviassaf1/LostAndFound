@@ -8,7 +8,7 @@ using WorkerHost.ServiceLayer.DataContracts;
 
 namespace NewWebClient
 {
-    public partial class ViewCompanies : System.Web.UI.Page
+    public partial class ViewGroups : System.Web.UI.Page
     {
         private List<GroupData> groups;
 

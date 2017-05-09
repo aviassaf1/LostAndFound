@@ -75,9 +75,9 @@ namespace WorkerHost
             return MatchController.getInstance.getMatchesByItemID(itemID, key);
         }
 
-        public Dictionary<string, string> getSystemCompanyFBGroup(int key)
+        public List<GroupData> getSystemCompanyFBGroup(int key)
         {
-            return CompanyController.getInstance.getSystemCompanyFBGroup( key);
+            return CompanyController.getInstance.getSystemCompanyFBGroup(key);
         }
 
         public string Adminlogin(string username, string password)

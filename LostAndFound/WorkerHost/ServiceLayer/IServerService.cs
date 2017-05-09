@@ -36,7 +36,7 @@ namespace WorkerHost
         [OperationContract]
         String removeFBGroup(string groupID, int key); //return true if good
         [OperationContract]
-        Dictionary<string, string> getSystemCompanyFBGroup(int key); //return null if fails
+        List<GroupData> getSystemCompanyFBGroup(int key); //return null if fails
         //Dictionary<string, string> getAllCompanyFBGroup(string companyName, string token); //return null if fails
         [OperationContract]
         String removeWorker(String delUsername, int key);

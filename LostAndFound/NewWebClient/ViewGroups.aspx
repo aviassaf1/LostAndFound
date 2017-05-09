@@ -7,7 +7,6 @@
     <div id = "dvGrid" style ="padding:10px;width:1108px">
 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
 <ContentTemplate>
-<asp:Label ID="item1" runat="server" ></asp:Label>
 
 <asp:GridView ID="GridView1" runat="server"  Width = "434px"
 AutoGenerateColumns = "false" Font-Names = "Arial"
