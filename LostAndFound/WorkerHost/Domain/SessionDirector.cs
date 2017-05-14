@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WorkerHost.Domain
 {
-    class SessionDirector
+    public class SessionDirector
     {
         private static SessionDirector singleton;
         private Dictionary<int, String> _sessions = new Dictionary<int, string>();//key, username
