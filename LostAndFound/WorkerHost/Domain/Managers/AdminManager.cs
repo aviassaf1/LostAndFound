@@ -143,7 +143,7 @@ namespace WorkerHost.Domain.Managers
             {
                 return "user no admin";
             }
-            if (companyName == null || /*password == null ||*/ phone == null || companyName.Equals("") || password.Equals("") ||
+            if (companyName == null || /*password == null ||*/ phone == null || companyName.Equals("") || /*password.Equals("") ||*/
                 phone.Equals(""))
             {
                 logg = "one or more of the fields is missing";
@@ -151,12 +151,13 @@ namespace WorkerHost.Domain.Managers
                 logger.logPrint(logg, 2);
                 return logg;
             }
+            /*
             // check if the password is strong enough
             bool isNumExist = false;
             bool isSmallKeyExist = false;
             bool isBigKeyExist = false;
             bool isKeyRepeting3Times = false;
-            /*if (password.Length < 6)
+            if (password.Length < 6)
             {
                 logg = "password should contain at least 6 ccharacters, edit company Fail";
                 logger.logPrint(logg, 0);
@@ -181,14 +182,14 @@ namespace WorkerHost.Domain.Managers
                 {
                     isKeyRepeting3Times = true;
                 }
-            }*/
+            }
             if (!(isNumExist && isSmallKeyExist && isBigKeyExist && !isKeyRepeting3Times))
             {
                 logg = "password isnt strong enough";
                 logger.logPrint(logg, 0);
                 logger.logPrint(logg, 2);
                 return logg;
-            }
+            }*/
             // check if the the phone is in a correct format
             if (phone.Length != 10 && phone.Length != 9)
             {

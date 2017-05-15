@@ -13,12 +13,12 @@ namespace WorkerHost.ServiceLayer.DataContracts
         [DataMember]
         private string userName;
         [DataMember]
-        private bool isAdmin;
+        private bool isManager;
 
-        public WorkerData(string name, bool is_admin)
+        public WorkerData(string name, bool is_manger)
         {
             userName = name;
-            isAdmin = is_admin;
+            isManager = is_manger;
         }
 
         public string UserName
@@ -34,16 +34,16 @@ namespace WorkerHost.ServiceLayer.DataContracts
             }
         }
 
-        public bool IsAdmin
+        public bool IsManager
         {
             get
             {
-                return isAdmin;
+                return isManager;
             }
 
             set
             {
-                isAdmin = value;
+                isManager = value;
             }
         }
     }

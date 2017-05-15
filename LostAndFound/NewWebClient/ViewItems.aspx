@@ -124,5 +124,6 @@ PageSize = "5" style="direction: rtl" >
 </Triggers>
 </asp:UpdatePanel>
             <asp:Button ID="publishButton" runat="server" Text="פרסם מאגר מציאות" OnClick="publishButton_Click" />
+            <asp:Button ID="ViewWorkersButton" runat="server" Text="צפה בעובדים" OnClick="ViewWorkers" />
 </div>
 </asp:Content>

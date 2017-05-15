@@ -275,7 +275,7 @@ namespace WorkerHost.Domain.BLBackEnd
         }
         public String addWorker(String username, String password)
         {
-            _managers.Add(username, password);
+            _workers.Add(username, password);
             return Cache.getInstance.addWorkerToCompany(username, password, _companyName, _fbProfileID, false);
         }
         public String removeWorker(String username)

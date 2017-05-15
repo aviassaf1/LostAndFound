@@ -1356,10 +1356,6 @@ namespace WorkerHost.DataLayer
                 {
                     return "company was not found";
                 }
-                if (user == null)
-                {
-                    return "user was not found";
-                }
                 CompanyUsers cu = new CompanyUsers();
                 cu.companyName = companyName;
                 cu.fbProfileId = fbProfileId;

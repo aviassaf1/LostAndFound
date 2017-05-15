@@ -84,5 +84,10 @@ namespace NewWebClient
                 showAlert(exc + "לא הצלחנו לפרסם את הפריטים אנא נסה שנית. שגיאה:");
             }
         }
+
+        protected void ViewWorkers(object sender, EventArgs e)
+        {
+            Response.Redirect("/ViewWorkers.aspx");
+        }
     }
 }

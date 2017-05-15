@@ -33,7 +33,7 @@ namespace NewWebClient
             }
             if (GroupNamesTextBox.Text.Equals(""))
             {
-                showAlert("אף שם חברה לא הוזן");
+                showAlert("אף קבוצה לא הוזנה");
                 return;
             }
             if (GroupManager.Text.Equals(""))

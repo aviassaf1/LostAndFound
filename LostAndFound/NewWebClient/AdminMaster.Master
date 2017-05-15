@@ -53,7 +53,7 @@
                         <AnonymousTemplate>
                             <ul class="nav navbar-nav navbar-right">
                                 <li><a runat="server" href="~/AddCompany">הוסף חברה</a></li>
-                                <li><a runat="server" href="~/AddLostItem">צפה בחברה</a></li>                   
+                                <li><a runat="server" href="~/ViewCompanies">צפה בחברה</a></li>                   
                             </ul>
                         </AnonymousTemplate>
                         <LoggedInTemplate>

@@ -31,7 +31,7 @@ namespace NewWebClient
             {
                 int key = (int)Session["token"];
                 var channel = Channel.getInstance;
-                string ret = channel.ServerService.addWorker(workerNameTextBox.Text, password.Text, true, key);
+                string ret = channel.ServerService.addWorker(workerNameTextBox.Text, password.Text, isManager.Checked, key);
                 workerNameTextBox.Text = ret;
                 Response.Redirect("/ViewWorkers.aspx");
             }
