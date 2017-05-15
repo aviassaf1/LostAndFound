@@ -371,6 +371,7 @@ namespace WorkerHost.DataLayer
             {
                 clearItems();
                 clearFbGroups();
+                clearCompanyUsers();
                 List<Companies> companyList = new List<Companies>();
                 foreach (Companies company in db.Companies)
                 {
@@ -386,10 +387,28 @@ namespace WorkerHost.DataLayer
                 }
                 db.SaveChanges();
             }
-            catch
+            catch (Exception e)
             {
-
+                
             }
+        }
+
+        private void clearCompanyUsers()
+        {
+            foreach (Companies company in db.Companies)
+            {
+                company.CompanyUsers = null;
+            }
+            List<CompanyUsers> companyUsersList = new List<CompanyUsers>();
+            foreach (CompanyUsers cu in db.CompanyUsers)
+            {
+                companyUsersList.Add(cu);
+            }
+            foreach (CompanyUsers cu in companyUsersList)
+            {
+                db.CompanyUsers.Remove(cu);
+            }
+            db.SaveChanges();
         }
 
         private void clearUsers()
