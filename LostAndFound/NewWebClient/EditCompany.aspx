@@ -13,9 +13,7 @@
                     
                     &nbsp;</p>
                 <p style="direction: rtl">
-                    <asp:Label runat="server" Width="120" Font-Underline="true"> שם החברה:</asp:Label>
-                    <asp:TextBox ID="companyNameTextBox" runat="server" style="margin-right: 30px" Width="120"></asp:TextBox>
-                </p>
+                    &nbsp;</p>
                 <p style="direction: rtl">
                     <asp:Label runat="server" Width="120" Font-Underline="true">מספר פלאפון:</asp:Label>
                     <asp:TextBox ID="PhoneTextBox" runat="server" style="margin-right: 30px" Width="120"></asp:TextBox>

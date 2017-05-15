@@ -202,6 +202,7 @@
     <Content Include="Account\ResetPasswordConfirmation.aspx" />
     <Content Include="Account\TwoFactorAuthenticationSignIn.aspx" />
     <Content Include="Account\VerifyPhoneNumber.aspx" />
+    <Content Include="EditCompany.aspx" />
     <Content Include="ViewWorkers.aspx" />
     <Content Include="AddWorker.aspx" />
     <Content Include="ViewGroups.aspx" />
@@ -391,13 +392,20 @@
     <Compile Include="Account\VerifyPhoneNumber.aspx.designer.cs">
       <DependentUpon>VerifyPhoneNumber.aspx</DependentUpon>
     </Compile>
+    <Compile Include="EditCompany.aspx.cs">
+      <DependentUpon>EditCompany.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditCompany.aspx.designer.cs">
+      <DependentUpon>EditCompany.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ViewWorkers.aspx.cs">
       <DependentUpon>ViewWorkers.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ViewWorkers.aspx.designer.cs">
       <DependentUpon>ViewWorkers.aspx</DependentUpon>
-	</Compile>
+    </Compile>
     <Compile Include="AddWorker.aspx.cs">
       <DependentUpon>AddWorker.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

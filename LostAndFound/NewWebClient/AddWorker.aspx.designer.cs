@@ -31,13 +31,13 @@ namespace NewWebClient {
         protected global::System.Web.UI.WebControls.TextBox password;
         
         /// <summary>
-        /// isManagerWorker control.
+        /// isManager control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList isManagerWorker;
+        protected global::System.Web.UI.WebControls.CheckBox isManager;
         
         /// <summary>
         /// OK control.

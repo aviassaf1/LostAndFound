@@ -29,6 +29,8 @@ namespace WorkerHost
         //Company getCompanyByName(string companyName); //returns null if fails
         [OperationContract]
         String publishInventory(String GroupID, int days, int key);//max days=8, string "true" is ok
+
+        [OperationContract]
         List<WorkerData> getCompanyWorkers(int token);
 
         //List<Item> getLostItems3Days(string companyName, DateTime date); //returns null if fails

@@ -13,7 +13,8 @@ namespace WorkerHost.Domain
 
         private Logger()
         {
-            _sw1 = File.CreateText(Path.GetFullPath("log.txt"));//File.AppendText("log.txt");// new StreamWriter(fullPath);
+            string path=Path.GetFullPath("log.txt");
+            _sw1 = File.CreateText(path);//File.AppendText("log.txt");// new StreamWriter(fullPath);
             _sw2 = File.CreateText(Path.GetFullPath("logActions.txt"));
             _sw3 = File.CreateText(Path.GetFullPath("logErrors.txt"));
         }

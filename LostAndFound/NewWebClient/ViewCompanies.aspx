@@ -2,7 +2,7 @@
 
 <asp:Content ID="bodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <div style="direction: rtl">    
-        <asp:Label runat="server" Font-Size="Larger" Font-Bold="true">הוספת חברה למערכת</asp:Label>
+        <asp:Label runat="server" Font-Size="Larger" Font-Bold="true">צפייה בחברות</asp:Label>
     </div>
     <div id = "dvGrid" style ="padding:10px;width:1108px">
 <asp:UpdatePanel ID="UpdatePanel1" runat="server">

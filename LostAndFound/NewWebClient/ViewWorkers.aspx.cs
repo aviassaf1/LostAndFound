@@ -10,9 +10,8 @@ namespace NewWebClient
 {
     public partial class ViewWorkers : System.Web.UI.Page
     {
-        private List<WorkerData> workers;
+        private static List<WorkerData> workers;
 
-        private string item1ID;
         public void showAlert(string content)
         {
             Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "popup", "<script>alert(\"" + content + "\");</script>");
@@ -36,7 +35,6 @@ namespace NewWebClient
         {
             var channel = Channel.getInstance;
             int token = (int)(Session["token"]);
-            item1ID = Request.QueryString["ID"];
             workers = channel.ServerService.getCompanyWorkers(token);
             GridView1.DataSource = workers;
             GridView1.DataBind();
@@ -50,7 +48,7 @@ namespace NewWebClient
             {
                 if (wd.UserName.Equals(argument))
                 {
-                    if (wd.IsAdmin)
+                    if (wd.IsManager)
                         break;
                     else
                     {

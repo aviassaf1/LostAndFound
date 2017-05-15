@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminMaster.Master" AutoEventWireup="true" CodeBehind="ViewWorkers.aspx.cs" Inherits="NewWebClient.ViewWorkers" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ViewWorkers.aspx.cs" Inherits="NewWebClient.ViewWorkers" %>
 
 <asp:Content ID="bodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <div style="direction: rtl">    

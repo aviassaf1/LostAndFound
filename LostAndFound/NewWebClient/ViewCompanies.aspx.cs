@@ -10,7 +10,7 @@ namespace NewWebClient
 {
     public partial class ViewCompanies : System.Web.UI.Page
     {
-        private List<CompanyData> companies;
+        private static List<CompanyData> companies;
 
         private string item1ID;
         public void showAlert(string content)
@@ -60,7 +60,7 @@ namespace NewWebClient
                     break;
                 }
             }
-            Response.Redirect("/EditCompany.aspx?ID=" + argument+ "&phone="+phone);
+            Response.Redirect("/EditCompany.aspx?ID=" + argument + "&phone=" + phone);
         }
     }
 }
