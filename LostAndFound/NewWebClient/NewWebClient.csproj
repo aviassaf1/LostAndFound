@@ -203,7 +203,6 @@
     <Content Include="Account\TwoFactorAuthenticationSignIn.aspx" />
     <Content Include="Account\VerifyPhoneNumber.aspx" />
     <Content Include="ViewWorkers.aspx" />
-    <Content Include="AddWorker.aspx" />
     <Content Include="ViewGroups.aspx" />
     <Content Include="ViewCompanies.aspx" />
     <Content Include="AddFacebookGroup.aspx" />
@@ -391,21 +390,12 @@
     <Compile Include="Account\VerifyPhoneNumber.aspx.designer.cs">
       <DependentUpon>VerifyPhoneNumber.aspx</DependentUpon>
     </Compile>
-<<<<<<< HEAD
     <Compile Include="ViewWorkers.aspx.cs">
       <DependentUpon>ViewWorkers.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ViewWorkers.aspx.designer.cs">
       <DependentUpon>ViewWorkers.aspx</DependentUpon>
-=======
-    <Compile Include="AddWorker.aspx.cs">
-      <DependentUpon>AddWorker.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AddWorker.aspx.designer.cs">
-      <DependentUpon>AddWorker.aspx</DependentUpon>
->>>>>>> addworkerpage
     </Compile>
     <Compile Include="ViewGroups.aspx.cs">
       <DependentUpon>ViewGroups.aspx</DependentUpon>
