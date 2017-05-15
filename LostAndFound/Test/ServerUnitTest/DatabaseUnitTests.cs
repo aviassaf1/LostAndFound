@@ -22,7 +22,7 @@ namespace Test.UnitTests
         [TestInitialize]
         public void setUp()
         {
-            db = Database.getInstance();
+            db = WorkerHost.DataLayer.Database.getInstance();
             db.clear();
             db.setUp();
 
@@ -42,20 +42,20 @@ namespace Test.UnitTests
         public void find_company_valid_andExist()
         {
             string realCompanyName = "testCompany";
-            Companies company = db.findCompanyByCompanyName(realCompanyName);
+            WorkerHost.DataLayer.Companies company = db.findCompanyByCompanyName(realCompanyName);
             Assert.IsNotNull(company);
             Assert.AreEqual(company.companyName, realCompanyName);
         }
         [TestMethod]
         public void find_company_valid_andNotExist()
         {
-            Companies company = db.findCompanyByCompanyName("notRealCompany");
+            WorkerHost.DataLayer.Companies company = db.findCompanyByCompanyName("notRealCompany");
             Assert.IsNull(company);
         }
         [TestMethod]
         public void find_company_not_valid()
         {
-            Companies company = db.findCompanyByCompanyName("");
+            WorkerHost.DataLayer.Companies company = db.findCompanyByCompanyName("");
             Assert.IsNull(company);
         }
 
@@ -66,10 +66,10 @@ namespace Test.UnitTests
         {
             string userName = "tomer";
             string companyName = "myComp";
-            string str = db.addCompany(userName,"Gg12345", companyName, "0522222222", null,"1212323214",new System.Collections.Generic.Dictionary<string, string>(),
+            string str = db.addCompany(userName, "Gg12345", companyName, "0522222222", null, "1212323214", new System.Collections.Generic.Dictionary<string, string>(),
                 new System.Collections.Generic.Dictionary<string, string>());
-            User user = db.findUserByUserName(userName);
-            Companies company = db.findCompanyByCompanyName(companyName);
+            WorkerHost.DataLayer.User user = db.findUserByUserName(userName);
+            WorkerHost.DataLayer.Companies company = db.findCompanyByCompanyName(companyName);
             Assert.AreEqual(str, "true");
             Assert.IsNotNull(company);
             Assert.IsNotNull(user);
@@ -110,7 +110,7 @@ namespace Test.UnitTests
         {
             string str = db.removeCompany(validExistCompanyName);
             Assert.AreEqual("true", str);
-            Companies company = db.findCompanyByCompanyName(validExistCompanyName);
+            WorkerHost.DataLayer.Companies company = db.findCompanyByCompanyName(validExistCompanyName);
             Assert.IsNull(company);
         }
         [TestMethod]
@@ -118,7 +118,7 @@ namespace Test.UnitTests
         {
             string str = db.removeCompany(validNotExistCompanyName);
             Assert.AreNotEqual("true", str);
-            Companies company = db.findCompanyByCompanyName(validNotExistCompanyName);
+            WorkerHost.DataLayer.Companies company = db.findCompanyByCompanyName(validNotExistCompanyName);
             Assert.IsNull(company);
         }
         [TestMethod]
@@ -126,7 +126,7 @@ namespace Test.UnitTests
         {
             string str = db.removeCompany(notValidCompanyName);
             Assert.AreNotEqual("true", str);
-            Companies company = db.findCompanyByCompanyName(notValidCompanyName);
+            WorkerHost.DataLayer.Companies company = db.findCompanyByCompanyName(notValidCompanyName);
             Assert.IsNull(company);
         }
         //////////////////////update company
@@ -153,7 +153,7 @@ namespace Test.UnitTests
         {
             string str = db.addFacebookGroup(validExistCompanyName, validNotExistUrl);
             Assert.AreEqual("true", str);
-            FacebookGroups fbg = db.findFacebookGroup(validExistCompanyName, validNotExistUrl);
+            WorkerHost.DataLayer.FacebookGroups fbg = db.findFacebookGroup(validExistCompanyName, validNotExistUrl);
             Assert.IsNotNull(fbg);
         }
         [TestMethod]
@@ -161,7 +161,7 @@ namespace Test.UnitTests
         {
             string str = db.addFacebookGroup(validExistCompanyName, notValidUrl);
             Assert.AreNotEqual("true", str);
-            FacebookGroups fbg = db.findFacebookGroup(validExistCompanyName, notValidUrl);
+            WorkerHost.DataLayer.FacebookGroups fbg = db.findFacebookGroup(validExistCompanyName, notValidUrl);
             Assert.IsNull(fbg);
         }
         [TestMethod]
@@ -169,7 +169,7 @@ namespace Test.UnitTests
         {
             string str = db.addFacebookGroup(validNotExistCompanyName, validExistUrl);
             Assert.AreNotEqual("true", str);
-            FacebookGroups fbg = db.findFacebookGroup(validNotExistCompanyName, validExistUrl);
+            WorkerHost.DataLayer.FacebookGroups fbg = db.findFacebookGroup(validNotExistCompanyName, validExistUrl);
             Assert.IsNull(fbg);
         }
         [TestMethod]
@@ -177,7 +177,7 @@ namespace Test.UnitTests
         {
             string str = db.addFacebookGroup(validNotExistCompanyName, validNotExistUrl);
             Assert.AreNotEqual("true", str);
-            FacebookGroups fbg = db.findFacebookGroup(validNotExistCompanyName, validNotExistUrl);
+            WorkerHost.DataLayer.FacebookGroups fbg = db.findFacebookGroup(validNotExistCompanyName, validNotExistUrl);
             Assert.IsNull(fbg);
         }
         [TestMethod]
@@ -185,7 +185,7 @@ namespace Test.UnitTests
         {
             string str = db.addFacebookGroup(validNotExistCompanyName, notValidUrl);
             Assert.AreNotEqual("true", str);
-            FacebookGroups fbg = db.findFacebookGroup(validNotExistCompanyName, notValidUrl);
+            WorkerHost.DataLayer.FacebookGroups fbg = db.findFacebookGroup(validNotExistCompanyName, notValidUrl);
             Assert.IsNull(fbg);
         }
         [TestMethod]
@@ -193,7 +193,7 @@ namespace Test.UnitTests
         {
             string str = db.addFacebookGroup(notValidCompanyName, validExistUrl);
             Assert.AreNotEqual("true", str);
-            FacebookGroups fbg = db.findFacebookGroup(notValidCompanyName, validExistUrl);
+            WorkerHost.DataLayer.FacebookGroups fbg = db.findFacebookGroup(notValidCompanyName, validExistUrl);
             Assert.IsNull(fbg);
         }
         [TestMethod]
@@ -201,7 +201,7 @@ namespace Test.UnitTests
         {
             string str = db.addFacebookGroup(notValidCompanyName, validNotExistUrl);
             Assert.AreNotEqual("true", str);
-            FacebookGroups fbg = db.findFacebookGroup(notValidCompanyName, validNotExistUrl);
+            WorkerHost.DataLayer.FacebookGroups fbg = db.findFacebookGroup(notValidCompanyName, validNotExistUrl);
             Assert.IsNull(fbg);
         }
         [TestMethod]
@@ -209,7 +209,7 @@ namespace Test.UnitTests
         {
             string str = db.addFacebookGroup(notValidCompanyName, notValidUrl);
             Assert.AreNotEqual("true", str);
-            FacebookGroups fbg = db.findFacebookGroup(notValidCompanyName, notValidUrl);
+            WorkerHost.DataLayer.FacebookGroups fbg = db.findFacebookGroup(notValidCompanyName, notValidUrl);
             Assert.IsNull(fbg);
         }
 
@@ -219,7 +219,7 @@ namespace Test.UnitTests
         {
             string str = db.removeFacebookGroup(validExistCompanyName, validExistUrl);
             Assert.AreEqual("true", str);
-            FacebookGroups fbg = db.findFacebookGroup(validExistCompanyName, validExistUrl);
+            WorkerHost.DataLayer.FacebookGroups fbg = db.findFacebookGroup(validExistCompanyName, validExistUrl);
             Assert.IsNull(fbg);
         }
         [TestMethod]
@@ -275,7 +275,7 @@ namespace Test.UnitTests
         [TestMethod]
         public void find_facebookGroup_valid_exist_ExistCompany()
         {
-            FacebookGroups fbg = db.findFacebookGroup(validExistCompanyName, validExistUrl);
+            WorkerHost.DataLayer.FacebookGroups fbg = db.findFacebookGroup(validExistCompanyName, validExistUrl);
             Assert.IsNotNull(fbg);
             Assert.AreEqual(fbg.groupURL, validExistUrl);
             Assert.AreEqual(fbg.CompanyName, validExistCompanyName);
@@ -283,49 +283,49 @@ namespace Test.UnitTests
         [TestMethod]
         public void find_facebookGroup_valid_NotExist_fromExistCompany()
         {
-            FacebookGroups fbg = db.findFacebookGroup(validExistCompanyName, validNotExistUrl);
+            WorkerHost.DataLayer.FacebookGroups fbg = db.findFacebookGroup(validExistCompanyName, validNotExistUrl);
             Assert.IsNull(fbg);
         }
         [TestMethod]
         public void find_facebookGroup_notValid_ExistCompany()
         {
-            FacebookGroups fbg = db.findFacebookGroup(validExistCompanyName, notValidUrl);
+            WorkerHost.DataLayer.FacebookGroups fbg = db.findFacebookGroup(validExistCompanyName, notValidUrl);
             Assert.IsNull(fbg);
         }
         [TestMethod]
         public void find_facebookGroup_valid_exist_ValidNotExistCompany()
         {
-            FacebookGroups fbg = db.findFacebookGroup(validNotExistCompanyName, validExistUrl);
+            WorkerHost.DataLayer.FacebookGroups fbg = db.findFacebookGroup(validNotExistCompanyName, validExistUrl);
             Assert.IsNull(fbg);
         }
         [TestMethod]
         public void find_facebookGroup_valid_Notexist_ValidNotExistCompany()
         {
-            FacebookGroups fbg = db.findFacebookGroup(validNotExistCompanyName, validNotExistUrl);
+            WorkerHost.DataLayer.FacebookGroups fbg = db.findFacebookGroup(validNotExistCompanyName, validNotExistUrl);
             Assert.IsNull(fbg);
         }
         [TestMethod]
         public void find_facebookGroup_notValid_ValidNotExistCompany()
         {
-            FacebookGroups fbg = db.findFacebookGroup(notValidCompanyName, notValidUrl);
+            WorkerHost.DataLayer.FacebookGroups fbg = db.findFacebookGroup(notValidCompanyName, notValidUrl);
             Assert.IsNull(fbg);
         }
         [TestMethod]
         public void find_facebookGroup_valid_exist_mNotValidCompany()
         {
-            FacebookGroups fbg = db.findFacebookGroup(notValidCompanyName, validExistUrl);
+            WorkerHost.DataLayer.FacebookGroups fbg = db.findFacebookGroup(notValidCompanyName, validExistUrl);
             Assert.IsNull(fbg);
         }
         [TestMethod]
         public void find_facebookGroup_valid_Notexist_NotValidCompany()
         {
-            FacebookGroups fbg = db.findFacebookGroup(notValidCompanyName, validNotExistUrl);
+            WorkerHost.DataLayer.FacebookGroups fbg = db.findFacebookGroup(notValidCompanyName, validNotExistUrl);
             Assert.IsNull(fbg);
         }
         [TestMethod]
         public void find_facebookGroup_notValid_toNotValidCompany()
         {
-            FacebookGroups fbg = db.findFacebookGroup(notValidCompanyName, notValidUrl);
+            WorkerHost.DataLayer.FacebookGroups fbg = db.findFacebookGroup(notValidCompanyName, notValidUrl);
             Assert.IsNull(fbg);
         }
 
@@ -346,7 +346,7 @@ namespace Test.UnitTests
             int ret = db.addFoundItem(null, null, DateTime.Now, null, null, 0, validExistCompanyName, null, null, null, true);
             bool cond = ret > 0;
             Assert.IsTrue(cond);
-            Items item = db.findItemByItemId(ret);
+            WorkerHost.DataLayer.Items item = db.findItemByItemId(ret);
             Assert.IsNotNull(item);
         }
         [TestMethod]
@@ -355,7 +355,7 @@ namespace Test.UnitTests
             int ret = db.addLostItem(null, null, DateTime.Now, null, null, 0, validExistCompanyName, null, null, null, true);
             bool cond = ret > 0;
             Assert.IsTrue(cond);
-            Items item = db.findItemByItemId(ret);
+            WorkerHost.DataLayer.Items item = db.findItemByItemId(ret);
             Assert.IsNotNull(item);
         }
         [TestMethod]
@@ -364,7 +364,7 @@ namespace Test.UnitTests
             int ret = db.addFBItem(null, null, DateTime.Now, null, null, null, null, null);
             bool cond = ret > 0;
             Assert.IsTrue(cond);
-            Items item = db.findItemByItemId(ret);
+            WorkerHost.DataLayer.Items item = db.findItemByItemId(ret);
             Assert.IsNotNull(item);
         }
 
@@ -377,7 +377,7 @@ namespace Test.UnitTests
             int ret = db.addFBItem(null, null, DateTime.Now, null, null, null, null, null);
             bool cond = ret > 0;
             Assert.IsTrue(cond);
-            Items item = db.findItemByItemId(ret);
+            WorkerHost.DataLayer.Items item = db.findItemByItemId(ret);
             Assert.IsNotNull(item);
         }
 
@@ -388,7 +388,7 @@ namespace Test.UnitTests
             int ret = db.addFBItem(null, null, DateTime.Now, null, null, null, null, null);
             string update = db.updateFBItem(ret, new System.Collections.Generic.List<string>(), "", DateTime.Now, "1", "1", "1", "1", "1");
             Assert.AreEqual("true", update);
-            FBItem item = db.findItemByItemId(ret).FBItem;
+            WorkerHost.DataLayer.FBItem item = db.findItemByItemId(ret).FBItem;
             Assert.IsNotNull(item.colors);
             Assert.AreEqual(item.itemType, "1");
             Assert.AreEqual(item.location, "1");
@@ -404,7 +404,7 @@ namespace Test.UnitTests
             int ret = db.addFoundItem(null, null, DateTime.Now, null, null, 0, validExistCompanyName, null, null, null, true);
             bool cond = ret > 0;
             Assert.IsTrue(cond);
-            Items item = db.findItemByItemId(ret);
+            WorkerHost.DataLayer.Items item = db.findItemByItemId(ret);
             Assert.IsNotNull(item);
         }
         [TestMethod]
@@ -413,7 +413,7 @@ namespace Test.UnitTests
             int ret = db.addFoundItem(null, null, DateTime.Now, null, null, 0, validNotExistCompanyName, null, null, null, true);
             bool cond = ret > 0;
             Assert.IsFalse(cond);
-            Items item = db.findItemByItemId(ret);
+            WorkerHost.DataLayer.Items item = db.findItemByItemId(ret);
             Assert.IsNull(item);
         }
         [TestMethod]
@@ -422,7 +422,7 @@ namespace Test.UnitTests
             int ret = db.addFoundItem(null, null, DateTime.Now, null, null, 0, notValidCompanyName, null, null, null, true);
             bool cond = ret > 0;
             Assert.IsFalse(cond);
-            Items item = db.findItemByItemId(ret);
+            WorkerHost.DataLayer.Items item = db.findItemByItemId(ret);
             Assert.IsNull(item);
         }
 
@@ -433,7 +433,7 @@ namespace Test.UnitTests
             int ret = db.addFoundItem(null, null, DateTime.Now, null, null, 0, validExistCompanyName, null, null, null, true);
             string update = db.updateFoundItem(ret, new System.Collections.Generic.List<string>(), "", DateTime.Now, "", "", "", false);
             Assert.AreEqual("true", update);
-            FoundItems item = db.findItemByItemId(ret).CompanyItems.FoundItems;
+            WorkerHost.DataLayer.FoundItems item = db.findItemByItemId(ret).CompanyItems.FoundItems;
             Assert.IsNotNull(item.colors);
             Assert.AreEqual(item.itemType, "");
             Assert.AreEqual(item.location, "");
@@ -450,7 +450,7 @@ namespace Test.UnitTests
             int ret = db.addLostItem(null, null, DateTime.Now, null, null, 0, validExistCompanyName, null, null, null, true);
             bool cond = ret > 0;
             Assert.IsTrue(cond);
-            Items item = db.findItemByItemId(ret);
+            WorkerHost.DataLayer.Items item = db.findItemByItemId(ret);
             Assert.IsNotNull(item);
         }
         [TestMethod]
@@ -459,7 +459,7 @@ namespace Test.UnitTests
             int ret = db.addLostItem(null, null, DateTime.Now, null, null, 0, validNotExistCompanyName, null, null, null, true);
             bool cond = ret > 0;
             Assert.IsFalse(cond);
-            Items item = db.findItemByItemId(ret);
+            WorkerHost.DataLayer.Items item = db.findItemByItemId(ret);
             Assert.IsNull(item);
         }
         [TestMethod]
@@ -468,7 +468,7 @@ namespace Test.UnitTests
             int ret = db.addLostItem(null, null, DateTime.Now, null, null, 0, notValidCompanyName, null, null, null, true);
             bool cond = ret > 0;
             Assert.IsFalse(cond);
-            Items item = db.findItemByItemId(ret);
+            WorkerHost.DataLayer.Items item = db.findItemByItemId(ret);
             Assert.IsNull(item);
         }
 
@@ -479,7 +479,7 @@ namespace Test.UnitTests
             int ret = db.addFoundItem(null, null, DateTime.Now, null, null, 0, validExistCompanyName, null, null, null, true);
             string update = db.updateFoundItem(ret, new System.Collections.Generic.List<string>(), "", DateTime.Now, "", "", "", false);
             Assert.AreEqual("true", update);
-            FoundItems item = db.findItemByItemId(ret).CompanyItems.FoundItems;
+            WorkerHost.DataLayer.FoundItems item = db.findItemByItemId(ret).CompanyItems.FoundItems;
             Assert.IsNotNull(item.colors);
             Assert.AreEqual(item.itemType, "");
             Assert.AreEqual(item.location, "");
@@ -500,7 +500,7 @@ namespace Test.UnitTests
             int matchId = db.addMatch(cItemId, itemId, "");
             bool cond = matchId > 0;
             Assert.IsTrue(cond);
-            Matches match = db.findMathByMatchId(matchId);
+            WorkerHost.DataLayer.Matches match = db.findMathByMatchId(matchId);
             Assert.IsNotNull(match);
             Assert.AreEqual(cItemId, match.CompanyItems.itemId);
             Assert.AreEqual(itemId, match.Items.itemID);
@@ -587,7 +587,7 @@ namespace Test.UnitTests
             int itemId = db.addFBItem(null, null, DateTime.Now, null, null, null, null, null);
             int matchId = db.addMatch(cItemId, itemId, "");
             db.removeMatch(matchId);
-            Matches match = db.findMathByMatchId(matchId);
+            WorkerHost.DataLayer.Matches match = db.findMathByMatchId(matchId);
             Assert.IsNull(match);
         }
 
@@ -599,7 +599,7 @@ namespace Test.UnitTests
             int itemId = db.addFBItem(null, null, DateTime.Now, null, null, null, null, null);
             int matchId = db.addMatch(cItemId, itemId, "");
             db.updateMatch(matchId, "hello");
-            Matches match = db.findMathByMatchId(matchId);
+            WorkerHost.DataLayer.Matches match = db.findMathByMatchId(matchId);
             Assert.IsNotNull(match);
             Assert.AreEqual("hello", match.matchStatus);
         }
@@ -611,19 +611,19 @@ namespace Test.UnitTests
             int cItemId = db.addFoundItem(null, null, DateTime.Now, null, null, 0, validExistCompanyName, null, null, null, true);
             int itemId = db.addFBItem(null, null, DateTime.Now, null, null, null, null, null);
             int matchId = db.addMatch(cItemId, itemId, "");
-            Matches match = db.findMathByMatchId(matchId);
+            WorkerHost.DataLayer.Matches match = db.findMathByMatchId(matchId);
             Assert.IsNotNull(match);
         }
         [TestMethod]
         public void findMatchValidNotExistId()
         {
-            Matches match = db.findMathByMatchId(337484);
+            WorkerHost.DataLayer.Matches match = db.findMathByMatchId(337484);
             Assert.IsNull(match);
         }
         [TestMethod]
         public void findMatchNotValidId()
         {
-            Matches match = db.findMathByMatchId(-1);
+            WorkerHost.DataLayer.Matches match = db.findMathByMatchId(-1);
             Assert.IsNull(match);
         }
 
@@ -632,20 +632,20 @@ namespace Test.UnitTests
         [TestMethod]
         public void find_user_valid_andExist()
         {
-            User user = db.findUserByUserName(validExistUserName);
+            WorkerHost.DataLayer.User user = db.findUserByUserName(validExistUserName);
             Assert.IsNotNull(user);
             Assert.AreEqual(user.UserName, validExistUserName);
         }
         [TestMethod]
         public void find_user_valid_andNotExist()
         {
-            User user = db.findUserByUserName(validNotExistUserName);
+            WorkerHost.DataLayer.User user = db.findUserByUserName(validNotExistUserName);
             Assert.IsNull(user);
         }
         [TestMethod]
         public void find_user_not_valid()
         {
-            User user = db.findUserByUserName(notValidUserName);
+            WorkerHost.DataLayer.User user = db.findUserByUserName(notValidUserName);
             Assert.IsNull(user);
         }
 
@@ -655,7 +655,7 @@ namespace Test.UnitTests
         public void add_user_notExist_valid()
         {
             string str = db.addUser(validNotExistUserName, "", true);
-            User user = db.findUserByUserName(validNotExistUserName);
+            WorkerHost.DataLayer.User user = db.findUserByUserName(validNotExistUserName);
             Assert.AreEqual(str, "true");
             Assert.IsNotNull(user);
         }
@@ -663,7 +663,7 @@ namespace Test.UnitTests
         public void add_user_Exist_valid()
         {
             string str = db.addUser(validExistUserName, "", true);
-            User user = db.findUserByUserName(validExistUserName);
+            WorkerHost.DataLayer.User user = db.findUserByUserName(validExistUserName);
             Assert.AreNotEqual(str, "true");
         }
         [TestMethod]
@@ -677,7 +677,7 @@ namespace Test.UnitTests
         {
             string str = db.removeUser(validExistUserName);
             Assert.AreEqual("true", str);
-            User user = db.findUserByUserName(validExistUserName);
+            WorkerHost.DataLayer.User user = db.findUserByUserName(validExistUserName);
             Assert.IsNull(user);
         }
         [TestMethod]
@@ -699,7 +699,7 @@ namespace Test.UnitTests
         {
             string str = db.updateUser(validExistUserName, "new");
             Assert.AreEqual(str, "true");
-            User user = db.findUserByUserName(validExistUserName);
+            WorkerHost.DataLayer.User user = db.findUserByUserName(validExistUserName);
             Assert.AreEqual(user.password, "new");
         }
 
