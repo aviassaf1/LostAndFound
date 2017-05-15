@@ -397,6 +397,7 @@
     </Compile>
     <Compile Include="ViewWorkers.aspx.designer.cs">
       <DependentUpon>ViewWorkers.aspx</DependentUpon>
+	</Compile>
     <Compile Include="AddWorker.aspx.cs">
       <DependentUpon>AddWorker.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
