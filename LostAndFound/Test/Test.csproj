@@ -50,8 +50,19 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServerUnitTest\AdminManagerUnitTest.cs" />
+    <Compile Include="ServerUnitTest\CacheUnitTest.cs" />
+    <Compile Include="ServerUnitTest\CompanyManagerUnitTest.cs" />
+    <Compile Include="ServerUnitTest\DatabaseUnitTests.cs" />
+    <Compile Include="ServerUnitTest\ItemManagerUnitTest.cs" />
+    <Compile Include="ServerUnitTest\MatchMangerUnitTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WorkerHost\WorkerHost.csproj">
+      <Project>{061b290a-8b85-4d37-bce2-4db4f7072b57}</Project>
+      <Name>WorkerHost</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
