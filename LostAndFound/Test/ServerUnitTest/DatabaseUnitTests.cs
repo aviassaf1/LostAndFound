@@ -66,7 +66,8 @@ namespace Test.UnitTests
         {
             string userName = "tomer";
             string companyName = "myComp";
-            string str = db.addCompany(userName, "tomer", companyName, "0522222222", null);
+            string str = db.addCompany(userName,"Gg12345", companyName, "0522222222", null,"1212323214",new System.Collections.Generic.Dictionary<string, string>(),
+                new System.Collections.Generic.Dictionary<string, string>());
             User user = db.findUserByUserName(userName);
             Companies company = db.findCompanyByCompanyName(companyName);
             Assert.AreEqual(str, "true");
@@ -80,7 +81,8 @@ namespace Test.UnitTests
         {
             string userName = "testUser";
             string companyName = "testCompany";
-            string str = db.addCompany(userName, "tomer", companyName, "0522222222", null);
+            string str = db.addCompany(userName, "tomer", companyName, "0522222222", null, "1212323214", new System.Collections.Generic.Dictionary<string, string>(),
+                new System.Collections.Generic.Dictionary<string, string>());
             Assert.AreNotEqual("true", str);
         }
         [TestMethod]
@@ -88,16 +90,20 @@ namespace Test.UnitTests
         {
             string userName = "";
             string companyName = "testCompany";
-            db.addCompany(userName, "tomer", companyName, "0522222222", null);
-            string str = db.addCompany(userName, "tomer", companyName, "0522222222", null);
+            db.addCompany(userName, "tomer", companyName, "0522222222", null, "1212323214", new System.Collections.Generic.Dictionary<string, string>(),
+                new System.Collections.Generic.Dictionary<string, string>());
+            string str = db.addCompany(userName, "tomer", companyName, "0522222222", null, "1212323214", new System.Collections.Generic.Dictionary<string, string>(),
+                new System.Collections.Generic.Dictionary<string, string>());
         }
         [TestMethod]
         public void add_company_companyName_notValid()
         {
             string userName = "testUser";
             string companyName = "";
-            db.addCompany(userName, "tomer", companyName, "0522222222", null);
-            string str = db.addCompany(userName, "tomer", companyName, "0522222222", null);
+            db.addCompany(userName, "tomer", companyName, "0522222222", null, "1212323214", new System.Collections.Generic.Dictionary<string, string>(),
+                new System.Collections.Generic.Dictionary<string, string>());
+            string str = db.addCompany(userName, "tomer", companyName, "0522222222", null, "1212323214", new System.Collections.Generic.Dictionary<string, string>(),
+                new System.Collections.Generic.Dictionary<string, string>());
         }
         [TestMethod]
         public void remove_company_valid_exist()
