@@ -80,5 +80,10 @@ namespace WorkerHost.ServiceLayer.Controllers
             }
             return workers;
         }
+
+        public bool isManager(int key)
+        {
+            return ICM.isManager(key);
+        }
     }
 }

@@ -541,5 +541,23 @@ namespace WorkerHost.Domain.Managers
             }
             return null;
         }
+
+        public bool isManager(int key)
+        {
+            String user = SessionDirector.getInstance.getUserName(key);
+            if (user != null)
+            {
+                String companyName = cache.getCompanyNameByUsername(user);
+                if (companyName != null)
+                {
+                    Company company = cache.getCompany(companyName);
+                    if (company != null && company.Managers.Keys.Contains(user))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
     }
 }

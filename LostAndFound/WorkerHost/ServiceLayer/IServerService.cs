@@ -46,6 +46,8 @@ namespace WorkerHost
         String removeWorker(String delUsername, int key);
         [OperationContract]
         String addWorker(String newUsername, String newPassword, bool isManager, int key);
+        [OperationContract]
+        bool isManager(int key);
 
 
 

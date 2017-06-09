@@ -66,6 +66,9 @@ namespace NewWebClient
                     throw new InvalidOperationException("Validation of Anti-XSRF token failed.");
                 }
             }
+
+            Page.FindControl("AddW").Visible = (bool)Session["isManager"];
+            Page.FindControl("ViewW").Visible = (bool)Session["isManager"];
         }
 
         protected void Page_Load(object sender, EventArgs e)

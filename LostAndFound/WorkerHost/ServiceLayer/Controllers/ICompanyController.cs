@@ -29,6 +29,9 @@ namespace WorkerHost.ServiceLayer.Controllers
         String removeWorker(String delUsername, int key);
         [OperationContract]
         String addWorker(String newUsername, String newPassword, bool isManager, int key);
+        [OperationContract]
         List<WorkerData> getCompanyWorkers(int token);
+        [OperationContract]
+        bool isManager(int key);
     }
 }
