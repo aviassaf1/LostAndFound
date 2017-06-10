@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Jil;
 using Newtonsoft.Json;
 using System.Drawing;
+using NewWebClient;
 
 namespace VisionApiTest
 {
@@ -44,11 +45,11 @@ namespace VisionApiTest
         static void processImage(string path)
         {
             List<string> description = new List<string>();
-            List<string> colorList = new List<string>();
-            DoStuff(path, description, colorList).Wait();
+            List<int> colorIndexList = new List<int>();
+            DoStuff(path, description, colorIndexList).Wait();
         }
 
-        private static string getColorName(int red, int green, int blue)
+        /*private static string getColorName(int red, int green, int blue)
         {
             foreach (KnownColor kc in Enum.GetValues(typeof(KnownColor)))
             {
@@ -59,9 +60,9 @@ namespace VisionApiTest
                 }
             }
             return "color name not found";
-        }
+        }*/
 
-        static async Task DoStuff(string filePath, List<string> descArr, List<string> colorsList)
+        static async Task DoStuff(string filePath, List<string> descArr, List<int> colorIndexList)
         {
             const string apiKey = "AIzaSyAqXXOCmKkLYOWIhZ7j1ssYF2pcM-KigsI";
             const string baseUrlFormat = "https://vision.googleapis.com/v1/images:annotate?key={0}";
@@ -126,8 +127,8 @@ namespace VisionApiTest
                             int red = color["red"];
                             int green = color["green"];
                             int blue = color["blue"];
-                            string colorName = getColorName(red, green, blue);
-                            colorsList.Add(colorName);
+                            int colorIndex = ColorFromRGB.getColor(red, green, blue);
+                            colorIndexList.Add(colorIndex);
                         }
                     }
                 }
