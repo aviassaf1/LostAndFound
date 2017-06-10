@@ -99,6 +99,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -408,6 +409,7 @@
     <Compile Include="EditCompany.aspx.designer.cs">
       <DependentUpon>EditCompany.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ImageChooser.cs" />
     <Compile Include="ImageProccesing\ImageProccessingClass.cs" />
     <Compile Include="ViewWorkers.aspx.cs">
       <DependentUpon>ViewWorkers.aspx</DependentUpon>
