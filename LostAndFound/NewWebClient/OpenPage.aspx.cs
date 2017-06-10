@@ -16,6 +16,7 @@ namespace NewWebClient
         public const string FaceBookAppKey = "f2631cbbee9a9ccbcdb09558a6f1bc52";
         protected void Page_Load(object sender, EventArgs e)
         {
+            Session.Clear();
             if (string.IsNullOrEmpty(Request.QueryString["access_token"])) return; //ERROR! No token returned from Facebook!!
 
             //let's send an http-request to facebook using the token            
