@@ -11,8 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewWebClient", "NewWebClien
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{F51249F1-2D86-4829-BB90-30CD1C975573}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cloudSightXamarin", "..\..\CloudSightXamarin-master\cloudSightXamarin\cloudSightXamarin.csproj", "{5DAC23ED-7558-4828-AAF2-82F6CE2CAA12}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,16 +69,6 @@ Global
 		{F51249F1-2D86-4829-BB90-30CD1C975573}.Release|iPhone.Build.0 = Release|Any CPU
 		{F51249F1-2D86-4829-BB90-30CD1C975573}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{F51249F1-2D86-4829-BB90-30CD1C975573}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
-		{5DAC23ED-7558-4828-AAF2-82F6CE2CAA12}.Debug|Any CPU.ActiveCfg = Debug|iPhone
-		{5DAC23ED-7558-4828-AAF2-82F6CE2CAA12}.Debug|iPhone.ActiveCfg = Debug|iPhone
-		{5DAC23ED-7558-4828-AAF2-82F6CE2CAA12}.Debug|iPhone.Build.0 = Debug|iPhone
-		{5DAC23ED-7558-4828-AAF2-82F6CE2CAA12}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
-		{5DAC23ED-7558-4828-AAF2-82F6CE2CAA12}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
-		{5DAC23ED-7558-4828-AAF2-82F6CE2CAA12}.Release|Any CPU.ActiveCfg = Release|iPhone
-		{5DAC23ED-7558-4828-AAF2-82F6CE2CAA12}.Release|iPhone.ActiveCfg = Release|iPhone
-		{5DAC23ED-7558-4828-AAF2-82F6CE2CAA12}.Release|iPhone.Build.0 = Release|iPhone
-		{5DAC23ED-7558-4828-AAF2-82F6CE2CAA12}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
-		{5DAC23ED-7558-4828-AAF2-82F6CE2CAA12}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
