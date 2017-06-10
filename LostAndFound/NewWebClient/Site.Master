@@ -57,6 +57,7 @@
                                 <li><a runat="server" href="~/ViewItems">צפה בפריט</a></li>
                                 <li id="ViewW" runat="server"><a runat="server" href="~/ViewWorkers">צפה בעובדים</a></li>
                                 <li id="AddW" runat="server"><a runat="server" href="~/AddWorker" >הוסף עובד</a></li>
+                                <li><a runat="server" href="~/OpenPage">התנתק</a></li>
                        
                             </ul>
                         </AnonymousTemplate>
