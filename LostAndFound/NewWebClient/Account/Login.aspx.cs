@@ -58,6 +58,10 @@ namespace NewWebClient.Account
 
             return s;
         }
+        private void showAlert(String content)
+        {
+            Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "popup", "<script>alert(\"" + content + "\");</script>");
+        }
 
         protected void LogIn(object sender, EventArgs e)
         {
@@ -84,6 +88,10 @@ namespace NewWebClient.Account
                         Session["token"] = int.Parse(res);
                         Response.Redirect("../ViewCompanies.aspx");
                     }
+                    else
+                    {
+                        showAlert(res);
+                    }
                 }
                 else
                 {
@@ -96,6 +104,10 @@ namespace NewWebClient.Account
                         Session["isManager"] = channel.ServerService.isManager((int)Session["token"]); 
                         Response.Redirect("../ViewItems.aspx");
                         //string sessionToken = Session["token"].ToString();
+                    }
+                    else
+                    {
+                        showAlert(res);
                     }
                 }
                 

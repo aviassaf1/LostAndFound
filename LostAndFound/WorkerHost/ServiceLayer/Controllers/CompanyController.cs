@@ -37,6 +37,8 @@ namespace WorkerHost.ServiceLayer.Controllers
         public List<GroupData> getSystemCompanyFBGroup(int key)
         {
             Dictionary<string, string> fbs=ICM.getSystemCompanyFBGroup( key);
+            if (fbs == null)
+                return null;
             List<GroupData> fbgs = new List<GroupData>();
             foreach(string id in fbs.Keys)
             {
@@ -73,6 +75,8 @@ namespace WorkerHost.ServiceLayer.Controllers
         public List<WorkerData> getCompanyWorkers(int key)
         {
             Dictionary<string, bool> workers2 = ICM.getCompanyWorkers(key);
+            if (workers2 == null)
+                return null;
             List<WorkerData> workers = new List<WorkerData>();
             foreach (string userName in workers2.Keys)
             {

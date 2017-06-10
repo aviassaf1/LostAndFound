@@ -59,7 +59,7 @@ namespace WorkerHost.Domain.Managers
             String user = SessionDirector.getInstance.getUserName(key);
             if (user == null)
             {
-                logg = "addFoundItem: session key does not exist";
+                logg = "הוספת פריט נכשלה, אנא נסה להתחבר מחדש";
                 logger.logPrint(logg, 0);
                 logger.logPrint(logg, 2);
                 return null;
@@ -67,7 +67,7 @@ namespace WorkerHost.Domain.Managers
             string companyName = cache.getCompanyNameByUsername(user);
             if (companyName == null)
             {
-                logg = "PublishInventory: session key does not exist";
+                logg = "הוספת פריט נכשלה, אנא נסה להתחבר מחדש";
                 logger.logPrint(logg, 0);
                 logger.logPrint(logg, 2);
                 return logg;
@@ -81,14 +81,14 @@ namespace WorkerHost.Domain.Managers
                 companyName == null || contactName == null || contactPhone == null ||
                 photoLocation == null || token == null)
             {
-                logg = "one of or more argument are null, add found itemm failed";
+                logg = "הוספת פריט נכשלה, אחד השדות או יותר לא תקינים";
                 logger.logPrint(logg, 0);
                 logger.logPrint(logg, 2);
                 return logg;
             }
             if (cache.getCompany(companyName) == null)
             {
-                logg = "add found item fail, company does not exist";
+                logg = "הוספת פריט נכשלה, החברה לא תקינה";
                 logger.logPrint(logg, 0);
                 logger.logPrint(logg, 2);
                 return logg;
@@ -98,7 +98,7 @@ namespace WorkerHost.Domain.Managers
             {
                 if (!enColors.ContainsKey(color))
                 {
-                    logg = "add found item fail, there is no color like that";
+                    logg = "הוספת פריט נכשלה, צבע לא תקין";
                     logger.logPrint(logg, 0);
                     logger.logPrint(logg, 2);
                     return logg;
@@ -107,7 +107,7 @@ namespace WorkerHost.Domain.Managers
             }
             if (!enTypes.ContainsKey(sType))
             {
-                logg = "add found item fail, there is no item type like that";
+                logg = "הוספת פריט נכשלה, סוג פריט לא קיים";
                 logger.logPrint(logg, 0);
                 logger.logPrint(logg, 2);
                 return logg;
@@ -116,7 +116,7 @@ namespace WorkerHost.Domain.Managers
             //check Date is not bigger than today
             if (date.CompareTo(DateTime.Now) > 0)
             {
-                logg = "add found item: date is invalid";
+                logg = "הוספת פריט נכשלה, תאריך לא תקין";
                 logger.logPrint(logg, 0);
                 logger.logPrint(logg, 2);
                 return logg;
@@ -139,7 +139,7 @@ namespace WorkerHost.Domain.Managers
             String user = SessionDirector.getInstance.getUserName(key);
             if (user == null)
             {
-                logg = "addLostItem: session key does not exist";
+                logg = "הוספת פריט נכשלה, אנא נסה להתחבר מחדש";
                 logger.logPrint(logg, 0);
                 logger.logPrint(logg, 2);
                 return null;
@@ -147,7 +147,7 @@ namespace WorkerHost.Domain.Managers
             string companyName = cache.getCompanyNameByUsername(user);
             if (companyName == null)
             {
-                logg = "PublishInventory: session key does not exist";
+                logg = "הוספת פריט נכשלה, אנא נסה להתחבר מחדש";
                 logger.logPrint(logg, 0);
                 logger.logPrint(logg, 2);
                 return logg;
@@ -161,14 +161,14 @@ namespace WorkerHost.Domain.Managers
                 companyName == null || contactName == null || contactPhone == null ||
                 photoLocation == null || token == null)
             {
-                logg = "one of or more argument are null, add lost itemm failed";
+                logg = "הוספת פריט נכשלה, אחד השדות או יותר לא תקינים";
                 logger.logPrint(logg, 0);
                 logger.logPrint(logg, 2);
                 return logg;
             }
             if (cache.getCompany(companyName) == null)
             {
-                logg = "add lost item fail, company does not exist";
+                logg = "הוספת פריט נכשלה, החברה לא תקינה";
                 logger.logPrint(logg, 0);
                 logger.logPrint(logg, 2);
                 return logg;
@@ -178,7 +178,7 @@ namespace WorkerHost.Domain.Managers
             {
                 if (!enColors.ContainsKey(color))
                 {
-                    logg = "add lost item fail, there is no color like that";
+                    logg = "הוספת פריט נכשלה, צבע לא תקין";
                     logger.logPrint(logg, 0);
                     logger.logPrint(logg, 2);
                     return logg;
@@ -187,13 +187,13 @@ namespace WorkerHost.Domain.Managers
             }
             if (!enTypes.ContainsKey(sType))
             {
-                return "add lost item fail, there is no item type like that";
+                return "הוספת פריט נכשלה, סוג פריט לא תקין";
             }
             ItemType type = enTypes[sType];
             //check Date is not bigger than today
             if (date.CompareTo(DateTime.Now) > 0)
             {
-                logg = "add lost item: date is invalid";
+                logg = "הוספת פריט נכשלה, תאריך לא תקין";
                 logger.logPrint(logg, 0);
                 logger.logPrint(logg, 2);
                 return logg;
@@ -236,7 +236,7 @@ namespace WorkerHost.Domain.Managers
             String user = SessionDirector.getInstance.getUserName(key);
             if (user == null)
             {
-                logg = "getCompanyItem: session key does not exist";
+                logg = "מחיקת פריט נכשלה, אנא נסה להתחבר מחדש";
                 logger.logPrint(logg, 0);
                 logger.logPrint(logg, 2);
                 return null;
@@ -244,7 +244,7 @@ namespace WorkerHost.Domain.Managers
             string companyName = cache.getCompanyNameByUsername(user);
             if (companyName == null)
             {
-                logg = "getCompanyItem: session key does not exist";
+                logg = "מחיקת פריט נכשלה, חברה לא קיימת";
                 logger.logPrint(logg, 0);
                 logger.logPrint(logg, 2);
                 return null;
@@ -253,7 +253,7 @@ namespace WorkerHost.Domain.Managers
             CompanyItem item = cache.getCompanyItem(itemID);
             if (item == null)
             {
-                logg = "itemID wasn't found";
+                logg = "מחיקת פריט נכשלה, הפריט לא נמצא במאגר";
                 logger.logPrint(logg, 0);
                 logger.logPrint(logg, 2);
                 return logg;
@@ -264,14 +264,14 @@ namespace WorkerHost.Domain.Managers
                 logg = "someone tried to hack our system";
                 logger.logPrint(logg, 0);
                 logger.logPrint(logg, 2);
-                return "bye bye";
+                return "מחיקת פריט נכשלה, חברה לא קיימת";
             }
             Company company = cache.getCompany(item.CompanyName);
             if ((item.GetType()).Equals(typeof(FoundItem)))
                 return company.removeFoundItem(itemID);
             if ((item.GetType()).Equals(typeof(LostItem)))
                 return company.removeLostItem(itemID);
-            logg = "delete Item worked";
+            logg = "Item deleted";
             logger.logPrint(logg, 0);
             logger.logPrint(logg, 1);
             return logg;
@@ -280,10 +280,49 @@ namespace WorkerHost.Domain.Managers
         public string editItem(int itemID, DateTime date, string location, string description, int serialNumber, string contactName, string contactPhone, int key)
         {
             string logg;
+            String user = SessionDirector.getInstance.getUserName(key);
+            if (user == null)
+            {
+                logg = "עריכת פריט כשלה, נסה להתחבר מחדש";
+                logger.logPrint(logg, 0);
+                logger.logPrint(logg, 2);
+                return null;
+            }
+            string companyName = cache.getCompanyNameByUsername(user);
+            if (companyName == null)
+            {
+                logg = "עריכת פריט כשלה, נסה להתחבר מחדש";
+                logger.logPrint(logg, 0);
+                logger.logPrint(logg, 2);
+                return null;
+            }
+
             CompanyItem item = cache.getCompanyItem(itemID);
+            if (item == null)
+            {
+                logg = "עריכת פריט כשלה, פריט לא נמצא במאגר";
+                logger.logPrint(logg, 0);
+                logger.logPrint(logg, 2);
+                return logg;
+            }
+
+            if (!item.CompanyName.Equals(companyName))
+            {
+                logg = "someone tried to hack our system";
+                logger.logPrint(logg, 0);
+                logger.logPrint(logg, 2);
+                return "עריכת פריט כשלה, חברה לא קיימת";
+            }
             if (item == null || date == null || location == null || description == null || contactName == null || contactName == null || contactPhone == null || DateTime.Today < date)
             {
-                logg = "one or more of the arguments is incorrect, edit item fail";
+                logg = "עריכת פריט נכשלה, אחד הפריטים חסר";
+                logger.logPrint(logg, 0);
+                logger.logPrint(logg, 2);
+                return logg;
+            }
+            if (date > DateTime.Today)
+            {
+                logg = "עריכת פריט נכשלה, תאריך לא תקין";
                 logger.logPrint(logg, 0);
                 logger.logPrint(logg, 2);
                 return logg;
@@ -291,7 +330,7 @@ namespace WorkerHost.Domain.Managers
             logg = item.updateItem(date, location, description, serialNumber, contactName, contactPhone);
             logger.logPrint(logg, 0);
             logger.logPrint(logg, 1);
-            return logg;
+            return "item edited";
         }
 
         public CompanyItem getCompanyItem(int itemID, int key)

@@ -81,7 +81,7 @@ namespace WorkerHost.Domain.Managers
             }
             else
             {
-                return "login failed, user name or password are invalid";
+                return "התחברות נכשלה, שם משתמש או סיסמה לא תקינים";
             }
 
         }
@@ -101,19 +101,20 @@ namespace WorkerHost.Domain.Managers
                         {
                             if (!isManager)
                             {
-                                return company.addWorker(newUsername, newPassword);
+                                company.addWorker(newUsername, newPassword);
                             }
                             else
                             {
-                                return company.addManager(newUsername, newPassword);
+                                company.addManager(newUsername, newPassword);
                             }
+                            return "worker added";
                         }
-                        return "add worker failed, username already exists";
+                        return "הוספת עובד נכשלה, משתמש כבר קיים במערכת";
                     }
 
                 }
             }
-            return "add worker failed";
+            return "הוספת עובד נכשלה";
         }
 
         public String removeWorker(String delUsername,  int key)
@@ -146,7 +147,7 @@ namespace WorkerHost.Domain.Managers
             String user = SessionDirector.getInstance.getUserName(key);
             if (user == null)
             {
-                logg = "PublishInventory: session key does not exist";
+                logg = "פרסום נכשל, אנא נסה להתחבר מחדש";
                 logger.logPrint(logg, 0);
                 logger.logPrint(logg, 2);
                 return logg;
@@ -154,7 +155,7 @@ namespace WorkerHost.Domain.Managers
             string companyName = cache.getCompanyNameByUsername(user);
             if (companyName == null)
             {
-                logg = "PublishInventory: session key does not exist";
+                logg = "פרסום נכשל, אנא נסה להתחבר מחדש";
                 logger.logPrint(logg, 0);
                 logger.logPrint(logg, 2);
                 return logg;
@@ -166,14 +167,14 @@ namespace WorkerHost.Domain.Managers
             }
             if (token == null || groupID == null || companyName == null)
             {
-                logg = "PublishInventory: values cannot be null";
+                logg = "פרסום נכשל, אחד הערכים או יותר לא תקינים";
                 logger.logPrint(logg, 0);
                 logger.logPrint(logg, 2);
                 return logg;
             }
                 if (days > MAXDAYS)
             {
-                logg = "PublishInventory: days is more than MAXDAYS";
+                logg = "פרסום נכשל, כמות הימים שניתן לבחור היא "+ MAXDAYS;
                 logger.logPrint(logg, 0);
                 logger.logPrint(logg, 2);
                 return logg;
@@ -186,7 +187,7 @@ namespace WorkerHost.Domain.Managers
             }
             catch
             {
-                logg = "PublishInventory: token is invalid";
+                logg = "פרסום נכשל, אנא נסה להתחבר מחדש";
                 logger.logPrint(logg, 0);
                 logger.logPrint(logg, 2);
                 return logg;
@@ -196,7 +197,7 @@ namespace WorkerHost.Domain.Managers
             List<CompanyItem> items = ItemManager.getInstance.getAllCompanyItems(key);
             if (items == null)
             {
-                logg = "PublishInventory: companyName is invalid";
+                logg = "פרסום נכשל, שם חברה לא תקין";
                 logger.logPrint(logg, 0);
                 logger.logPrint(logg, 2);
                 return logg;
@@ -229,7 +230,7 @@ namespace WorkerHost.Domain.Managers
             }
             catch (Exception)
             {
-                logg = "PublishInventory: post to facebook failed";
+                logg = "פרסום נכשל, החיבור עם פייסבוק לא צלח אנא נסה להתחבר שוב לפייסבוק ואז למערכת";
                 logger.logPrint(logg, 0);
                 logger.logPrint(logg, 2);
                 return logg;
@@ -304,7 +305,7 @@ namespace WorkerHost.Domain.Managers
             String user = SessionDirector.getInstance.getUserName(key);
             if (user == null)
             {
-                logg = "CompanyManager-addFBGroup: session key does not exist";
+                logg = "הוספת קבוצת פייסבוק נכשלה, מפתח כניסה לא מעודכן, אנא נסה להתחבר בשנית";
                 logger.logPrint(logg, 0);
                 logger.logPrint(logg, 2);
                 return logg;
@@ -312,7 +313,7 @@ namespace WorkerHost.Domain.Managers
             string companyName = cache.getCompanyNameByUsername(user);
             if (companyName == null)
             {
-                logg = "CompanyManager-addFBGroup: session key does not exist";
+                logg = "הוספת קבוצת פייסבוק נכשלה, מפתח כניסה לא מעודכן, אנא נסה להתחבר בשנית";
                 logger.logPrint(logg, 0);
                 logger.logPrint(logg, 2);
                 return logg;
@@ -324,7 +325,7 @@ namespace WorkerHost.Domain.Managers
             Company c = getCompanyByName(companyName);
             if (c == null)
             {
-                logg = "CompanyManager-addFBGroup: company name is not valid";
+                logg = "הוספת קבוצת פייסבוק נכשלה, שם החברה אינו תקין";
                 logger.logPrint(logg, 0);
                 logger.logPrint(logg, 2);
                 return logg;
@@ -335,11 +336,11 @@ namespace WorkerHost.Domain.Managers
                 logg = "Add facebook group worked";
                 logger.logPrint(logg, 0);
                 logger.logPrint(logg, 1);
-                return "true";
+                return "Add facebook group worked";
             }
             else
             {
-                logg = "CompanyManager-addFBGroup: facebook group was already added";
+                logg = "הוספת קבוצת פייסבוק נכשלה, הקבוצה כבר קיימת במערכת";
                 logger.logPrint(logg, 0);
                 logger.logPrint(logg, 2);
                 return logg;

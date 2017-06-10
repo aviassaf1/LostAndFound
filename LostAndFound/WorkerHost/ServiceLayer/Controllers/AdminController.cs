@@ -54,6 +54,8 @@ namespace WorkerHost.ServiceLayer.Controllers
         public List<CompanyData> getAllCompanies(int key)
         {
             List<Company> companies = IAM.getAllCompanies(key);
+            if (companies == null)
+                return null;
             List<CompanyData> res = new List<CompanyData>();
             foreach(Company c in companies)
             {

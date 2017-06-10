@@ -33,19 +33,18 @@ namespace WorkerHost.Domain.Managers
         public string addComapny(string companyName, string phone, 
             HashSet<string> facebookGroups, String companyProfileID, String managerUserName, String managerPassword, int key)
         {
-            
             //check not exist
             //check phone type
             //check password
             string logg;
             if (sd.getAdminName(key) == null)
             {
-                return "user no admin";
+                return "הוספת חברה נכשלה, למשתמש זה אין הרשאות מתאימות";
             }
             if (companyName == null ||  phone == null || facebookGroups == null 
                 || companyProfileID==null || managerUserName==null|| managerPassword==null)
             {
-                logg = "one of the arguments or more is null, add company failed";
+                logg = "הוספת החברה נכשלה, בבקשה הזן את כל הפרטים הדרושים";
                 logger.logPrint(logg, 0);
                 logger.logPrint(logg, 2);
                 return logg;
@@ -53,7 +52,7 @@ namespace WorkerHost.Domain.Managers
             Company company = cache.getCompany(companyName);
             if (company != null)
             {
-                logg = "company already exists in the system";
+                logg = "החברה לא נוספה, החברה כבר קיימת במערכת";
                 logger.logPrint(logg, 0);
                 logger.logPrint(logg, 2);
                 return logg;
@@ -61,7 +60,7 @@ namespace WorkerHost.Domain.Managers
             if (companyName.Equals("") || phone.Equals("")
                 || companyProfileID.Equals("") || managerUserName.Equals("") || managerPassword.Equals(""))
             {
-                logg = "one or more of the fields is missing";
+                logg = "אחד השדות או יותר חסרים";
                 logger.logPrint(logg, 0);
                 logger.logPrint(logg, 2);
                 return logg;
@@ -69,7 +68,7 @@ namespace WorkerHost.Domain.Managers
             // check if the the phone is in a correct format
             if (phone.Length != 10 && phone.Length != 9)
             {
-                logg = "phone number's length is invalid";
+                logg = "מספר טלפון לא תקין";
                 logger.logPrint(logg, 0);
                 logger.logPrint(logg, 2);
                 return logg;
@@ -80,7 +79,7 @@ namespace WorkerHost.Domain.Managers
             bool isKeyRepeting3Times = false;
             if (managerPassword.Length < 6)
             {
-                logg = "password should contain at least 6 ccharacters, add company Fail";
+                logg = logg = "החברה לא נוספה, נא הזן סיסמה חזקה יותר, באורך 6 תוים לפחות";
                 logger.logPrint(logg, 0);
                 logger.logPrint(logg, 2);
                 return logg;
@@ -106,7 +105,7 @@ namespace WorkerHost.Domain.Managers
             }
             if (!(isNumExist && isSmallKeyExist && isBigKeyExist && !isKeyRepeting3Times))
             {
-                logg = "password isnt strong enough";
+                logg = "החברה לא נוספה, נא הזן סיסמה חזקה יותר";
                 logger.logPrint(logg, 0);
                 logger.logPrint(logg, 2);
                 return logg;
@@ -141,12 +140,12 @@ namespace WorkerHost.Domain.Managers
             string logg;
             if (sd.getAdminName(key) == null)
             {
-                return "user no admin";
+                return "עריכת חברה לא התבצעה";
             }
             if (companyName == null || /*password == null ||*/ phone == null || companyName.Equals("") || /*password.Equals("") ||*/
                 phone.Equals(""))
             {
-                logg = "one or more of the fields is missing";
+                logg = "עריכת חברה לא התבצעה, אחד או יותר מהערכים חסרים";
                 logger.logPrint(logg, 0);
                 logger.logPrint(logg, 2);
                 return logg;
@@ -193,7 +192,7 @@ namespace WorkerHost.Domain.Managers
             // check if the the phone is in a correct format
             if (phone.Length != 10 && phone.Length != 9)
             {
-                logg = "phone number's length is invalid";
+                logg = "עריכת חברה לא התבצעה, מספר טלפון לא תקין";
                 logger.logPrint(logg, 0);
                 logger.logPrint(logg, 1);
                 return logg;
@@ -209,7 +208,7 @@ namespace WorkerHost.Domain.Managers
                 return "login succeeded," + key;
             }
             else 
-                return "login failed, user name or password are invalid";
+                return "התחברות נכשלה, שם משתמש או סיסמה לא תקינים";
         }
 
         public List<Company> getAllCompanies(int key)

@@ -27,10 +27,17 @@ namespace NewWebClient
         {
             var argument = ((LinkButton)sender).CommandArgument;
             string ans=Channel.getInstance.ServerService.deleteItem(int.Parse(argument), (int)(Session["token"]));
-            items = Channel.getInstance.ServerService.getAllCompanyItems((int)(Session["token"]));
-            GridView1.DataSource = items;
-            GridView1.DataBind();
-            showAlert(ans);
+            if(ans.Equals("Item deleted"))
+            {
+                showAlert("הפריט נמחק בהצלחה");
+                items = Channel.getInstance.ServerService.getAllCompanyItems((int)(Session["token"]));
+                GridView1.DataSource = items;
+                GridView1.DataBind();
+            }
+            else
+            {
+                showAlert(ans);
+            }
         }
         protected void deleteItem(object sender, GridViewUpdateEventArgs e)
         {
@@ -77,7 +84,14 @@ namespace NewWebClient
                 var channel = Channel.getInstance;
                 int key = (int)Session["token"];
                 string ret = channel.ServerService.publishInventory("1538105046204967", 3, key);
-                showAlert(ret);
+                if (ret.Equals("true"))
+                {
+                    showAlert("פרסום הפריטים הצליח");
+                }
+                else
+                {
+                    showAlert(ret);
+                }
             }
             catch (Exception exc)
             {

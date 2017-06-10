@@ -47,6 +47,8 @@ namespace WorkerHost.ServiceLayer.Controllers
         public List<MatchData> getMatchesByItemID(int itemID, int key)
         {
             List<Match> matches= IMM.getMatchesByItemID(itemID, key);
+            if (matches == null)
+                return null;
             List<MatchData> ret = new List<MatchData>();
             foreach(Match match in matches)
             {

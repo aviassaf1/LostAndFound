@@ -57,8 +57,16 @@ namespace NewWebClient
                     groupsSet.Add(s);
                 }
                 string ret = channel.ServerService.addComapny(companyNameTextBox.Text, PhoneTextBox.Text, groupsSet, FacebookIdTextBox.Text, GroupManager.Text, GroupManagerPass.Text, key);
-                companyNameTextBox.Text = ret;
-                Response.Redirect("/ViewCompanies.aspx");
+                if (ret.Equals("company has been added"))
+                {
+                    showAlert("החברה נוספה בהצלחה");
+                    Response.Redirect("/ViewCompanies.aspx");
+                }
+                else
+                {
+                    showAlert(ret);
+                }
+                
             }
             catch (Exception exc)
             {

@@ -34,7 +34,15 @@ namespace NewWebClient
                 int key = (int)Session["token"];
                 var channel = Channel.getInstance;
                 string ret = channel.ServerService.editCompany(_companyName, "", ph, key);
-                Response.Redirect("/ViewCompanies.aspx");
+                if (ret.Equals("true"))
+                {
+                    showAlert("החברה נערכה בהצלחה");
+                    Response.Redirect("/ViewCompanies.aspx");
+                }
+                else
+                {
+                    showAlert(ret);
+                }
             }
             catch(Exception exc)
             {

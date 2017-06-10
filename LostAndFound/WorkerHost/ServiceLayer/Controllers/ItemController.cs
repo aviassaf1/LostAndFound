@@ -54,8 +54,10 @@ namespace WorkerHost.ServiceLayer.Controllers
 
         public List<CompanyItemData> getAllCompanyItems(int key)
         {
-            List<CompanyItemData> res = new List<CompanyItemData>();
             List<CompanyItem> items = IIM.getAllCompanyItems(key);
+            if (items == null)
+                return null;
+            List<CompanyItemData> res = new List<CompanyItemData>();
             bool stat;
             string type;
             foreach ( CompanyItem i in items)

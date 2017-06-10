@@ -40,9 +40,11 @@ namespace NewWebClient
             matches = channel.ServerService.getMatchesByItemID(Int32.Parse(item1ID),token);
             GridView1.DataSource = matches;
             GridView1.DataBind();
-            
-            CompanyItemData cid= channel.ServerService.getCompanyItem(Int32.Parse(item1ID), token);
-            item1.Text = "פריט מספר " + cid.ItemID + "בצבע " + cid.Colors ;
+            if (matches != null)
+            {
+                CompanyItemData cid = channel.ServerService.getCompanyItem(Int32.Parse(item1ID), token);
+                item1.Text = "פריט מספר " + cid.ItemID + "בצבע " + cid.Colors;
+            }
         }
 
         protected void correctMatch(object sender, EventArgs e)

@@ -32,8 +32,15 @@ namespace NewWebClient
                 int key = (int)Session["token"];
                 var channel = Channel.getInstance;
                 string ret = channel.ServerService.addWorker(workerNameTextBox.Text, password.Text, isManager.Checked, key);
-                workerNameTextBox.Text = ret;
-                Response.Redirect("/ViewWorkers.aspx");
+                if (ret.Equals("worker added"))
+                {
+                    showAlert("העובד נוסף בהצלחה");
+                    Response.Redirect("/ViewWorkers.aspx");
+                }
+                else
+                {
+                    showAlert(ret);
+                }
             }
             catch (Exception exc)
             {

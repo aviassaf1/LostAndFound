@@ -73,8 +73,15 @@ namespace NewWebClient
                 var channel = Channel.getInstance;
                 string ret = channel.ServerService.addFoundItem(sColors, sType, date, location, description,
                 serialNumber, contactName, contactPhone, "D", token);
-                showAlert(ret);
-                Response.Redirect("/ViewItems.aspx");
+                if (ret.Equals("add found item: item was added successfully"))
+                {
+                    showAlert("הפריט נוסף בהצלחה");
+                    Response.Redirect("/ViewItems.aspx");
+                }
+                else
+                {
+                    showAlert(ret);
+                }
             }
             catch (Exception exc)
             {

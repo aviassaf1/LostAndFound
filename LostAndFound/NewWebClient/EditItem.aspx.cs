@@ -96,10 +96,19 @@ namespace NewWebClient
             }
             try
             {
+                int key = (int)Session["token"];
                 var channel = Channel.getInstance;
                 string ret = channel.ServerService.editItem(Int32.Parse(itemid), date, location, description,
-                serialNumber, contactName, contactPhone, 564/*key*/);
-                _contactName.Text = ret;
+                serialNumber, contactName, contactPhone, key);
+                if (ret.Equals("item edited"))
+                {
+                    showAlert("הפריט נערך בהצלחה");
+                    Response.Redirect("/ViewCompanies.aspx");
+                }
+                else
+                {
+                    showAlert(ret);
+                }
             }
             catch (Exception exc)
             {

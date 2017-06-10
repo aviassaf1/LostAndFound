@@ -17,7 +17,7 @@
 </head>
 <body>
     <form runat="server">
-        <asp:ScriptManager runat="server">
+        <asp:ScriptManager runat="server" ID="id1">
             <Scripts>
                 <%--To learn more about bundling scripts in ScriptManager see http://go.microsoft.com/fwlink/?LinkID=301884 --%>
                 <%--Framework Scripts--%>
@@ -52,6 +52,8 @@
                     <asp:LoginView runat="server" ViewStateMode="Disabled">
                         <AnonymousTemplate>
                             <ul class="nav navbar-nav navbar-right">
+                                <li><a runat="server" href="~/AddFacebookGroup">הוסף קבוצת פייסבוק</a></li>
+                                <li><a runat="server" href="~/ViewGroups">צפה בקבוצות פייסבוק</a></li>
                                 <li><a runat="server" href="~/AddFoundItem">הוסף מציאה</a></li>
                                 <li><a runat="server" href="~/AddLostItem">הוסף אבידה</a></li>
                                 <li><a runat="server" href="~/ViewItems">צפה בפריט</a></li>
