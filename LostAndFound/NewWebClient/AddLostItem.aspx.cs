@@ -4,13 +4,18 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.IO;
+using System.Windows.Forms;
+
 
 namespace NewWebClient
 {
     public partial class AddLostItem : System.Web.UI.Page
     {
+        private string _path;
         protected void Page_Load(object sender, EventArgs e)
         {
+            _path = "";
 
         }
 
@@ -81,6 +86,15 @@ namespace NewWebClient
         private void showAlert(String content)
         {
             Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "popup", "<script>alert(\"" + content + "\");</script>");
+        }
+
+        protected void imageChoosingButton_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog fbd = new FolderBrowserDialog();
+            if (fbd.ShowDialog() == DialogResult.OK)
+            {
+                _path = fbd.SelectedPath;
+            }
         }
     }
 }
