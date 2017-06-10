@@ -14,6 +14,7 @@ namespace NewWebClient
     {
        private static OpenFileDialog openFileDialog1;
 
+        [STAThread]
         public static List<String> getImagePath()
         {
             List<String> fList = new List<string>();
