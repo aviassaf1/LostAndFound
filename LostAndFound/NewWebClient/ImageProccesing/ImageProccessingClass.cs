@@ -6,7 +6,8 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Jil;
-
+using Newtonsoft.Json;
+using System.Drawing;
 
 namespace VisionApiTest
 {
@@ -42,10 +43,25 @@ namespace VisionApiTest
     {
         static void processImage(string path)
         {
-            DoStuff(path).Wait();
+            List<string> description = new List<string>();
+            List<string> colorList = new List<string>();
+            DoStuff(path, description, colorList).Wait();
         }
 
-        static async Task DoStuff(string filePath)
+        private static string getColorName(int red, int green, int blue)
+        {
+            foreach (KnownColor kc in Enum.GetValues(typeof(KnownColor)))
+            {
+                Color known = Color.FromKnownColor(kc);
+                if (Color.FromArgb(red, green, blue, 0).ToArgb() == known.ToArgb())
+                {
+                    return known.Name;
+                }
+            }
+            return "color name not found";
+        }
+
+        static async Task DoStuff(string filePath, List<string> descArr, List<string> colorsList)
         {
             const string apiKey = "AIzaSyAqXXOCmKkLYOWIhZ7j1ssYF2pcM-KigsI";
             const string baseUrlFormat = "https://vision.googleapis.com/v1/images:annotate?key={0}";
@@ -93,11 +109,29 @@ namespace VisionApiTest
                     using (var content = response.Content)
                     {
                         var json = await content.ReadAsStringAsync();
-                        Console.WriteLine(json);
+                        dynamic JsonValues = JsonConvert.DeserializeObject<Dictionary<string, object>>(json);
+                        dynamic responses = JsonValues["responses"];
+                        dynamic temp = responses[0];
+                        dynamic labelAnnotations = temp["labelAnnotations"];
+                        foreach (dynamic label in labelAnnotations)
+                        {
+                            descArr.Add(label["description"]);
+                        }
+                        dynamic imagePropertiesAnnotation = temp["imagePropertiesAnnotation"];
+                        dynamic dominantColors = imagePropertiesAnnotation["dominantColors"];
+                        dynamic colors = dominantColors["colors"];
+                        foreach (dynamic label in colors)
+                        {
+                            dynamic color = label["color"];
+                            int red = color["red"];
+                            int green = color["green"];
+                            int blue = color["blue"];
+                            string colorName = getColorName(red, green, blue);
+                            colorsList.Add(colorName);
+                        }
                     }
                 }
             }
         }
-
     }
 }
