@@ -21,14 +21,14 @@ namespace NewWebClient
                 showAlert("מספר קבוצת פייסבוק לא הוזן");
                 return;
             }
-            int fbId = -1;
+            long fbId = -1;
             try
             {
-                fbId = int.Parse(FbIdTextBox.Text);
+                fbId = Int64.Parse(FbIdTextBox.Text);
             }
-            catch
+            catch(Exception ex)
             {
-                showAlert("שם קבוצת פייסבוק לא הוזן");
+                showAlert("מספר קבוצת פייסבוק לא הוזן כראוי");
                 return;
             }
 
@@ -39,8 +39,8 @@ namespace NewWebClient
                 string ret = channel.ServerService.addFBGroup(FbIdTextBox.Text, key);
                 if (ret.Equals("Add facebook group worked"))
                 {
+                    Response.Redirect("/ViewGroups.aspx");
                     showAlert("הקבוצה נוספה בהצלחה");
-                    Response.Redirect("/AddCompany.aspx");
                 }
                 else
                 {

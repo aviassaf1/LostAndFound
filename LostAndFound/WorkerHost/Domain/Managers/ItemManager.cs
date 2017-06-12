@@ -62,7 +62,7 @@ namespace WorkerHost.Domain.Managers
                 logg = "הוספת פריט נכשלה, אנא נסה להתחבר מחדש";
                 logger.logPrint(logg, 0);
                 logger.logPrint(logg, 2);
-                return null;
+                return logg;
             }
             string companyName = cache.getCompanyNameByUsername(user);
             if (companyName == null)
@@ -142,7 +142,7 @@ namespace WorkerHost.Domain.Managers
                 logg = "הוספת פריט נכשלה, אנא נסה להתחבר מחדש";
                 logger.logPrint(logg, 0);
                 logger.logPrint(logg, 2);
-                return null;
+                return logg;
             }
             string companyName = cache.getCompanyNameByUsername(user);
             if (companyName == null)

@@ -48,7 +48,7 @@
             <asp:Button ID="OK" runat="server" Text="הוסף אבידה למערכת" OnClick="Button1_Click" style="margin-left: 0px" Width="261px" />
         </div>
         <div class="col-md-6">
-            <p style="direction: rtl">
+            <p style="direction: rtl" id="panel1" runat="server">
                 <asp:Label runat="server" Width="60" Font-Underline="true">סוג פריט</asp:Label>
                
                 <asp:DropDownList ID="_TypeList" runat="server" Height="16px" Width="133px" style="direction:rtl">

@@ -165,7 +165,7 @@ namespace WorkerHost.Domain.Managers
             {
                 return null;
             }
-            if (token == null || groupID == null || companyName == null)
+            if (token == null || /*groupID == null ||*/ companyName == null)
             {
                 logg = "פרסום נכשל, אחד הערכים או יותר לא תקינים";
                 logger.logPrint(logg, 0);
@@ -226,9 +226,15 @@ namespace WorkerHost.Domain.Managers
             try
             {
                 //make sure post succeeds with GID
-                result = fb.Post(groupID + "/feed", new { message = inventory });
+                Company comp = getCompanyByName(companyName);
+                //
+                foreach (string groupId in comp.FacebookGroups)
+                {
+                    result = fb.Post(groupId + "/feed", new { message = inventory });
+                }
+                //result = fb.Post("1538105046204967" + "/feed", new { message = inventory });
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 logg = "פרסום נכשל, החיבור עם פייסבוק לא צלח אנא נסה להתחבר שוב לפייסבוק ואז למערכת";
                 logger.logPrint(logg, 0);
@@ -559,6 +565,11 @@ namespace WorkerHost.Domain.Managers
                 }
             }
             return false;
+        }
+
+        public void setToken(string companyName, string token)
+        {
+            _FBTokens[companyName] = token;
         }
     }
 }
