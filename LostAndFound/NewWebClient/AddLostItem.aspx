@@ -97,7 +97,7 @@
                     </asp:CheckBoxList>
                 </p>
             <p style="direction: rtl">
-                <asp:Button ID="imageChoosingButton" runat="server" Text="בחר תמונה" OnClick="imageChoosingButton_Click" /></p>
+                &nbsp;</p>
         </div>
     </div>       
 </asp:Content>

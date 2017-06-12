@@ -14,7 +14,11 @@ namespace NewWebClient
         private string _path;
         protected void Page_Load(object sender, EventArgs e)
         {
-            _path = "";
+            _path = (string)(Request.QueryString["path"]);
+            if (!_path.Equals(""))
+            {
+                setDataFromPic();
+            }
         }
 
         protected void Button1_Click(object sender, EventArgs e)
@@ -93,28 +97,13 @@ namespace NewWebClient
             Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "popup", "<script>alert(\"" + content + "\");</script>");
         }
 
-        protected void imageChoosingButton_Click(object sender, EventArgs e)
+        private void setDataFromPic()
         {
-            Thread newThread = new Thread(new ThreadStart(getPath));
-            newThread.SetApartmentState(ApartmentState.STA);
-            newThread.Start();
-        }
-
-        private void getPath()
-        {
-            List<String> pathes = ImageChooser.getImagePath();
-            if (pathes.Count > 0)
-                _path = pathes[0];
-            _path = pathes[0];
-            if (_path.Equals(""))
-            {
-                return;
-            }
             List<string> types = new List<string>();
             List<int> colorsIndex = new List<int>();
             ImageProccessingClass.processImage(_path, types, colorsIndex);
             int i = 0;
-            foreach(ListItem item in _ColorsCheckBox.Items)
+            foreach (ListItem item in _ColorsCheckBox.Items)
             {
                 if (colorsIndex.Contains(i))
                 {
@@ -123,30 +112,31 @@ namespace NewWebClient
                 i++;
             }
             string hebrewFinalType = "";
-            foreach(string type in types)
+            foreach (string type in types)
             {
-                foreach(string t in EditItem.EnglishTypes2Hebrew.Keys)
+                foreach (string t in EditItem.EnglishTypes2Hebrew.Keys)
                 {
-                    if (type.Contains(t) && hebrewFinalType.Equals(""))
+                    if (type.ToUpper().Contains(t) && hebrewFinalType.Equals(""))
                     {
                         hebrewFinalType = EditItem.EnglishTypes2Hebrew[t];
-                        
+                        //hebrewFinalType = type;
                     }
                 }
             }
             if (!hebrewFinalType.Equals(""))
             {
-                foreach(ListItem li in _TypeList.Items)
+                foreach (ListItem li in _TypeList.Items)
                 {
-                    if (li.Value.Equals(hebrewFinalType))
+                    if (li.Text.Equals(hebrewFinalType))
                     {
+                        _TypeList.SelectedValue = li.Value;
+                        //_TypeList.SelectedIndex = 2;
                         li.Selected = true;
+
                         break;
                     }
                 }
             }
-
-            
         }
     }
 }

@@ -15,8 +15,11 @@ namespace NewWebClient
         private string _path;
         protected void Page_Load(object sender, EventArgs e)
         {
-            _path = "";
-
+            _path  = (string)(Request.QueryString["path"]);
+            if (!_path.Equals(""))
+            {
+                setDataFromPic();
+            }
         }
 
         protected void Button1_Click(object sender, EventArgs e)
@@ -95,22 +98,8 @@ namespace NewWebClient
             Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "popup", "<script>alert(\"" + content + "\");</script>");
         }
 
-        protected void imageChoosingButton_Click(object sender, EventArgs e)
+        private void setDataFromPic()
         {
-            Thread newThread = new Thread(new ThreadStart(getPath));
-            newThread.SetApartmentState(ApartmentState.STA);
-            newThread.Start();
-        }
-
-        private void getPath()
-        {
-            List<String> pathes= ImageChooser.getImagePath();
-            if(pathes.Count>0)
-                _path = pathes[0];
-            if (_path.Equals(""))
-            {
-                return;
-            } 
             List<string> types = new List<string>();
             List<int> colorsIndex = new List<int>();
             ImageProccessingClass.processImage(_path, types, colorsIndex);
@@ -142,12 +131,13 @@ namespace NewWebClient
                     if (li.Text.Equals(hebrewFinalType))
                     {
                         _TypeList.SelectedValue = li.Value;
+                        //_TypeList.SelectedIndex = 2;
                         li.Selected = true;
+
                         break;
                     }
                 }
             }
-
         }
     }
 }
