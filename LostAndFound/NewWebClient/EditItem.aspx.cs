@@ -16,7 +16,7 @@ namespace NewWebClient
                 {"PCMOUSE", "עכבר"  }, { "CHARGER","מטען" },{ "PC","מחשב" }, { "PHONE","טלפון" }, { "KEYS","מפתח" }, {"BAG", "תיק" }, { "UMBRELLA","מטריה" },
                 { "SWEATSHIRT","סווטשרט" }, { "GLASSES","משקפיים" }, {"SHOES", "נעל" },{ "FLIPFLOPS","כפכפים" },
                 {"FOLDER" , "תיקיה/מחברת/קלסר"}, { "EARING", "עגיל" }, {  "RING" ,"טבעת"},
-                { "NECKLACE","שרשרת/תליון" },{ "BRACELET", "צמיד" }, {"HEADPHONES","אוזניות" }, {"PencilCase","קלמר" } };
+                { "NECKLACE","שרשרת/תליון" },{ "COMPUTER","מחשב" },{ "BRACELET", "צמיד" }, {"HEADPHONES","אוזניות" }, {"PencilCase","קלמר" } };
 
         protected void Page_Load(object sender, EventArgs e)
         {
