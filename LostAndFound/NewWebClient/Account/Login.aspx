@@ -46,7 +46,8 @@
                     </div>
                 </div>
                 <p>
-                    &nbsp;</p>
+                    <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
+                </p>
                 <p>
                     <%-- Enable this once you have account confirmation enabled for password reset functionality
                     <asp:HyperLink runat="server" ID="ForgotPasswordHyperLink" ViewStateMode="Disabled">Forgot your password?</asp:HyperLink>

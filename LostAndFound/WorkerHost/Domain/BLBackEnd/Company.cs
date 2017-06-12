@@ -33,7 +33,7 @@ namespace WorkerHost.Domain.BLBackEnd
             Managers.Add(managerUserName, managerPassword);
             _workers = new Dictionary<string, string>();
             _fbProfileID = companyProfileID;
-            Cache.getInstance.addNewCompany(this);
+            Cache.getInstance.addNewCompany(this,managerUserName);
         }
         public Company(  String companyName,  String phone, HashSet<string> facebookGroups,
             String companyProfileID, Dictionary<String, String> managers, Dictionary<String, String> workers,

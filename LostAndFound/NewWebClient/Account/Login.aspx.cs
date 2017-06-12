@@ -9,6 +9,8 @@ using System.Web.Script.Serialization;
 using System.Net;
 using System.IO;
 using NewWebClient.Facebook;
+using Facebook;
+using System.Collections.Generic;
 
 namespace NewWebClient.Account
 {
@@ -42,6 +44,31 @@ namespace NewWebClient.Account
                 fbToken = Request.QueryString["access_token"];
                 //fbToken = "EAACEdEose0cBAMKjyMnsZAsUVuws6IwTPIKWIpDqfasPHlRp5ilwpYZBxepNNm97ivGGleR3cpZApBspAYshApGDQ8LiP4bZABHd7r7XLMa0GpJFMiIvXnYDxhptazLFGBpIBy5nZCGBFesyKgmos0rp4NDGI8Mzfo93ApqeALZB5B4ToAmnsu";
             }
+            string fbid = "";
+            var fb = new FacebookClient();
+            try
+            {
+                //make sure the token is good
+                fb = new FacebookClient(fbToken);
+                var parameters = new Dictionary<string, object>();
+                parameters["fields"] = "id";
+                dynamic result;
+                try
+                {
+                    //make sure post succeeds with GID
+                    result = fb.Get("me", parameters);
+                    fbid = result.id;
+                    Label1.Text="במידה ואתה מייצג חברה חדשה, אנא העבר מפתח זה למנהל המערכת " +
+                        fbid +"."+ "  בתודה, הנהלת אבדות ומציאות";
+                }
+                catch (Exception)
+                {
+                }
+            }
+            catch
+            {
+            }
+            
         }
 
 

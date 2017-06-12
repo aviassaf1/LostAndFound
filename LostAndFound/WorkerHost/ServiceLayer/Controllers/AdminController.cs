@@ -31,9 +31,9 @@ namespace WorkerHost.ServiceLayer.Controllers
         }
 
         public string addComapny(string companyName , string phone, HashSet<string> facebookGroups,
-            String companyToken, String managerUserName, String managerPassword, int key)
+            String companyProfileID, String managerUserName, String managerPassword, int key)
         {
-            return IAM.addComapny(companyName, phone, facebookGroups, companyToken, managerUserName, managerPassword, key);
+            return IAM.addComapny(companyName, phone, facebookGroups, companyProfileID, managerUserName, managerPassword, key);
         }
 
         public string deleteCompany(string companyName, int key)

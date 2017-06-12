@@ -13,9 +13,9 @@ namespace WorkerHost
     class ServerService : IServerService
     {
 
-        public string addComapny(string companyName, string phone, HashSet<string> facebookGroups, string companyToken, string managerUserName, string managerPassword, int key)
+        public string addComapny(string companyName, string phone, HashSet<string> facebookGroups, string companyProfileID, string managerUserName, string managerPassword, int key)
         {
-            return AdminController.getInstance.addComapny(companyName, phone, facebookGroups, companyToken,
+            return AdminController.getInstance.addComapny(companyName, phone, facebookGroups, companyProfileID,
                 managerUserName, managerPassword, key);
         }
 

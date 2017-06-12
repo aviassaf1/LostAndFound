@@ -444,9 +444,10 @@ namespace WorkerHost.Domain
             _db.removeFacebookGroup(companyName, url);
         }
 
-        internal void addNewCompany(Company company)
+        internal void addNewCompany(Company company,String managerName)
         {
             _companies.Add(company.UserName, company);
+            _workers.Add(managerName, company.CompanyName);
             _db.addCompany(company.UserName, company.Password, company.CompanyName, company.Phone, company.FacebookGroups,company.FbProfileID, company.Managers, company.Workers);
         }
 

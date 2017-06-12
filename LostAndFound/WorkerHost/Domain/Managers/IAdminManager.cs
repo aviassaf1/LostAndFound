@@ -11,7 +11,7 @@ namespace WorkerHost.Domain.Managers
     {
         String login(String username, String password);
         String addComapny(String companyName, String phone, HashSet<String> facebookGroups,
-            String companyToken, String managerUserName, String managerPassword, int key);
+            String companyProfileID, String managerUserName, String managerPassword, int key);
 
         String deleteCompany(String companyName, int key);
 

@@ -12,7 +12,7 @@ namespace WorkerHost
         String Adminlogin(String username, String password);
         [OperationContract]
         String addComapny(String companyName, String phone, HashSet<String> facebookGroups,
-            String companyToken, String managerUserName, String managerPassword, int key);
+            String companyProfileID, String managerUserName, String managerPassword, int key);
         [OperationContract]
         String deleteCompany(String companyName, int key);
         [OperationContract]
