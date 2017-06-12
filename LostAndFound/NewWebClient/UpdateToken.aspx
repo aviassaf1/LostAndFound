@@ -20,7 +20,7 @@
                     <asp:Label runat="server" Width="120" Font-Underline="true"> שם החברה:</asp:Label>
                     <asp:TextBox ID="companyNameTextBox" runat="server" style="margin-right: 30px" Width="120"></asp:TextBox>
                 </p>
-            <asp:Button ID="OK" runat="server" Text="עדכן טוקן" OnClick="updateTokenButton" style="margin-left: 0px" Width="261px" />
+            <asp:Button ID="OK" runat="server" Text="עדכן מפתח" OnClick="updateTokenButton" style="margin-left: 0px" Width="261px" />
         </div>
         
     </div>       

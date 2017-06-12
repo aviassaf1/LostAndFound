@@ -237,7 +237,7 @@ namespace WorkerHost.Domain.Managers
             Company company = cache.getCompany(companyName);
             if (company == null)
             {
-                logg = "החברה לא נוספה, החברה לא קיימת במערכת";
+                logg = "שינוי מפתח נכשל, החברה לא קיימת במערכת";
                 logger.logPrint(logg, 0);
                 logger.logPrint(logg, 2);
                 return logg;
