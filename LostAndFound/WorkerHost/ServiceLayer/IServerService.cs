@@ -19,8 +19,8 @@ namespace WorkerHost
         String editCompany(String companyName, String password, String phone, int key);
         [OperationContract]
         List<CompanyData> getAllCompanies(int key);
-
-
+        [OperationContract]
+        String updateToken(string token, string companyName, int key);
 
 
 

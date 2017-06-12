@@ -18,5 +18,7 @@ namespace WorkerHost.Domain.Managers
         String editCompany(String companyName, String password, String phone, int key);
 
         List<Company> getAllCompanies(int key);
+
+        String updateToken(string token, string companyName, int key);
     }
 }

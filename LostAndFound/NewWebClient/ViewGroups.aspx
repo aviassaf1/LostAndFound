@@ -26,15 +26,15 @@ PageSize = "5" style="direction: rtl"  >
 
 <asp:TemplateField   HeaderText = "id">
     <ItemTemplate>
-        <asp:Label ID="phone" runat="server"
-                Text='<%# Eval("GoupID")%>'></asp:Label>
+        <asp:Label ID="groupID" runat="server"
+                Text='<%# Eval("GroupID")%>'></asp:Label>
     </ItemTemplate>
 </asp:TemplateField>
 
 <asp:TemplateField>
     <ItemTemplate>
         <asp:LinkButton ID="remove" runat="server"
-            CommandArgument = '<%# Eval("GoupID")%>'
+            CommandArgument = '<%# Eval("GroupID")%>'
          OnClientClick = "return confirm('?האם אתה בטוח שברצונך למחוק את קבוצה זו')"
         Text = "מחק" OnClick = "deleteGroup"></asp:LinkButton>
     </ItemTemplate>

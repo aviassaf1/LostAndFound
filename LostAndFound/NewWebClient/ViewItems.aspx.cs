@@ -83,7 +83,7 @@ namespace NewWebClient
             {
                 var channel = Channel.getInstance;
                 int key = (int)Session["token"];
-                string ret = channel.ServerService.publishInventory("1538105046204967", 3, key);
+                string ret = channel.ServerService.publishInventory("", 3, key);
                 if (ret.Equals("true"))
                 {
                     showAlert("פרסום הפריטים הצליח");

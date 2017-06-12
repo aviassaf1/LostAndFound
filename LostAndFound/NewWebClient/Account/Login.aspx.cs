@@ -28,7 +28,7 @@ namespace NewWebClient.Account
 
             if (string.IsNullOrEmpty(Request.QueryString["access_token"])) return; //ERROR! No token returned from Facebook!!
             Session["token"] = Request.QueryString["access_token"];
-            Session["token"] = "EAACEdEose0cBAMEXRZA4qCnV4aOEZAocqoSunDpGWljfZBYpZAPs5pWy4JI7JwphWuhIiacHWgF2OR859Bj1NYhmJjOgi8SlA7GBXH0bt4bZCrMDX1q0jcQCtevdcg3ZAsVYwxnsP9sh258ybrBS3yvokb26Th2rPLA4YHwmYffj0AElEnUBWAEQJL93zZComwZD";
+            Session["token"] = "EAACEdEose0cBAIpCghPiMolQvyOJibopSlZCHMcv4yPukUHjpA1g139DCesZAt1ibgZB7cYv4wI7zU5ZAVBXucSYwK712mPFv5FReZCyzZBdc6kYlOk7avZBfNABm5VUBmQfITCwoinPbdnTTOM1S1AnZAseFwHJbGeNGSIF26f9yC6jAW5VO7iB";
             //let's send an http-request to facebook using the token            
             string json = GetFacebookUserJSON(Request.QueryString["access_token"]);
 
@@ -40,7 +40,7 @@ namespace NewWebClient.Account
             if (oUser != null)
             {
                 fbToken = Request.QueryString["access_token"];
-                fbToken = "EAACEdEose0cBAMEXRZA4qCnV4aOEZAocqoSunDpGWljfZBYpZAPs5pWy4JI7JwphWuhIiacHWgF2OR859Bj1NYhmJjOgi8SlA7GBXH0bt4bZCrMDX1q0jcQCtevdcg3ZAsVYwxnsP9sh258ybrBS3yvokb26Th2rPLA4YHwmYffj0AElEnUBWAEQJL93zZComwZD";
+                fbToken = "EAACEdEose0cBAIpCghPiMolQvyOJibopSlZCHMcv4yPukUHjpA1g139DCesZAt1ibgZB7cYv4wI7zU5ZAVBXucSYwK712mPFv5FReZCyzZBdc6kYlOk7avZBfNABm5VUBmQfITCwoinPbdnTTOM1S1AnZAseFwHJbGeNGSIF26f9yC6jAW5VO7iB";
             }
         }
 

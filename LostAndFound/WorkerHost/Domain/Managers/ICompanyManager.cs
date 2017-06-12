@@ -23,5 +23,6 @@ namespace WorkerHost.Domain.Managers
         string getToken(string companyName);
         Dictionary<string, bool> getCompanyWorkers(int key);
         bool isManager(int key);
+        void setToken(String companyName, string token);
     }
 }

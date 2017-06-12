@@ -63,5 +63,10 @@ namespace WorkerHost.ServiceLayer.Controllers
             }
             return res;
         }
+
+        public string updateToken(string token, string companyName, int key)
+        {
+            return IAM.updateToken(token, companyName, key);
+        }
     }
 }

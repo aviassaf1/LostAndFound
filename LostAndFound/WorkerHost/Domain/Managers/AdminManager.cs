@@ -220,5 +220,30 @@ namespace WorkerHost.Domain.Managers
 
             return cache.getAllCompanies();
         }
+        public string updateToken(string token, string companyName,int key)
+        {
+            string logg;
+            if (sd.getAdminName(key) == null)
+            {
+                return "שינוי מפתח נכשל, למשתמש זה אין הרשאות מתאימות";
+            }
+            if (companyName == null )
+            {
+                logg = "שינוי מפתח נכשל, בבקשה הזן את כל הפרטים הדרושים";
+                logger.logPrint(logg, 0);
+                logger.logPrint(logg, 2);
+                return logg;
+            }
+            Company company = cache.getCompany(companyName);
+            if (company == null)
+            {
+                logg = "החברה לא נוספה, החברה לא קיימת במערכת";
+                logger.logPrint(logg, 0);
+                logger.logPrint(logg, 2);
+                return logg;
+            }
+            CompanyManager.getInstance.setToken(company.CompanyName, token);
+            return "המפתח שונה בהצלחה";
+        }
     }
 }
