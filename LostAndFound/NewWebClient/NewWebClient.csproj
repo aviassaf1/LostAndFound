@@ -411,7 +411,7 @@
       <DependentUpon>EditCompany.aspx</DependentUpon>
     </Compile>
     <Compile Include="ImageChooser.cs" />
-    <Compile Include="ImageProccesing\ImageProccessingClass.cs" />
+    <Compile Include="ImageProccessingClass.cs" />
     <Compile Include="ViewWorkers.aspx.cs">
       <DependentUpon>ViewWorkers.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

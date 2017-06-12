@@ -8,9 +8,8 @@ using System.Threading.Tasks;
 using Jil;
 using Newtonsoft.Json;
 using System.Drawing;
-using NewWebClient;
 
-namespace VisionApiTest
+namespace NewWebClient
 {
     public class VisionApiRequest
     {
@@ -40,13 +39,11 @@ namespace VisionApiTest
         public IEnumerable<VisionApiRequest> requests { get; set; }
     }
 
-    class ImageProccessingClass
+    public class ImageProccessingClass
     {
-        static void processImage(string path)
+        public static void processImage(string path, List<string> types, List<int> colorIndexList)
         {
-            List<string> description = new List<string>();
-            List<int> colorIndexList = new List<int>();
-            DoStuff(path, description, colorIndexList).Wait();
+            DoStuff(path, types, colorIndexList).Wait();
         }
 
         /*private static string getColorName(int red, int green, int blue)
@@ -116,7 +113,9 @@ namespace VisionApiTest
                         dynamic labelAnnotations = temp["labelAnnotations"];
                         foreach (dynamic label in labelAnnotations)
                         {
-                            descArr.Add(label["description"]);
+                            var temp9 = (label["description"]);
+                            string desc = temp9.Value;
+                            descArr.Add(desc);
                         }
                         dynamic imagePropertiesAnnotation = temp["imagePropertiesAnnotation"];
                         dynamic dominantColors = imagePropertiesAnnotation["dominantColors"];
