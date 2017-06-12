@@ -70,12 +70,12 @@ namespace WorkerHost.Domain.Managers
                 (company.Workers.Keys.Contains(userName)&& company.Workers[userName].Equals(userPassword)) || 
                 (company.Managers.Keys.Contains(userName) && company.Managers[userName].Equals(userPassword))))
             {
-                if (_FBTokens.ContainsKey(company.CompanyName))
+                /*if (_FBTokens.ContainsKey(company.CompanyName))
                     _FBTokens[company.CompanyName] = token;
                 else
                 {
                     _FBTokens.Add(company.CompanyName, token);
-                }
+                }*/
                 int key = SessionDirector.getInstance.generateKey(userName);
                 return "login succeeded,"+key;
             }

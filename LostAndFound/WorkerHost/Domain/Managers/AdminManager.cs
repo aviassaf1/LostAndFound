@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Facebook;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,7 +32,7 @@ namespace WorkerHost.Domain.Managers
         }
 
         public string addComapny(string companyName, string phone, 
-            HashSet<string> facebookGroups, String companyProfileID, String managerUserName, String managerPassword, int key)
+            HashSet<string> facebookGroups, String companyToken, String managerUserName, String managerPassword, int key)
         {
             //check not exist
             //check phone type
@@ -42,7 +43,7 @@ namespace WorkerHost.Domain.Managers
                 return "הוספת חברה נכשלה, למשתמש זה אין הרשאות מתאימות";
             }
             if (companyName == null ||  phone == null || facebookGroups == null 
-                || companyProfileID==null || managerUserName==null|| managerPassword==null)
+                || companyToken==null || managerUserName==null|| managerPassword==null)
             {
                 logg = "הוספת החברה נכשלה, בבקשה הזן את כל הפרטים הדרושים";
                 logger.logPrint(logg, 0);
@@ -58,7 +59,7 @@ namespace WorkerHost.Domain.Managers
                 return logg;
             }
             if (companyName.Equals("") || phone.Equals("")
-                || companyProfileID.Equals("") || managerUserName.Equals("") || managerPassword.Equals(""))
+                || companyToken.Equals("") || managerUserName.Equals("") || managerPassword.Equals(""))
             {
                 logg = "אחד השדות או יותר חסרים";
                 logger.logPrint(logg, 0);
@@ -110,7 +111,31 @@ namespace WorkerHost.Domain.Managers
                 logger.logPrint(logg, 2);
                 return logg;
             }
-            company = new Company(companyName, phone, facebookGroups, companyProfileID,managerUserName, managerPassword);
+            string fbid = "";
+            var fb = new FacebookClient();
+            try
+            {
+                //make sure the token is good
+                fb = new FacebookClient(companyToken);
+            }
+            catch
+            {
+                return null;
+            }
+            var parameters = new Dictionary<string, object>();
+            parameters["fields"] = "id";
+            dynamic result;
+            try
+            {
+                //make sure post succeeds with GID
+                result = fb.Get("me", parameters);
+                fbid = result.id;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+            company = new Company(companyName, phone, facebookGroups, fbid, managerUserName, managerPassword);
             logg = "company has been added";
             logger.logPrint(logg, 0);
             logger.logPrint(logg, 1);

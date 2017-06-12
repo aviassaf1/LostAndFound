@@ -33,7 +33,7 @@
                     <asp:TextBox ID="GroupManagerPass" runat="server" style="margin-right: 30px" Width="120" ControlToValidate="Password"></asp:TextBox>
                 </p>
               <p style="direction: rtl">
-                   <asp:Label runat="server" Width="120" Font-Underline="true">פייסבוק ID</asp:Label> 
+                   <asp:Label runat="server" Width="120" Font-Underline="true">מפתח פייסבוק</asp:Label> 
                     <asp:TextBox ID="FacebookIdTextBox" runat="server" style="margin-right: 30px" Width="120"></asp:TextBox>
                 </p>
             <asp:Button ID="OK" runat="server" Text="הוסף חברה" OnClick="Button1_Click" style="margin-left: 0px" Width="261px" />
