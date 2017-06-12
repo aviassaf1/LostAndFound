@@ -213,6 +213,7 @@
     <Content Include="Account\TwoFactorAuthenticationSignIn.aspx" />
     <Content Include="Account\VerifyPhoneNumber.aspx" />
     <Content Include="EditCompany.aspx" />
+    <Content Include="UpdateToken.aspx" />
     <Content Include="ViewWorkers.aspx" />
     <Content Include="AddWorker.aspx" />
     <Content Include="ViewGroups.aspx" />
@@ -412,6 +413,13 @@
     </Compile>
     <Compile Include="ImageChooser.cs" />
     <Compile Include="ImageProccessingClass.cs" />
+    <Compile Include="UpdateToken.aspx.cs">
+      <DependentUpon>UpdateToken.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UpdateToken.aspx.designer.cs">
+      <DependentUpon>UpdateToken.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ViewWorkers.aspx.cs">
       <DependentUpon>ViewWorkers.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
