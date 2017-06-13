@@ -153,7 +153,8 @@ namespace WorkerHost.Domain.Managers
                 return logg;
             }
             string companyName = cache.getCompanyNameByUsername(user);
-            if (companyName == null)
+            Company comp= getCompanyByName(companyName);
+            if (companyName == null||comp==null)
             {
                 logg = "פרסום נכשל, אנא נסה להתחבר מחדש";
                 logger.logPrint(logg, 0);
@@ -202,7 +203,7 @@ namespace WorkerHost.Domain.Managers
                 logger.logPrint(logg, 2);
                 return logg;
             }
-            string inventory = "אלו הפריטים הנמצאים במחלקת אבדות ומציאות: \n";
+            string inventory = "אלו הפריטים הנמצאים במחלקת אבדות ומציאות בחברת "+companyName+" : \n";
             string format = " {0} בצבע {1}\n";
             DateTime nDaysAgo = DateTime.Now;
             nDaysAgo = nDaysAgo.AddDays(-days);
@@ -222,12 +223,11 @@ namespace WorkerHost.Domain.Managers
                     }
                 }
             }
+            inventory += "\n\n" + "במידה וזיהית את אחד הפריטים ניתן לגשת ל" + companyName + " או ליצור קשר טלפוני במספר " + comp.Phone;
             dynamic result = null;
             try
             {
                 //make sure post succeeds with GID
-                Company comp = getCompanyByName(companyName);
-                //
                 foreach (string groupId in comp.FacebookGroups)
                 {
                     result = fb.Post(groupId + "/feed", new { message = inventory });

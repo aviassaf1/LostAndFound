@@ -156,7 +156,7 @@ namespace WorkerHost.Domain.Managers
                             item.addToDB();
                             match.Item2ID = item.ItemID;
                             match.addToDB();
-                            commentToPost(token, ((FBItem)item).PostID, "שלום, נמצאה התאמה בין הפריט לבין פריט ב" + cItem.CompanyName + " מספר ההתאמה של הפריט הוא: " + match.MatchID);
+                            commentToPost(token, ((FBItem)item).PostID, "שלום,\n"+"בזכות מערכת אבדות ומציאות שפותחה על ידי סטודנטים מאוניברסיטת בן גוריון,\n"+"נמצאה התאמה בין הפריט לבין פריט ב" + cItem.CompanyName + " מספר ההתאמה של הפריט הוא: " + match.MatchID);
                         }
                     }
                 }
