@@ -14,7 +14,45 @@ namespace NewWebClient
         private string _path;
         protected void Page_Load(object sender, EventArgs e)
         {
-            _path = "";
+            _path = (string)(Request.QueryString["path"]);
+            if (!_path.Equals(""))
+            {
+                List<string> types = (List < string > )Session["types"];
+                List<int> colorsIndex = (List < int > )Session["colorsIndex"];
+                int i = 0;
+                foreach (ListItem item in _ColorsCheckBox.Items)
+                {
+                    if (colorsIndex.Contains(i))
+                    {
+                        item.Selected = true;
+                    }
+                    i++;
+                }
+                string hebrewFinalType = "";
+                foreach (string type in types)
+                {
+                    foreach (string t in EditItem.EnglishTypes2Hebrew.Keys)
+                    {
+                        if (type.ToUpper().Contains(t) && hebrewFinalType.Equals(""))
+                        {
+                            hebrewFinalType = EditItem.EnglishTypes2Hebrew[t];
+
+                        }
+                    }
+                }
+                if (!hebrewFinalType.Equals(""))
+                {
+                    foreach (ListItem li in _TypeList.Items)
+                    {
+                        if (li.Text.Equals(hebrewFinalType))
+                        {
+                            li.Selected = true;
+                            break;
+                        }
+                    }
+                }
+
+            }
         }
 
         protected void Button1_Click(object sender, EventArgs e)
@@ -93,60 +131,5 @@ namespace NewWebClient
             Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "popup", "<script>alert(\"" + content + "\");</script>");
         }
 
-        protected void imageChoosingButton_Click(object sender, EventArgs e)
-        {
-            Thread newThread = new Thread(new ThreadStart(getPath));
-            newThread.SetApartmentState(ApartmentState.STA);
-            newThread.Start();
-        }
-
-        private void getPath()
-        {
-            List<String> pathes = ImageChooser.getImagePath();
-            if (pathes.Count > 0)
-                _path = pathes[0];
-            _path = pathes[0];
-            if (_path.Equals(""))
-            {
-                return;
-            }
-            List<string> types = new List<string>();
-            List<int> colorsIndex = new List<int>();
-            ImageProccessingClass.processImage(_path, types, colorsIndex);
-            int i = 0;
-            foreach(ListItem item in _ColorsCheckBox.Items)
-            {
-                if (colorsIndex.Contains(i))
-                {
-                    item.Selected = true;
-                }
-                i++;
-            }
-            string hebrewFinalType = "";
-            foreach(string type in types)
-            {
-                foreach(string t in EditItem.EnglishTypes2Hebrew.Keys)
-                {
-                    if (type.Contains(t) && hebrewFinalType.Equals(""))
-                    {
-                        hebrewFinalType = EditItem.EnglishTypes2Hebrew[t];
-                        
-                    }
-                }
-            }
-            if (!hebrewFinalType.Equals(""))
-            {
-                foreach(ListItem li in _TypeList.Items)
-                {
-                    if (li.Value.Equals(hebrewFinalType))
-                    {
-                        li.Selected = true;
-                        break;
-                    }
-                }
-            }
-
-            
-        }
     }
 }
