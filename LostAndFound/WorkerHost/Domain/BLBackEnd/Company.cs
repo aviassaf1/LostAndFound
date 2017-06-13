@@ -141,6 +141,14 @@ namespace WorkerHost.Domain.BLBackEnd
             {
                 removeLostItem(lostItem);
             }
+            foreach (string workerName in Workers.Keys)
+            {
+                Cache.getInstance.removeWorkerFromCompany(workerName);
+            }
+            foreach (string managerName in Managers.Keys)
+            {
+                Cache.getInstance.removeWorkerFromCompany(managerName);
+            }
             return Cache.getInstance.deleteCompany(_userName, _companyName);
         }
 
@@ -280,7 +288,7 @@ namespace WorkerHost.Domain.BLBackEnd
         }
         public String removeWorker(String username)
         {
-            _managers.Remove(username);
+            //_managers.Remove(username);
             _workers.Remove(username);
             return Cache.getInstance.removeWorkerFromCompany(username);
         }

@@ -519,7 +519,10 @@ namespace WorkerHost.Domain.Managers
 
         public string getToken(string companyName)
         {
-            return _FBTokens[companyName];
+            if (_FBTokens.ContainsKey(companyName))
+                return _FBTokens[companyName];
+            else
+                return null;
         }
 
         public Dictionary<string, bool> getCompanyWorkers(int key)

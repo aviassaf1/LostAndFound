@@ -75,7 +75,7 @@ namespace WorkerHost.Domain.Managers
             string token = CompanyManager.getInstance.getToken(companyName);
             if (token == null)
             {
-                return null;
+                return "הוספת פריט נכשלה, אנא נסה להתחבר בשנית";
             }
             if (sColors == null || sType == null || date == null || location == null || description == null ||
                 companyName == null || contactName == null || contactPhone == null ||
@@ -155,7 +155,7 @@ namespace WorkerHost.Domain.Managers
             string token = CompanyManager.getInstance.getToken(companyName);
             if (token == null)
             {
-                return null;
+                return "הוספת פריט נכשלה, אנא נסה להתחבר בשנית";
             }
             if (sColors == null || sType == null || date == null || location == null || description == null ||
                 companyName == null || contactName == null || contactPhone == null ||
