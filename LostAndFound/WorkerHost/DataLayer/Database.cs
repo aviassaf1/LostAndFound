@@ -11,6 +11,17 @@ namespace WorkerHost.DataLayer
         private static Database singleton;
         private LostFoundFreeDBEntities db;
 
+       /* public static void Main(string[] args)
+        {
+            LostFoundFreeDBEntities ent = new LostFoundFreeDBEntities();
+            foreach (User user in ent.User)
+            {
+                user.test = "שונה";
+            }
+            ent.SaveChanges();
+            int x = 0;
+        }*/
+
         private Database()
         {
         }
