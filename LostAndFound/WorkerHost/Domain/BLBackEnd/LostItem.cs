@@ -22,7 +22,7 @@ namespace WorkerHost.Domain.BLBackEnd
             _serialNumber = serialNumber;
             _companyName = companyName;
             _contactName = contactName;
-            _contactPhone = ContactPhone;
+            _contactPhone = contactPhone;
             _photoLocation = photoLocation;
             _wasFound = wasFound;
         }
@@ -38,7 +38,7 @@ namespace WorkerHost.Domain.BLBackEnd
             _serialNumber = serialNumber;
             _companyName = companyName;
             _contactName = contactName;
-            _contactPhone = ContactPhone;
+            _contactPhone = contactPhone;
             _photoLocation = photoLocation;
             _wasFound = false;
         }

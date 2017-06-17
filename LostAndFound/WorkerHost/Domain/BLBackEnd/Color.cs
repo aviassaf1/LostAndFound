@@ -8,6 +8,6 @@ namespace WorkerHost.Domain.BLBackEnd
 {
     public enum Color
     {
-        PINK, BLACK, BLUE, RED, GREEN, YELLOW, WHITE, PURPEL, ORANGE, GRAY, BROWN, GOLD, SILVER, UNKNOWN
+        PINK, BLACK, BLUE, RED, GREEN, YELLOW, WHITE, PURPLE, ORANGE, GRAY, BROWN, GOLD, SILVER, UNKNOWN
     }
 }

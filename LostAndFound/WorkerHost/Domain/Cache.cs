@@ -39,7 +39,7 @@ namespace WorkerHost.Domain
                 _db = Database.getInstance();
                 initCache();
             }
-            catch
+            catch(Exception ex)
             {
                 _admins = new Dictionary<string, Admin>();
                 _companies = new Dictionary<string, Company>();

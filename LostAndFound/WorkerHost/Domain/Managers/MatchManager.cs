@@ -146,7 +146,9 @@ namespace WorkerHost.Domain.Managers
             List<Item> FBItems = getFBItemsOfCompany(cItem.CompanyName, token);
             foreach (Item item in FBItems)
             {
-                items.Add(item);
+                if (Math.Abs(item.Date.Subtract(cItem.Date).Days) < 4){
+                    items.Add(item);
+                }
             }
             List<Match> matches = Cache.getInstance.getCompany(cItem.CompanyName).getComapanyMatches();
             foreach (Item item in items)

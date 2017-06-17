@@ -24,11 +24,11 @@ namespace NewWebClient
         {
             var argument = ((LinkButton)sender).CommandArgument;
             string ans=Channel.getInstance.ServerService.deleteItem(int.Parse(argument), (int)(Session["token"]));
-            if(ans.Equals("Item deleted"))
+            if(ans.Equals("Item Removed"))
             {
                 showAlert("הפריט נמחק בהצלחה");
                 items = Channel.getInstance.ServerService.getAllCompanyItems((int)(Session["token"]));
-                Response.Redirect(Request.RawUrl);
+                Response.Redirect("/ViewItems.aspx");
             }
             else
             {
