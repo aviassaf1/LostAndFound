@@ -10,7 +10,7 @@ AutoGenerateColumns = "false" Font-Names = "Arial"
 Font-Size = "11pt" AlternatingRowStyle-BackColor = "#C2D69B" 
 HeaderStyle-BackColor = "#6699ff" AllowPaging ="true"  ShowFooter = "false" 
 OnPageIndexChanging = "OnPaging" 
-PageSize = "5" style="direction: rtl" >
+PageSize = "8" style="direction: rtl" >
 <Columns>
 
 <asp:TemplateField ItemStyle-Width = "30px"  HeaderText = "מזהה פריט" runat="server" >
