@@ -395,9 +395,12 @@ namespace WorkerHost.Domain
             int id = _db.addLostItem(lostItem.getColorsList(), lostItem.ItemType.ToString(), lostItem.Date, lostItem.Location,
                 lostItem.Description, lostItem.SerialNumber, lostItem.CompanyName, lostItem.ContactName,
                 lostItem.ContactPhone, lostItem.PhotoLocation, lostItem.WasFound);
-            _lostItems.Add(id, lostItem);
-            getCompany(lostItem.CompanyName).addLostItem(id);
-            lostItem.ItemID = id;
+            if (id != -1)
+            {
+                _lostItems.Add(id, lostItem);
+                getCompany(lostItem.CompanyName).addLostItem(id);
+                lostItem.ItemID = id;
+            }
         }
 
         internal void addFoundItem(FoundItem foundItem)

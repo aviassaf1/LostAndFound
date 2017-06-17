@@ -19,10 +19,7 @@ namespace NewWebClient
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
                 BindData();
-            }
         }
 
         protected void OnPaging(object sender, GridViewPageEventArgs e)
@@ -50,34 +47,25 @@ namespace NewWebClient
         protected void correctMatch(object sender, EventArgs e)
         {
             var argument = ((LinkButton)sender).CommandArgument;
-            if (matches.ElementAt(int.Parse(argument)).MatchStatus.Equals("נכונה"))
-            {
-                string ans = Channel.getInstance.ServerService.changeMatchStatus(matches.ElementAt(int.Parse(argument)).MatchID, "נכון", (int)(Session["token"]));
-                matches = Channel.getInstance.ServerService.getMatchesByItemID(Int32.Parse(item1ID), (int)(Session["token"]));
-                GridView1.DataSource = matches;
-                GridView1.DataBind();
-                showAlert(ans);
-            }
+            string ans = Channel.getInstance.ServerService.changeMatchStatus(int.Parse(argument), "נכון", (int)(Session["token"]));
+            showAlert(ans);
+            Response.Redirect("ViewMatches.aspx?ID="+ Request.QueryString["ID"]);
         }
 
         protected void doneMatch(object sender, EventArgs e)
         {
             var argument = ((LinkButton)sender).CommandArgument;
-            string ans = Channel.getInstance.ServerService.changeMatchStatus(matches.ElementAt(int.Parse(argument)).MatchID, "הושלם", (int)(Session["token"]));
-            matches = Channel.getInstance.ServerService.getMatchesByItemID(Int32.Parse(item1ID), (int)(Session["token"]));
-            GridView1.DataSource = matches;
-            GridView1.DataBind();
+            string ans = Channel.getInstance.ServerService.changeMatchStatus(int.Parse(argument), "הושלם", (int)(Session["token"]));
             showAlert(ans);
+            Response.Redirect("ViewMatches.aspx?ID=" + Request.QueryString["ID"]);
         }
 
         protected void deleteMatch(object sender, EventArgs e)
         {
             var argument = ((LinkButton)sender).CommandArgument;
-            string ans = Channel.getInstance.ServerService.changeMatchStatus(matches.ElementAt(int.Parse(argument)).MatchID,"לא נכון", (int)(Session["token"]));
-            matches = Channel.getInstance.ServerService.getMatchesByItemID(Int32.Parse(item1ID), (int)(Session["token"]));
-            GridView1.DataSource = matches;
-            GridView1.DataBind();
+            string ans = Channel.getInstance.ServerService.changeMatchStatus(int.Parse(argument), "לא נכון", (int)(Session["token"]));
             showAlert(ans);
+            Response.Redirect("ViewMatches.aspx?ID=" + Request.QueryString["ID"]);
         }
     }
 }

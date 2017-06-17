@@ -23,7 +23,6 @@ namespace WorkerHost.Domain.Managers
                 return singleton;
             }
         }
-
         public string changeMatchStatus(int matchID, int statusNum, int key)
         {
             string logg;
@@ -67,11 +66,28 @@ namespace WorkerHost.Domain.Managers
                 {
                     match.MatchStatus = MatchStatus.CORRECT;
                     removeMatchesOfItemExcept(match.MatchID, match.CompanyItemID);
-                    if (Cache.getInstance.getCompanyItem(match.Item2ID) != null)
-                        removeMatchesOfItemExcept(match.MatchID, match.Item2ID);
+                    if (Cache.getInstance.getCompanyItem(match.CompanyItemID) != null)
+                        removeMatchesOfItemExcept(match.MatchID, match.CompanyItemID);
                 }
                 if (statusNum == 2)
+                {
                     match.MatchStatus = MatchStatus.COMPLETE;
+                    CompanyItem item = Cache.getInstance.getCompanyItem(match.CompanyItemID);
+                    if (item.GetType() == typeof(FoundItem))
+                    {
+                        ((FoundItem)item).Delivered = true;
+                    }
+                    else
+                    {
+                        ((LostItem)item).WasFound = true;
+                    }
+                    removeMatchesOfItemExcept(match.MatchID, match.CompanyItemID);
+                    CompanyItem item2 = Cache.getInstance.getCompanyItem(match.Item2ID);
+                    if (item2 != null)
+                    {
+                        removeMatchesOfItemExcept(match.MatchID, match.Item2ID);
+                    }
+                }
                 if (statusNum == 4)
                 {
                     match.MatchStatus = MatchStatus.INCORRECT;
@@ -94,7 +110,6 @@ namespace WorkerHost.Domain.Managers
             logger.logPrint(logg, 1);
             return logg;
         }
-
         private void removeMatchesOfItemExcept(int matchID, int companyItemID)
         {
             CompanyItem cItem = Cache.getInstance.getCompanyItem(companyItemID);
@@ -155,9 +170,9 @@ namespace WorkerHost.Domain.Managers
                         {
                             item.addToDB();
                             match.Item2ID = item.ItemID;
-                            match.addToDB();
                             commentToPost(token, ((FBItem)item).PostID, "שלום, נמצאה התאמה בין הפריט לבין פריט ב" + cItem.CompanyName + " מספר ההתאמה של הפריט הוא: " + match.MatchID);
                         }
+                        match.addToDB();
                     }
                 }
             }
