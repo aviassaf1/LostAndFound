@@ -39,8 +39,9 @@ namespace WorkerHost.Domain
                 _db = Database.getInstance();
                 initCache();
             }
-            catch
+            catch(Exception ex)
             {
+                Console.WriteLine(ex.StackTrace);
                 _admins = new Dictionary<string, Admin>();
                 _companies = new Dictionary<string, Company>();
                 _lostItems = new Dictionary<int, LostItem>();
@@ -135,7 +136,8 @@ namespace WorkerHost.Domain
                 {
                     foreach (string col in stringToListOfColors(li.colors))
                     {
-                        colors.Add(Colors[col]);
+                        if(col!="")
+                            colors.Add(Colors[col]);
                     }
                 }
                 _lostItems.Add(li.itemID, new LostItem(li.itemID, colors, HebTypes[li.itemType], li.lostDate.Value, li.location, li.description, li.CompanyItems.serialNumber.Value, li.companyName, li.CompanyItems.contactName, li.CompanyItems.contactPhone, li.photoLocation, li.delivered.Value));
@@ -148,7 +150,8 @@ namespace WorkerHost.Domain
                 {
                     foreach (string col in stringToListOfColors(fi.colors))
                     {
-                        colors.Add(Colors[col]);
+                        if (col != "")
+                            colors.Add(Colors[col]);
                     }
                 }
                 _foundItems.Add(fi.itemID, new FoundItem(fi.itemID, colors, HebTypes[fi.itemType], fi.findingDate.Value, fi.location, fi.description, fi.CompanyItems.serialNumber.Value, fi.companyName, fi.CompanyItems.contactName, fi.CompanyItems.contactPhone, fi.photoLocation, fi.delivered.Value));
@@ -160,7 +163,8 @@ namespace WorkerHost.Domain
                 {
                     foreach (string col in stringToListOfColors(fbi.colors))
                     {
-                        colors.Add(Colors[col]);
+                        if (col != "")
+                            colors.Add(Colors[col]);
                     }
                 }
                 try {
@@ -395,9 +399,12 @@ namespace WorkerHost.Domain
             int id = _db.addLostItem(lostItem.getColorsList(), lostItem.ItemType.ToString(), lostItem.Date, lostItem.Location,
                 lostItem.Description, lostItem.SerialNumber, lostItem.CompanyName, lostItem.ContactName,
                 lostItem.ContactPhone, lostItem.PhotoLocation, lostItem.WasFound);
-            _lostItems.Add(id, lostItem);
-            getCompany(lostItem.CompanyName).addLostItem(id);
-            lostItem.ItemID = id;
+            if (id != -1)
+            {
+                _lostItems.Add(id, lostItem);
+                getCompany(lostItem.CompanyName).addLostItem(id);
+                lostItem.ItemID = id;
+            }
         }
 
         internal void addFoundItem(FoundItem foundItem)

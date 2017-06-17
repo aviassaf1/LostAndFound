@@ -420,6 +420,13 @@ namespace WorkerHost.Domain.Managers
                 logger.logPrint(logg, 2);
                 return null;
             }
+            if (!_FBTokens.Keys.Contains(companyName))
+            {
+                logg = "CompanyManager-getSystemCompanyFBGroup: session key does not exist";
+                logger.logPrint(logg, 0);
+                logger.logPrint(logg, 2);
+                return null;
+            }
             string token = _FBTokens[companyName];
             if (token == null)
             {

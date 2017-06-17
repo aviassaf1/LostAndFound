@@ -2,7 +2,7 @@
 
 <asp:Content ID="bodyContent" ContentPlaceHolderID="MainContent" runat="server">
         
-        <div id = "dvGrid" style ="padding:10px;width:1108px">
+        <div id = "dvGrid" style ="padding:10px;width:1108px" dir="rtl">
 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
 <ContentTemplate>
 <asp:Label ID="item1" runat="server" ></asp:Label>
@@ -12,11 +12,11 @@ AutoGenerateColumns = "false" Font-Names = "Arial"
 Font-Size = "11pt" AlternatingRowStyle-BackColor = "#C2D69B" 
 HeaderStyle-BackColor = "#6699ff" AllowPaging ="true"  ShowFooter = "false" 
 OnPageIndexChanging = "OnPaging" 
-PageSize = "5" style="direction: rtl"  >
+PageSize = "8" style="direction: rtl"  >
 
 <Columns>
 
-<asp:TemplateField ItemStyle-Width = "100px"  HeaderText = "מזהה פריט">
+<asp:TemplateField ItemStyle-Width = "100px"  HeaderText = "מזהה התאמה">
     <ItemTemplate>
         <asp:Label ID="matchID" runat="server"
                 Text='<%# Eval("MatchID")%>'></asp:Label>

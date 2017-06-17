@@ -53,6 +53,7 @@ namespace NewWebClient
                 }
 
             }
+            _dateCalendar.SelectedDate = DateTime.Today;
         }
 
         protected void Button1_Click(object sender, EventArgs e)
@@ -76,7 +77,7 @@ namespace NewWebClient
                 showAlert("לא נבחר סוג פריט");
             }
             DateTime date = _dateCalendar.SelectedDate;
-            if (date > DateTime.Today)
+            if (date > DateTime.Today||date<new DateTime(2005,1,1))
             {
                 showAlert("תאריך לא תקין, נא לבחור תאריך אמיתי");
             }

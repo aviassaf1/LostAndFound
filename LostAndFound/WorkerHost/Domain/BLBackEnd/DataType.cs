@@ -28,14 +28,14 @@ namespace WorkerHost.Domain.BLBackEnd
         public static Dictionary<string, FBType> FBTypes = new Dictionary<string, FBType>() { { "FOUND", FBType.FOUND }, { "LOST", FBType.LOST } };
         public static Dictionary<string, MatchStatus> status = new Dictionary<string, MatchStatus>() { { "POSSIBLE", MatchStatus.POSSIBLE }, { "CORRECT", MatchStatus.CORRECT }, { "COMPLETE", MatchStatus.COMPLETE }, { "INCORRECT", MatchStatus.INCORRECT } };
         public static Dictionary<string, Color> EnglishColors = new Dictionary<string, Color>(){{ "PINK" , Color.PINK }, { "BLACK", Color.BLACK }, { "BLUE", Color.BLUE }, { "RED", Color.RED },
-                { "GREEN", Color.GREEN }, { "YELLOW", Color.YELLOW }, { "WHITE", Color.WHITE },{ "PURPEL", Color.PURPEL }, { "ORANGE", Color.ORANGE },
+                { "GREEN", Color.GREEN }, { "YELLOW", Color.YELLOW }, { "WHITE", Color.WHITE },{ "PURPLE", Color.PURPLE }, { "ORANGE", Color.ORANGE },
                 { "GRAY", Color.GRAY }, { "BROWN", Color.BROWN }, { "GOLD", Color.GOLD }, { "SILVER", Color.SILVER }};
         public static Dictionary<string, Color> HebColors = new Dictionary<string, Color>(){{ "ורוד" , Color.PINK }, { "שחור", Color.BLACK }, { "כחול", Color.BLUE }, { "אדום", Color.RED }, { "אדומ", Color.RED },
-                { "ירוק", Color.GREEN }, { "צהוב", Color.YELLOW }, { "לבן", Color.WHITE }, { "לבנ", Color.WHITE }, { "סגול", Color.PURPEL }, { "כתום", Color.ORANGE }, { "כתומ", Color.ORANGE },
+                { "ירוק", Color.GREEN }, { "צהוב", Color.YELLOW }, { "לבן", Color.WHITE }, { "לבנ", Color.WHITE }, { "סגול", Color.PURPLE }, { "כתום", Color.ORANGE }, { "כתומ", Color.ORANGE },
                 { "אפור", Color.GRAY }, { "חום", Color.BROWN }, { "חומ", Color.BROWN } , { "זהב", Color.GOLD }, { "זהוב", Color.GOLD }, { "כסף", Color.SILVER }, { "כסוף", Color.SILVER } };
 
         public static Dictionary<Color,string> Colors2Heb = new Dictionary<Color,string>(){{Color.PINK, "ורוד"  }, { Color.BLACK, "שחור" }, {Color.BLUE, "כחול" }, { Color.RED, "אדום" },
-                {  Color.GREEN,"ירוק" }, {Color.YELLOW,"צהוב" }, { Color.WHITE,"לבן" },{  Color.PURPEL,"סגול" }, {Color.ORANGE, "כתום" },
+                {  Color.GREEN,"ירוק" }, {Color.YELLOW,"צהוב" }, { Color.WHITE,"לבן" },{  Color.PURPLE,"סגול" }, {Color.ORANGE, "כתום" },
                 { Color.GRAY,"אפור" }, {  Color.BROWN,"חום" }, {Color.GOLD , "זהב"},  {Color.SILVER, "כסף" }};
 
         public static Dictionary<string, FBType> HebTypes = new Dictionary<string, FBType>(){{ "אבד" , FBType.LOST },{ "איבד" , FBType.LOST },{ "איבוד" , FBType.LOST }, { "נעלם", FBType.LOST },

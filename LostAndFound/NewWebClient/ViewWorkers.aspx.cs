@@ -60,6 +60,7 @@ namespace NewWebClient
             {
                 string ans = Channel.getInstance.ServerService.removeWorker(argument, (int)Session["token"]);
                 BindData();
+                Response.Redirect("/ViewWorkers.aspx");
             }
         }
     }

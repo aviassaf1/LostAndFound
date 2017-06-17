@@ -65,11 +65,6 @@ namespace WorkerHost.Domain.BLBackEnd
             }
         }
 
-        internal string delete()
-        {
-            return Cache.getInstance.deleteMatch(MatchID);
-        }
-
         public MatchStatus MatchStatus
         {
             get

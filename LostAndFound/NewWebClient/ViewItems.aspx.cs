@@ -18,21 +18,17 @@ namespace NewWebClient
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
                 BindData();
-            }
         }
         protected void deleteItem2(object sender, EventArgs e)
         {
             var argument = ((LinkButton)sender).CommandArgument;
             string ans=Channel.getInstance.ServerService.deleteItem(int.Parse(argument), (int)(Session["token"]));
-            if(ans.Equals("Item deleted"))
+            if(ans.Equals("Item Removed"))
             {
                 showAlert("הפריט נמחק בהצלחה");
                 items = Channel.getInstance.ServerService.getAllCompanyItems((int)(Session["token"]));
-                GridView1.DataSource = items;
-                GridView1.DataBind();
+                Response.Redirect("/ViewItems.aspx");
             }
             else
             {
