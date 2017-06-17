@@ -41,6 +41,7 @@ namespace WorkerHost.Domain
             }
             catch(Exception ex)
             {
+                Console.WriteLine(ex.StackTrace);
                 _admins = new Dictionary<string, Admin>();
                 _companies = new Dictionary<string, Company>();
                 _lostItems = new Dictionary<int, LostItem>();

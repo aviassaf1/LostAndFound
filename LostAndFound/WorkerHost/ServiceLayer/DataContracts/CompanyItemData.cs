@@ -210,6 +210,21 @@ namespace WorkerHost.ServiceLayer.DataContracts
             }
         }
 
+        public string HebType
+        {
+            get
+            {
+                if (_type.Equals("lost"))
+                {
+                    return "אבידה";
+                }
+                else
+                {
+                    return "מציאה";
+                }
+            }
+        }
+
         public CompanyItemData(int itemID, List<string> colors, string itemType, string location, DateTime date, string desc,
             int serNum, string comName, string conName, string conPhone, bool stat, string type)
         {

@@ -4,7 +4,7 @@
     <div style="direction: rtl">    
         <asp:Label runat="server" Font-Size="Larger" Font-Bold="true">צפיה בקבוצות פייסבוק</asp:Label>
     </div>
-    <div id = "dvGrid" style ="padding:10px;width:1108px">
+    <div id = "dvGrid" style ="padding:10px;width:1108px" dir="rtl">
 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
 <ContentTemplate>
 

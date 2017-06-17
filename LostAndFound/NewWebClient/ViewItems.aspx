@@ -2,7 +2,7 @@
 
 <asp:Content ID="bodyContent" ContentPlaceHolderID="MainContent" runat="server">
         
-        <div id = "dvGrid" style ="padding:10px;width:1108px">
+        <div id = "dvGrid" style ="padding:10px;width:1108px" dir="rtl">
 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
 <ContentTemplate>
 <asp:GridView ID="GridView1" runat="server"  Width = "550px"
@@ -13,17 +13,25 @@ OnPageIndexChanging = "OnPaging"
 PageSize = "8" style="direction: rtl" >
 <Columns>
 
-<asp:TemplateField ItemStyle-Width = "30px"  HeaderText = "מזהה פריט" runat="server" >
+<asp:TemplateField ItemStyle-Width = "30px"  HeaderText = "מזהה פריט" runat="server">
     <ItemTemplate>
-        <asp:Label ID="ItemID" runat="server"
+        <asp:Label ID="ItemID" runat="server" dir="rtl"
         Text='<%# Eval("ItemID")%>'></asp:Label>
     </ItemTemplate>
 </asp:TemplateField>
 
+    
+
+<asp:TemplateField ItemStyle-Width = "30px"  HeaderText = "אבידה/מציאה" runat="server" >
+    <ItemTemplate>
+        <asp:Label ID="Item_TypeLF" runat="server"
+        Text='<%# Eval("HebType")%>'></asp:Label>
+    </ItemTemplate>
+</asp:TemplateField>
 
 <asp:TemplateField ItemStyle-Width = "100px"  HeaderText = "סוג">
     <ItemTemplate>
-        <asp:Label ID="itemType" runat="server"
+        <asp:Label ID="itemType" runat="server" dir="rtl"
                 Text='<%# Eval("ItemType")%>'></asp:Label>
     </ItemTemplate>
 </asp:TemplateField>
@@ -49,21 +57,21 @@ PageSize = "8" style="direction: rtl" >
     </ItemTemplate>
 </asp:TemplateField>
 
-<asp:TemplateField ItemStyle-Width = "100px"  HeaderText = "מספר סידורי">
+<asp:TemplateField ItemStyle-Width = "30px"  HeaderText = "מספר סידורי">
     <ItemTemplate>
         <asp:Label ID="itemSerial" runat="server"
                 Text='<%# Eval("SerialNumber")%>'></asp:Label>
     </ItemTemplate>
 </asp:TemplateField>
 
-<asp:TemplateField ItemStyle-Width = "100px"  HeaderText = "שם מדווח">
+<asp:TemplateField ItemStyle-Width = "30px"  HeaderText = "שם מדווח">
     <ItemTemplate>
         <asp:Label ID="contactName" runat="server"
                 Text='<%# Eval("ContactName")%>'></asp:Label>
     </ItemTemplate>
 </asp:TemplateField>
 
-<asp:TemplateField ItemStyle-Width = "100px"  HeaderText = "טלפון מדווח">
+<asp:TemplateField ItemStyle-Width = "30px"  HeaderText = "טלפון מדווח">
     <ItemTemplate>
         <asp:Label ID="contactPhone" runat="server"
                 Text='<%# Eval("ContactPhone")%>'></asp:Label>
@@ -77,7 +85,7 @@ PageSize = "8" style="direction: rtl" >
     </ItemTemplate>
 </asp:TemplateField>
 
-<asp:TemplateField ItemStyle-Width = "100px"  HeaderText = "תיאור">
+<asp:TemplateField ItemStyle-Width = "100px"  HeaderText = "תיאור" >
     <ItemTemplate>
         <asp:Label ID="description" runat="server"
                 Text='<%# Eval("Description")%>'></asp:Label>

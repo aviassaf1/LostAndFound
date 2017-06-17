@@ -37,7 +37,6 @@ namespace NewWebClient
                         if (type.ToUpper().Contains(t) && hebrewFinalType.Equals(""))
                         {
                             hebrewFinalType = EditItem.EnglishTypes2Hebrew[t];
-
                         }
                     }
                 }
@@ -52,8 +51,8 @@ namespace NewWebClient
                         }
                     }
                 }
-
             }
+            _dateCalendar.SelectedDate = DateTime.Today;
         }
 
         protected void Button1_Click(object sender, EventArgs e)
