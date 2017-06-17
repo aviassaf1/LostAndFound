@@ -18,10 +18,7 @@ namespace NewWebClient
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
                 BindData();
-            }
         }
         protected void deleteItem2(object sender, EventArgs e)
         {
@@ -31,8 +28,7 @@ namespace NewWebClient
             {
                 showAlert("הפריט נמחק בהצלחה");
                 items = Channel.getInstance.ServerService.getAllCompanyItems((int)(Session["token"]));
-                GridView1.DataSource = items;
-                GridView1.DataBind();
+                Response.Redirect(Request.RawUrl);
             }
             else
             {

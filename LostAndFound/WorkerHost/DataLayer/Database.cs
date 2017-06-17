@@ -940,18 +940,18 @@ namespace WorkerHost.DataLayer
                 {
                     lItem.colors = listOfColorsToString(colors);
                 }
+                lItem.itemID = cItem.itemId;
                 lItem.companyName = companyName;
                 lItem.delivered = wasFound;
                 lItem.description = description;
-                lItem.itemID = cItem.itemId;
                 lItem.itemType = itemType;
                 lItem.location = location;
                 lItem.photoLocation = photoLocation;
-                cItem.LostItems = lItem;
                 lItem.CompanyItems = cItem;
+                cItem.LostItems = lItem;
                 db.SaveChanges();
             }
-            catch
+            catch (Exception e)
             {
                 return -1;
             }
