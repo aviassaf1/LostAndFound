@@ -68,6 +68,8 @@ namespace WorkerHost.Domain.Managers
                     removeMatchesOfItemExcept(match.MatchID, match.CompanyItemID);
                     if (Cache.getInstance.getCompanyItem(match.CompanyItemID) != null)
                         removeMatchesOfItemExcept(match.MatchID, match.CompanyItemID);
+                    if (Cache.getInstance.getCompanyItem(match.Item2ID) != null)
+                        removeMatchesOfItemExcept(match.MatchID, match.Item2ID);
                 }
                 if (statusNum == 2)
                 {
@@ -85,6 +87,14 @@ namespace WorkerHost.Domain.Managers
                     CompanyItem item2 = Cache.getInstance.getCompanyItem(match.Item2ID);
                     if (item2 != null)
                     {
+                        if (item.GetType() == typeof(FoundItem))
+                        {
+                            ((FoundItem)item).Delivered = true;
+                        }
+                        else
+                        {
+                            ((LostItem)item).WasFound = true;
+                        }
                         removeMatchesOfItemExcept(match.MatchID, match.Item2ID);
                     }
                 }
