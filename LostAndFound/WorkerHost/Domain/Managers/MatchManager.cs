@@ -87,13 +87,13 @@ namespace WorkerHost.Domain.Managers
                     CompanyItem item2 = Cache.getInstance.getCompanyItem(match.Item2ID);
                     if (item2 != null)
                     {
-                        if (item.GetType() == typeof(FoundItem))
+                        if (item2.GetType() == typeof(FoundItem))
                         {
-                            ((FoundItem)item).Delivered = true;
+                            ((FoundItem)item2).Delivered = true;
                         }
                         else
                         {
-                            ((LostItem)item).WasFound = true;
+                            ((LostItem)item2).WasFound = true;
                         }
                         removeMatchesOfItemExcept(match.MatchID, match.Item2ID);
                     }
