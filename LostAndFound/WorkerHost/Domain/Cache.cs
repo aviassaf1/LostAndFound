@@ -135,7 +135,8 @@ namespace WorkerHost.Domain
                 {
                     foreach (string col in stringToListOfColors(li.colors))
                     {
-                        colors.Add(Colors[col]);
+                        if(col!="")
+                            colors.Add(Colors[col]);
                     }
                 }
                 _lostItems.Add(li.itemID, new LostItem(li.itemID, colors, HebTypes[li.itemType], li.lostDate.Value, li.location, li.description, li.CompanyItems.serialNumber.Value, li.companyName, li.CompanyItems.contactName, li.CompanyItems.contactPhone, li.photoLocation, li.delivered.Value));
@@ -148,7 +149,8 @@ namespace WorkerHost.Domain
                 {
                     foreach (string col in stringToListOfColors(fi.colors))
                     {
-                        colors.Add(Colors[col]);
+                        if (col != "")
+                            colors.Add(Colors[col]);
                     }
                 }
                 _foundItems.Add(fi.itemID, new FoundItem(fi.itemID, colors, HebTypes[fi.itemType], fi.findingDate.Value, fi.location, fi.description, fi.CompanyItems.serialNumber.Value, fi.companyName, fi.CompanyItems.contactName, fi.CompanyItems.contactPhone, fi.photoLocation, fi.delivered.Value));
@@ -160,7 +162,8 @@ namespace WorkerHost.Domain
                 {
                     foreach (string col in stringToListOfColors(fbi.colors))
                     {
-                        colors.Add(Colors[col]);
+                        if (col != "")
+                            colors.Add(Colors[col]);
                     }
                 }
                 try {
