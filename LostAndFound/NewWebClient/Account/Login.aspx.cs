@@ -113,6 +113,7 @@ namespace NewWebClient.Account
                         res = res.Split(ar)[1];
                         Username.Text = res;
                         Session["token"] = int.Parse(res);
+                        Session["isManager"] = false;
                         Response.Redirect("../ViewCompanies.aspx");
                     }
                     else

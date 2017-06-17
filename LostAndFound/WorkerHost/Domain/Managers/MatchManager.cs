@@ -75,7 +75,7 @@ namespace WorkerHost.Domain.Managers
                 if (statusNum == 4)
                 {
                     match.MatchStatus = MatchStatus.INCORRECT;
-                    match.delete();
+                    company.removeMatch(matchID);
                 }
                 else
                 {
