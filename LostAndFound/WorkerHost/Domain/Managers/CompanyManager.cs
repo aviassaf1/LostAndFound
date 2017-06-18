@@ -336,7 +336,21 @@ namespace WorkerHost.Domain.Managers
                 logger.logPrint(logg, 2);
                 return logg;
             }
+            try
+            {
+                string token = _FBTokens[companyName];
+                FacebookClient fb = new FacebookClient(token);
+                dynamic fbResult = fb.Get(groupID);
+            }
+            catch
+            {
+                logg = "הוספת קבוצת פייסבוק נכשלה, אנא הכנס מספר תקין של קבוצה בפייסבוק";
+                logger.logPrint(logg, 0);
+                logger.logPrint(logg, 2);
+                return logg;
+            }
             bool ok = c.addFacebookGroup(groupID);
+
             if (ok)
             {
                 logg = "Add facebook group worked";

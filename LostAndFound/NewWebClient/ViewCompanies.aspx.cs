@@ -19,10 +19,7 @@ namespace NewWebClient
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
                 BindData();
-            }
         }
 
         protected void OnPaging(object sender, GridViewPageEventArgs e)
@@ -46,7 +43,8 @@ namespace NewWebClient
         {
             var argument = ((LinkButton)sender).CommandArgument;
             string ans = Channel.getInstance.ServerService.deleteCompany(argument, (int)Session["token"]);
-            BindData();
+            Response.Redirect("/ViewCompanies.aspx");
+
         }
 
         protected void editCompany(object sender, EventArgs e)
