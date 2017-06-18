@@ -15,8 +15,9 @@ namespace Test.UnitTests
         private Database db;
         private IAdminManager IDM;
         private ICompanyManager ICM;
-        private int adminKey = SessionDirector.getInstance.generateAdminKey("admin");
-        private int comapnyKey = SessionDirector.getInstance.generateAdminKey("TestAddCompany");
+        private int adminKey;
+        private int comapnyKey;
+        private string FBToken = "EAACEdEose0cBACgowwD00gUgMEIK751N6rlXvPZCK0rZA5HXsTkEWyQm64BeXV3ZAm0xdoccmxLLMpTLjvis8RZB9iWilLWKrnHnijsMvQjlQb1NZCkmnxgNLOZAPq3vgUBaFYBCziBg0gXFfEcGAwNYRkRxfdVC5UDhyW7P7FhUpWeYZBi1paCxDTNGkDBajIZD";
 
         [TestInitialize]
         public void setUp()
@@ -28,6 +29,21 @@ namespace Test.UnitTests
             cache.setUp();
             IDM = AdminManager.getInstance;
             ICM = CompanyManager.getInstance;
+            string res = ICM.login(FBToken, "Guy", "Mc123456");
+            if (res.Contains("login succeeded,"))
+            {
+                char[] ar = { ',' };
+                res = res.Split(ar)[1];
+                comapnyKey = int.Parse(res);
+            }
+
+            string adminRes = IDM.login("admin1", "Mc123456");
+            if (adminRes.Contains("login succeeded,"))
+            {
+                char[] ar = { ',' };
+                adminRes = adminRes.Split(ar)[1];
+                adminKey = int.Parse(adminRes);
+            }
         }
 
         [TestCleanup]
@@ -45,16 +61,16 @@ namespace Test.UnitTests
         }
 
         [TestMethod]
-        public void TestAddCompanyWrongPassword()
+        public void TestAddCompanyWrongPassword() ///weird test
         {
             Assert.IsNull(ICM.getCompanyByName("TestAddCompany"));
-            IDM.addComapny("TestAddCompany", "050000000", new System.Collections.Generic.HashSet<string>(), "testfbID", "mangerName", "Gg123456", adminKey);
+            IDM.addComapny("TestAddCompany", "050000000", new System.Collections.Generic.HashSet<string>(), "testfbID", "mangerName", "gg123456", adminKey);
             Assert.IsNull(ICM.getCompanyByName("TestAddCompany"));
-            IDM.addComapny("TestAddCompany", "050000000", new System.Collections.Generic.HashSet<string>(), "testfbID", "mangerName", "Gg123456", adminKey);
+            IDM.addComapny("TestAddCompany", "050000000", new System.Collections.Generic.HashSet<string>(), "testfbID", "mangerName", "GG123456", adminKey);
             Assert.IsNull(ICM.getCompanyByName("TestAddCompany"));
-            IDM.addComapny("TestAddCompany", "050000000", new System.Collections.Generic.HashSet<string>(), "testfbID", "mangerName", "Gg123456", adminKey);
+            IDM.addComapny("TestAddCompany", "050000000", new System.Collections.Generic.HashSet<string>(), "testfbID", "mangerName", "Gggggggg", adminKey);
             Assert.IsNull(ICM.getCompanyByName("TestAddCompany"));
-            IDM.addComapny("TestAddCompany", "050000000", new System.Collections.Generic.HashSet<string>(), "testfbID", "mangerName", "Gg123456", adminKey);
+            IDM.addComapny("TestAddCompany", "050000000", new System.Collections.Generic.HashSet<string>(), "testfbID", "mangerName", "00123456", adminKey);
             Assert.IsNull(ICM.getCompanyByName("TestAddCompany"));
         }
 
@@ -132,12 +148,10 @@ namespace Test.UnitTests
             Assert.IsNotNull(comp);
             string pas1 = comp.Password;
             string phone1 = comp.Phone;
-            IDM.editCompany("Guy", "TestEdit12", "051111111", adminKey);
+            IDM.editCompany("Guy", "", "051111111", adminKey);
             comp = ICM.getCompanyByName("Guy");
             Assert.IsNotNull(ICM.getCompanyByName("Guy"));
-            Assert.AreNotEqual(pas1, comp.Password);
             Assert.AreNotEqual(phone1, comp.Phone);
-            Assert.AreEqual("TestEdit12", comp.Password);
             Assert.AreEqual("051111111", comp.Phone);
         }
 
@@ -146,45 +160,13 @@ namespace Test.UnitTests
         {
             Company comp = ICM.getCompanyByName("");
             Assert.IsNull(comp);
-            Assert.AreEqual("one or more of the fields is missing", IDM.editCompany("", "TestEdit12", "051111111", adminKey));
+            Assert.AreEqual("עריכת חברה לא התבצעה, אחד או יותר מהערכים חסרים", IDM.editCompany("", "TestEdit12", "051111111", adminKey));
         }
 
         [TestMethod]
         public void TestEditCompanyNullCompany()
         {
-            Assert.AreEqual("one or more of the fields is missing", IDM.editCompany(null, "TestEdit12", "051111111", adminKey));
-        }
-
-        [TestMethod]
-        public void TestEditCompanyNoPassword()
-        {
-            Company comp = ICM.getCompanyByName("Guy");
-            Assert.IsNotNull(comp);
-            string pas1 = comp.Password;
-            string phone1 = comp.Phone;
-            IDM.editCompany("Guy", "", "051111111", adminKey);
-            comp = ICM.getCompanyByName("Guy");
-            Assert.IsNotNull(ICM.getCompanyByName("Guy"));
-            Assert.AreEqual(pas1, comp.Password);
-            Assert.AreEqual(phone1, comp.Phone);
-            Assert.AreNotEqual("TestEdit12", comp.Password);
-            Assert.AreNotEqual("", comp.Phone);
-        }
-
-        [TestMethod]
-        public void TestEditCompanyNullPassword()
-        {
-            Company comp = ICM.getCompanyByName("Guy");
-            Assert.IsNotNull(comp);
-            string pas1 = comp.Password;
-            string phone1 = comp.Phone;
-            IDM.editCompany("Guy", null, "051111111", adminKey);
-            comp = ICM.getCompanyByName("Guy");
-            Assert.IsNotNull(ICM.getCompanyByName("Guy"));
-            Assert.AreEqual(pas1, comp.Password);
-            Assert.AreEqual(phone1, comp.Phone);
-            Assert.AreNotEqual(null, comp.Password);
-            Assert.AreNotEqual("051111111", comp.Phone);
+            Assert.AreEqual("עריכת חברה לא התבצעה, אחד או יותר מהערכים חסרים", IDM.editCompany(null, "TestEdit12", "051111111", adminKey));
         }
 
         [TestMethod]
@@ -217,70 +199,6 @@ namespace Test.UnitTests
             Assert.AreEqual(phone1, comp.Phone);
             Assert.AreNotEqual("TestEdit12", comp.Password);
             Assert.AreNotEqual(null, comp.Phone);
-        }
-
-        [TestMethod]
-        public void TestEditCompanyShortPassword()
-        {
-            Company comp = ICM.getCompanyByName("Guy");
-            Assert.IsNotNull(comp);
-            string pas1 = comp.Password;
-            string phone1 = comp.Phone;
-            IDM.editCompany("Guy", "Tt1", "051111111", adminKey);
-            comp = ICM.getCompanyByName("Guy");
-            Assert.IsNotNull(ICM.getCompanyByName("Guy"));
-            Assert.AreEqual(pas1, comp.Password);
-            Assert.AreEqual(phone1, comp.Phone);
-            Assert.AreNotEqual("Tt1", comp.Password);
-            Assert.AreNotEqual("051111111", comp.Phone);
-        }
-
-        [TestMethod]
-        public void TestEditCompanyNoNumberInPassword()
-        {
-            Company comp = ICM.getCompanyByName("Guy");
-            Assert.IsNotNull(comp);
-            string pas1 = comp.Password;
-            string phone1 = comp.Phone;
-            IDM.editCompany("Guy", "Ttttttt", "051111111", adminKey);
-            comp = ICM.getCompanyByName("Guy");
-            Assert.IsNotNull(ICM.getCompanyByName("Guy"));
-            Assert.AreEqual(pas1, comp.Password);
-            Assert.AreEqual(phone1, comp.Phone);
-            Assert.AreNotEqual("Ttttttt", comp.Password);
-            Assert.AreNotEqual("051111111", comp.Phone);
-        }
-
-        [TestMethod]
-        public void TestEditCompanyNoCapitalLetterInPassword()
-        {
-            Company comp = ICM.getCompanyByName("Guy");
-            Assert.IsNotNull(comp);
-            string pas1 = comp.Password;
-            string phone1 = comp.Phone;
-            IDM.editCompany("Guy", "11111t1", "051111111", adminKey);
-            comp = ICM.getCompanyByName("Guy");
-            Assert.IsNotNull(ICM.getCompanyByName("Guy"));
-            Assert.AreEqual(pas1, comp.Password);
-            Assert.AreEqual(phone1, comp.Phone);
-            Assert.AreNotEqual("11111t1", comp.Password);
-            Assert.AreNotEqual("051111111", comp.Phone);
-        }
-
-        [TestMethod]
-        public void TestEditCompanyNoSmallLetterInPassword()
-        {
-            Company comp = ICM.getCompanyByName("Guy");
-            Assert.IsNotNull(comp);
-            string pas1 = comp.Password;
-            string phone1 = comp.Phone;
-            IDM.editCompany("Guy", "T111111", "051111111", adminKey);
-            comp = ICM.getCompanyByName("Guy");
-            Assert.IsNotNull(ICM.getCompanyByName("Guy"));
-            Assert.AreEqual(pas1, comp.Password);
-            Assert.AreEqual(phone1, comp.Phone);
-            Assert.AreNotEqual("T111111", comp.Password);
-            Assert.AreNotEqual("051111111", comp.Phone);
         }
     }
 }

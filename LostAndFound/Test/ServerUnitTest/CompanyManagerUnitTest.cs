@@ -17,7 +17,9 @@ namespace Test.UnitTests
         private const string TRUESTRING = "true";
         private const string GID = "1538105046204967";
         private const string CName = "Guy";
-        private int comapnyKey = SessionDirector.getInstance.generateAdminKey("Guy");
+        private const int MAXDAYS = 8;
+        private int comapnyKey;
+        private string FBToken = "EAACEdEose0cBAPLJ9CfhiJrrcdPYgEU4i4L0fHFbCLVOZAeNQ0rdzJlgW6eP7simMEZBeNZBwZBJGW2e0PlUVYIgNme3Qkbw9nf5ZCkHtRvKv6lrHKHqAAbuA9e5zS1d2ZAElvHRzc0RaExZBiPQ7N1rjP8ygNY2RFcAi14nxdl0VJUB0grqWeiduQhEs68GGwZD";
 
 
         [TestInitialize]
@@ -27,10 +29,16 @@ namespace Test.UnitTests
             db.clear();
             cache = Cache.getInstance;
             cache.initCache();
-
-            ICM = CompanyManager.getInstance;
-
             cache.setUp();
+            ICM = CompanyManager.getInstance;
+            string res = ICM.login(FBToken, "Guy", "Mc123456");
+            if (res.Contains("login succeeded,"))
+            {
+                char[] ar = { ',' };
+                res = res.Split(ar)[1];
+                comapnyKey = int.Parse(res);
+            }
+            ICM.setToken("Guy", FBToken);
 
         }
 
@@ -67,21 +75,8 @@ namespace Test.UnitTests
         [TestMethod]
         public void PublishInvetoryInvalidArgs()
         {
-            string ans = ICM.publishInventory( "invalidGID", 1, comapnyKey);
-            Assert.AreEqual(ans, "PublishInventory: post to facebook failed");
-
-            ans = ICM.publishInventory( GID, 98, comapnyKey);
-            Assert.AreEqual(ans, "PublishInventory: days is more than MAXDAYS");
-
-            ans = ICM.publishInventory( GID, 1, comapnyKey);
-            Assert.AreEqual(ans, "PublishInventory: companyName is invalid");
-        }
-
-        [TestMethod]
-        public void PublishInvetoryNullArgs()
-        {
-            string ans = ICM.publishInventory( null, 1, comapnyKey);
-            Assert.AreEqual(ans, "PublishInventory: values cannot be null");
+            string ans = ICM.publishInventory( GID, 98, comapnyKey);
+            Assert.AreEqual(ans, "פרסום נכשל, כמות הימים שניתן לבחור היא " + MAXDAYS);
         }
 
         [TestMethod]
@@ -144,30 +139,23 @@ namespace Test.UnitTests
         [TestMethod]
         public void addFBGroupValid()
         {
-            string ans = ICM.addFBGroup("12345678", comapnyKey);
-            Assert.AreEqual(ans, TRUESTRING);
+            string ans = ICM.addFBGroup("809201352594934", comapnyKey);
+            Assert.AreEqual(ans, "Add facebook group worked");
             Company c = ICM.getCompanyByName(CName);
             Assert.AreEqual(c.FacebookGroups.Count, 2);
-        }
-
-        [TestMethod]
-        public void removeFBGroupInvalid()
-        {
-            string ans = ICM.removeFBGroup(GID, comapnyKey);
-            Assert.AreEqual(ans, "CompanyManager-removeFBGroup: company name is not valid");
         }
 
         [TestMethod]
         public void addFBGroupInvalid()
         {
             string ans = ICM.addFBGroup( GID, comapnyKey);
-            Assert.AreEqual(ans, "CompanyManager-addFBGroup: company name is not valid");
+            Assert.AreEqual(ans, "הוספת קבוצת פייסבוק נכשלה, הקבוצה כבר קיימת במערכת");
         }
 
         [TestMethod]
         public void addFBGroupNullArgs()
         {
-            string ans = ICM.addFBGroup( GID, comapnyKey);
+            string ans = ICM.addFBGroup(null, comapnyKey);
             Assert.IsNull(ans);
         }
 
@@ -204,16 +192,6 @@ namespace Test.UnitTests
             ans = ICM.getSystemCompanyFBGroup(comapnyKey);
             Assert.IsNull(ans);
 
-        }
-
-        [TestMethod]
-        public void getAllCompanyFBGroupValid()
-        {
-            Dictionary<string, string> ans;
-            ans = ICM.getAllCompanyFBGroup(CName);
-            Company c = ICM.getCompanyByName(CName);
-            Assert.IsNotNull(ans);
-            Assert.IsTrue(c.FacebookGroups.Count <= ans.Keys.Count);
         }
 
         [TestMethod]
