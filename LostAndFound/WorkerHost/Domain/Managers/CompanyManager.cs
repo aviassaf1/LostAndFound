@@ -484,6 +484,10 @@ namespace WorkerHost.Domain.Managers
             {
                 return null;
             }
+            if (!_FBTokens.ContainsKey(companyName))
+            {
+                return null;
+            }
             string token = _FBTokens[companyName];
             if ( token == null)
             {
