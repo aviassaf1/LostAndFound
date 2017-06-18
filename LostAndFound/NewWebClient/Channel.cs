@@ -29,6 +29,11 @@ namespace NewWebClient
             }
         }
 
+
+        public static Channel getNewTestChannel()
+        {
+            return new Channel();
+        }
         public IServerService ServerService
         {
             get
