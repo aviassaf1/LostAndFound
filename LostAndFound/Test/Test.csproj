@@ -48,6 +48,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <Choose>
@@ -58,11 +59,32 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
+          <Private>False</Private>
+        </Reference>
       </ItemGroup>
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="..\WorkerHost\ServiceLayer\DataContracts\CompanyData.cs">
+      <Link>ClientLoadTests\CompanyData.cs</Link>
+    </Compile>
+    <Compile Include="..\WorkerHost\ServiceLayer\DataContracts\CompanyItemData.cs">
+      <Link>ClientLoadTests\CompanyItemData.cs</Link>
+    </Compile>
+    <Compile Include="..\WorkerHost\ServiceLayer\DataContracts\GroupData.cs">
+      <Link>ClientLoadTests\GroupData.cs</Link>
+    </Compile>
+    <Compile Include="..\WorkerHost\ServiceLayer\DataContracts\MatchData.cs">
+      <Link>ClientLoadTests\MatchData.cs</Link>
+    </Compile>
+    <Compile Include="..\WorkerHost\ServiceLayer\DataContracts\WorkerData.cs">
+      <Link>ClientLoadTests\WorkerData.cs</Link>
+    </Compile>
+    <Compile Include="..\WorkerHost\ServiceLayer\IServerService.cs">
+      <Link>ClientLoadTests\IServerService.cs</Link>
+    </Compile>
+    <Compile Include="ClientLoadTests\LoadTest.cs" />
     <Compile Include="Companies.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -120,6 +142,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\NewWebClient\NewWebClient.csproj">
+      <Project>{2F321CFE-CE55-4A40-941E-6955321764AA}</Project>
+      <Name>NewWebClient</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WorkerHost\WorkerHost.csproj">
       <Project>{061b290a-8b85-4d37-bce2-4db4f7072b57}</Project>
       <Name>WorkerHost</Name>
@@ -153,6 +179,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

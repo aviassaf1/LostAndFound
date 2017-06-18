@@ -15,6 +15,7 @@ namespace WorkerHost.Domain
         private Dictionary<string, Company> _companies;
         private Dictionary<int, LostItem> _lostItems;
         private Dictionary<int, FoundItem> _foundItems;
+
         private Dictionary<string, Domain.BLBackEnd.FBItem> _FBItems;
         private Dictionary<int, Match> _matches;
         private Dictionary<string, string> _workers;
@@ -88,6 +89,12 @@ namespace WorkerHost.Domain
 
             addMatch(new Match(fi1.ItemID, li1.ItemID, MatchStatus.POSSIBLE));
             addMatch(new Match(fi3.ItemID, li3.ItemID, MatchStatus.POSSIBLE));
+        }
+
+        public void setUp2()
+        {
+            Company comp1 = new Company("testComp", "05000000", new HashSet<string>(), "746438115377087", "testComp", "Mc123456");
+            comp1.addFacebookGroup("1538105046204967");
         }
 
         internal Company getCompanyByfb(string fbid)
