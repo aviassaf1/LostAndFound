@@ -29,14 +29,15 @@ namespace NewWebClient
                     i++;
                 }
                 string hebrewFinalType = "";
+                string englishFinalType = "";
                 foreach (string type in types)
                 {
                     foreach (string t in EditItem.EnglishTypes2Hebrew.Keys)
                     {
-                        if (type.ToUpper().Contains(t) && hebrewFinalType.Equals(""))
+                        if ((type.ToUpper().Contains(t.ToUpper()) || t.ToUpper().Contains(type.ToUpper())) && hebrewFinalType.Equals(""))
                         {
                             hebrewFinalType = EditItem.EnglishTypes2Hebrew[t];
-
+                            englishFinalType = type;
                         }
                     }
                 }
@@ -44,7 +45,9 @@ namespace NewWebClient
                 {
                     foreach (ListItem li in _TypeList.Items)
                     {
-                        if (li.Text.Equals(hebrewFinalType))
+                        if (li.Text.Equals(hebrewFinalType) || englishFinalType.ToUpper().Contains(li.Value.ToUpper()) ||
+                            (li.Text.Contains(hebrewFinalType) && !(li.Text.Contains(" "))) || (li.Value.ToUpper().Contains(englishFinalType.ToUpper()) && !(li.Value.ToUpper().Contains(" ")))
+                            || (hebrewFinalType.Contains(li.Text) && !(hebrewFinalType.Contains(" "))) || (englishFinalType.ToUpper().Contains(li.Value.ToUpper())) && !(englishFinalType.ToUpper().Contains(" ")))
                         {
                             li.Selected = true;
                             break;

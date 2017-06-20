@@ -18,7 +18,8 @@ namespace NewWebClient
         {
             _path = "";
             _wait = true;
-            _iip = new ImageProccessingGoogle();
+            //_iip = new ImageProccessingGoogle();
+            _iip = new imageProcessingMicrosoft();
         }
         
 
