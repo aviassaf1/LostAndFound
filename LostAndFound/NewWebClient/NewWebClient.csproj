@@ -72,6 +72,10 @@
       <HintPath>..\packages\Microsoft.Data.Services.Client.5.7.0\lib\net40\Microsoft.Data.Services.Client.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.ProjectOxford.Vision, Version=1.0.393.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ProjectOxford.Vision.1.0.393\lib\portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10\Microsoft.ProjectOxford.Vision.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.WindowsAzure.Diagnostics, Version=2.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
       <Private>True</Private>
     </Reference>
@@ -318,6 +322,7 @@
     <Compile Include="IimageProcessing.cs" />
     <Compile Include="ImageChooser.cs" />
     <Compile Include="ImageProccessingGoogle.cs" />
+    <Compile Include="imageProcessingMicrosoft.cs" />
     <Compile Include="UpdateToken.aspx.cs">
       <DependentUpon>UpdateToken.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
