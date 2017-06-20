@@ -193,21 +193,5 @@ namespace Test.UnitTests
             Assert.IsNull(ans);
 
         }
-
-        [TestMethod]
-        public void getAllCompanyFBGroupInvalid()
-        {
-            Dictionary<string, string> ans;
-            ans = ICM.getAllCompanyFBGroup("notCompany");
-            Assert.IsNull(ans);
-        }
-
-        [TestMethod]
-        public void getAllCompanyFBGroupNullArgs()
-        {
-            Dictionary<string, string> ans;
-            ans = ICM.getAllCompanyFBGroup(null);
-            Assert.IsNull(ans);
-        }
     }
 }

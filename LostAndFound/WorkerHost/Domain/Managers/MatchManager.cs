@@ -182,7 +182,7 @@ namespace WorkerHost.Domain.Managers
                         {
                             item.addToDB();
                             match.Item2ID = item.ItemID;
-                            commentToPost(token, ((FBItem)item).PostID, "שלום, נמצאה התאמה בין הפריט לבין פריט ב" + cItem.CompanyName + " מספר ההתאמה של הפריט הוא: " + match.MatchID);
+                            FacebookConnector.commentToPost(token, ((FBItem)item).PostID, "שלום, נמצאה התאמה בין הפריט לבין פריט ב" + cItem.CompanyName + " מספר ההתאמה של הפריט הוא: " + match.MatchID);
                         }
                         match.addToDB();
                     }
@@ -193,18 +193,8 @@ namespace WorkerHost.Domain.Managers
 
         private List<Item> getFBItemsOfCompany(string companyName, string token)
         {
-            List<Item> fbItems = new List<Item>();
-            List<FBItem> groupFBItems = new List<FBItem>();
             Company company = Cache.getInstance.getCompany(companyName);
-            foreach (String fbGroup in company.FacebookGroups)
-            {
-                groupFBItems = getPostsFromGroup(token, fbGroup);
-                foreach (FBItem fbitem in groupFBItems)
-                {
-                    fbItems.Add(fbitem);
-                }
-            }
-            return fbItems;
+            return FacebookConnector.getFBItemsOfCompany(companyName, token,company.FacebookGroups);
         }
 
         private Match findMatch(CompanyItem cItem, Item item)
@@ -231,131 +221,7 @@ namespace WorkerHost.Domain.Managers
             }
             return null;
         }
-
-        private Boolean commentToPost(String token, String postID, String info)
-        {
-            var fb = new FacebookClient(token);
-            fb.Version = "v2.3";
-            var parameters = new Dictionary<string, object>();
-            dynamic result = fb.Post(postID + "/comments", new { message = info });
-            string logg = "post commented";
-            logger.logPrint(logg, 0);
-            logger.logPrint(logg, 1);
-            return true;
-        }
-        public List<FBItem> getPostsFromGroup(String token, String GroupID)
-        {
-            if (token == null || GroupID == null)
-                return null;
-            List<FBItem> answer = new List<FBItem>();
-            var fb = new FacebookClient();
-            try
-            {
-                //make sure the token is good
-                fb = new FacebookClient(token);
-            }
-            catch
-            {
-                return null;
-            }
-            fb.Version = "v2.3";
-            var parameters = new Dictionary<string, object>();
-            int daysAgo = 3;
-            DateTime nDaysAgo = DateTime.Now;
-            nDaysAgo = nDaysAgo.AddDays(-daysAgo);
-            Int32 unixTimestamp = (Int32)(nDaysAgo.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
-            parameters["since"] = unixTimestamp;
-            dynamic result;
-            try
-            {
-                //make sure post succeeds with GID
-                result = fb.Get(GroupID + "/feed"/*, new { since = unixTimestamp }*/);
-            }
-            catch (Exception)
-            {
-
-                return null;
-            }
-            var posts = result["data"];
-            foreach (var post in posts)
-            {
-                JsonObject npost = (JsonObject)post;
-                string postID = post["id"];
-                FBItem fbi = Cache.getInstance.getFBItemByPostID(postID);
-                if (fbi != null)
-                    answer.Add(fbi);
-                else
-                {
-                    if (npost.ContainsKey("message"))
-                    {
-                        string description = post["message"];
-                        if (!description.Contains("אלו הפריטים הנמצאים"))
-                        {
-                            FBType fbType = getFBType(description);
-                            if (fbType != FBType.NO)
-                            {
-                                DateTime date = DateTime.Parse(post["created_time"]);
-                                string publisher = post["from"]["name"];
-                                List<Color> colors = getColors(description);
-                                ItemType itemType = getItemType(description);
-                                string location = "NeverLand";//"getLocation(description);
-                                FBItem item = new FBItem(colors, itemType, date, location, description, postID, publisher, fbType);
-                                answer.Add(item);
-                            }
-                        }
-                    }
-                }
-            }
-            return answer;
-        }
-
-        private FBType getFBType(string description)
-        {
-            Dictionary<string, FBType> HebTypes = DataType.HebTypes;
-            foreach (string hebType in HebTypes.Keys)
-            {
-                if (description.Contains(hebType))
-                {
-                    return HebTypes[hebType];
-                }
-            }
-            return FBType.NO;
-        }
-
-        private ItemType getItemType(string description)
-        {
-            Dictionary<string, ItemType> HebTypes = DataType.Hebrew2EnglishTypes;
-            foreach (string hebType in HebTypes.Keys)
-            {
-                if (description.Contains(hebType))
-                {
-                    return HebTypes[hebType];
-                }
-            }
-            return ItemType.UNDEFIEND;
-
-        }
-
-        private List<Color> getColors(string description)
-        {
-            List<Color> colors = new List<Color>();
-            Dictionary<string, Color> HebColors = DataType.HebColors;
-            Boolean foundColor = false;
-            foreach (string hebCol in HebColors.Keys)
-            {
-                if (description.Contains(hebCol))
-                {
-                    colors.Add(HebColors[hebCol]);
-                    foundColor = true;
-                }
-            }
-            if (foundColor == false)
-            {
-                colors.Add(Color.UNKNOWN);
-            }
-            return colors;
-        }
-
+        
         public Match getMatchByID(int matchID)
         {
             return Cache.getInstance.getMatch(matchID);
