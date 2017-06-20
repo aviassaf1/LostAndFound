@@ -17,7 +17,7 @@ namespace Test.UnitTests
         private ICompanyManager ICM;
         private int adminKey;
         private int comapnyKey;
-        private string FBToken = "EAACEdEose0cBACgowwD00gUgMEIK751N6rlXvPZCK0rZA5HXsTkEWyQm64BeXV3ZAm0xdoccmxLLMpTLjvis8RZB9iWilLWKrnHnijsMvQjlQb1NZCkmnxgNLOZAPq3vgUBaFYBCziBg0gXFfEcGAwNYRkRxfdVC5UDhyW7P7FhUpWeYZBi1paCxDTNGkDBajIZD";
+        private string FBToken = FacebookConnector.testFBToken;
 
         [TestInitialize]
         public void setUp()

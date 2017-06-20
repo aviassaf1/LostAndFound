@@ -11,6 +11,7 @@ namespace WorkerHost.Domain
 {
     public class FacebookConnector
     {
+        public static string testFBToken = "";
         public static Boolean commentToPost(String token, String postID, String info)
         {
             var fb = new FacebookClient(token);

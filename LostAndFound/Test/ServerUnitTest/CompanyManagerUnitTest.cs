@@ -19,7 +19,7 @@ namespace Test.UnitTests
         private const string CName = "Guy";
         private const int MAXDAYS = 8;
         private int comapnyKey;
-        private string FBToken = "EAACEdEose0cBAPLJ9CfhiJrrcdPYgEU4i4L0fHFbCLVOZAeNQ0rdzJlgW6eP7simMEZBeNZBwZBJGW2e0PlUVYIgNme3Qkbw9nf5ZCkHtRvKv6lrHKHqAAbuA9e5zS1d2ZAElvHRzc0RaExZBiPQ7N1rjP8ygNY2RFcAi14nxdl0VJUB0grqWeiduQhEs68GGwZD";
+        private string FBToken = FacebookConnector.testFBToken;
 
 
         [TestInitialize]
