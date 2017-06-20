@@ -98,17 +98,17 @@ namespace Test.UnitTests
         [TestMethod]
         public void getPostsFromGroupValid()
         {
-            List<WorkerHost.Domain.BLBackEnd.FBItem> fbis = IMM.getPostsFromGroup(CompanyManager.getInstance.getToken("Guy"), GID);
+            List<WorkerHost.Domain.BLBackEnd.FBItem> fbis = FacebookConnector.getPostsFromGroup(CompanyManager.getInstance.getToken("Guy"), GID);
             Assert.IsNotNull(fbis);
         }
 
         [TestMethod]
         public void getPostsFromGroupInvalid()
         {
-            List<WorkerHost.Domain.BLBackEnd.FBItem> fbis = IMM.getPostsFromGroup(null, GID);
+            List<WorkerHost.Domain.BLBackEnd.FBItem> fbis = FacebookConnector.getPostsFromGroup(null, GID);
             Assert.IsNull(fbis);
 
-            fbis = IMM.getPostsFromGroup(CompanyManager.getInstance.getToken("Guy"), null);
+            fbis = FacebookConnector.getPostsFromGroup(CompanyManager.getInstance.getToken("Guy"), null);
             Assert.IsNull(fbis);
         }
     }

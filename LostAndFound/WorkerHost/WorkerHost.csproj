@@ -171,6 +171,7 @@
     <Compile Include="Domain\BLBackEnd\MatchStatus.cs" />
     <Compile Include="Domain\BLBackEnd\User.cs" />
     <Compile Include="Domain\Cache.cs" />
+    <Compile Include="Domain\FacebookConnector.cs" />
     <Compile Include="Domain\Logger.cs" />
     <Compile Include="Domain\Managers\AdminManager.cs" />
     <Compile Include="Domain\Managers\CompanyManager.cs" />

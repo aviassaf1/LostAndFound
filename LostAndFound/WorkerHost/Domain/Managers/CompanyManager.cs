@@ -179,72 +179,9 @@ namespace WorkerHost.Domain.Managers
                 logger.logPrint(logg, 2);
                 return logg;
             }
-            var fb = new FacebookClient();
-            try
-            {
-                //make sure the token is good
-                fb = new FacebookClient(token);
-            }
-            catch
-            {
-                logg = "פרסום נכשל, אנא נסה להתחבר מחדש";
-                logger.logPrint(logg, 0);
-                logger.logPrint(logg, 2);
-                return logg;
-            }
-            fb.Version = "v2.3";
-            var parameters = new Dictionary<string, object>();
             List<CompanyItem> items = ItemManager.getInstance.getAllCompanyItems(key);
-            if (items == null)
-            {
-                logg = "פרסום נכשל, שם חברה לא תקין";
-                logger.logPrint(logg, 0);
-                logger.logPrint(logg, 2);
-                return logg;
-            }
-            string inventory = "אלו הפריטים הנמצאים במחלקת אבדות ומציאות: \n";
-            string format = " {0} בצבע {1}\n";
-            DateTime nDaysAgo = DateTime.Now;
-            nDaysAgo = nDaysAgo.AddDays(-days);
-            foreach (CompanyItem item in items)
-            {
-                if ((item.GetType()).Equals(typeof(FoundItem)))
-                {
-                    if (!((FoundItem)item).Delivered && item.Date.CompareTo(nDaysAgo) > 0)
-                    {
-                        string type = DataType.EnglishTypes2Hebrew[item.ItemType];//DataType.Hebrew2EnglishTypes.FirstOrDefault(x => x.Value == item.ItemType).Key;
-                        string color = "";
-                        foreach(string col in item.getHebColorsList())
-                        {
-                            color += col+" ";
-                        }
-                        inventory += String.Format(format, type, color);
-                    }
-                }
-            }
-            dynamic result = null;
-            try
-            {
-                //make sure post succeeds with GID
-                Company comp = getCompanyByName(companyName);
-                //
-                foreach (string groupId in comp.FacebookGroups)
-                {
-                    result = fb.Post(groupId + "/feed", new { message = inventory });
-                }
-                //result = fb.Post("1538105046204967" + "/feed", new { message = inventory });
-            }
-            catch (Exception ex)
-            {
-                logg = "פרסום נכשל, החיבור עם פייסבוק לא צלח אנא נסה להתחבר שוב לפייסבוק ואז למערכת";
-                logger.logPrint(logg, 0);
-                logger.logPrint(logg, 2);
-                return logg;
-            }
-            logg = "PublishInventory Worked";
-            logger.logPrint(logg, 0);
-            logger.logPrint(logg, 1);
-            return "true";
+            Company comp = getCompanyByName(companyName);
+            return FacebookConnector.publishInvetory(token, comp.FacebookGroups, days, items);
         }
 
         private string getColorsString(List<Color> colors)
@@ -427,102 +364,23 @@ namespace WorkerHost.Domain.Managers
                 logger.logPrint(logg, 2);
                 return null;
             }
+            if (!_FBTokens.ContainsKey(companyName))
+            {
+                return null;
+            }
             string token = _FBTokens[companyName];
             if (token == null)
             {
                 return null;
             }
-            Dictionary<string, string> result = new Dictionary<string, string>();
-            /*Dictionary<string, string> allFBGroups = getAllCompanyFBGroup( token);
-            if (allFBGroups == null)
-            {
-                return null;
-            }*/
             Company c = getCompanyByName(companyName);
             if (c == null)
             {
                 return null;
             }
-            Dictionary<string, string> res = new Dictionary<string, string>();
-            var fb = new FacebookClient();
-            try
-            {
-                //make sure the token is good
-                fb = new FacebookClient(token);
-            }
-            catch
-            {
-                return null;
-            }
-            HashSet<string> FBgroups = c.FacebookGroups;
-            foreach (string groupID in FBgroups)
-            {
-                dynamic fbResult = fb.Get(groupID);
-                result.Add(groupID, fbResult["name"]);
-            }
-            return result;
-
+            return FacebookConnector.getFBGroups(token,c.FacebookGroups);
         }
 
-        public Dictionary<string, string> getAllCompanyFBGroup(string companyName)
-        {
-            if (companyName == null )
-            {
-                return null;
-            }
-            string token = _FBTokens[companyName];
-            if ( token == null)
-            {
-                return null;
-            }
-            Company c = getCompanyByName(companyName);
-            if (c == null)
-            {
-                return null;
-            }
-            Dictionary<string, string> res = new Dictionary<string, string>();
-            var fb = new FacebookClient();
-            try
-            {
-                //make sure the token is good
-                fb = new FacebookClient(token);
-            }
-            catch
-            {
-                return null;
-            }
-            fb.Version = "v2.3";
-            var parameters = new Dictionary<string, object>();
-            parameters["fields"] = "name";
-            dynamic result = fb.Get("me", parameters);
-            var groups = result.groups["data"];
-            bool isNext = true;
-            var paging = result.groups["paging"];
-            int i = 0;
-            while (isNext)
-            {
-                foreach (var group in groups)
-                {
-                    string groupname = group["name"];
-                    var gid = group["id"];
-                    res.Add(gid, groupname);
-                }
-                if (i != 0)
-                    paging = result["paging"];
-                if (!paging.ContainsKey("next"))
-                    isNext = false;
-                else
-                {
-                    var nextURL = paging["next"];
-                    result = fb.Get((string)nextURL);
-                    groups = result["data"];
-                    i++;
-                }
-
-
-            }
-            return res;
-        }
 
         public string getToken(string companyName)
         {

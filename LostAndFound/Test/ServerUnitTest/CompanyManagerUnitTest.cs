@@ -206,7 +206,7 @@ namespace Test.UnitTests
 
         }
 
-        [TestMethod]
+        /*[TestMethod]
         public void getAllCompanyFBGroupValid()
         {
             Dictionary<string, string> ans;
@@ -230,6 +230,6 @@ namespace Test.UnitTests
             Dictionary<string, string> ans;
             ans = ICM.getAllCompanyFBGroup(null);
             Assert.IsNull(ans);
-        }
+        }*/
     }
 }

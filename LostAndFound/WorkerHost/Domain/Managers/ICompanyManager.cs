@@ -17,7 +17,6 @@ namespace WorkerHost.Domain.Managers
         String addFBGroup( string groupID, int key); //return true if good
         String removeFBGroup( string groupID, int key); //return true if good
         Dictionary<string, string> getSystemCompanyFBGroup( int key); //return null if fails
-        Dictionary<string, string> getAllCompanyFBGroup(string companyName); //return null if fails
         String removeWorker(String delUsername, int key);
         String addWorker(String newUsername, String newPassword, bool isManager, int key);
         string getToken(string companyName);
