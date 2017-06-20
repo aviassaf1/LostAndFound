@@ -61,7 +61,7 @@ namespace WorkerHost.Domain.Managers
                 result = fb.Get("me",parameters);
                 fbid = result.id;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return null;
             }

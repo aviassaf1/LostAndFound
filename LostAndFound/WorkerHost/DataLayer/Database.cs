@@ -84,6 +84,15 @@ namespace WorkerHost.DataLayer
             db.SaveChanges();
 
         }
+
+        public void saveChanges(string v)
+        {
+            if (v.Equals("test"))
+            {
+                db.SaveChanges();
+            }
+        }
+
         private Boolean initializeDB()
         {
             try
@@ -615,7 +624,7 @@ namespace WorkerHost.DataLayer
                 db.SaveChanges();
                 return cItem.itemId;
             }
-            catch
+            catch (Exception e)
             {
                 return -1;
             }
@@ -853,10 +862,10 @@ namespace WorkerHost.DataLayer
                 fItem.location = location;
                 fItem.photoLocation = photoLocation;
                 cItem.FoundItems = fItem;
-                fItem.CompanyItems = cItem;
+                fItem.CompanyItems = cItem;                
                 db.SaveChanges();
             }
-            catch
+            catch (Exception e)
             {
                 return -1;
             }
