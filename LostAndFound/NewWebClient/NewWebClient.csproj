@@ -315,8 +315,9 @@
     <Compile Include="EditCompany.aspx.designer.cs">
       <DependentUpon>EditCompany.aspx</DependentUpon>
     </Compile>
+    <Compile Include="IimageProcessing.cs" />
     <Compile Include="ImageChooser.cs" />
-    <Compile Include="ImageProccessingClass.cs" />
+    <Compile Include="ImageProccessingGoogle.cs" />
     <Compile Include="UpdateToken.aspx.cs">
       <DependentUpon>UpdateToken.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

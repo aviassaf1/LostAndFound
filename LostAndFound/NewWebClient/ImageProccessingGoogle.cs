@@ -39,9 +39,13 @@ namespace NewWebClient
         public IEnumerable<VisionApiRequest> requests { get; set; }
     }
 
-    public class ImageProccessingClass
+    public class ImageProccessingGoogle : IimageProcessing
     {
-        public static void processImage(string path, List<string> types, List<int> colorIndexList)
+        public ImageProccessingGoogle()
+        {
+
+        }
+        public void processImage(string path, List<string> types, List<int> colorIndexList)
         {
             DoStuff(path, types, colorIndexList).Wait();
         }
