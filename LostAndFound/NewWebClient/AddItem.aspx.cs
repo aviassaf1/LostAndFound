@@ -13,10 +13,12 @@ namespace NewWebClient
     {
         string _path;
         bool _wait;
+        IimageProcessing _iip;
         protected void Page_Load(object sender, EventArgs e)
         {
             _path = "";
             _wait = true;
+            _iip = new ImageProccessingGoogle();
         }
         
 
@@ -72,7 +74,7 @@ namespace NewWebClient
         {
             List<string> types = new List<string>();
             List<int> colorsIndex = new List<int>();
-            ImageProccessingClass.processImage(_path, types, colorsIndex);
+            _iip.processImage(_path, types, colorsIndex);
             Session["types"] = types;
             Session["colorsIndex"] = colorsIndex;
 
