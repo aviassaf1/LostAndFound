@@ -14,77 +14,91 @@ namespace WorkerHost.Domain
         public static string testFBToken = "";
         public static Boolean commentToPost(String token, String postID, String info)
         {
-            var fb = new FacebookClient(token);
-            fb.Version = "v2.3";
-            var parameters = new Dictionary<string, object>();
-            dynamic result = fb.Post(postID + "/comments", new { message = info });
-            return true;
+            try {
+                var fb = new FacebookClient(token);
+                fb.Version = "v2.3";
+                var parameters = new Dictionary<string, object>();
+                dynamic result = fb.Post(postID + "/comments", new { message = info });
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.StackTrace);
+                return false;
+            }
         }
         public static List<FBItem> getPostsFromGroup(String token, String GroupID)
         {
             if (token == null || GroupID == null)
                 return null;
             List<FBItem> answer = new List<FBItem>();
-            var fb = new FacebookClient();
-            try
-            {
-                //make sure the token is good
-                fb = new FacebookClient(token);
-            }
-            catch
-            {
-                return null;
-            }
-            fb.Version = "v2.3";
-            var parameters = new Dictionary<string, object>();
-            int daysAgo = 3;
-            DateTime nDaysAgo = DateTime.Now;
-            nDaysAgo = nDaysAgo.AddDays(-daysAgo);
-            Int32 unixTimestamp = (Int32)(nDaysAgo.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
-            parameters["since"] = unixTimestamp;
-            dynamic result;
-            try
-            {
-                //make sure post succeeds with GID
-                result = fb.Get(GroupID + "/feed"/*, new { since = unixTimestamp }*/);
-            }
-            catch (Exception)
-            {
-
-                return null;
-            }
-            var posts = result["data"];
-            foreach (var post in posts)
-            {
-                JsonObject npost = (JsonObject)post;
-                string postID = post["id"];
-                FBItem fbi = Cache.getInstance.getFBItemByPostID(postID);
-                if (fbi != null)
-                    answer.Add(fbi);
-                else
+            try {
+                var fb = new FacebookClient();
+                try
                 {
-                    if (npost.ContainsKey("message"))
+                    //make sure the token is good
+                    fb = new FacebookClient(token);
+                }
+                catch
+                {
+                    return null;
+                }
+                fb.Version = "v2.3";
+                var parameters = new Dictionary<string, object>();
+                int daysAgo = 3;
+                DateTime nDaysAgo = DateTime.Now;
+                nDaysAgo = nDaysAgo.AddDays(-daysAgo);
+                Int32 unixTimestamp = (Int32)(nDaysAgo.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+                parameters["since"] = unixTimestamp;
+                dynamic result;
+                try
+                {
+                    //make sure post succeeds with GID
+                    result = fb.Get(GroupID + "/feed"/*, new { since = unixTimestamp }*/);
+                }
+                catch (Exception)
+                {
+
+                    return null;
+                }
+                var posts = result["data"];
+                foreach (var post in posts)
+                {
+                    JsonObject npost = (JsonObject)post;
+                    string postID = post["id"];
+                    FBItem fbi = Cache.getInstance.getFBItemByPostID(postID);
+                    if (fbi != null)
+                        answer.Add(fbi);
+                    else
                     {
-                        string description = post["message"];
-                        if (!description.Contains("אלו הפריטים הנמצאים"))
+                        if (npost.ContainsKey("message"))
                         {
-                            FBType fbType = getFBType(description);
-                            if (fbType != FBType.NO)
+                            string description = post["message"];
+                            if (!description.Contains("אלו הפריטים הנמצאים"))
                             {
-                                DateTime date = DateTime.Parse(post["created_time"]);
-                                string publisher = post["from"]["name"];
-                                List<Color> colors = getColors(description);
-                                ItemType itemType = getItemType(description);
-                                string location = "NeverLand";//"getLocation(description);
-                                FBItem item = new FBItem(colors, itemType, date, location, description, postID, publisher, fbType);
-                                answer.Add(item);
+                                FBType fbType = getFBType(description);
+                                if (fbType != FBType.NO)
+                                {
+                                    DateTime date = DateTime.Parse(post["created_time"]);
+                                    string publisher = post["from"]["name"];
+                                    List<Color> colors = getColors(description);
+                                    ItemType itemType = getItemType(description);
+                                    string location = "NeverLand";//"getLocation(description);
+                                    FBItem item = new FBItem(colors, itemType, date, location, description, postID, publisher, fbType);
+                                    answer.Add(item);
+                                }
                             }
                         }
                     }
                 }
+                return answer;
             }
-            return answer;
-        }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.StackTrace);
+                return null;
+            }
+}
         private static FBType getFBType(string description)
         {
             Dictionary<string, FBType> HebTypes = DataType.HebTypes;
@@ -145,78 +159,92 @@ namespace WorkerHost.Domain
         }
         public static String publishInvetory(string token, HashSet<String> fbGroups, int days, List<CompanyItem> items)
         {
-            var fb = new FacebookClient();
-            try
-            {
-                //make sure the token is good
-                fb = new FacebookClient(token);
-            }
-            catch
-            {
-                return "פרסום נכשל, אנא נסה להתחבר מחדש";
-            }
-            fb.Version = "v2.3";
-            var parameters = new Dictionary<string, object>();
-            if (items == null)
-            {
-                return "פרסום נכשל, שם חברה לא תקין";
-            }
-            string inventory = "אלו הפריטים הנמצאים במחלקת אבדות ומציאות: \n";
-            string format = " {0} בצבע {1}\n";
-            DateTime nDaysAgo = DateTime.Now;
-            nDaysAgo = nDaysAgo.AddDays(-days);
-            foreach (CompanyItem item in items)
-            {
-                if ((item.GetType()).Equals(typeof(FoundItem)))
+            try {
+                var fb = new FacebookClient();
+                try
                 {
-                    if (!((FoundItem)item).Delivered && item.Date.CompareTo(nDaysAgo) > 0)
+                    //make sure the token is good
+                    fb = new FacebookClient(token);
+                }
+                catch
+                {
+                    return "פרסום נכשל, אנא נסה להתחבר מחדש";
+                }
+                fb.Version = "v2.3";
+                var parameters = new Dictionary<string, object>();
+                if (items == null)
+                {
+                    return "פרסום נכשל, שם חברה לא תקין";
+                }
+                string inventory = "אלו הפריטים הנמצאים במחלקת אבדות ומציאות: \n";
+                string format = " {0} בצבע {1}\n";
+                DateTime nDaysAgo = DateTime.Now;
+                nDaysAgo = nDaysAgo.AddDays(-days);
+                foreach (CompanyItem item in items)
+                {
+                    if ((item.GetType()).Equals(typeof(FoundItem)))
                     {
-                        string type = DataType.EnglishTypes2Hebrew[item.ItemType];//DataType.Hebrew2EnglishTypes.FirstOrDefault(x => x.Value == item.ItemType).Key;
-                        string color = "";
-                        foreach (string col in item.getHebColorsList())
+                        if (!((FoundItem)item).Delivered && item.Date.CompareTo(nDaysAgo) > 0)
                         {
-                            color += col + " ";
+                            string type = DataType.EnglishTypes2Hebrew[item.ItemType];//DataType.Hebrew2EnglishTypes.FirstOrDefault(x => x.Value == item.ItemType).Key;
+                            string color = "";
+                            foreach (string col in item.getHebColorsList())
+                            {
+                                color += col + " ";
+                            }
+                            inventory += String.Format(format, type, color);
                         }
-                        inventory += String.Format(format, type, color);
                     }
                 }
-            }
-            dynamic result = null;
-            try
-            {
-                //make sure post succeeds with GID
-                //
-                foreach (string groupId in fbGroups)
+                dynamic result = null;
+                try
                 {
-                    result = fb.Post(groupId + "/feed", new { message = inventory });
+                    //make sure post succeeds with GID
+                    //
+                    foreach (string groupId in fbGroups)
+                    {
+                        result = fb.Post(groupId + "/feed", new { message = inventory });
+                    }
+                    //result = fb.Post("1538105046204967" + "/feed", new { message = inventory });
                 }
-                //result = fb.Post("1538105046204967" + "/feed", new { message = inventory });
+                catch (Exception ex)
+                {
+                    return "פרסום נכשל, החיבור עם פייסבוק לא צלח אנא נסה להתחבר שוב לפייסבוק ואז למערכת";
+                }
+                return "true";
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
+                Console.WriteLine(e.StackTrace);
                 return "פרסום נכשל, החיבור עם פייסבוק לא צלח אנא נסה להתחבר שוב לפייסבוק ואז למערכת";
             }
-            return "true";
-        }
+}
         public static Dictionary<string, string> getFBGroups(String token, HashSet<string> FBgroups)
         {
-            var fb = new FacebookClient();
-            try
-            {
-                //make sure the token is good
-                fb = new FacebookClient(token);
+            try {
+                var fb = new FacebookClient();
+                try
+                {
+                    //make sure the token is good
+                    fb = new FacebookClient(token);
+                }
+                catch
+                {
+                    return null;
+                }
+                Dictionary<string, string> result = new Dictionary<string, string>();
+                foreach (string groupID in FBgroups)
+                {
+                    dynamic fbResult = fb.Get(groupID);
+                    result.Add(groupID, fbResult["name"]);
+                }
+                return result;
             }
-            catch
+            catch (Exception e)
             {
+                Console.WriteLine(e.StackTrace);
                 return null;
             }
-            Dictionary<string, string> result = new Dictionary<string, string>();
-            foreach (string groupID in FBgroups)
-            {
-                dynamic fbResult = fb.Get(groupID);
-                result.Add(groupID, fbResult["name"]);
-            }
-            return result;
         }
     }
 }
