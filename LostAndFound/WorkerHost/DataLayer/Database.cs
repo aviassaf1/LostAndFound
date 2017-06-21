@@ -495,7 +495,7 @@ namespace WorkerHost.DataLayer
                         fbg.Companies = company;
                     }
                 }
-                //db.Companies.Add(company);
+                db.Companies.Add(company);
                 db.SaveChanges();
                 foreach (string managersName in managers.Keys)
                 {
