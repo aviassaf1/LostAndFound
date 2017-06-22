@@ -62,7 +62,7 @@ namespace WorkerHost.Domain.Managers
             {
                 if (statusNum == 0)
                     match.MatchStatus = MatchStatus.POSSIBLE;
-                if (statusNum == 1)
+                else if (statusNum == 1)
                 {
                     match.MatchStatus = MatchStatus.CORRECT;
                     removeMatchesOfItemExcept(match.MatchID, match.CompanyItemID);
@@ -71,7 +71,7 @@ namespace WorkerHost.Domain.Managers
                     if (Cache.getInstance.getCompanyItem(match.Item2ID) != null)
                         removeMatchesOfItemExcept(match.MatchID, match.Item2ID);
                 }
-                if (statusNum == 2)
+                else if (statusNum == 2)
                 {
                     match.MatchStatus = MatchStatus.COMPLETE;
                     CompanyItem item = Cache.getInstance.getCompanyItem(match.CompanyItemID);
@@ -98,7 +98,7 @@ namespace WorkerHost.Domain.Managers
                         removeMatchesOfItemExcept(match.MatchID, match.Item2ID);
                     }
                 }
-                if (statusNum == 4)
+                else if (statusNum == 4)
                 {
                     match.MatchStatus = MatchStatus.INCORRECT;
                     company.removeMatch(matchID);

@@ -180,18 +180,8 @@ namespace Test.UnitTests
         public void getSystemCompanyFBGroupInvalid()
         {
             Dictionary<string, string> ans;
-            ans = ICM.getSystemCompanyFBGroup(comapnyKey);
+            ans = ICM.getSystemCompanyFBGroup(-1);
             Assert.IsNull(ans);
-
-        }
-
-        [TestMethod]
-        public void getSystemCompanyFBGroupNullArgs()
-        {
-            Dictionary<string, string> ans;
-            ans = ICM.getSystemCompanyFBGroup(comapnyKey);
-            Assert.IsNull(ans);
-
         }
     }
 }

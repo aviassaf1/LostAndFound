@@ -49,22 +49,12 @@ namespace Test.UnitTests
             List<CompanyItem> compItems = IIM.getAllCompanyItems(comapnyKey);
             Assert.IsNotNull(compItems);
             Assert.AreEqual(6, compItems.ToArray().Length);
-            List<CompanyItem> compItems2 = IIM.getAllCompanyItems(comapnyKey);
-            Assert.IsNotNull(compItems2);
-            Assert.AreEqual(0, compItems2.ToArray().Length);
-        }
-
-        [TestMethod]
-        public void TestGetAllCompanyItemsNullCopamany()
-        {
-            List<CompanyItem> compItems = IIM.getAllCompanyItems(comapnyKey);
-            Assert.IsNull(compItems);
         }
 
         [TestMethod]
         public void TestGetAllCompanyItemsNotExit()
         {
-            List<CompanyItem> compItems = IIM.getAllCompanyItems(comapnyKey);
+            List<CompanyItem> compItems = IIM.getAllCompanyItems(-1);
             Assert.IsNull(compItems);
         }
 
@@ -73,12 +63,12 @@ namespace Test.UnitTests
         {
             List<CompanyItem> compItems2 = IIM.getAllCompanyItems(comapnyKey);
             Assert.IsNotNull(compItems2);
-            Assert.AreEqual(0, compItems2.ToArray().Length);
+            Assert.AreEqual(6, compItems2.ToArray().Length);
             List<string> sColors = new List<string> { "BLUE", "GRAY" };
             IIM.addLostItem(sColors, "FOLDER", DateTime.Today, "location", "description",
             4564,  "contactName", "054444444", "photoLocation", comapnyKey);
             compItems2 = IIM.getAllCompanyItems(comapnyKey);
-            Assert.AreEqual(1, compItems2.ToArray().Length);
+            Assert.AreEqual(7, compItems2.ToArray().Length);
         }
 
         [TestMethod]
@@ -86,12 +76,12 @@ namespace Test.UnitTests
         {
             List<CompanyItem> compItems2 = IIM.getAllCompanyItems(comapnyKey);
             Assert.IsNotNull(compItems2);
-            Assert.AreEqual(0, compItems2.ToArray().Length);
+            Assert.AreEqual(6, compItems2.ToArray().Length);
             List<string> sColors = new List<string>();
             IIM.addLostItem(sColors, "FOLDER", DateTime.Today, "location", "description",
             4564,  "contactName", "054444444", "photoLocation", comapnyKey);
             compItems2 = IIM.getAllCompanyItems(comapnyKey);
-            Assert.AreEqual(1, compItems2.ToArray().Length);
+            Assert.AreEqual(7, compItems2.ToArray().Length);
         }
 
         [TestMethod]
@@ -99,12 +89,12 @@ namespace Test.UnitTests
         {
             List<CompanyItem> compItems2 = IIM.getAllCompanyItems(comapnyKey);
             Assert.IsNotNull(compItems2);
-            Assert.AreEqual(0, compItems2.ToArray().Length);
+            Assert.AreEqual(6, compItems2.ToArray().Length);
             List<string> sColors = new List<string>();
             IIM.addLostItem(null, "FOLDER", DateTime.Today, "location", "description",
             4564,  "contactName", "054444444", "photoLocation", comapnyKey);
             compItems2 = IIM.getAllCompanyItems(comapnyKey);
-            Assert.AreEqual(0, compItems2.ToArray().Length);
+            Assert.AreEqual(6, compItems2.ToArray().Length);
         }
 
         [TestMethod]
@@ -112,12 +102,12 @@ namespace Test.UnitTests
         {
             List<CompanyItem> compItems2 = IIM.getAllCompanyItems(comapnyKey);
             Assert.IsNotNull(compItems2);
-            Assert.AreEqual(0, compItems2.ToArray().Length);
+            Assert.AreEqual(6, compItems2.ToArray().Length);
             List<string> sColors = new List<string> { "BLUE", "GRAY" };
             IIM.addLostItem(sColors, null, DateTime.Today, "location", "description",
             4564,  "contactName", "054444444", "photoLocation", comapnyKey);
             compItems2 = IIM.getAllCompanyItems(comapnyKey);
-            Assert.AreEqual(0, compItems2.ToArray().Length);
+            Assert.AreEqual(6, compItems2.ToArray().Length);
         }
 
         [TestMethod]
@@ -125,12 +115,12 @@ namespace Test.UnitTests
         {
             List<CompanyItem> compItems2 = IIM.getAllCompanyItems(comapnyKey);
             Assert.IsNotNull(compItems2);
-            Assert.AreEqual(0, compItems2.ToArray().Length);
+            Assert.AreEqual(6, compItems2.ToArray().Length);
             List<string> sColors = new List<string> { "BLUE", "GRAY" };
             IIM.addLostItem(sColors, "FOLDER", DateTime.Today, null, "description",
             4564,  "contactName", "054444444", "photoLocation", comapnyKey);
             compItems2 = IIM.getAllCompanyItems(comapnyKey);
-            Assert.AreEqual(0, compItems2.ToArray().Length);
+            Assert.AreEqual(6, compItems2.ToArray().Length);
         }
 
         [TestMethod]
@@ -138,12 +128,12 @@ namespace Test.UnitTests
         {
             List<CompanyItem> compItems2 = IIM.getAllCompanyItems(comapnyKey);
             Assert.IsNotNull(compItems2);
-            Assert.AreEqual(0, compItems2.ToArray().Length);
+            Assert.AreEqual(6, compItems2.ToArray().Length);
             List<string> sColors = new List<string> { "BLUE", "GRAY" };
             IIM.addLostItem(sColors, "FOLDER", DateTime.Today, "location", null,
             4564,  "contactName", "054444444", "photoLocation", comapnyKey);
             compItems2 = IIM.getAllCompanyItems(comapnyKey);
-            Assert.AreEqual(0, compItems2.ToArray().Length);
+            Assert.AreEqual(6, compItems2.ToArray().Length);
         }
 
         [TestMethod]
@@ -151,12 +141,12 @@ namespace Test.UnitTests
         {
             List<CompanyItem> compItems2 = IIM.getAllCompanyItems(comapnyKey);
             Assert.IsNotNull(compItems2);
-            Assert.AreEqual(0, compItems2.ToArray().Length);
+            Assert.AreEqual(6, compItems2.ToArray().Length);
             List<string> sColors = new List<string> { "BLUE", "GRAY" };
             IIM.addLostItem(sColors, "FOLDER", DateTime.Today, "location", "description",
             4564, "contactName", "054444444", "photoLocation", comapnyKey);
             compItems2 = IIM.getAllCompanyItems(comapnyKey);
-            Assert.AreEqual(0, compItems2.ToArray().Length);
+            Assert.AreEqual(6, compItems2.ToArray().Length);
         }
 
         [TestMethod]
@@ -164,12 +154,12 @@ namespace Test.UnitTests
         {
             List<CompanyItem> compItems2 = IIM.getAllCompanyItems(comapnyKey);
             Assert.IsNotNull(compItems2);
-            Assert.AreEqual(0, compItems2.ToArray().Length);
+            Assert.AreEqual(6, compItems2.ToArray().Length);
             List<string> sColors = new List<string> { "BLUE", "GRAY" };
             IIM.addLostItem(sColors, "FOLDER", DateTime.Today, "location", "description",
             4564,  null, "054444444", "photoLocation", comapnyKey);
             compItems2 = IIM.getAllCompanyItems(comapnyKey);
-            Assert.AreEqual(0, compItems2.ToArray().Length);
+            Assert.AreEqual(6, compItems2.ToArray().Length);
         }
 
         [TestMethod]
@@ -177,12 +167,12 @@ namespace Test.UnitTests
         {
             List<CompanyItem> compItems2 = IIM.getAllCompanyItems(comapnyKey);
             Assert.IsNotNull(compItems2);
-            Assert.AreEqual(0, compItems2.ToArray().Length);
+            Assert.AreEqual(6, compItems2.ToArray().Length);
             List<string> sColors = new List<string> { "BLUE", "GRAY" };
             IIM.addLostItem(sColors, "FOLDER", DateTime.Today, "location", "description",
             4564,  "contactName", null, "photoLocation", comapnyKey);
             compItems2 = IIM.getAllCompanyItems(comapnyKey);
-            Assert.AreEqual(0, compItems2.ToArray().Length);
+            Assert.AreEqual(6, compItems2.ToArray().Length);
         }
 
         [TestMethod]
@@ -190,12 +180,12 @@ namespace Test.UnitTests
         {
             List<CompanyItem> compItems2 = IIM.getAllCompanyItems(comapnyKey);
             Assert.IsNotNull(compItems2);
-            Assert.AreEqual(0, compItems2.ToArray().Length);
+            Assert.AreEqual(6, compItems2.ToArray().Length);
             List<string> sColors = new List<string> { "BLUE", "GRAY" };
             IIM.addLostItem(sColors, "FOLDER", DateTime.Today, "location", "description",
             4564,  "contactName", "054444444", null, comapnyKey);
             compItems2 = IIM.getAllCompanyItems(comapnyKey);
-            Assert.AreEqual(0, compItems2.ToArray().Length);
+            Assert.AreEqual(6, compItems2.ToArray().Length);
         }
 
         [TestMethod]
@@ -203,12 +193,12 @@ namespace Test.UnitTests
         {
             List<CompanyItem> compItems2 = IIM.getAllCompanyItems(comapnyKey);
             Assert.IsNotNull(compItems2);
-            Assert.AreEqual(0, compItems2.ToArray().Length);
+            Assert.AreEqual(6, compItems2.ToArray().Length);
             List<string> sColors = new List<string> { "BLUE", "GRAY" };
             IIM.addLostItem(sColors, "FOLDER", DateTime.Today, "location", "description",
             4564,  "contactName", "054444444", "photoLocation",comapnyKey);
             compItems2 = IIM.getAllCompanyItems(comapnyKey);
-            Assert.AreEqual(0, compItems2.ToArray().Length);
+            Assert.AreEqual(6, compItems2.ToArray().Length);
         }
 
         [TestMethod]
@@ -216,12 +206,12 @@ namespace Test.UnitTests
         {
             List<CompanyItem> compItems2 = IIM.getAllCompanyItems(comapnyKey);
             Assert.IsNotNull(compItems2);
-            Assert.AreEqual(0, compItems2.ToArray().Length);
+            Assert.AreEqual(6, compItems2.ToArray().Length);
             List<string> sColors = new List<string> { "BLUE", "GRAY" };
             IIM.addLostItem(sColors, "", DateTime.Today, "location", "description",
             4564,  "contactName", "054444444", "photoLocation", comapnyKey);
             compItems2 = IIM.getAllCompanyItems(comapnyKey);
-            Assert.AreEqual(0, compItems2.ToArray().Length);
+            Assert.AreEqual(6, compItems2.ToArray().Length);
         }
 
         [TestMethod]
@@ -229,12 +219,12 @@ namespace Test.UnitTests
         {
             List<CompanyItem> compItems2 = IIM.getAllCompanyItems(comapnyKey);
             Assert.IsNotNull(compItems2);
-            Assert.AreEqual(0, compItems2.ToArray().Length);
+            Assert.AreEqual(6, compItems2.ToArray().Length);
             List<string> sColors = new List<string> { "BLUE", "GRAY" };
             IIM.addLostItem(sColors, "FOLDER", DateTime.Today.AddDays(2), "location", "description",
             4564,  "contactName", "054444444", "photoLocation", comapnyKey);
             compItems2 = IIM.getAllCompanyItems(comapnyKey);
-            Assert.AreEqual(0, compItems2.ToArray().Length);
+            Assert.AreEqual(6, compItems2.ToArray().Length);
         }
 
         [TestMethod]
@@ -242,12 +232,12 @@ namespace Test.UnitTests
         {
             List<CompanyItem> compItems2 = IIM.getAllCompanyItems(comapnyKey);
             Assert.IsNotNull(compItems2);
-            Assert.AreEqual(0, compItems2.ToArray().Length);
+            Assert.AreEqual(6, compItems2.ToArray().Length);
             List<string> sColors = new List<string> { "BLUE", "GRAY" };
             IIM.addLostItem(sColors, "FOLDER", DateTime.Today, "location", "description",
             4564, "contactName", "054444444", "photoLocation", comapnyKey);
             compItems2 = IIM.getAllCompanyItems(comapnyKey);
-            Assert.AreEqual(0, compItems2.ToArray().Length);
+            Assert.AreEqual(6, compItems2.ToArray().Length);
         }
 
         [TestMethod]
@@ -255,12 +245,12 @@ namespace Test.UnitTests
         {
             List<CompanyItem> compItems2 = IIM.getAllCompanyItems(comapnyKey);
             Assert.IsNotNull(compItems2);
-            Assert.AreEqual(0, compItems2.ToArray().Length);
+            Assert.AreEqual(6, compItems2.ToArray().Length);
             List<string> sColors = new List<string> { "BLUE", "GRAY" };
             IIM.addLostItem(sColors, "fol", DateTime.Today, "location", "description",
             4564,  "contactName", "054444444", "photoLocation", comapnyKey);
             compItems2 = IIM.getAllCompanyItems(comapnyKey);
-            Assert.AreEqual(0, compItems2.ToArray().Length);
+            Assert.AreEqual(6, compItems2.ToArray().Length);
         }
 
         [TestMethod]
@@ -268,12 +258,12 @@ namespace Test.UnitTests
         {
             List<CompanyItem> compItems2 = IIM.getAllCompanyItems(comapnyKey);
             Assert.IsNotNull(compItems2);
-            Assert.AreEqual(0, compItems2.ToArray().Length);
+            Assert.AreEqual(6, compItems2.ToArray().Length);
             List<string> sColors = new List<string> { "BLUE", "GRAY" };
             IIM.addFoundItem(sColors, "FOLDER", DateTime.Today, "location", "description",
             4564,  "contactName", "054444444", "photoLocation", comapnyKey);
             compItems2 = IIM.getAllCompanyItems(comapnyKey);
-            Assert.AreEqual(1, compItems2.ToArray().Length);
+            Assert.AreEqual(7, compItems2.ToArray().Length);
         }
 
         [TestMethod]
@@ -281,12 +271,12 @@ namespace Test.UnitTests
         {
             List<CompanyItem> compItems2 = IIM.getAllCompanyItems(comapnyKey);
             Assert.IsNotNull(compItems2);
-            Assert.AreEqual(0, compItems2.ToArray().Length);
+            Assert.AreEqual(6, compItems2.ToArray().Length);
             List<string> sColors = new List<string>();
             IIM.addFoundItem(sColors, "FOLDER", DateTime.Today, "location", "description",
             4564,  "contactName", "054444444", "photoLocation", comapnyKey);
             compItems2 = IIM.getAllCompanyItems(comapnyKey);
-            Assert.AreEqual(1, compItems2.ToArray().Length);
+            Assert.AreEqual(7, compItems2.ToArray().Length);
         }
 
         [TestMethod]
@@ -294,12 +284,12 @@ namespace Test.UnitTests
         {
             List<CompanyItem> compItems2 = IIM.getAllCompanyItems(comapnyKey);
             Assert.IsNotNull(compItems2);
-            Assert.AreEqual(0, compItems2.ToArray().Length);
+            Assert.AreEqual(6, compItems2.ToArray().Length);
             List<string> sColors = new List<string>();
             IIM.addFoundItem(null, "FOLDER", DateTime.Today, "location", "description",
             4564,  "contactName", "054444444", "photoLocation", comapnyKey);
             compItems2 = IIM.getAllCompanyItems(comapnyKey);
-            Assert.AreEqual(0, compItems2.ToArray().Length);
+            Assert.AreEqual(6, compItems2.ToArray().Length);
         }
 
         [TestMethod]
@@ -307,12 +297,12 @@ namespace Test.UnitTests
         {
             List<CompanyItem> compItems2 = IIM.getAllCompanyItems(comapnyKey);
             Assert.IsNotNull(compItems2);
-            Assert.AreEqual(0, compItems2.ToArray().Length);
+            Assert.AreEqual(6, compItems2.ToArray().Length);
             List<string> sColors = new List<string> { "BLUE", "GRAY" };
             IIM.addFoundItem(sColors, null, DateTime.Today, "location", "description",
             4564,  "contactName", "054444444", "photoLocation", comapnyKey);
             compItems2 = IIM.getAllCompanyItems(comapnyKey);
-            Assert.AreEqual(0, compItems2.ToArray().Length);
+            Assert.AreEqual(6, compItems2.ToArray().Length);
         }
 
         [TestMethod]
@@ -320,12 +310,12 @@ namespace Test.UnitTests
         {
             List<CompanyItem> compItems2 = IIM.getAllCompanyItems(comapnyKey);
             Assert.IsNotNull(compItems2);
-            Assert.AreEqual(0, compItems2.ToArray().Length);
+            Assert.AreEqual(6, compItems2.ToArray().Length);
             List<string> sColors = new List<string> { "BLUE", "GRAY" };
             IIM.addFoundItem(sColors, "FOLDER", DateTime.Today, null, "description",
             4564,  "contactName", "054444444", "photoLocation", comapnyKey);
             compItems2 = IIM.getAllCompanyItems(comapnyKey);
-            Assert.AreEqual(0, compItems2.ToArray().Length);
+            Assert.AreEqual(6, compItems2.ToArray().Length);
         }
 
         [TestMethod]
@@ -333,12 +323,12 @@ namespace Test.UnitTests
         {
             List<CompanyItem> compItems2 = IIM.getAllCompanyItems(comapnyKey);
             Assert.IsNotNull(compItems2);
-            Assert.AreEqual(0, compItems2.ToArray().Length);
+            Assert.AreEqual(6, compItems2.ToArray().Length);
             List<string> sColors = new List<string> { "BLUE", "GRAY" };
             IIM.addFoundItem(sColors, "FOLDER", DateTime.Today, "location", null,
             4564,  "contactName", "054444444", "photoLocation", comapnyKey);
             compItems2 = IIM.getAllCompanyItems(comapnyKey);
-            Assert.AreEqual(0, compItems2.ToArray().Length);
+            Assert.AreEqual(6, compItems2.ToArray().Length);
         }
 
         [TestMethod]
@@ -346,12 +336,12 @@ namespace Test.UnitTests
         {
             List<CompanyItem> compItems2 = IIM.getAllCompanyItems(comapnyKey);
             Assert.IsNotNull(compItems2);
-            Assert.AreEqual(0, compItems2.ToArray().Length);
+            Assert.AreEqual(6, compItems2.ToArray().Length);
             List<string> sColors = new List<string> { "BLUE", "GRAY" };
             IIM.addFoundItem(sColors, "FOLDER", DateTime.Today, "location", "description",
             4564,  "contactName", "054444444", "photoLocation", comapnyKey);
             compItems2 = IIM.getAllCompanyItems(comapnyKey);
-            Assert.AreEqual(0, compItems2.ToArray().Length);
+            Assert.AreEqual(6, compItems2.ToArray().Length);
         }
 
         [TestMethod]
@@ -359,12 +349,12 @@ namespace Test.UnitTests
         {
             List<CompanyItem> compItems2 = IIM.getAllCompanyItems(comapnyKey);
             Assert.IsNotNull(compItems2);
-            Assert.AreEqual(0, compItems2.ToArray().Length);
+            Assert.AreEqual(6, compItems2.ToArray().Length);
             List<string> sColors = new List<string> { "BLUE", "GRAY" };
             IIM.addFoundItem(sColors, "FOLDER", DateTime.Today, "location", "description",
             4564,  null, "054444444", "photoLocation", comapnyKey);
             compItems2 = IIM.getAllCompanyItems(comapnyKey);
-            Assert.AreEqual(0, compItems2.ToArray().Length);
+            Assert.AreEqual(6, compItems2.ToArray().Length);
         }
 
         [TestMethod]
@@ -372,12 +362,12 @@ namespace Test.UnitTests
         {
             List<CompanyItem> compItems2 = IIM.getAllCompanyItems(comapnyKey);
             Assert.IsNotNull(compItems2);
-            Assert.AreEqual(0, compItems2.ToArray().Length);
+            Assert.AreEqual(6, compItems2.ToArray().Length);
             List<string> sColors = new List<string> { "BLUE", "GRAY" };
             IIM.addFoundItem(sColors, "FOLDER", DateTime.Today, "location", "description",
             4564,  "contactName", null, "photoLocation", comapnyKey);
             compItems2 = IIM.getAllCompanyItems(comapnyKey);
-            Assert.AreEqual(0, compItems2.ToArray().Length);
+            Assert.AreEqual(6, compItems2.ToArray().Length);
         }
 
         [TestMethod]
@@ -385,12 +375,12 @@ namespace Test.UnitTests
         {
             List<CompanyItem> compItems2 = IIM.getAllCompanyItems(comapnyKey);
             Assert.IsNotNull(compItems2);
-            Assert.AreEqual(0, compItems2.ToArray().Length);
+            Assert.AreEqual(6, compItems2.ToArray().Length);
             List<string> sColors = new List<string> { "BLUE", "GRAY" };
             IIM.addFoundItem(sColors, "FOLDER", DateTime.Today, "location", "description",
             4564,  "contactName", "054444444", null, comapnyKey);
             compItems2 = IIM.getAllCompanyItems(comapnyKey);
-            Assert.AreEqual(0, compItems2.ToArray().Length);
+            Assert.AreEqual(6, compItems2.ToArray().Length);
         }
 
         [TestMethod]
@@ -398,12 +388,12 @@ namespace Test.UnitTests
         {
             List<CompanyItem> compItems2 = IIM.getAllCompanyItems(comapnyKey);
             Assert.IsNotNull(compItems2);
-            Assert.AreEqual(0, compItems2.ToArray().Length);
+            Assert.AreEqual(6, compItems2.ToArray().Length);
             List<string> sColors = new List<string> { "BLUE", "GRAY" };
             IIM.addFoundItem(sColors, "FOLDER", DateTime.Today, "location", "description",
             4564,  "contactName", "054444444", "photoLocation", comapnyKey);
             compItems2 = IIM.getAllCompanyItems(comapnyKey);
-            Assert.AreEqual(0, compItems2.ToArray().Length);
+            Assert.AreEqual(6, compItems2.ToArray().Length);
         }
 
         [TestMethod]
@@ -411,12 +401,12 @@ namespace Test.UnitTests
         {
             List<CompanyItem> compItems2 = IIM.getAllCompanyItems(comapnyKey);
             Assert.IsNotNull(compItems2);
-            Assert.AreEqual(0, compItems2.ToArray().Length);
+            Assert.AreEqual(6, compItems2.ToArray().Length);
             List<string> sColors = new List<string> { "BLUE", "GRAY" };
             IIM.addFoundItem(sColors, "", DateTime.Today, "location", "description",
             4564,  "contactName", "054444444", "photoLocation", comapnyKey);
             compItems2 = IIM.getAllCompanyItems(comapnyKey);
-            Assert.AreEqual(0, compItems2.ToArray().Length);
+            Assert.AreEqual(6, compItems2.ToArray().Length);
         }
 
         [TestMethod]
@@ -424,12 +414,12 @@ namespace Test.UnitTests
         {
             List<CompanyItem> compItems2 = IIM.getAllCompanyItems(comapnyKey);
             Assert.IsNotNull(compItems2);
-            Assert.AreEqual(0, compItems2.ToArray().Length);
+            Assert.AreEqual(6, compItems2.ToArray().Length);
             List<string> sColors = new List<string> { "BLUE", "GRAY" };
             IIM.addFoundItem(sColors, "FOLDER", DateTime.Today.AddDays(2), "location", "description",
             4564,  "contactName", "054444444", "photoLocation", comapnyKey);
             compItems2 = IIM.getAllCompanyItems(comapnyKey);
-            Assert.AreEqual(0, compItems2.ToArray().Length);
+            Assert.AreEqual(6, compItems2.ToArray().Length);
         }
 
         [TestMethod]
@@ -437,12 +427,12 @@ namespace Test.UnitTests
         {
             List<CompanyItem> compItems2 = IIM.getAllCompanyItems(comapnyKey);
             Assert.IsNotNull(compItems2);
-            Assert.AreEqual(0, compItems2.ToArray().Length);
+            Assert.AreEqual(6, compItems2.ToArray().Length);
             List<string> sColors = new List<string> { "BLUE", "GRAY" };
             IIM.addFoundItem(sColors, "FOLDER", DateTime.Today, "location", "description",
             4564, "contactName", "054444444", "photoLocation", comapnyKey);
             compItems2 = IIM.getAllCompanyItems(comapnyKey);
-            Assert.AreEqual(0, compItems2.ToArray().Length);
+            Assert.AreEqual(6, compItems2.ToArray().Length);
         }
 
         [TestMethod]
@@ -450,12 +440,12 @@ namespace Test.UnitTests
         {
             List<CompanyItem> compItems2 = IIM.getAllCompanyItems(comapnyKey);
             Assert.IsNotNull(compItems2);
-            Assert.AreEqual(0, compItems2.ToArray().Length);
+            Assert.AreEqual(6, compItems2.ToArray().Length);
             List<string> sColors = new List<string> { "BLUE", "GRAY" };
             IIM.addFoundItem(sColors, "fol", DateTime.Today, "location", "description",
             4564,  "contactName", "054444444", "photoLocation", comapnyKey);
             compItems2 = IIM.getAllCompanyItems(comapnyKey);
-            Assert.AreEqual(0, compItems2.ToArray().Length);
+            Assert.AreEqual(6, compItems2.ToArray().Length);
         }
 
 

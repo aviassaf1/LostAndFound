@@ -15,6 +15,7 @@ namespace Test.UnitTests
         private Database db;
         private IMatchManager IMM;
         private ICompanyManager ICM;
+        private IItemManager IIM;
         private const string GID = "1538105046204967";
         private int comapnyKey;
         private string FBToken = FacebookConnector.testFBToken;
@@ -29,6 +30,7 @@ namespace Test.UnitTests
             cache.setUp();
             IMM = MatchManager.getInstance;
             ICM = CompanyManager.getInstance;
+            IIM = ItemManager.getInstance;
             string res = ICM.login(FBToken, "Guy", "Mc123456");
             if (res.Contains("login succeeded,"))
             {
@@ -56,7 +58,7 @@ namespace Test.UnitTests
                 if (!done)
                 {
                     ans = IMM.changeMatchStatus(i, 1, comapnyKey);
-                    Assert.AreEqual(1.ToString(), IMM.getMatchByID(i).MatchStatus.ToString());
+                    Assert.AreEqual("CORRECT", IMM.getMatchByID(i).MatchStatus.ToString());
                     Assert.AreEqual("status Changed", ans);
                     done = true;
                 }
@@ -78,7 +80,7 @@ namespace Test.UnitTests
                     Assert.AreEqual("not good statusNumber", ans);
 
                     ans = IMM.changeMatchStatus(-2, 1, comapnyKey);
-                    Assert.AreEqual("no match with that id", ans);
+                    Assert.AreEqual("changeMatchStatus: match id is not valid", ans);
                     done = true;
                 }
             }
@@ -87,10 +89,11 @@ namespace Test.UnitTests
         [TestMethod]
         public void findMatchesValid()
         {
-            List<Color> colors1 = new List<Color>();
-            colors1.Add(Color.BLACK);
-            List<Match> ms = IMM.findMatches(new FoundItem(colors1, ItemType.FOLDER, DateTime.Today, "BGU", "bla bla",
-                8876, "Guy", "Noam", "05000000", "c"), ICM.getToken("Guy"));
+            List<string> colors1 = new List<string>() { "BLACK" };
+            IIM.addFoundItem(colors1, "FOLDER", DateTime.Today, "BGU", "bla bla",
+                8876, "Guy", "Noam", "05000000", comapnyKey);
+            IIM.getAllCompanyItems(comapnyKey);
+            List<Match> ms = IMM.findMatches(IIM.getAllCompanyItems(comapnyKey)[0], ICM.getToken("Guy"));
             Assert.IsNotNull(ms);
         }
 
