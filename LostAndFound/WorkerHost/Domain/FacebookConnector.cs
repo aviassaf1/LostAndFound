@@ -16,7 +16,7 @@ namespace WorkerHost.Domain
         {
             try {
                 var fb = new FacebookClient(token);
-                fb.Version = "v2.3";
+                //fb.Version = "v2.3";
                 var parameters = new Dictionary<string, object>();
                 dynamic result = fb.Post(postID + "/comments", new { message = info });
                 return true;
@@ -43,7 +43,7 @@ namespace WorkerHost.Domain
                 {
                     return null;
                 }
-                fb.Version = "v2.3";
+                //fb.Version = "v2.3";
                 var parameters = new Dictionary<string, object>();
                 int daysAgo = 3;
                 DateTime nDaysAgo = DateTime.Now;
@@ -170,7 +170,7 @@ namespace WorkerHost.Domain
                 {
                     return "פרסום נכשל, אנא נסה להתחבר מחדש";
                 }
-                fb.Version = "v2.3";
+                //fb.Version = "v2.3";
                 var parameters = new Dictionary<string, object>();
                 if (items == null)
                 {
