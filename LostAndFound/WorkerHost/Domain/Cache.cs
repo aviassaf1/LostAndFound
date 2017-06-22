@@ -99,6 +99,11 @@ namespace WorkerHost.Domain
             comp1.addFacebookGroup("1538105046204967");
         }
 
+        internal bool hasWorker(string managerUserName)
+        {
+            return _workers.ContainsKey(managerUserName);
+        }
+
         internal Company getCompanyByfb(string fbid)
         {
             foreach(Company comp in _companies.Values)

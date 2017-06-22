@@ -110,6 +110,13 @@ namespace WorkerHost.Domain.Managers
                 logger.logPrint(logg, 2);
                 return logg;
             }
+            if (cache.hasWorker(managerUserName))
+            {
+                logg = "החברה לא נוספה, שם המשתמש תפוס, אנא הזן שם מנהל אחר";
+                logger.logPrint(logg, 0);
+                logger.logPrint(logg, 2);
+                return logg;
+            }
             company = new Company(companyName, phone, facebookGroups, companyProfileID,managerUserName, managerPassword);
             logg = "company has been added";
             logger.logPrint(logg, 0);
