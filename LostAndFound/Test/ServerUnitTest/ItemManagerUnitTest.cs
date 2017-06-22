@@ -15,7 +15,8 @@ namespace Test.UnitTests
         private Database db;
         private IItemManager IIM;
         private ICompanyManager ICM;
-        private int comapnyKey = SessionDirector.getInstance.generateAdminKey("Guy");
+        private int comapnyKey;
+        private string FBToken = FacebookConnector.testFBToken;
         [TestInitialize]
         public void setUp()
         {
@@ -26,6 +27,14 @@ namespace Test.UnitTests
             cache.setUp();
             IIM = ItemManager.getInstance;
             ICM = CompanyManager.getInstance;
+            string res = ICM.login(FBToken, "Guy", "Mc123456");
+            if (res.Contains("login succeeded,"))
+            {
+                char[] ar = { ',' };
+                res = res.Split(ar)[1];
+                comapnyKey = int.Parse(res);
+            }
+            ICM.setToken("Guy", FBToken);
         }
 
         [TestCleanup]

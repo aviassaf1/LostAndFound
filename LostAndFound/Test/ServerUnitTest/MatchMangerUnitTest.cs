@@ -14,8 +14,10 @@ namespace Test.UnitTests
         private Cache cache;
         private Database db;
         private IMatchManager IMM;
+        private ICompanyManager ICM;
         private const string GID = "1538105046204967";
-        private int comapnyKey = SessionDirector.getInstance.generateAdminKey("Guy");
+        private int comapnyKey;
+        private string FBToken = FacebookConnector.testFBToken;
 
         [TestInitialize]
         public void setUp()
@@ -26,6 +28,15 @@ namespace Test.UnitTests
             cache.initCache();
             cache.setUp();
             IMM = MatchManager.getInstance;
+            ICM = CompanyManager.getInstance;
+            string res = ICM.login(FBToken, "Guy", "Mc123456");
+            if (res.Contains("login succeeded,"))
+            {
+                char[] ar = { ',' };
+                res = res.Split(ar)[1];
+                comapnyKey = int.Parse(res);
+            }
+            ICM.setToken("Guy", FBToken);
         }
 
         [TestCleanup]
@@ -36,7 +47,7 @@ namespace Test.UnitTests
         [TestMethod]
         public void changeMatchStatusValid()
         {
-            Company c = CompanyManager.getInstance.getCompanyByName("Guy");
+            Company c = ICM.getCompanyByName("Guy");
             HashSet<int> m = c.Matches;
             string ans;
             bool done = false;
@@ -55,7 +66,7 @@ namespace Test.UnitTests
         [TestMethod]
         public void changeMatchStatusInvalid()
         {
-            Company c = CompanyManager.getInstance.getCompanyByName("Guy");
+            Company c = ICM.getCompanyByName("Guy");
             HashSet<int> m = c.Matches;
             string ans;
             bool done = false;
@@ -79,14 +90,14 @@ namespace Test.UnitTests
             List<Color> colors1 = new List<Color>();
             colors1.Add(Color.BLACK);
             List<Match> ms = IMM.findMatches(new FoundItem(colors1, ItemType.FOLDER, DateTime.Today, "BGU", "bla bla",
-                8876, "Guy", "Noam", "05000000", "c"), CompanyManager.getInstance.getToken("Guy"));
+                8876, "Guy", "Noam", "05000000", "c"), ICM.getToken("Guy"));
             Assert.IsNotNull(ms);
         }
 
         [TestMethod]
         public void findMatchesInvalid()
         {
-            List<Match> ms = IMM.findMatches(null, CompanyManager.getInstance.getToken("Guy"));
+            List<Match> ms = IMM.findMatches(null, ICM.getToken("Guy"));
             Assert.IsNull(ms);
 
             List<Color> colors1 = new List<Color>();
@@ -98,7 +109,7 @@ namespace Test.UnitTests
         [TestMethod]
         public void getPostsFromGroupValid()
         {
-            List<WorkerHost.Domain.BLBackEnd.FBItem> fbis = FacebookConnector.getPostsFromGroup(CompanyManager.getInstance.getToken("Guy"), GID);
+            List<WorkerHost.Domain.BLBackEnd.FBItem> fbis = FacebookConnector.getPostsFromGroup(ICM.getToken("Guy"), GID);
             Assert.IsNotNull(fbis);
         }
 
@@ -108,7 +119,7 @@ namespace Test.UnitTests
             List<WorkerHost.Domain.BLBackEnd.FBItem> fbis = FacebookConnector.getPostsFromGroup(null, GID);
             Assert.IsNull(fbis);
 
-            fbis = FacebookConnector.getPostsFromGroup(CompanyManager.getInstance.getToken("Guy"), null);
+            fbis = FacebookConnector.getPostsFromGroup(ICM.getToken("Guy"), null);
             Assert.IsNull(fbis);
         }
     }
