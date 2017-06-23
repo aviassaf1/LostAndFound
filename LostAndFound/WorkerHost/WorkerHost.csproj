@@ -95,26 +95,26 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataLayer\Companies.cs">
-      <DependentUpon>FreeModel.tt</DependentUpon>
+      <DependentUpon>LoaclModelTest.tt</DependentUpon>
     </Compile>
     <Compile Include="DataLayer\CompanyFbConnection.cs">
-      <DependentUpon>FreeModel.tt</DependentUpon>
+      <DependentUpon>LoaclModelTest.tt</DependentUpon>
     </Compile>
     <Compile Include="DataLayer\CompanyItems.cs">
-      <DependentUpon>FreeModel.tt</DependentUpon>
+      <DependentUpon>LoaclModelTest.tt</DependentUpon>
     </Compile>
     <Compile Include="DataLayer\CompanyUsers.cs">
-      <DependentUpon>FreeModel.tt</DependentUpon>
+      <DependentUpon>LoaclModelTest.tt</DependentUpon>
     </Compile>
     <Compile Include="DataLayer\Database.cs" />
     <Compile Include="DataLayer\FacebookGroups.cs">
-      <DependentUpon>FreeModel.tt</DependentUpon>
+      <DependentUpon>LoaclModelTest.tt</DependentUpon>
     </Compile>
     <Compile Include="DataLayer\FBItem.cs">
-      <DependentUpon>FreeModel.tt</DependentUpon>
+      <DependentUpon>LoaclModelTest.tt</DependentUpon>
     </Compile>
     <Compile Include="DataLayer\FoundItems.cs">
-      <DependentUpon>FreeModel.tt</DependentUpon>
+      <DependentUpon>LoaclModelTest.tt</DependentUpon>
     </Compile>
     <Compile Include="DataLayer\FreeModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -133,13 +133,28 @@
     </Compile>
     <Compile Include="DataLayer\IDB.cs" />
     <Compile Include="DataLayer\Items.cs">
-      <DependentUpon>FreeModel.tt</DependentUpon>
+      <DependentUpon>LoaclModelTest.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataLayer\LoaclModelTest.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LoaclModelTest.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataLayer\LoaclModelTest.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LoaclModelTest.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataLayer\LoaclModelTest.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LoaclModelTest.edmx</DependentUpon>
     </Compile>
     <Compile Include="DataLayer\LostItems.cs">
-      <DependentUpon>FreeModel.tt</DependentUpon>
+      <DependentUpon>LoaclModelTest.tt</DependentUpon>
     </Compile>
     <Compile Include="DataLayer\Matches.cs">
-      <DependentUpon>FreeModel.tt</DependentUpon>
+      <DependentUpon>LoaclModelTest.tt</DependentUpon>
     </Compile>
     <Compile Include="DataLayer\Model1.Context.cs">
       <AutoGen>True</AutoGen>
@@ -157,7 +172,7 @@
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
     <Compile Include="DataLayer\User.cs">
-      <DependentUpon>FreeModel.tt</DependentUpon>
+      <DependentUpon>LoaclModelTest.tt</DependentUpon>
     </Compile>
     <Compile Include="Domain\BLBackEnd\Admin.cs" />
     <Compile Include="Domain\BLBackEnd\Color.cs" />
@@ -216,6 +231,13 @@
     <None Include="DataLayer\FreeModel.edmx.diagram">
       <DependentUpon>FreeModel.edmx</DependentUpon>
     </None>
+    <EntityDeploy Include="DataLayer\LoaclModelTest.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>LoaclModelTest.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="DataLayer\LoaclModelTest.edmx.diagram">
+      <DependentUpon>LoaclModelTest.edmx</DependentUpon>
+    </None>
     <None Include="DataLayer\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </None>
@@ -234,6 +256,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>FreeModel.edmx</DependentUpon>
       <LastGenOutput>FreeModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="DataLayer\LoaclModelTest.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>LoaclModelTest.edmx</DependentUpon>
+      <LastGenOutput>LoaclModelTest.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DataLayer\LoaclModelTest.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>LoaclModelTest.edmx</DependentUpon>
+      <LastGenOutput>LoaclModelTest.cs</LastGenOutput>
     </Content>
     <Content Include="DataLayer\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

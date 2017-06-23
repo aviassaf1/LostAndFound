@@ -9,7 +9,11 @@ namespace WorkerHost.DataLayer
     public class Database : IDB
     {
         private static Database singleton;
-        private LostFoundFreeDBEntities db;
+        //private LostFoundFreeDBEntities db;      this is what should be
+        private localDBEntities db;
+
+        private Object addToDB_lock;
+
 
         private Database()
         {
@@ -97,11 +101,13 @@ namespace WorkerHost.DataLayer
         {
             try
             {
-                this.db = new LostFoundFreeDBEntities();
+                //this.db = new LostFoundFreeDBEntities();    - this is what should be
+                this.db = new localDBEntities();
                 string baseDir = AppDomain.CurrentDomain.BaseDirectory;
                 int index = baseDir.IndexOf("LostAndFound");
                 string dataDir = baseDir.Substring(0, index) + "LostAndFound\\LostAndFound\\";
                 AppDomain.CurrentDomain.SetData("DataDirectory", dataDir);
+                addToDB_lock = new Object();
                 //initialAddToCache();
                 return true;
             }
@@ -598,35 +604,56 @@ namespace WorkerHost.DataLayer
             }
         }
 
+        private int addItem()
+        {
+            lock (addToDB_lock)
+            {
+                localDBEntities context = new localDBEntities();
+                Items temp = new Items();
+                context.Items.Add(temp);
+                context.SaveChanges();
+                return temp.itemID;
+            }
+        }
+
         public int AddCompanyItem(int serialNumber, string contactName, string contactPhone, string companyName)
         {
             try
             {
-                Items item = new Items();
-                db.SaveChanges();
+                int itemId = addItem();
+                
                 CompanyItems cItem = new CompanyItems();
                 Companies company = findCompanyByCompanyName(companyName);
                 if (company == null)
                 {
                     return -2;
                 }
-
-                db.SaveChanges();
-                company.CompanyItems.Add(cItem);
-                item.CompanyItems = cItem;
-                cItem.Items = item;
-                cItem.itemId = item.itemID;
-                cItem.Companies = company;
+                cItem.itemId = itemId;
                 cItem.companyName = companyName;
                 cItem.contactName = contactName;
                 cItem.contactPhone = contactPhone;
                 cItem.serialNumber = serialNumber;
-                db.SaveChanges();
-                return cItem.itemId;
+                int res = addCompanyitem(company, cItem, itemId);
+                return res;
             }
             catch (Exception e)
             {
                 return -1;
+            }
+        }
+
+        private int addCompanyitem(Companies company, CompanyItems cItem, int itemId)
+        {
+            lock (addToDB_lock)
+            {
+                localDBEntities context = new localDBEntities();
+                Items item = findItemByItemId(itemId);
+                cItem.Companies = company;
+                company.CompanyItems.Add(cItem);
+                item.CompanyItems = cItem;
+                cItem.Items = item;
+                context.SaveChanges();
+                return cItem.itemId;
             }
         }
 
@@ -844,7 +871,8 @@ namespace WorkerHost.DataLayer
             try
             {
                 int citemId = AddCompanyItem(serialNumber, contactName, contactPhone, companyName);
-                CompanyItems cItem = findItemByItemId(citemId).CompanyItems;
+                Items item = findItemByItemId(citemId);
+                CompanyItems cItem = item.CompanyItems;
                 if (cItem == null)
                 {
                     return -2;
@@ -861,15 +889,26 @@ namespace WorkerHost.DataLayer
                 fItem.itemType = itemType;
                 fItem.location = location;
                 fItem.photoLocation = photoLocation;
-                cItem.FoundItems = fItem;
-                fItem.CompanyItems = cItem;                
-                db.SaveChanges();
+                int res = addFoundItem(cItem, fItem);
+                return res;
+
             }
             catch (Exception e)
             {
                 return -1;
             }
-            return fItem.itemID;
+        }
+
+        private int addFoundItem(CompanyItems cItem, FoundItems fItem)
+        {
+            lock (addToDB_lock)
+            {
+                localDBEntities context = new localDBEntities();
+                cItem.FoundItems = fItem;
+                fItem.CompanyItems = cItem;
+                context.SaveChanges();
+                return fItem.itemID;
+            }
         }
 
         public string updateFoundItem(int itemId, List<string> colorsNew, string itemTypeNew, DateTime findingDateNew, string locationNew, string descriptionNew, string photoLocationNew, bool deliveredNew)
@@ -956,15 +995,25 @@ namespace WorkerHost.DataLayer
                 lItem.itemType = itemType;
                 lItem.location = location;
                 lItem.photoLocation = photoLocation;
-                lItem.CompanyItems = cItem;
-                cItem.LostItems = lItem;
-                db.SaveChanges();
+                int res = addLostItem(cItem, lItem);
+                return res;
             }
             catch (Exception e)
             {
                 return -1;
             }
-            return lItem.itemID;
+        }
+
+        private int addLostItem(CompanyItems cItem, LostItems lItem)
+        {
+            lock (addToDB_lock)
+            {
+                localDBEntities context = new localDBEntities();
+                cItem.LostItems = lItem;
+                lItem.CompanyItems = cItem;
+                context.SaveChanges();
+                return lItem.itemID;
+            }
         }
 
         public string updateLostItem(int itemId, List<string> colorsNew, string itemTypeNew, DateTime lostDateNew, string locationNew, string descriptionNew, string photoLocationNew, bool deliveredNew)
@@ -1182,7 +1231,7 @@ namespace WorkerHost.DataLayer
                 }
                 return retList;
             }
-            catch
+            catch (Exception e)
             {
                 return null;
             }

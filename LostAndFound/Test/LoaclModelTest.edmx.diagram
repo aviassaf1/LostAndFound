@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6f1606e406b94c57bacd4d1fa8ee878e" Name="Diagram1">
+        <EntityTypeShape EntityType="localDBModel.Companies" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="localDBModel.CompanyFbConnection" Width="1.5" PointX="3" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="localDBModel.CompanyItems" Width="1.5" PointX="3" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="localDBModel.CompanyUsers" Width="1.5" PointX="3" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="localDBModel.FacebookGroups" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="localDBModel.FBItem" Width="1.5" PointX="3" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="localDBModel.FoundItems" Width="1.5" PointX="5.25" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="localDBModel.Items" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="localDBModel.LostItems" Width="1.5" PointX="5.25" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="localDBModel.Matches" Width="1.5" PointX="8.25" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="localDBModel.User" Width="1.5" PointX="1.5" PointY="1.25" IsExpanded="true" />
+        <AssociationConnector Association="localDBModel.FK_Companies_ToTable" ManuallyRouted="false" />
+        <AssociationConnector Association="localDBModel.FK_CompanyFbConnection_ToTable" ManuallyRouted="false" />
+        <AssociationConnector Association="localDBModel.FK_CompanyItems_ToTable" ManuallyRouted="false" />
+        <AssociationConnector Association="localDBModel.FK_CompanyUsers_ToTable" ManuallyRouted="false" />
+        <AssociationConnector Association="localDBModel.FK_FacebookGroups_ToTable" ManuallyRouted="false" />
+        <AssociationConnector Association="localDBModel.FK_CompanyItems_ToTable_1" ManuallyRouted="false" />
+        <AssociationConnector Association="localDBModel.FK_FoundItems_ToTable" ManuallyRouted="false" />
+        <AssociationConnector Association="localDBModel.FK_LostItems_ToTable" ManuallyRouted="false" />
+        <AssociationConnector Association="localDBModel.FK_Matches_ToTable_1" ManuallyRouted="false" />
+        <AssociationConnector Association="localDBModel.FK_FBItem_ToTable" ManuallyRouted="false" />
+        <AssociationConnector Association="localDBModel.FK_Matches_ToTable" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

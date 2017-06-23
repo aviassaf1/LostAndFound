@@ -20,7 +20,7 @@ namespace Test.ClientLoadTests
         private ICompanyManager ICM;
         private IItemManager _iim;
         private int key;
-        private string FBToken = "EAACEdEose0cBAMc85AED4kjrVAEcGQbLpNsx2JZCvfT7ZCe9Cumi6EtCfgZA2pINtMpc3T9zEIyeDvz0mJ0vwj6WZBUYbUUPp6xZBMZBNtHzOluPyienjp8WVGa5DO5fwLNFAPyoZAQEmJdo77adHOXPIdRQ9ZB0JfhogSU7PHRZCJUtB1juEDzfZC5ZBUUROZBzYlgZD";
+        private string FBToken = "EAACEdEose0cBABHYaUmk35BR2bAZA8ZAfpLu5CelCDTqExYTetRI8uoWYpe7OiBDN97GZC789mIzaLvV9ZAe48EG7YKyC18PGxkRv5G0b4sBSrKlaofxsvhUTHaWkzZCuyJu38zmTZAvu800XeLCDMYhRvvfsE64H82NZChuivmb7fWEzxg2gyRc6td9mYX0ucZD";
         private string addFItemTrueRes = "add found item: item was added successfully";
         private string _companyName;
 
@@ -87,11 +87,11 @@ namespace Test.ClientLoadTests
 
 
         [TestMethod]
-        public void TestMethod1()
+        public void add100FoundItems()
         {
             string res;
             List<Task<string>> threads = new List<Task<string>>();
-            for(int i=0; i<3; i++)
+            for(int i=0; i<100; i++)
             {
                 threads.Add(new Task<string>(addItemFunc));
             }
