@@ -59,8 +59,8 @@ namespace WorkerHost.Domain
         {
             _admins.Add("admin1", new Admin("admin1", "Mc123456"));
             _db.addUser("admin1", "Mc123456", true);
-            Company comp1 = new Company("Guy", "05000000", new HashSet<string>(), "746438115377087", "Guy", "Mc123456");
-            Company comp2 = new Company("Guy2", "05000000", new HashSet<string>(), "10205175970541279", "Guy2", "Mc123456");
+            Company comp1 = new Company("Guy", "05000000", new HashSet<string>(), "10205175970541279", "Guy", "Mc123456");
+            Company comp2 = new Company("Guy2", "05000000", new HashSet<string>(), "746438115377087", "Guy2", "Mc123456");
             comp1.addFacebookGroup("1538105046204967");
             comp2.addFacebookGroup("1538105046204967");
             List<Color> colors1 = new List<Color>();
