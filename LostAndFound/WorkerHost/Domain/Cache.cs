@@ -107,6 +107,18 @@ namespace WorkerHost.Domain
             return _workers.ContainsKey(managerUserName);
         }
 
+        internal bool hasFBProfileID(string companyProfileID)
+        {
+            foreach (Company comp in _companies.Values)
+            {
+                if (companyProfileID.Equals(comp.FbProfileID))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         internal Company getCompanyByfb(string fbid)
         {
             foreach(Company comp in _companies.Values)
