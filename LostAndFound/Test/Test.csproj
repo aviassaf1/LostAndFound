@@ -94,9 +94,6 @@
     <Compile Include="Companies.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="CompanyFbConnection.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="CompanyItems.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

@@ -9,18 +9,9 @@
           <Key>
             <PropertyRef Name="companyName" />
           </Key>
-          <Property Name="userName" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="companyName" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="phone" Type="varchar" MaxLength="50" />
-        </EntityType>
-        <EntityType Name="CompanyFbConnection">
-          <Key>
-            <PropertyRef Name="companyName" />
-            <PropertyRef Name="fbProfile" />
-          </Key>
-          <Property Name="companyName" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="fbProfile" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="isManager" Type="bit" Nullable="false" />
+          <Property Name="userName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="companyName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="phone" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="CompanyItems">
           <Key>
@@ -30,25 +21,25 @@
           <Property Name="serialNumber" Type="int" />
           <Property Name="contactName" Type="nvarchar" MaxLength="50" />
           <Property Name="contactPhone" Type="nvarchar" MaxLength="50" />
-          <Property Name="companyName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="companyName" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="CompanyUsers">
           <Key>
             <PropertyRef Name="userName" />
           </Key>
-          <Property Name="companyName" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="fbProfileId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="companyName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="fbProfileId" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="isManager" Type="bit" Nullable="false" />
-          <Property Name="userName" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="userName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="FacebookGroups">
           <Key>
             <PropertyRef Name="CompanyName" />
             <PropertyRef Name="groupURL" />
           </Key>
-          <Property Name="CompanyName" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="groupURL" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="groupURL" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="FBItem">
           <Key>
@@ -106,14 +97,14 @@
           <Property Name="matchID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="companyItemId" Type="int" Nullable="false" />
           <Property Name="itemID" Type="int" Nullable="false" />
-          <Property Name="matchStatus" Type="varchar" MaxLength="50" />
+          <Property Name="matchStatus" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="UserName" />
           </Key>
-          <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="password" Type="varchar" MaxLength="50" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" />
           <Property Name="isAdmin" Type="bit" />
         </EntityType>
         <Association Name="FK_Companies_ToTable">
@@ -125,18 +116,6 @@
             </Principal>
             <Dependent Role="Companies">
               <PropertyRef Name="userName" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CompanyFbConnection_ToTable">
-          <End Role="Companies" Type="Self.Companies" Multiplicity="1" />
-          <End Role="CompanyFbConnection" Type="Self.CompanyFbConnection" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Companies">
-              <PropertyRef Name="companyName" />
-            </Principal>
-            <Dependent Role="CompanyFbConnection">
-              <PropertyRef Name="companyName" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -250,7 +229,6 @@
         </Association>
         <EntityContainer Name="LostFoundFreeDBModelStoreContainer">
           <EntitySet Name="Companies" EntityType="Self.Companies" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="CompanyFbConnection" EntityType="Self.CompanyFbConnection" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CompanyItems" EntityType="Self.CompanyItems" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CompanyUsers" EntityType="Self.CompanyUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FacebookGroups" EntityType="Self.FacebookGroups" Schema="dbo" store:Type="Tables" />
@@ -263,10 +241,6 @@
           <AssociationSet Name="FK_Companies_ToTable" Association="Self.FK_Companies_ToTable">
             <End Role="User" EntitySet="User" />
             <End Role="Companies" EntitySet="Companies" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CompanyFbConnection_ToTable" Association="Self.FK_CompanyFbConnection_ToTable">
-            <End Role="Companies" EntitySet="Companies" />
-            <End Role="CompanyFbConnection" EntitySet="CompanyFbConnection" />
           </AssociationSet>
           <AssociationSet Name="FK_CompanyItems_ToTable" Association="Self.FK_CompanyItems_ToTable">
             <End Role="Companies" EntitySet="Companies" />
@@ -311,7 +285,6 @@
       <Schema Namespace="LostFoundFreeDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="LostFoundFreeDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Companies" EntityType="LostFoundFreeDBModel.Companies" />
-          <EntitySet Name="CompanyFbConnection" EntityType="LostFoundFreeDBModel.CompanyFbConnection" />
           <EntitySet Name="CompanyItems" EntityType="LostFoundFreeDBModel.CompanyItems" />
           <EntitySet Name="CompanyUsers" EntityType="LostFoundFreeDBModel.CompanyUsers" />
           <EntitySet Name="FacebookGroups" EntityType="LostFoundFreeDBModel.FacebookGroups" />
@@ -324,10 +297,6 @@
           <AssociationSet Name="FK_Companies_ToTable" Association="LostFoundFreeDBModel.FK_Companies_ToTable">
             <End Role="User" EntitySet="User" />
             <End Role="Companies" EntitySet="Companies" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CompanyFbConnection_ToTable" Association="LostFoundFreeDBModel.FK_CompanyFbConnection_ToTable">
-            <End Role="Companies" EntitySet="Companies" />
-            <End Role="CompanyFbConnection" EntitySet="CompanyFbConnection" />
           </AssociationSet>
           <AssociationSet Name="FK_CompanyItems_ToTable" Association="LostFoundFreeDBModel.FK_CompanyItems_ToTable">
             <End Role="Companies" EntitySet="Companies" />
@@ -370,24 +339,13 @@
           <Key>
             <PropertyRef Name="companyName" />
           </Key>
-          <Property Name="userName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="companyName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="userName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="companyName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="User" Relationship="LostFoundFreeDBModel.FK_Companies_ToTable" FromRole="Companies" ToRole="User" />
-          <NavigationProperty Name="CompanyFbConnection" Relationship="LostFoundFreeDBModel.FK_CompanyFbConnection_ToTable" FromRole="Companies" ToRole="CompanyFbConnection" />
           <NavigationProperty Name="CompanyItems" Relationship="LostFoundFreeDBModel.FK_CompanyItems_ToTable" FromRole="Companies" ToRole="CompanyItems" />
           <NavigationProperty Name="CompanyUsers" Relationship="LostFoundFreeDBModel.FK_CompanyUsers_ToTable" FromRole="Companies" ToRole="CompanyUsers" />
           <NavigationProperty Name="FacebookGroups" Relationship="LostFoundFreeDBModel.FK_FacebookGroups_ToTable" FromRole="Companies" ToRole="FacebookGroups" />
-        </EntityType>
-        <EntityType Name="CompanyFbConnection">
-          <Key>
-            <PropertyRef Name="companyName" />
-            <PropertyRef Name="fbProfile" />
-          </Key>
-          <Property Name="companyName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="fbProfile" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="isManager" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Companies" Relationship="LostFoundFreeDBModel.FK_CompanyFbConnection_ToTable" FromRole="CompanyFbConnection" ToRole="Companies" />
         </EntityType>
         <EntityType Name="CompanyItems">
           <Key>
@@ -397,7 +355,7 @@
           <Property Name="serialNumber" Type="Int32" />
           <Property Name="contactName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="contactPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="companyName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="companyName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Companies" Relationship="LostFoundFreeDBModel.FK_CompanyItems_ToTable" FromRole="CompanyItems" ToRole="Companies" />
           <NavigationProperty Name="Items" Relationship="LostFoundFreeDBModel.FK_CompanyItems_ToTable_1" FromRole="CompanyItems" ToRole="Items" />
           <NavigationProperty Name="FoundItems" Relationship="LostFoundFreeDBModel.FK_FoundItems_ToTable" FromRole="CompanyItems" ToRole="FoundItems" />
@@ -408,11 +366,11 @@
           <Key>
             <PropertyRef Name="userName" />
           </Key>
-          <Property Name="companyName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="fbProfileId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="companyName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fbProfileId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="isManager" Type="Boolean" Nullable="false" />
-          <Property Name="userName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="userName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Companies" Relationship="LostFoundFreeDBModel.FK_CompanyUsers_ToTable" FromRole="CompanyUsers" ToRole="Companies" />
         </EntityType>
         <EntityType Name="FacebookGroups">
@@ -420,8 +378,8 @@
             <PropertyRef Name="CompanyName" />
             <PropertyRef Name="groupURL" />
           </Key>
-          <Property Name="CompanyName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="groupURL" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="groupURL" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Companies" Relationship="LostFoundFreeDBModel.FK_FacebookGroups_ToTable" FromRole="FacebookGroups" ToRole="Companies" />
         </EntityType>
         <EntityType Name="FBItem">
@@ -486,7 +444,7 @@
           <Property Name="matchID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="companyItemId" Type="Int32" Nullable="false" />
           <Property Name="itemID" Type="Int32" Nullable="false" />
-          <Property Name="matchStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="matchStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CompanyItems" Relationship="LostFoundFreeDBModel.FK_Matches_ToTable_1" FromRole="Matches" ToRole="CompanyItems" />
           <NavigationProperty Name="Items" Relationship="LostFoundFreeDBModel.FK_Matches_ToTable" FromRole="Matches" ToRole="Items" />
         </EntityType>
@@ -494,8 +452,8 @@
           <Key>
             <PropertyRef Name="UserName" />
           </Key>
-          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="isAdmin" Type="Boolean" />
           <NavigationProperty Name="Companies" Relationship="LostFoundFreeDBModel.FK_Companies_ToTable" FromRole="User" ToRole="Companies" />
         </EntityType>
@@ -508,18 +466,6 @@
             </Principal>
             <Dependent Role="Companies">
               <PropertyRef Name="userName" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CompanyFbConnection_ToTable">
-          <End Type="LostFoundFreeDBModel.Companies" Role="Companies" Multiplicity="1" />
-          <End Type="LostFoundFreeDBModel.CompanyFbConnection" Role="CompanyFbConnection" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Companies">
-              <PropertyRef Name="companyName" />
-            </Principal>
-            <Dependent Role="CompanyFbConnection">
-              <PropertyRef Name="companyName" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -643,15 +589,6 @@
                 <ScalarProperty Name="phone" ColumnName="phone" />
                 <ScalarProperty Name="companyName" ColumnName="companyName" />
                 <ScalarProperty Name="userName" ColumnName="userName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CompanyFbConnection">
-            <EntityTypeMapping TypeName="LostFoundFreeDBModel.CompanyFbConnection">
-              <MappingFragment StoreEntitySet="CompanyFbConnection">
-                <ScalarProperty Name="isManager" ColumnName="isManager" />
-                <ScalarProperty Name="fbProfile" ColumnName="fbProfile" />
-                <ScalarProperty Name="companyName" ColumnName="companyName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

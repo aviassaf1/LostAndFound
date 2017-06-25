@@ -26,7 +26,6 @@ namespace WorkerHost.DataLayer
         }
     
         public virtual DbSet<Companies> Companies { get; set; }
-        public virtual DbSet<CompanyFbConnection> CompanyFbConnection { get; set; }
         public virtual DbSet<CompanyItems> CompanyItems { get; set; }
         public virtual DbSet<CompanyUsers> CompanyUsers { get; set; }
         public virtual DbSet<FacebookGroups> FacebookGroups { get; set; }

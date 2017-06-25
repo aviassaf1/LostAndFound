@@ -6,7 +6,6 @@
     <edmx:Diagrams>
       <Diagram DiagramId="9c6bdfa2a63f4288a5309d13daaa9bac" Name="Diagram1">
         <EntityTypeShape EntityType="lostAndFoundDbEUModel.Companies" Width="1.5" PointX="0.75" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="lostAndFoundDbEUModel.CompanyFbConnection" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
         <EntityTypeShape EntityType="lostAndFoundDbEUModel.CompanyItems" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
         <EntityTypeShape EntityType="lostAndFoundDbEUModel.CompanyUsers" Width="1.5" PointX="5.75" PointY="1.75" IsExpanded="true" />
         <EntityTypeShape EntityType="lostAndFoundDbEUModel.FacebookGroups" Width="1.5" PointX="3" PointY="11.375" IsExpanded="true" />
@@ -17,7 +16,6 @@
         <EntityTypeShape EntityType="lostAndFoundDbEUModel.Matches" Width="1.5" PointX="8.25" PointY="7.625" IsExpanded="true" />
         <EntityTypeShape EntityType="lostAndFoundDbEUModel.User" Width="1.5" PointX="1.5" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="lostAndFoundDbEUModel.FK_Companies_ToTable" ManuallyRouted="false" />
-        <AssociationConnector Association="lostAndFoundDbEUModel.FK_CompanyFbConnection_ToTable" ManuallyRouted="false" />
         <AssociationConnector Association="lostAndFoundDbEUModel.FK_CompanyItems_ToTable" ManuallyRouted="false" />
         <AssociationConnector Association="lostAndFoundDbEUModel.FK_CompanyUsers_ToTable" ManuallyRouted="false" />
         <AssociationConnector Association="lostAndFoundDbEUModel.FK_FacebookGroups_ToTable" ManuallyRouted="false" />
