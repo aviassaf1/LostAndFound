@@ -97,6 +97,9 @@ namespace WorkerHost.Domain
         {
             Company comp1 = new Company("testComp", "05000000", new HashSet<string>(), "746438115377087", "testComp", "Mc123456");
             comp1.addFacebookGroup("1538105046204967");
+            
+            _db.addUser("admin1", "Aadmin123", true);
+
         }
 
         internal bool hasWorker(string managerUserName)
@@ -273,7 +276,7 @@ namespace WorkerHost.Domain
                 _companies.Remove(_userName);
                 return _db.removeCompany(_userName);
             }
-            return "Company didn't remove";
+            return "company does not exist";
         }
 
         internal CompanyItem getCompanyItem(int itemID)
@@ -467,9 +470,12 @@ namespace WorkerHost.Domain
 
         internal void addNewCompany(Company company,String managerName)
         {
-            _companies.Add(company.UserName, company);
-            _workers.Add(managerName, company.CompanyName);
-            _db.addCompany(company.UserName, company.Password, company.CompanyName, company.Phone, company.FacebookGroups,company.FbProfileID, company.Managers, company.Workers);
+            string res = _db.addCompany(company.UserName, company.Password, company.CompanyName, company.Phone, company.FacebookGroups, company.FbProfileID, company.Managers, company.Workers);
+            if (res.Equals("true"))
+            {
+                _companies.Add(company.UserName, company);
+                _workers.Add(managerName, company.CompanyName);
+            }
         }
 
         internal void updateFacebbokItem(Domain.BLBackEnd.FBItem fBItem)
