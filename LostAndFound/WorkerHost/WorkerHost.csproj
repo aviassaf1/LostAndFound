@@ -95,26 +95,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataLayer\Companies.cs">
-      <DependentUpon>FreeModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataLayer\CompanyFbConnection.cs">
-      <DependentUpon>FreeModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="DataLayer\CompanyItems.cs">
-      <DependentUpon>FreeModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="DataLayer\CompanyUsers.cs">
-      <DependentUpon>FreeModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="DataLayer\Database.cs" />
     <Compile Include="DataLayer\FacebookGroups.cs">
-      <DependentUpon>FreeModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="DataLayer\FBItem.cs">
-      <DependentUpon>FreeModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="DataLayer\FoundItems.cs">
-      <DependentUpon>FreeModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="DataLayer\FreeModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -133,13 +130,13 @@
     </Compile>
     <Compile Include="DataLayer\IDB.cs" />
     <Compile Include="DataLayer\Items.cs">
-      <DependentUpon>FreeModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="DataLayer\LostItems.cs">
-      <DependentUpon>FreeModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="DataLayer\Matches.cs">
-      <DependentUpon>FreeModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="DataLayer\Model1.Context.cs">
       <AutoGen>True</AutoGen>
@@ -157,7 +154,7 @@
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
     <Compile Include="DataLayer\User.cs">
-      <DependentUpon>FreeModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Domain\BLBackEnd\Admin.cs" />
     <Compile Include="Domain\BLBackEnd\Color.cs" />
