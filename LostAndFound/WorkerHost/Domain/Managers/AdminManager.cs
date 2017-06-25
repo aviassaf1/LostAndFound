@@ -117,6 +117,13 @@ namespace WorkerHost.Domain.Managers
                 logger.logPrint(logg, 2);
                 return logg;
             }
+            if (cache.hasFBProfileID(companyProfileID))
+            {
+                logg = "החברה לא נוספה, מזהה פייסבוק כבר קיים במערכת";
+                logger.logPrint(logg, 0);
+                logger.logPrint(logg, 2);
+                return logg;
+            }
             company = new Company(companyName, phone, facebookGroups, companyProfileID,managerUserName, managerPassword);
             logg = "company has been added";
             logger.logPrint(logg, 0);
