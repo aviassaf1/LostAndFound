@@ -49,6 +49,15 @@ namespace NewWebClient {
         protected global::System.Web.UI.WebControls.Button ViewWorkersButton;
         
         /// <summary>
+        /// picLostItem control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button picLostItem;
+        
+        /// <summary>
         /// picFoundItem control.
         /// </summary>
         /// <remarks>
@@ -56,15 +65,6 @@ namespace NewWebClient {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button picFoundItem;
-        
-        /// <summary>
-        /// noPicFoundItem control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button noPicFoundItem;
         
         /// <summary>
         /// noPicLostItem control.
@@ -76,12 +76,12 @@ namespace NewWebClient {
         protected global::System.Web.UI.WebControls.Button noPicLostItem;
         
         /// <summary>
-        /// picLostItem control.
+        /// noPicFoundItem control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button picLostItem;
+        protected global::System.Web.UI.WebControls.Button noPicFoundItem;
     }
 }

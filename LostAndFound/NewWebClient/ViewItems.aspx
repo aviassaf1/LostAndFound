@@ -2,10 +2,18 @@
 
 <asp:Content ID="bodyContent" ContentPlaceHolderID="MainContent" runat="server">
         
+
         <div id = "dvGrid" style ="padding:10px;width:1108px" dir="rtl">
+                <asp:Button ID="publishButton" runat="server" Text="פרסם מאגר מציאות" OnClick="publishButton_Click" Width="150"/>
+            <asp:Button ID="ViewWorkersButton" runat="server" Text="צפה בעובדים" OnClick="ViewWorkers" Width="150"/>
+                <asp:Button ID="picFoundItem" runat="server" OnClick="picFoundItem_Click" Text="הוספת מציאה עם תמונה" Width="150"/>
+                <asp:Button ID="noPicFoundItem" runat="server" OnClick="noPicFoundItem_Click" Text="הוספת מציאה בלי תמונה" Width="150"/>
+                <asp:Button ID="noPicLostItem" runat="server" OnClick="noPicLostItem_Click" Text="הוספת אבידה בלי תמונה" Width="150"/>
+                <asp:Button ID="picLostItem" runat="server" OnClick="picLostItem_Click" Text="הוספת אבידה עם תמונה" Width="150"/>
+                <br />
 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
 <ContentTemplate>
-<asp:GridView ID="GridView1" runat="server"  Width = "550px"
+<asp:GridView ID="GridView1" runat="server"  Width = "920px"
 AutoGenerateColumns = "false" Font-Names = "Arial"
 Font-Size = "11pt" AlternatingRowStyle-BackColor = "#C2D69B" 
 HeaderStyle-BackColor = "#6699ff" AllowPaging ="true"  ShowFooter = "false" 
@@ -131,12 +139,6 @@ PageSize = "8" style="direction: rtl" >
 <asp:AsyncPostBackTrigger ControlID = "GridView1" />
 </Triggers>
 </asp:UpdatePanel>
-            <asp:Button ID="publishButton" runat="server" Text="פרסם מאגר מציאות" OnClick="publishButton_Click" />
-            <asp:Button ID="ViewWorkersButton" runat="server" Text="צפה בעובדים" OnClick="ViewWorkers" />
-                <asp:Button ID="picFoundItem" runat="server" OnClick="picFoundItem_Click" Text="הוספת מציאה עם תמונה" />
-                <asp:Button ID="noPicFoundItem" runat="server" OnClick="noPicFoundItem_Click" Text="הוספת מציאה בלי תמונה" />
-                <asp:Button ID="noPicLostItem" runat="server" OnClick="noPicLostItem_Click" Text="הוספת אבידה בלי תמונה" />
-                <asp:Button ID="picLostItem" runat="server" OnClick="picLostItem_Click" Text="הוספת אבידה עם תמונה" />
-                <br />
+            
 </div>
 </asp:Content>

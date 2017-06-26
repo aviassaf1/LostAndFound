@@ -15,124 +15,292 @@ namespace WorkerHost
 
         public string addComapny(string companyName, string phone, HashSet<string> facebookGroups, string companyProfileID, string managerUserName, string managerPassword, int key)
         {
-            return AdminController.getInstance.addComapny(companyName, phone, facebookGroups, companyProfileID,
-                managerUserName, managerPassword, key);
+            try
+            {
+                return AdminController.getInstance.addComapny(companyName, phone, facebookGroups, companyProfileID,
+                    managerUserName, managerPassword, key);
+            }
+            catch(Exception e)
+            {
+                return "error in server";
+            }
         }
 
         public string addFBGroup(string groupID, int key)
         {
-            return CompanyController.getInstance.addFBGroup(groupID, key);
+            try
+            {
+                return CompanyController.getInstance.addFBGroup(groupID, key);
+            }
+            catch (Exception e)
+            {
+                return "error in server";
+            }
         }
 
         public string addFoundItem(List<string> sColors, string sType, DateTime date, string location, string description, int serialNumber, string contactName, string contactPhone, string photoLocation, int key)
         {
-            return ItemController.getInstance.addFoundItem(sColors, sType, date, location, description, serialNumber, contactName, contactPhone, photoLocation, key);
+            try
+            {
+                return ItemController.getInstance.addFoundItem(sColors, sType, date, location, description, serialNumber, contactName, contactPhone, photoLocation, key);
+            }
+            catch (Exception e)
+            {
+                return "error in server";
+            }
         }
 
         public string addLostItem(List<string> sColors, string sType, DateTime date, string location, string description, int serialNumber, string contactName, string contactPhone, string photoLocation, int key)
         {
-            return ItemController.getInstance.addLostItem(sColors, sType, date, location, description, serialNumber, contactName, contactPhone, photoLocation, key);
+            try
+            {
+                return ItemController.getInstance.addLostItem(sColors, sType, date, location, description, serialNumber, contactName, contactPhone, photoLocation, key);
+            }
+            catch (Exception e)
+            {
+                return "error in server";
+            }
         }
 
         public string addWorker(string newUsername, string newPassword, bool isManager, int key)
         {
-            return CompanyController.getInstance.addWorker(newUsername, newPassword, isManager, key);
+            try
+            {
+                return CompanyController.getInstance.addWorker(newUsername, newPassword, isManager, key);
+            }
+            catch (Exception e)
+            {
+                return "error in server";
+            }
         }
 
         public string changeMatchStatus(int matchID, string statusNum, int key)
         {
-            return MatchController.getInstance.changeMatchStatus(matchID,statusNum, key);
+            try
+            {
+                return MatchController.getInstance.changeMatchStatus(matchID, statusNum, key);
+            }
+            catch (Exception e)
+            {
+                return "error in server";
+            }
         }
 
         public string deleteCompany(string companyName, int key)
         {
-            return AdminController.getInstance.deleteCompany(companyName, key);
+            try
+            {
+                return AdminController.getInstance.deleteCompany(companyName, key);
+            }
+            catch (Exception e)
+            {
+                return "error in server";
+            }
         }
 
         public string deleteItem(int itemID, int key)
         {
-            return ItemController.getInstance.deleteItem(itemID, key);
+            try
+            {
+                return ItemController.getInstance.deleteItem(itemID, key);
+            }
+            catch (Exception e)
+            {
+                return "error in server";
+            }
         }
 
         public string editCompany(string companyName, string password, string phone, int key)
         {
-            return AdminController.getInstance.editCompany(companyName,password,phone, key);
+            try
+            {
+                return AdminController.getInstance.editCompany(companyName, password, phone, key);
+            }
+            catch (Exception e)
+            {
+                return "error in server";
+            }
         }
 
         public string editItem(int itemID, DateTime date, string location, string description, int serialNumber, string contactName, string contactPhone, int key)
         {
-            return ItemController.getInstance.editItem(itemID, date, location, description, serialNumber, contactName,
-                contactPhone, key);
+            try
+            {
+                return ItemController.getInstance.editItem(itemID, date, location, description, serialNumber, contactName,
+                    contactPhone, key);
+            }
+            catch (Exception e)
+            {
+                return "error in server";
+            }
         }
 
         public List<CompanyItemData> getAllCompanyItems(int key)
         {
-            return ItemController.getInstance.getAllCompanyItems(key);
+            try
+            {
+                return ItemController.getInstance.getAllCompanyItems(key);
+            }
+            catch (Exception e)
+            {
+                return new List<CompanyItemData>();
+            }
         }
 
         public List<MatchData> getMatchesByItemID(int itemID, int key)
         {
-            return MatchController.getInstance.getMatchesByItemID(itemID, key);
+            try
+            {
+                return MatchController.getInstance.getMatchesByItemID(itemID, key);
+            }
+            catch (Exception e)
+            {
+                return new List<MatchData>();
+            }
         }
 
         public List<GroupData> getSystemCompanyFBGroup(int key)
         {
-            return CompanyController.getInstance.getSystemCompanyFBGroup(key);
+            try
+            {
+                return CompanyController.getInstance.getSystemCompanyFBGroup(key);
+            }
+            catch (Exception e)
+            {
+                return new List<GroupData>();
+            }
         }
 
         public string Adminlogin(string username, string password)
         {
-            return AdminController.getInstance.login(username, password);
+            try
+            {
+                return AdminController.getInstance.login(username, password);
+            }
+            catch (Exception e)
+            {
+                return "error in server";
+            }
         }
 
         public string login(string token, string username, string userPassword)
         {
-            return CompanyController.getInstance.login(token, username, userPassword);
+            try
+            {
+                return CompanyController.getInstance.login(token, username, userPassword);
+            }
+            catch (Exception e)
+            {
+                return "error in server";
+            }
         }
 
         public string publishInventory(string GroupID, int days, int key)
         {
-            return CompanyController.getInstance.publishInventory(GroupID,days, key);
+            try
+            {
+                return CompanyController.getInstance.publishInventory(GroupID, days, key);
+            }
+            catch (Exception e)
+            {
+                return "error in server";
+            }
         }
 
         public string removeFBGroup(string groupID, int key)
         {
-            return CompanyController.getInstance.removeFBGroup(groupID, key);
+            try
+            {
+                return CompanyController.getInstance.removeFBGroup(groupID, key);
+            }
+            catch (Exception e)
+            {
+                return "error in server";
+            }
         }
 
         public string removeWorker(string delUsername, int key)
         {
-            return CompanyController.getInstance.removeWorker(delUsername, key);
+            try
+            {
+                return CompanyController.getInstance.removeWorker(delUsername, key);
+            }
+            catch (Exception e)
+            {
+                return "error in server";
+            }
         }
 
         public string transactionComplete(int itemID, int key)
         {
-            return ItemController.getInstance.transactionComplete(itemID, key);
+            try
+            {
+                return ItemController.getInstance.transactionComplete(itemID, key);
+            }
+            catch (Exception e)
+            {
+                return "error in server";
+            }
         }
 
         public CompanyItemData getCompanyItem(int itemID, int key)
         {
-            return ItemController.getInstance.getCompanyItem(itemID, key);
+            try
+            {
+                return ItemController.getInstance.getCompanyItem(itemID, key);
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
         }
 
         public List<CompanyData> getAllCompanies(int key)
         {
-            return AdminController.getInstance.getAllCompanies(key);
+            try
+            {
+                return AdminController.getInstance.getAllCompanies(key);
+            }
+            catch (Exception e)
+            {
+                return new List<CompanyData>();
+            }
         }
 
         public List<WorkerData> getCompanyWorkers(int token)
         {
-            return CompanyController.getInstance.getCompanyWorkers(token);
+            try
+            {
+                return CompanyController.getInstance.getCompanyWorkers(token);
+            }
+            catch (Exception e)
+            {
+                return new List<WorkerData>();
+            }
         }
 
         public bool isManager(int key)
         {
-            return CompanyController.getInstance.isManager(key);
+            try
+            {
+                return CompanyController.getInstance.isManager(key);
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public string updateToken(string token, string companyName, int key)
         {
-            return AdminController.getInstance.updateToken(token, companyName, key);
+            try
+            {
+                return AdminController.getInstance.updateToken(token, companyName, key);
+            }
+            catch (Exception e)
+            {
+                return "error in server";
+            }
         }
 
         /*public string testClass1(string color, string type, string name, string phone)
