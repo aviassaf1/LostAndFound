@@ -11,7 +11,7 @@ namespace WorkerHost.Domain
 {
     public class FacebookConnector
     {
-        public static string testFBToken = "EAACEdEose0cBAID6wbCQEqJkJ32TFLH2hOIQ7UCI0SIaeZCnr0XZCcJVRQKYvKqvMw9Es9hMrWw2y83oZBThF6Oq0EKal8YwPXnjQJMiQVxx8PMRh5OvmS7gw9amDCtSlRjGhF79RGv5FbL9ZBSMvjZAnPUVGx9RCErHDAu7WZA3RvBmUunf3wVbTx3HmyQpkZD";
+        public static string testFBToken = "EAACEdEose0cBAHpaYsZCNghTfc7eW7H2tqfwz14GmWIVDYEpWPjoFmHf2ZAZBbcw0TEFawcd4hwCktDs3brnKnOQgnStCnQvvqZBO7czUUN4OdAELPJtbRvk9UeXDY6sI5caz6w5mXC3u0g41z9WCAPUtyQvWb40cpqSf34zukiGkv6nibdEh26gZBs3keRQZD";
         public static Boolean commentToPost(String token, String postID, String info)
         {
             try {
@@ -24,6 +24,7 @@ namespace WorkerHost.Domain
             catch (Exception e)
             {
                 Console.WriteLine(e.StackTrace);
+                Console.ReadLine();
                 return false;
             }
         }
@@ -96,6 +97,7 @@ namespace WorkerHost.Domain
             catch (Exception e)
             {
                 Console.WriteLine(e.StackTrace);
+                Console.ReadLine();
                 return null;
             }
 }
@@ -216,6 +218,7 @@ namespace WorkerHost.Domain
             catch (Exception e)
             {
                 Console.WriteLine(e.StackTrace);
+                Console.ReadLine();
                 return "פרסום נכשל, החיבור עם פייסבוק לא צלח אנא נסה להתחבר שוב לפייסבוק ואז למערכת";
             }
 }
@@ -243,6 +246,7 @@ namespace WorkerHost.Domain
             catch (Exception e)
             {
                 Console.WriteLine(e.StackTrace);
+                Console.ReadLine();
                 return null;
             }
         }

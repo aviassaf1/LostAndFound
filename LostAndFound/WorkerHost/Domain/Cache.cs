@@ -43,6 +43,7 @@ namespace WorkerHost.Domain
             catch(Exception ex)
             {
                 Console.WriteLine(ex.StackTrace);
+                Console.ReadLine();
                 _admins = new Dictionary<string, Admin>();
                 _companies = new Dictionary<string, Company>();
                 _lostItems = new Dictionary<int, LostItem>();
@@ -149,6 +150,12 @@ namespace WorkerHost.Domain
             List<DataLayer.FBItem> FBItems = _db.getFBItemsList();//int itemID, List<Color> colors, ItemType itemType, DateTime date, String location, String description, String postUrl, String publisherName, FBType fbType
             List<Matches> matches = _db.getMatchesList();//int matchID, int companyItemID, int item2ID, MatchStatus matchStatus
             List<CompanyUsers> companyUsers = _db.getCompanyUsersList();
+            if(admins==null| companies == null | facebookGroups == null | lostItems == null |
+                foundItems == null | FBItems == null | matches == null | companyUsers == null )
+            {
+                Console.WriteLine("database init problem");
+                Console.ReadLine();
+            }               
             foreach (DataLayer.User user in admins)
             {
                 _admins.Add(user.UserName, new Admin(user.UserName, user.password));//add encryption to pass
