@@ -22,7 +22,7 @@ namespace Test.ClientLoadTests
         private IItemManager _iim;
         private IAdminManager _iam;
         private int key;
-        private string FBToken = "EAACEdEose0cBAKL76AV60ABmjr1itjdsEV5QBAxjZA9I7V1oL5gBCTRpTyxHhfBkxRLI5RdsaNiwmac0jTdVQPupzcUSG7a6USBP04mB7iXpmSyLWbpNeQzu90vVZBVnQXZC68d1yBoGVQe1CuyRw1dJsT9S9ZB2LlZCn3ZBIAtznac5vqxTfpI5wzQSNwJicZD";
+        private string FBToken = FacebookConnector.testFBToken;
         private string addFItemTrueRes = "add found item: item was added successfully";
         private string addLItemTrueRes = "add lost item: item was added successfully";
         private string deleteItemRes = "Item Removed";
