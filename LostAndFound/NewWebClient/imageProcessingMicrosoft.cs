@@ -21,17 +21,18 @@ namespace NewWebClient
             _key2 = "29d4419bdfb14f908e9dfcc613e62ca0";
             _color2index = new Dictionary<string, int>();
             _color2index.Add("PINK", 0);
-            _color2index.Add("BLUE", 1);
-            _color2index.Add("RED", 2);
-            _color2index.Add("GREEN", 3);
-            _color2index.Add("YELLOW", 4);
-            _color2index.Add("WHITE", 5);
-            _color2index.Add("PURPLE", 6);
-            _color2index.Add("ORANGE", 7);
-            _color2index.Add("GRAY", 8);
-            _color2index.Add("BROWN", 9);
-            _color2index.Add("GOLD", 10);
-            _color2index.Add("SILVER", 11);
+            _color2index.Add("BLACK", 1);
+            _color2index.Add("BLUE", 2);
+            _color2index.Add("RED", 3);
+            _color2index.Add("GREEN", 4);
+            _color2index.Add("YELLOW", 5);
+            _color2index.Add("WHITE", 6);
+            _color2index.Add("PURPLE", 7);
+            _color2index.Add("ORANGE", 8);
+            _color2index.Add("GRAY", 9);
+            _color2index.Add("BROWN", 10);
+            _color2index.Add("GOLD", 11);
+            _color2index.Add("SILVER", 12);
             _lastIndex = _color2index.Count;
         }
 

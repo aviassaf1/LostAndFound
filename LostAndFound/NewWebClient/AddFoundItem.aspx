@@ -89,7 +89,7 @@
                         <asp:ListItem Text="לבן" Value="WHITE"></asp:ListItem>
                         <asp:ListItem Text="סגול" Value="PURPLE"></asp:ListItem>
                         <asp:ListItem Text="כתום" Value="ORANGE"></asp:ListItem>
-                        <asp:ListItem Text="אפור" Value="GRAY"></asp:ListItem>
+                        <asp:ListItem Text="אפור" Value="GREY"></asp:ListItem>
                         <asp:ListItem Text="חום" Value="BROWN"></asp:ListItem>
                         <asp:ListItem Text="זהב" Value="GOLD"></asp:ListItem>
                         <asp:ListItem Text="כסוף" Value="SILVER"></asp:ListItem>

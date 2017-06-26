@@ -133,5 +133,10 @@ PageSize = "8" style="direction: rtl" >
 </asp:UpdatePanel>
             <asp:Button ID="publishButton" runat="server" Text="פרסם מאגר מציאות" OnClick="publishButton_Click" />
             <asp:Button ID="ViewWorkersButton" runat="server" Text="צפה בעובדים" OnClick="ViewWorkers" />
+                <asp:Button ID="picFoundItem" runat="server" OnClick="picFoundItem_Click" Text="הוספת מציאה עם תמונה" />
+                <asp:Button ID="noPicFoundItem" runat="server" OnClick="noPicFoundItem_Click" Text="הוספת מציאה בלי תמונה" />
+                <asp:Button ID="noPicLostItem" runat="server" OnClick="noPicLostItem_Click" Text="הוספת אבידה בלי תמונה" />
+                <asp:Button ID="picLostItem" runat="server" OnClick="picLostItem_Click" Text="הוספת אבידה עם תמונה" />
+                <br />
 </div>
 </asp:Content>
