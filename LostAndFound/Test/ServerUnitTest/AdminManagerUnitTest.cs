@@ -4,6 +4,8 @@ using WorkerHost.DataLayer;
 using WorkerHost.Domain;
 using WorkerHost.Domain.Managers;
 using WorkerHost.Domain.BLBackEnd;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace Test.UnitTests
 {
@@ -200,5 +202,119 @@ namespace Test.UnitTests
             Assert.AreNotEqual("TestEdit12", comp.Password);
             Assert.AreNotEqual(null, comp.Phone);
         }
+
+        [TestMethod]
+        public void TestLogin()
+        {
+            String adminRes2;
+            int adminKey2;
+            string adminRes = IDM.login("admin1", "Mc123456");
+            Assert.IsTrue(adminRes.Contains("login succeeded,"));
+            if (adminRes.Contains("login succeeded,"))
+            {
+                char[] ar = { ',' };
+                adminRes2 = adminRes.Split(ar)[1];
+                adminKey2 = int.Parse(adminRes);
+            }
+        }
+
+        [TestMethod]
+        public void TestLoginNotExistAdmin()
+        {
+            string adminName = RandomString();
+            while (adminName.Equals("admin1"))
+            {
+                adminName = RandomString();
+            }
+            string adminRes = IDM.login(adminName, "Mc123456");
+            Assert.IsFalse(adminRes.Contains("login succeeded,"));
+        }
+
+        [TestMethod]
+        public void TestAddCompanyInvalidPassword()
+        {
+            string adminPassword = RandomString();
+            while (adminPassword.Equals("Mc123456"))
+            {
+                adminPassword = RandomString();
+            }
+            string adminRes = IDM.login("admin1", adminPassword);
+            Assert.IsFalse(adminRes.Contains("login succeeded,"));
+        }
+
+        [TestMethod]
+        public void TestGetAllCompanies()
+        {
+            List<Company> comps= IDM.getAllCompanies(adminKey);
+            Assert.IsNotNull(comps);
+            Assert.AreEqual(2, comps.Count, "number of companies is not the same as it should be");
+        }
+
+        [TestMethod]
+        public void TestGetAllCompaniesAfterAddAndDelete()
+        {
+            List<Company> comps = IDM.getAllCompanies(adminKey);
+            Assert.IsNotNull(comps);
+            Assert.AreEqual(2, comps.Count, "number of companies is not the same as it should be");
+            IDM.addComapny("TestAddCompany", "050000000", new System.Collections.Generic.HashSet<string>(), "testfbID", "mangerName", "Gg123456", adminKey);
+            comps = IDM.getAllCompanies(adminKey);
+            Assert.IsNotNull(comps);
+            Assert.AreEqual(3, comps.Count, "number of companies is not the same as it should be");
+            IDM.deleteCompany("TestAddCompany", adminKey);
+            comps = IDM.getAllCompanies(adminKey);
+            Assert.IsNotNull(comps);
+            Assert.AreEqual(2, comps.Count, "number of companies is not the same as it should be");
+        }
+
+        [TestMethod]
+        public void TestGetAllCompaniesInvalidAdminKey()
+        {
+            Random random = new Random();
+            int adminK = random.Next();
+            while (adminK.Equals(adminKey))
+            {
+                adminK = random.Next();
+            }
+            List<Company> comps = IDM.getAllCompanies(adminK);
+            Assert.IsNull(comps);
+        }
+
+        [TestMethod]
+        public void TestUpdateToken()
+        {
+            string compToken = RandomString();
+            string adminRes = IDM.updateToken(compToken,"Guy", adminKey);
+            Assert.AreEqual("המפתח שונה בהצלחה",adminRes);
+            Assert.AreEqual(compToken,ICM.getToken("Guy"));
+        }
+
+        [TestMethod]
+        public void TestUpdateTokenInvalidKey()
+        {
+            Random random = new Random();
+            int adminK = random.Next();
+            while (adminK.Equals(adminKey))
+            {
+                adminK = random.Next();
+            }
+            string compToken = RandomString();
+            string adminRes = IDM.updateToken(compToken, "Guy", adminK);
+            Assert.AreNotEqual("המפתח שונה בהצלחה", adminRes);
+            Assert.AreNotEqual(compToken, ICM.getToken("Guy"));
+        }
+
+        public static string RandomString()
+        {
+            Random random = new Random();
+            int length = random.Next();
+            while (length < 1)
+            {
+                length = random.Next();
+            }
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+
     }
 }

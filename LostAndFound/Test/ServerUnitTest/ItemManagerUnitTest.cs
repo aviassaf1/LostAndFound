@@ -5,6 +5,7 @@ using WorkerHost.Domain;
 using WorkerHost.Domain.BLBackEnd;
 using WorkerHost.Domain.Managers;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Test.UnitTests
 {
@@ -689,7 +690,68 @@ namespace Test.UnitTests
             }
         }
 
+        [TestMethod]
+        public void TestGetCompanyItem()
+        {
+            foreach (CompanyItem ci in IIM.getAllCompanyItems(comapnyKey)) {
+                int itemID =ci.ItemID;
+                CompanyItem item = IIM.getCompanyItem(itemID, comapnyKey);
+                Assert.IsNotNull(item);
+            }
+        }
 
+        [TestMethod]
+        public void TestGetCompanyItemInvalidKey()
+        {
+            Random random = new Random();
+            int compK = random.Next();
+            while (compK.Equals(comapnyKey))
+            {
+                compK = random.Next();
+            }
+            foreach (CompanyItem ci in IIM.getAllCompanyItems(comapnyKey))
+            {
+                int itemID = ci.ItemID;
+                CompanyItem item = IIM.getCompanyItem(itemID, compK);
+                Assert.IsNull(item);
+            }
+        }
+
+        [TestMethod]
+        public void TestGetCompanyItemInvalidID()
+        {
+            Random random = new Random();
+            int itemID = random.Next(); ;
+            bool notFinish = true;
+            while (notFinish)
+            {
+                itemID = random.Next();
+                notFinish = false;
+                foreach (CompanyItem ci in IIM.getAllCompanyItems(comapnyKey))
+                {
+                    if (ci.ItemID.Equals(itemID))
+                    {
+                        notFinish = true;
+                    }
+                }
+            }
+            CompanyItem item = IIM.getCompanyItem(itemID, comapnyKey);
+            Assert.IsNull(item);
+        }
+
+
+        public static string RandomString()
+        {
+            Random random = new Random();
+            int length = random.Next();
+            while (length < 1)
+            {
+                length = random.Next();
+            }
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
 
 
         /*
