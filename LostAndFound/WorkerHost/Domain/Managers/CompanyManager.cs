@@ -88,6 +88,9 @@ namespace WorkerHost.Domain.Managers
 
         public String addWorker(String newUsername,String newPassword,bool isManager, int key)
         {
+            if (newUsername == null || newPassword == null)
+                return "worker not added, username or password is invalid";
+
             String user= SessionDirector.getInstance.getUserName(key);
             if (user != null)
             {
@@ -130,7 +133,9 @@ namespace WorkerHost.Domain.Managers
                     {
                         if (cache.getCompanyNameByUsername(delUsername) != null)
                         {
-                            return company.removeWorker(delUsername);
+                            string res = company.removeWorker(delUsername);
+                            if (res.Equals("item was removed successfully"))
+                                return "worker was removed successfully";
                         }
                         return "remove worker failed, username not exists";
                     }
