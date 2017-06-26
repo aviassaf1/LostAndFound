@@ -54,7 +54,6 @@
                             <ul class="nav navbar-nav navbar-right">
                                 <li><a runat="server" href="~/AddFacebookGroup">הוסף קבוצת פייסבוק</a></li>
                                 <li><a runat="server" href="~/ViewGroups">צפה בקבוצות פייסבוק</a></li>
-                                <li><a runat="server" href="~/AddItem">הוסף פריט</a></li>
                                 <li><a runat="server" href="~/ViewItems">צפה בפריטים</a></li>
                                 <li id="ViewW" runat="server"><a runat="server" href="~/ViewWorkers">צפה בעובדים</a></li>
                                 <li id="AddW" runat="server"><a runat="server" href="~/AddWorker" >הוסף עובד</a></li>

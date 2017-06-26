@@ -11,41 +11,5 @@ namespace NewWebClient {
     
     
     public partial class AddItem {
-        
-        /// <summary>
-        /// picFoundItem control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button picFoundItem;
-        
-        /// <summary>
-        /// noPicFoundItem control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button noPicFoundItem;
-        
-        /// <summary>
-        /// picLostItem control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button picLostItem;
-        
-        /// <summary>
-        /// noPicLostItem control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button noPicLostItem;
     }
 }
