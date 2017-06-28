@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -860,7 +862,19 @@ namespace WorkerHost.DataLayer
                     //db.FBItem.Add(fbItem);
                     db.SaveChanges();
                 }
-                catch
+                catch (DbEntityValidationException dbEx)
+                {
+                    foreach (var validationErrors in dbEx.EntityValidationErrors)
+                    {
+                        foreach (var validationError in validationErrors.ValidationErrors)
+                        {
+                            Trace.TraceInformation("Property: {0} Error: {1}",
+                                                    validationError.PropertyName,
+                                                    validationError.ErrorMessage);
+                        }
+                    }
+                }
+                catch (Exception e)
                 {
                     return -1;
                 }
@@ -926,6 +940,18 @@ namespace WorkerHost.DataLayer
                     cItem.FoundItems = fItem;
                     fItem.CompanyItems = cItem;
                     db.SaveChanges();
+                }
+                catch (DbEntityValidationException dbEx)
+                {
+                    foreach (var validationErrors in dbEx.EntityValidationErrors)
+                    {
+                        foreach (var validationError in validationErrors.ValidationErrors)
+                        {
+                            Trace.TraceInformation("Property: {0} Error: {1}",
+                                                    validationError.PropertyName,
+                                                    validationError.ErrorMessage);
+                        }
+                    }
                 }
                 catch (Exception e)
                 {
@@ -1099,7 +1125,19 @@ namespace WorkerHost.DataLayer
                     match.Items = item;
                     db.SaveChanges();
                 }
-                catch
+                catch (DbEntityValidationException dbEx)
+                {
+                    foreach (var validationErrors in dbEx.EntityValidationErrors)
+                    {
+                        foreach (var validationError in validationErrors.ValidationErrors)
+                        {
+                            Trace.TraceInformation("Property: {0} Error: {1}",
+                                                    validationError.PropertyName,
+                                                    validationError.ErrorMessage);
+                        }
+                    }
+                }
+                catch (Exception e)
                 {
                     return -1;
                 }
