@@ -31,15 +31,16 @@ namespace Test.UnitTests
 
         public static string RandomString()
         {
-            Random random = new Random();
-            int length = random.Next();
-            while (length < 1)
+            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            var stringChars = new char[new Random().Next(1, 50)];
+            var random = new Random();
+
+            for (int i = 0; i < stringChars.Length; i++)
             {
-                length = random.Next();
+                stringChars[i] = chars[random.Next(chars.Length)];
             }
-            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            return new string(Enumerable.Repeat(chars, length)
-              .Select(s => s[random.Next(s.Length)]).ToArray());
+
+            return new String(stringChars);
         }
 
 
@@ -234,9 +235,9 @@ namespace Test.UnitTests
             string randPassword = RandomString();
             string randFBToken = RandomString();
             string res = ICM.login(FBToken, randCompName, CPass);
-            Assert.Equals(res,"התחברות נכשלה, שם משתמש או סיסמה לא תקינים");
+            Assert.AreEqual(res,"התחברות נכשלה, שם משתמש או סיסמה לא תקינים");
             res = ICM.login(FBToken, CName, randPassword);
-            Assert.Equals(res, "התחברות נכשלה, שם משתמש או סיסמה לא תקינים");
+            Assert.AreEqual(res, "התחברות נכשלה, שם משתמש או סיסמה לא תקינים");
             res = ICM.login(randFBToken, CName, CPass);
             Assert.IsNull(res);
         }
@@ -250,11 +251,11 @@ namespace Test.UnitTests
             Assert.IsFalse(workers.ContainsKey("worker1"));
             string success = "worker added";
             string res = ICM.addWorker(workerUsername, workerPassword, false, companyKey);
-            Assert.Equals(res, success);
+            Assert.AreEqual(res, success);
             workers = ICM.getCompanyWorkers(companyKey);
             Assert.IsTrue(workers.ContainsKey("worker1"));
             int cKey;
-            string ans = ICM.login(FBToken, workerUsername, workerPassword);
+            res = ICM.login(FBToken, workerUsername, workerPassword);
             Assert.IsTrue(res.Contains("login succeeded,"));
             if (res.Contains("login succeeded,"))
             {
@@ -273,21 +274,21 @@ namespace Test.UnitTests
             Assert.IsFalse(workers.ContainsKey("worker1"));
             string success = "worker added";
             string res = ICM.addWorker(null, workerPassword, false, companyKey);
-            Assert.Equals(res, "worker not added, username or password is invalid");
+            Assert.AreEqual(res, "worker not added, username or password is invalid");
             res = ICM.addWorker(workerUsername, null, false, companyKey);
-            Assert.Equals(res, "worker not added, username or password is invalid");
+            Assert.AreEqual(res, "worker not added, username or password is invalid");
             res = ICM.addWorker(workerUsername, workerPassword, false, -1);
-            Assert.Equals(res, "הוספת עובד נכשלה");
+            Assert.AreEqual(res, "הוספת עובד נכשלה");
             res = ICM.addWorker(workerUsername, workerPassword, false, companyKey);
-            Assert.Equals(res, success);
+            Assert.AreEqual(res, success);
             workers = ICM.getCompanyWorkers(companyKey);
             Assert.IsTrue(workers.ContainsKey("worker1"));
             res = ICM.addWorker(workerUsername, workerPassword, false, companyKey);
-            Assert.Equals(res, "הוספת עובד נכשלה, משתמש כבר קיים במערכת");
+            Assert.AreEqual(res, "הוספת עובד נכשלה, משתמש כבר קיים במערכת");
 
         }
 
-        [TestMethod]
+        /*[TestMethod]
         public void addWorkerRandomInvalid()
         {
             string randWorkerName = RandomString();
@@ -295,10 +296,10 @@ namespace Test.UnitTests
             Dictionary<string, bool> workers = ICM.getCompanyWorkers(companyKey);
             Assert.IsFalse(workers.ContainsKey(randWorkerName));
             string res = ICM.addWorker(randWorkerName, randWorkerPassword, false, companyKey);
-            Assert.Equals(res, "הוספת עובד נכשלה");
+            Assert.AreEqual(res, "הוספת עובד נכשלה");
             Assert.IsFalse(workers.ContainsKey("randWorkerName"));
         }
-
+        */
         [TestMethod]
         public void RemoveWorkerValid()
         {
@@ -308,13 +309,13 @@ namespace Test.UnitTests
             //Assert.IsFalse(workers.ContainsKey("worker1"));
             string success = "worker added";
             string res = ICM.addWorker(workerUsername, workerPassword, false, companyKey);
-            //Assert.Equals(res, success);
-            workers = ICM.getCompanyWorkers(companyKey);
+            //Assert.AreEqual(res, success);
             //Assert.IsTrue(workers.ContainsKey("worker1"));
             res = ICM.removeWorker(workerUsername, companyKey);
+            workers = ICM.getCompanyWorkers(companyKey);
             Assert.IsFalse(workers.ContainsKey("worker1"));
             string ans = ICM.login(FBToken, workerUsername, workerPassword);
-            Assert.Equals(res,("התחברות נכשלה, שם משתמש או סיסמה לא תקינים"));
+            Assert.AreEqual("התחברות נכשלה, שם משתמש או סיסמה לא תקינים",ans);
         }
 
         [TestMethod]
@@ -326,16 +327,16 @@ namespace Test.UnitTests
             //Assert.IsFalse(workers.ContainsKey(workerUsername));
             string success = "worker added";
             string res = ICM.addWorker(workerUsername, workerPassword, false, companyKey);
-            //Assert.Equals(res, success);
+            //Assert.AreEqual(res, success);
             workers = ICM.getCompanyWorkers(companyKey);
             //Assert.IsTrue(workers.ContainsKey(workerUsername));
             //worker added
             res = ICM.removeWorker(workerUsername, -1);
-            Assert.Equals(res, "remove worker failed");
+            Assert.AreEqual(res, "remove worker failed");
             workers = ICM.getCompanyWorkers(companyKey);
             Assert.IsTrue(workers.ContainsKey(workerUsername));
             res = ICM.removeWorker("bad", companyKey);
-            Assert.Equals(res, "remove worker failed, username not exists");
+            Assert.AreEqual(res, "remove worker failed, username not exists");
             workers = ICM.getCompanyWorkers(companyKey);
             Assert.IsTrue(workers.ContainsKey(workerUsername));
         }
@@ -345,7 +346,7 @@ namespace Test.UnitTests
         {
             Dictionary<string, bool> workers = ICM.getCompanyWorkers(companyKey);
             List<string> myWorkers = new List<string>();
-            Assert.IsNull(workers);
+            Assert.AreEqual(1,workers.Count);
             string workerPassword = "Pp12345";
             for (int i = 1; i <= 3; i++)
             {
@@ -353,7 +354,7 @@ namespace Test.UnitTests
                 myWorkers.Add("worker" + i);
             }
             workers = ICM.getCompanyWorkers(companyKey);
-            Assert.IsTrue(workers.Count == 3);
+            Assert.IsTrue(workers.Count == 4);
             foreach(string w in myWorkers)
             {
                 Assert.IsTrue(workers.ContainsKey(w));
@@ -365,7 +366,7 @@ namespace Test.UnitTests
         {
             Dictionary<string, bool> workers = ICM.getCompanyWorkers(companyKey);
             List<string> myWorkers = new List<string>();
-            Assert.IsNull(workers);
+            Assert.IsTrue(workers.Count == 1);
             string workerPassword = "Pp12345";
             for (int i = 1; i <= 3; i++)
             {
@@ -408,7 +409,7 @@ namespace Test.UnitTests
         [TestMethod]
         public void isManagerFailValid()
         {
-            Assert.IsNull(ICM.isManager(-1));
+            Assert.IsFalse(ICM.isManager(-1));
         }
 
         [TestMethod]
@@ -416,7 +417,7 @@ namespace Test.UnitTests
         {
             Random rnd = new Random();
             int key = rnd.Next(int.MaxValue);
-            Assert.IsNull(ICM.isManager(key));
+            Assert.IsFalse(ICM.isManager(key));
         }
 
         [TestMethod]

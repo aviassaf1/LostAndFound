@@ -742,15 +742,16 @@ namespace Test.UnitTests
 
         public static string RandomString()
         {
-            Random random = new Random();
-            int length = random.Next();
-            while (length < 1)
+            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            var stringChars = new char[new Random().Next(1, 50)];
+            var random = new Random();
+
+            for (int i = 0; i < stringChars.Length; i++)
             {
-                length = random.Next();
+                stringChars[i] = chars[random.Next(chars.Length)];
             }
-            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            return new string(Enumerable.Repeat(chars, length)
-              .Select(s => s[random.Next(s.Length)]).ToArray());
+
+            return new String(stringChars);
         }
 
 
