@@ -53,8 +53,7 @@
                
                 <asp:DropDownList ID="_TypeList" runat="server" Height="16px" Width="133px" style="direction:rtl">
                     <asp:ListItem Text="תעודה" Value="ID"></asp:ListItem>
-                    <asp:ListItem Text="ארנק" Value="WALLET"></asp:ListItem>
-                    <asp:ListItem Text="עכבר מחשב" Value="PCMOUSE"></asp:ListItem>
+                    <asp:ListItem Text="ארנק" Value="WALLET"></asp:ListItem>                   
                     <asp:ListItem Text="מחשב" Value="PC"></asp:ListItem>
                     <asp:ListItem Text="טלפון" Value="PHONE"></asp:ListItem>
                     <asp:ListItem Text="מפתחות" Value="KEYS"></asp:ListItem>
@@ -72,6 +71,7 @@
                     <asp:ListItem Text="שרשרת" Value="NECKLACE"></asp:ListItem>
                     <asp:ListItem Text="צמיד"></asp:ListItem>
                     <asp:ListItem Text="אוזניות" Value="HEADPHONES"></asp:ListItem>
+                    <asp:ListItem Text="עכבר מחשב" Value="PCMOUSE"></asp:ListItem>
                     <asp:ListItem Text="סוג אחר"></asp:ListItem>
                 </asp:DropDownList>
             

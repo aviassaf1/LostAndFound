@@ -45,6 +45,18 @@ namespace NewWebClient
             {
                 types.Add(item.Name);
             }
+            foreach(var item in res.Description.Captions)
+            {
+                var arr = item.Text.ToString().Split(' ');
+                foreach(string s in arr)
+                {
+                    types.Add(s);
+                }
+            }
+            if (types.Contains("laptop"))
+            {
+                types.Add("PC");
+            }
             foreach (string color in res.Color.DominantColors)
             {
                 if (_color2index.Keys.Contains(color.ToUpper()))
