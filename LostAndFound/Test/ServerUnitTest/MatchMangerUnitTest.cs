@@ -49,6 +49,7 @@ namespace Test.UnitTests
         [TestMethod]
         public void changeMatchStatusValid()
         {
+            var watch = System.Diagnostics.Stopwatch.StartNew();
             Company c = ICM.getCompanyByName("Guy");
             HashSet<int> m = c.Matches;
             string ans;
@@ -60,6 +61,8 @@ namespace Test.UnitTests
                     ans = IMM.changeMatchStatus(i, 1, comapnyKey);
                     Assert.AreEqual("CORRECT", IMM.getMatchByID(i).MatchStatus.ToString());
                     Assert.AreEqual("status Changed", ans);
+                    watch.Stop();
+                    Assert.IsTrue(watch.ElapsedMilliseconds < 10000);
                     done = true;
                 }
             }
@@ -68,6 +71,7 @@ namespace Test.UnitTests
         [TestMethod]
         public void changeMatchStatusInvalid()
         {
+            var watch = System.Diagnostics.Stopwatch.StartNew();
             Company c = ICM.getCompanyByName("Guy");
             HashSet<int> m = c.Matches;
             string ans;
@@ -81,6 +85,8 @@ namespace Test.UnitTests
 
                     ans = IMM.changeMatchStatus(-2, 1, comapnyKey);
                     Assert.AreEqual("changeMatchStatus: match id is not valid", ans);
+                    watch.Stop();
+                    Assert.IsTrue(watch.ElapsedMilliseconds < 10000);
                     done = true;
                 }
             }
@@ -89,17 +95,21 @@ namespace Test.UnitTests
         [TestMethod]
         public void findMatchesValid()
         {
+            var watch = System.Diagnostics.Stopwatch.StartNew();
             List<string> colors1 = new List<string>() { "BLACK" };
             IIM.addFoundItem(colors1, "FOLDER", DateTime.Today, "BGU", "bla bla",
                 8876, "Guy", "Noam", "05000000", comapnyKey);
             IIM.getAllCompanyItems(comapnyKey);
             List<Match> ms = IMM.findMatches(IIM.getAllCompanyItems(comapnyKey)[0], ICM.getToken("Guy"));
             Assert.IsNotNull(ms);
+            watch.Stop();
+            Assert.IsTrue(watch.ElapsedMilliseconds < 10000);
         }
 
         [TestMethod]
         public void findMatchesInvalid()
         {
+            var watch = System.Diagnostics.Stopwatch.StartNew();
             List<Match> ms = IMM.findMatches(null, ICM.getToken("Guy"));
             Assert.IsNull(ms);
 
@@ -107,23 +117,31 @@ namespace Test.UnitTests
             colors1.Add(Color.BLACK);
             ms = IMM.findMatches(new FoundItem(colors1, ItemType.FOLDER, DateTime.Today, "BGU", "bla bla", 8876, "Guy", "Noam", "05000000", "c"), null);
             Assert.IsNull(ms);
+            watch.Stop();
+            Assert.IsTrue(watch.ElapsedMilliseconds < 10000);
         }
 
         [TestMethod]
         public void getPostsFromGroupValid()
         {
+            var watch = System.Diagnostics.Stopwatch.StartNew();
             List<WorkerHost.Domain.BLBackEnd.FBItem> fbis = FacebookConnector.getPostsFromGroup(ICM.getToken("Guy"), GID);
             Assert.IsNotNull(fbis);
+            watch.Stop();
+            Assert.IsTrue(watch.ElapsedMilliseconds < 10000);
         }
 
         [TestMethod]
         public void getPostsFromGroupInvalid()
         {
+            var watch = System.Diagnostics.Stopwatch.StartNew();
             List<WorkerHost.Domain.BLBackEnd.FBItem> fbis = FacebookConnector.getPostsFromGroup(null, GID);
             Assert.IsNull(fbis);
 
             fbis = FacebookConnector.getPostsFromGroup(ICM.getToken("Guy"), null);
             Assert.IsNull(fbis);
+            watch.Stop();
+            Assert.IsTrue(watch.ElapsedMilliseconds < 10000);
         }
     }
 }
