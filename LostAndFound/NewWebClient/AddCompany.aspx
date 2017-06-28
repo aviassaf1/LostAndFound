@@ -30,7 +30,7 @@
                 </p>
                 <p style="direction: rtl">
                    <asp:Label runat="server" Width="120" Font-Underline="true">סיסמת מנהל החברה:</asp:Label> 
-                    <asp:TextBox ID="GroupManagerPass" runat="server" style="margin-right: 30px" Width="120" ControlToValidate="Password"></asp:TextBox>
+                    <asp:TextBox ID="GroupManagerPass" runat="server" TextMode="Password" style="margin-right: 30px" Width="120" ControlToValidate="Password"></asp:TextBox>
                 </p>
               <p style="direction: rtl">
                    <asp:Label runat="server" Width="120" Font-Underline="true">ID פייסבוק:</asp:Label> 

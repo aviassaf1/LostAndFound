@@ -18,7 +18,7 @@
                 </p>
                 <p style="direction: rtl">
                     <asp:Label runat="server" Width="120" Font-Underline="true">סיסמת העובד:</asp:Label>
-                    <asp:TextBox ID="password" runat="server" style="margin-right: 30px" Width="120"></asp:TextBox>
+                    <asp:TextBox ID="password" runat="server" TextMode="Password" style="margin-right: 30px" Width="120"></asp:TextBox>
                 </p>
                 <p>
                     <asp:CheckBox runat="server" ID="isManager" />
