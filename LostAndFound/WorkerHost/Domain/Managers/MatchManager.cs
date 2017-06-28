@@ -182,9 +182,13 @@ namespace WorkerHost.Domain.Managers
                         {
                             item.addToDB();
                             match.Item2ID = item.ItemID;
+                            match.addToDB();
                             FacebookConnector.commentToPost(token, ((FBItem)item).PostID, "שלום, נמצאה התאמה בין הפריט לבין פריט ב" + cItem.CompanyName + " מספר ההתאמה של הפריט הוא: " + match.MatchID);
                         }
-                        match.addToDB();
+                        else
+                        {
+                            match.addToDB();
+                        }
                     }
                 }
             }

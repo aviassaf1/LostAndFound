@@ -50,7 +50,7 @@
           <Property Name="itemType" Type="nvarchar" MaxLength="50" />
           <Property Name="lostDate" Type="datetime" />
           <Property Name="location" Type="nvarchar" MaxLength="50" />
-          <Property Name="description" Type="nvarchar" MaxLength="50" />
+          <Property Name="description" Type="nvarchar(max)" />
           <Property Name="postId" Type="nvarchar" MaxLength="50" />
           <Property Name="publisherName" Type="nvarchar" MaxLength="50" />
           <Property Name="type" Type="nvarchar" MaxLength="50" />
@@ -60,7 +60,7 @@
             <PropertyRef Name="itemID" />
           </Key>
           <Property Name="itemID" Type="int" Nullable="false" />
-          <Property Name="companyName" Type="varchar" MaxLength="50" />
+          <Property Name="companyName" Type="nvarchar" MaxLength="50" />
           <Property Name="photoLocation" Type="nvarchar" MaxLength="50" />
           <Property Name="colors" Type="nvarchar" MaxLength="50" />
           <Property Name="itemType" Type="nvarchar" MaxLength="50" />
@@ -391,7 +391,7 @@
           <Property Name="itemType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="lostDate" Type="DateTime" Precision="3" />
           <Property Name="location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="postId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="publisherName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -402,7 +402,7 @@
             <PropertyRef Name="itemID" />
           </Key>
           <Property Name="itemID" Type="Int32" Nullable="false" />
-          <Property Name="companyName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="companyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="photoLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="colors" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="itemType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />

@@ -21,6 +21,5 @@ namespace WorkerHost.DataLayer
         public string password { get; set; }
     
         public virtual Companies Companies { get; set; }
-        public virtual User User { get; set; }
     }
 }

@@ -44,13 +44,6 @@ PageSize = "8" style="direction: rtl"  >
     </ItemTemplate>
 </asp:TemplateField>
 
-<asp:TemplateField ItemStyle-Width = "100px"  HeaderText = "מיקום">
-    <ItemTemplate>
-        <asp:Label ID="itemLocation" runat="server"
-                Text='<%# Eval("Location")%>'></asp:Label>
-    </ItemTemplate>
-</asp:TemplateField>
-
 <asp:TemplateField ItemStyle-Width = "100px"  HeaderText = "תיאור">
     <ItemTemplate>
         <asp:Label ID="description" runat="server"
