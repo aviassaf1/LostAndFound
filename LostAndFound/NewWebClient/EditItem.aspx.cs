@@ -12,11 +12,11 @@ namespace NewWebClient
     {
         private string itemid;
         private CompanyItemData item;
-        public static Dictionary<string, string> EnglishTypes2Hebrew = new Dictionary<string, string>(){{"ID" , "תעודה" }, {"WALLET", "ארנק"  },
-                {"PCMOUSE", "עכבר"  }, { "CHARGER","מטען" },{ "PC","מחשב" }, { "PHONE","טלפון" }, { "KEYS","מפתח" }, {"BAG", "תיק" }, { "UMBRELLA","מטריה" },
+        public static Dictionary<string, string> EnglishTypes2Hebrew = new Dictionary<string, string>(){{ "PC","מחשב" },{"ID" , "תעודה" }, {"WALLET", "ארנק"  },
+                 { "CHARGER","מטען" }, { "PHONE","טלפון" }, { "KEYS","מפתח" }, {"BAG", "תיק" }, { "UMBRELLA","מטריה" },
                 { "SWEATSHIRT","סווטשרט" }, { "GLASSES","משקפיים" }, {"SHOES", "נעל" },{ "FLIPFLOPS","כפכפים" },
                 {"FOLDER" , "תיקיה/מחברת/קלסר"}, { "EARING", "עגיל" }, {  "RING" ,"טבעת"},
-                { "NECKLACE","שרשרת/תליון" },{ "COMPUTER","מחשב" },{ "BRACELET", "צמיד" }, {"HEADPHONES","אוזניות" }, {"PencilCase","קלמר" } };
+                { "NECKLACE","שרשרת/תליון" },{ "COMPUTER","מחשב" },{ "BRACELET", "צמיד" }, {"HEADPHONES","אוזניות" }, {"PencilCase","קלמר" }, {"PCMOUSE", "עכבר"  } };
 
         protected void Page_Load(object sender, EventArgs e)
         {
