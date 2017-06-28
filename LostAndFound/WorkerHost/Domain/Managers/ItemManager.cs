@@ -359,7 +359,7 @@ namespace WorkerHost.Domain.Managers
                 logger.logPrint(logg, 0);
                 logger.logPrint(logg, 2);
             }
-            if (!item.CompanyName.Equals(companyName))
+            else if (!item.CompanyName.Equals(companyName))
             {
                 logg = "someone tried to hack our system";
                 logger.logPrint(logg, 0);

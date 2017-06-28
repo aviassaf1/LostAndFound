@@ -58,7 +58,10 @@ namespace Test.UnitTests
         public void TestAddCompany()
         {
             Assert.IsNull(ICM.getCompanyByName("TestAddCompany"));
+            var watch = System.Diagnostics.Stopwatch.StartNew();
             IDM.addComapny("TestAddCompany", "050000000", new System.Collections.Generic.HashSet<string>(), "testfbID", "mangerName", "Gg123456", adminKey);
+            watch.Stop();
+            Assert.IsTrue(watch.ElapsedMilliseconds<10000);
             Assert.IsNotNull(ICM.getCompanyByName("TestAddCompany"));
         }
 
@@ -66,13 +69,25 @@ namespace Test.UnitTests
         public void TestAddCompanyWrongPassword() ///weird test
         {
             Assert.IsNull(ICM.getCompanyByName("TestAddCompany"));
+            var watch = System.Diagnostics.Stopwatch.StartNew();
             IDM.addComapny("TestAddCompany", "050000000", new System.Collections.Generic.HashSet<string>(), "testfbID", "mangerName", "gg123456", adminKey);
+            watch.Stop();
+            Assert.IsTrue(watch.ElapsedMilliseconds < 10000);
             Assert.IsNull(ICM.getCompanyByName("TestAddCompany"));
+            watch = System.Diagnostics.Stopwatch.StartNew();
             IDM.addComapny("TestAddCompany", "050000000", new System.Collections.Generic.HashSet<string>(), "testfbID", "mangerName", "GG123456", adminKey);
+            watch.Stop();
+            Assert.IsTrue(watch.ElapsedMilliseconds < 10000);
             Assert.IsNull(ICM.getCompanyByName("TestAddCompany"));
+            watch = System.Diagnostics.Stopwatch.StartNew();
             IDM.addComapny("TestAddCompany", "050000000", new System.Collections.Generic.HashSet<string>(), "testfbID", "mangerName", "Gggggggg", adminKey);
+            watch.Stop();
+            Assert.IsTrue(watch.ElapsedMilliseconds < 10000);
             Assert.IsNull(ICM.getCompanyByName("TestAddCompany"));
+            watch = System.Diagnostics.Stopwatch.StartNew();
             IDM.addComapny("TestAddCompany", "050000000", new System.Collections.Generic.HashSet<string>(), "testfbID", "mangerName", "00123456", adminKey);
+            watch.Stop();
+            Assert.IsTrue(watch.ElapsedMilliseconds < 10000);
             Assert.IsNull(ICM.getCompanyByName("TestAddCompany"));
         }
 
@@ -80,11 +95,20 @@ namespace Test.UnitTests
         public void TestAddCompanyWrongPhone()
         {
             Assert.IsNull(ICM.getCompanyByName("TestAddCompany"));
+            var watch = System.Diagnostics.Stopwatch.StartNew();
             IDM.addComapny("TestAddCompany", "", new System.Collections.Generic.HashSet<string>(), "testfbID", "mangerName", "Gg123456", adminKey);
+            watch.Stop();
+            Assert.IsTrue(watch.ElapsedMilliseconds < 10000);
             Assert.IsNull(ICM.getCompanyByName("TestAddCompany"));
+            watch = System.Diagnostics.Stopwatch.StartNew();
             IDM.addComapny("TestAddCompany", "000101", new System.Collections.Generic.HashSet<string>(), "testfbID", "mangerName", "Gg123456", adminKey);
+            watch.Stop();
+            Assert.IsTrue(watch.ElapsedMilliseconds < 10000);
             Assert.IsNull(ICM.getCompanyByName("TestAddCompany"));
+            watch = System.Diagnostics.Stopwatch.StartNew();
             IDM.addComapny("TestAddCompany", null, new System.Collections.Generic.HashSet<string>(), "testfbID", "mangerName", "Gg123456", adminKey);
+            watch.Stop();
+            Assert.IsTrue(watch.ElapsedMilliseconds < 10000);
             Assert.IsNull(ICM.getCompanyByName("TestAddCompany"));
         }
 
@@ -94,9 +118,15 @@ namespace Test.UnitTests
         public void TestAddCompanyWrongUserName()
         {
             Assert.IsNull(ICM.getCompanyByName("TestAddCompany"));
+            var watch = System.Diagnostics.Stopwatch.StartNew();
             IDM.addComapny("", "050000000", new System.Collections.Generic.HashSet<string>(),"testfbID","mangerName","Gg123456", adminKey);
+            watch.Stop();
+            Assert.IsTrue(watch.ElapsedMilliseconds < 10000);
             Assert.IsNull(ICM.getCompanyByName("TestAddCompany"));
+            watch = System.Diagnostics.Stopwatch.StartNew();
             IDM.addComapny(null, "050000000", new System.Collections.Generic.HashSet<string>(), "testfbID", "mangerName", "Gg123456", adminKey);
+            watch.Stop();
+            Assert.IsTrue(watch.ElapsedMilliseconds < 10000);
             Assert.IsNull(ICM.getCompanyByName("TestAddCompany"));
         }
 
@@ -105,9 +135,15 @@ namespace Test.UnitTests
         public void TestAddCompanyWrongCompanyName()
         {
             Assert.IsNull(ICM.getCompanyByName("TestAddCompany"));
+            var watch = System.Diagnostics.Stopwatch.StartNew();
             IDM.addComapny( "", "050000000", new System.Collections.Generic.HashSet<string>(), "testfbID", "mangerName", "Gg123456", adminKey);
+            watch.Stop();
+            Assert.IsTrue(watch.ElapsedMilliseconds < 10000);
             Assert.IsNull(ICM.getCompanyByName("TestAddCompany"));
+            watch = System.Diagnostics.Stopwatch.StartNew();
             IDM.addComapny( null, "050000000", new System.Collections.Generic.HashSet<string>(), "testfbID", "mangerName", "Gg123456", adminKey);
+            watch.Stop();
+            Assert.IsTrue(watch.ElapsedMilliseconds < 10000);
             Assert.IsNull(ICM.getCompanyByName("TestAddCompany"));
         }
 
@@ -116,7 +152,10 @@ namespace Test.UnitTests
         public void TestAddCompanyWrongFBList()
         {
             Assert.IsNull(ICM.getCompanyByName("TestAddCompany"));
+            var watch = System.Diagnostics.Stopwatch.StartNew();
             IDM.addComapny("TestAddCompany", "050000000", null, "testfbID", "mangerName", "Gg123456", adminKey);
+            watch.Stop();
+            Assert.IsTrue(watch.ElapsedMilliseconds < 10000);
             Assert.IsNull(ICM.getCompanyByName("TestAddCompany"));
         }
 
@@ -125,7 +164,10 @@ namespace Test.UnitTests
         {
             Assert.IsNotNull(ICM.getCompanyByName("Guy"));
             int length = ItemManager.getInstance.getAllCompanyItems(comapnyKey).ToArray().Length;
+            var watch = System.Diagnostics.Stopwatch.StartNew();
             IDM.deleteCompany("Guy", adminKey);
+            watch.Stop();
+            Assert.IsTrue(watch.ElapsedMilliseconds < 10000);
             Assert.IsNull(ICM.getCompanyByName("Guy"));
             try
             {
@@ -139,7 +181,10 @@ namespace Test.UnitTests
         public void TestDeleteCompanyNotExist()
         {
             Assert.IsNull(ICM.getCompanyByName("Guy3"));
+            var watch = System.Diagnostics.Stopwatch.StartNew();
             Assert.AreEqual("company not exists in the system", IDM.deleteCompany("Guy3", adminKey));
+            watch.Stop();
+            Assert.IsTrue(watch.ElapsedMilliseconds < 10000);
             Assert.IsNull(ICM.getCompanyByName("Guy3"));
         }
 
@@ -150,7 +195,10 @@ namespace Test.UnitTests
             Assert.IsNotNull(comp);
             string pas1 = comp.Password;
             string phone1 = comp.Phone;
+            var watch = System.Diagnostics.Stopwatch.StartNew();
             IDM.editCompany("Guy", "", "051111111", adminKey);
+            watch.Stop();
+            Assert.IsTrue(watch.ElapsedMilliseconds < 10000);
             comp = ICM.getCompanyByName("Guy");
             Assert.IsNotNull(ICM.getCompanyByName("Guy"));
             Assert.AreNotEqual(phone1, comp.Phone);
@@ -162,13 +210,19 @@ namespace Test.UnitTests
         {
             Company comp = ICM.getCompanyByName("");
             Assert.IsNull(comp);
+            var watch = System.Diagnostics.Stopwatch.StartNew();
             Assert.AreEqual("עריכת חברה לא התבצעה, אחד או יותר מהערכים חסרים", IDM.editCompany("", "TestEdit12", "051111111", adminKey));
+            watch.Stop();
+            Assert.IsTrue(watch.ElapsedMilliseconds < 10000);
         }
 
         [TestMethod]
         public void TestEditCompanyNullCompany()
         {
+            var watch = System.Diagnostics.Stopwatch.StartNew();
             Assert.AreEqual("עריכת חברה לא התבצעה, אחד או יותר מהערכים חסרים", IDM.editCompany(null, "TestEdit12", "051111111", adminKey));
+            watch.Stop();
+            Assert.IsTrue(watch.ElapsedMilliseconds < 10000);
         }
 
         [TestMethod]
@@ -178,7 +232,10 @@ namespace Test.UnitTests
             Assert.IsNotNull(comp);
             string pas1 = comp.Password;
             string phone1 = comp.Phone;
+            var watch = System.Diagnostics.Stopwatch.StartNew();
             IDM.editCompany("Guy", "TestEdit12", "", adminKey);
+            watch.Stop();
+            Assert.IsTrue(watch.ElapsedMilliseconds < 10000);
             comp = ICM.getCompanyByName("Guy");
             Assert.IsNotNull(ICM.getCompanyByName("Guy"));
             Assert.AreEqual(pas1, comp.Password);
@@ -194,7 +251,10 @@ namespace Test.UnitTests
             Assert.IsNotNull(comp);
             string pas1 = comp.Password;
             string phone1 = comp.Phone;
+            var watch = System.Diagnostics.Stopwatch.StartNew();
             IDM.editCompany("Guy", "TestEdit12", null, adminKey);
+            watch.Stop();
+            Assert.IsTrue(watch.ElapsedMilliseconds < 10000);
             comp = ICM.getCompanyByName("Guy");
             Assert.IsNotNull(ICM.getCompanyByName("Guy"));
             Assert.AreEqual(pas1, comp.Password);
@@ -208,13 +268,16 @@ namespace Test.UnitTests
         {
             String adminRes2;
             int adminKey2;
+            var watch = System.Diagnostics.Stopwatch.StartNew();
             string adminRes = IDM.login("admin1", "Mc123456");
+            watch.Stop();
+            Assert.IsTrue(watch.ElapsedMilliseconds < 10000);
             Assert.IsTrue(adminRes.Contains("login succeeded,"));
             if (adminRes.Contains("login succeeded,"))
             {
                 char[] ar = { ',' };
                 adminRes2 = adminRes.Split(ar)[1];
-                adminKey2 = int.Parse(adminRes);
+                adminKey2 = int.Parse(adminRes2);
             }
         }
 
@@ -226,26 +289,35 @@ namespace Test.UnitTests
             {
                 adminName = RandomString();
             }
+            var watch = System.Diagnostics.Stopwatch.StartNew();
             string adminRes = IDM.login(adminName, "Mc123456");
+            watch.Stop();
+            Assert.IsTrue(watch.ElapsedMilliseconds < 10000);
             Assert.IsFalse(adminRes.Contains("login succeeded,"));
         }
 
         [TestMethod]
-        public void TestAddCompanyInvalidPassword()
+        public void TestloginCompanyInvalidPassword()
         {
             string adminPassword = RandomString();
             while (adminPassword.Equals("Mc123456"))
             {
                 adminPassword = RandomString();
             }
+            var watch = System.Diagnostics.Stopwatch.StartNew();
             string adminRes = IDM.login("admin1", adminPassword);
+            watch.Stop();
+            Assert.IsTrue(watch.ElapsedMilliseconds < 10000);
             Assert.IsFalse(adminRes.Contains("login succeeded,"));
         }
 
         [TestMethod]
         public void TestGetAllCompanies()
         {
+            var watch = System.Diagnostics.Stopwatch.StartNew();
             List<Company> comps= IDM.getAllCompanies(adminKey);
+            watch.Stop();
+            Assert.IsTrue(watch.ElapsedMilliseconds < 10000);
             Assert.IsNotNull(comps);
             Assert.AreEqual(2, comps.Count, "number of companies is not the same as it should be");
         }
@@ -253,15 +325,24 @@ namespace Test.UnitTests
         [TestMethod]
         public void TestGetAllCompaniesAfterAddAndDelete()
         {
+            var watch = System.Diagnostics.Stopwatch.StartNew();
             List<Company> comps = IDM.getAllCompanies(adminKey);
+            watch.Stop();
+            Assert.IsTrue(watch.ElapsedMilliseconds < 10000);
             Assert.IsNotNull(comps);
             Assert.AreEqual(2, comps.Count, "number of companies is not the same as it should be");
             IDM.addComapny("TestAddCompany", "050000000", new System.Collections.Generic.HashSet<string>(), "testfbID", "mangerName", "Gg123456", adminKey);
+            watch = System.Diagnostics.Stopwatch.StartNew();
             comps = IDM.getAllCompanies(adminKey);
+            watch.Stop();
+            Assert.IsTrue(watch.ElapsedMilliseconds < 10000);
             Assert.IsNotNull(comps);
             Assert.AreEqual(3, comps.Count, "number of companies is not the same as it should be");
             IDM.deleteCompany("TestAddCompany", adminKey);
+            watch = System.Diagnostics.Stopwatch.StartNew();
             comps = IDM.getAllCompanies(adminKey);
+            watch.Stop();
+            Assert.IsTrue(watch.ElapsedMilliseconds < 10000);
             Assert.IsNotNull(comps);
             Assert.AreEqual(2, comps.Count, "number of companies is not the same as it should be");
         }
@@ -275,7 +356,10 @@ namespace Test.UnitTests
             {
                 adminK = random.Next();
             }
+            var watch = System.Diagnostics.Stopwatch.StartNew();
             List<Company> comps = IDM.getAllCompanies(adminK);
+            watch.Stop();
+            Assert.IsTrue(watch.ElapsedMilliseconds < 10000);
             Assert.IsNull(comps);
         }
 
@@ -283,7 +367,10 @@ namespace Test.UnitTests
         public void TestUpdateToken()
         {
             string compToken = RandomString();
+            var watch = System.Diagnostics.Stopwatch.StartNew();
             string adminRes = IDM.updateToken(compToken,"Guy", adminKey);
+            watch.Stop();
+            Assert.IsTrue(watch.ElapsedMilliseconds < 10000);
             Assert.AreEqual("המפתח שונה בהצלחה",adminRes);
             Assert.AreEqual(compToken,ICM.getToken("Guy"));
         }
@@ -298,22 +385,25 @@ namespace Test.UnitTests
                 adminK = random.Next();
             }
             string compToken = RandomString();
+            var watch = System.Diagnostics.Stopwatch.StartNew();
             string adminRes = IDM.updateToken(compToken, "Guy", adminK);
+            watch.Stop();
+            Assert.IsTrue(watch.ElapsedMilliseconds < 10000);
             Assert.AreNotEqual("המפתח שונה בהצלחה", adminRes);
             Assert.AreNotEqual(compToken, ICM.getToken("Guy"));
         }
 
         public static string RandomString()
         {
-            Random random = new Random();
-            int length = random.Next();
-            while (length < 1)
+            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            var stringChars = new char[new Random().Next(1,50)];
+            var random = new Random();
+
+            for (int i = 0; i < stringChars.Length; i++)
             {
-                length = random.Next();
+                stringChars[i] = chars[random.Next(chars.Length)];
             }
-            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            return new string(Enumerable.Repeat(chars, length)
-              .Select(s => s[random.Next(s.Length)]).ToArray());
+            return new String(stringChars);
         }
 
     }

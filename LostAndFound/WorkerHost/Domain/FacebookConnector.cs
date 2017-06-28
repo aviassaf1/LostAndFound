@@ -11,7 +11,7 @@ namespace WorkerHost.Domain
 {
     public class FacebookConnector
     {
-        public static string testFBToken = "EAACEdEose0cBAHpaYsZCNghTfc7eW7H2tqfwz14GmWIVDYEpWPjoFmHf2ZAZBbcw0TEFawcd4hwCktDs3brnKnOQgnStCnQvvqZBO7czUUN4OdAELPJtbRvk9UeXDY6sI5caz6w5mXC3u0g41z9WCAPUtyQvWb40cpqSf34zukiGkv6nibdEh26gZBs3keRQZD";
+        public static string testFBToken = "EAACEdEose0cBAADZCZC3jU0uKouUFZC0HCnkI8ssxW8Gyz52ujDFUrIQ0ao8rTxxdnXQCkrge2DKkXkqmGew74iqKxFRHPwPmraLiVaAuVhZBUNDASpJMJ4UbYQ0PX23rPr88q0mWTG3WWJnPJO2g3FQg6v3gL67mW9IFmD12pRpbdlqSluCDZBQZAhxJAoWoZD";
         public static Boolean commentToPost(String token, String postID, String info)
         {
             try {
