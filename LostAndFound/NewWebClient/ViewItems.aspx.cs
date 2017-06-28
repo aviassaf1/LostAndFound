@@ -15,6 +15,7 @@ namespace NewWebClient
         private string _path;
         private bool _wait;
         private IimageProcessing _iip;
+        private static Object  lock1;
 
         public void showAlert(string content)
         {
@@ -27,6 +28,7 @@ namespace NewWebClient
             _wait = true;
             //_iip = new ImageProccessingGoogle();
             _iip = new imageProcessingMicrosoft();
+            lock1 = new Object();
         }
         protected void deleteItem2(object sender, EventArgs e)
         {
@@ -114,9 +116,11 @@ namespace NewWebClient
         protected void picFoundItem_Click(object sender, EventArgs e)
         {
             imageChoosingButton_Click(null, null);
-            while (_wait) ;
-            _wait = true;
-            Response.Redirect("/AddFoundItem.aspx?path=" + _path);
+            lock (lock1)
+            {
+                Monitor.Wait(lock1);
+                Response.Redirect("/AddFoundItem.aspx?path=" + _path);
+            }
         }
 
         protected void noPicFoundItem_Click(object sender, EventArgs e)
@@ -127,9 +131,11 @@ namespace NewWebClient
         protected void picLostItem_Click(object sender, EventArgs e)
         {
             imageChoosingButton_Click(null, null);
-            while (_wait) ;
-            _wait = true;
-            Response.Redirect("/AddLostItem.aspx?path=" + _path);
+            lock (lock1)
+            {
+                Monitor.Wait(lock1);
+                Response.Redirect("/AddLostItem.aspx?path=" + _path);
+            }
         }
 
         protected void noPicLostItem_Click(object sender, EventArgs e)
@@ -154,7 +160,11 @@ namespace NewWebClient
             {
                 setDataFromPic();
             }
-            _wait = false;
+            //_wait = false;
+            lock (lock1)
+            {
+                Monitor.PulseAll(lock1);
+            }
         }
 
 
